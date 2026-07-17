@@ -185,8 +185,8 @@ void MainWindow::setupToolBar()
 
     QAction* pingAction = toolbar->addAction(QString::fromUtf8("Ping"));
     pingAction->setToolTip(QString::fromUtf8("网络连通性测试"));
-    connect(pingAction, &QAction::triggered, this, []() {
-        Logger::instance().info("APP", "Ping toolbar clicked");
+    connect(pingAction, &QAction::triggered, this, [this]() {
+        openOrSwitchToTab("Ping", []() -> QWidget* { return new PingWidget(); });
     });
 
     toolbar->addSeparator();
@@ -199,8 +199,8 @@ void MainWindow::setupToolBar()
 
     QAction* settingsAction = toolbar->addAction(QString::fromUtf8("设置"));
     settingsAction->setToolTip(QString::fromUtf8("系统设置"));
-    connect(settingsAction, &QAction::triggered, this, []() {
-        Logger::instance().info("APP", "Settings toolbar clicked");
+    connect(settingsAction, &QAction::triggered, this, [this]() {
+        openOrSwitchToTab(QString::fromUtf8("系统设置"), []() -> QWidget* { return new SettingsWidget(); });
     });
 }
 
@@ -402,60 +402,111 @@ void MainWindow::setupWorkArea()
 
     // Quick actions grid
     auto* quickGrid = new QHBoxLayout();
-    quickGrid->setSpacing(12);
+    quickGrid->setSpacing(16);
     quickGrid->setAlignment(Qt::AlignCenter);
 
-    auto makeQuickCard = [](const QString& icon, const QString& title, const QString& desc,
-                             const QString& accent) -> QFrame* {
+    auto makeQuickCard = [this](const QString& emoji, const QString& title,
+                                 const QString& desc, const QString& accent,
+                                 const QString& accentBg, WidgetFactory factory) -> QFrame* {
         auto* card = new QFrame();
-        card->setFixedSize(180, 130);
+        card->setFixedSize(200, 170);
         card->setCursor(Qt::PointingHandCursor);
         card->setStyleSheet(
-            QString("QFrame {"
-                    "  background-color: #161B22;"
-                    "  border: 1px solid #30363D;"
-                    "  border-radius: 10px;"
-                    "  padding: 16px;"
+            QString("QFrame#quickCard {"
+                    "  background-color: %1;"
+                    "  border: 1px solid %2;"
+                    "  border-radius: 12px;"
                     "}"
-                    "QFrame:hover {"
-                    "  border-color: %1;"
-                    "  background-color: #1C2128;"
-                    "}").arg(accent)
+                    "QFrame#quickCard:hover {"
+                    "  border-color: %3;"
+                    "  background-color: %4;"
+                    "}").arg(ThemeManager::bgCard().name(),
+                              ThemeManager::borderSubtle().name(),
+                              accent,
+                              ThemeManager::bgHover().name())
         );
+        card->setObjectName("quickCard");
+
         auto* cl = new QVBoxLayout(card);
         cl->setContentsMargins(0, 0, 0, 0);
-        cl->setSpacing(8);
+        cl->setSpacing(0);
 
-        auto* iconLbl = new QLabel(icon);
-        iconLbl->setStyleSheet(QString("font-size: 28px; background: transparent; border: none;"));
-        cl->addWidget(iconLbl);
+        // ── Top accent bar ──
+        auto* accentBar = new QWidget();
+        accentBar->setFixedHeight(4);
+        accentBar->setStyleSheet(QString("background-color: %1; border-radius: 12px 12px 0px 0px;").arg(accent));
+        cl->addWidget(accentBar);
 
+        // ── Content area ──
+        auto* content = new QVBoxLayout();
+        content->setContentsMargins(18, 16, 18, 18);
+        content->setSpacing(10);
+
+        // Icon with accent background circle
+        auto* iconContainer = new QWidget();
+        iconContainer->setFixedSize(48, 48);
+        iconContainer->setStyleSheet(
+            QString("background-color: %1; border-radius: 12px;").arg(accentBg)
+        );
+        auto* iconLayout = new QVBoxLayout(iconContainer);
+        iconLayout->setAlignment(Qt::AlignCenter);
+        auto* iconLbl = new QLabel(emoji);
+        iconLbl->setStyleSheet("font-size: 22px; background: transparent; border: none;");
+        iconLbl->setAlignment(Qt::AlignCenter);
+        iconLayout->addWidget(iconLbl);
+        content->addWidget(iconContainer);
+
+        // Title
         auto* titleLbl = new QLabel(title);
-        titleLbl->setStyleSheet(QString("font-size: 13px; font-weight: 600; color: #E6EDF3; background: transparent; border: none;"));
-        cl->addWidget(titleLbl);
+        titleLbl->setStyleSheet(QString("font-size: 14px; font-weight: 700; color: %1; background: transparent; border: none;")
+                                .arg(ThemeManager::textPrimary().name()));
+        content->addWidget(titleLbl);
 
+        // Description
         auto* descLbl = new QLabel(desc);
         descLbl->setWordWrap(true);
-        descLbl->setStyleSheet("font-size: 11px; color: #8B949E; background: transparent; border: none; line-height: 1.4;");
-        cl->addWidget(descLbl);
+        descLbl->setStyleSheet(QString("font-size: 11px; color: %1; background: transparent; border: none; line-height: 1.5;")
+                               .arg(ThemeManager::textSecondary().name()));
+        content->addWidget(descLbl);
 
-        cl->addStretch();
+        content->addStretch();
+        cl->addLayout(content);
+
+        // ── Click handler ──
+        card->installEventFilter(this);
+        // Store the factory in the card's property
+        card->setProperty("cardFactory", QVariant::fromValue(reinterpret_cast<quintptr>(new WidgetFactory(factory))));
+
         return card;
     };
 
-    auto* sshCard = makeQuickCard(QString::fromUtf8("\xF0\x9F\x96\xA5"), "SSH",
-                                  QString::fromUtf8("远程终端连接\n管理网络设备"), "#58A6FF");
-    auto* pingCard = makeQuickCard(QString::fromUtf8("\xF0\x9F\x93\xA1"), "Ping",
-                                   QString::fromUtf8("网络连通性测试\n延迟与丢包分析"), "#3FB950");
-    auto* monitorCard = makeQuickCard(QString::fromUtf8("\xF0\x9F\x93\x8A"), QString::fromUtf8("运维总览"),
-                                      QString::fromUtf8("全局设备状态\n性能与告警面板"), "#D29922");
-    auto* configCard = makeQuickCard(QString::fromUtf8("\xE2\x9A\x99"), QString::fromUtf8("配置管理"),
-                                     QString::fromUtf8("设备配置生成\n差异对比与备份"), "#F85149");
+    auto* sshCard = makeQuickCard(QString::fromUtf8("\xF0\x9F\x96\xA5"),
+        "SSH", QString::fromUtf8("远程终端连接\n管理网络设备"),
+        "#58A6FF", "rgba(88, 166, 255, 0.12)",
+        [this]() -> QWidget* { openSSHDialog(); return nullptr; });
+    auto* pingCard = makeQuickCard(QString::fromUtf8("\xF0\x9F\x93\xA1"),
+        "Ping", QString::fromUtf8("网络连通性测试\n延迟与丢包分析"),
+        "#3FB950", "rgba(63, 185, 80, 0.12)",
+        []() -> QWidget* { return new PingWidget(); });
+    auto* monitorCard = makeQuickCard(QString::fromUtf8("\xF0\x9F\x93\x8A"),
+        QString::fromUtf8("运维总览"), QString::fromUtf8("全局设备状态\n性能与告警面板"),
+        "#D29922", "rgba(210, 153, 34, 0.12)",
+        []() -> QWidget* { return new DashboardWidget(); });
+    auto* configCard = makeQuickCard(QString::fromUtf8("\xE2\x9A\x99"),
+        QString::fromUtf8("系统设置"), QString::fromUtf8("主题外观配置\n偏好与个性化设置"),
+        "#F85149", "rgba(248, 81, 73, 0.12)",
+        []() -> QWidget* { return new SettingsWidget(); });
 
     quickGrid->addWidget(sshCard);
     quickGrid->addWidget(pingCard);
     quickGrid->addWidget(monitorCard);
     quickGrid->addWidget(configCard);
+
+    // Install event filters for click handling
+    sshCard->installEventFilter(this);
+    pingCard->installEventFilter(this);
+    monitorCard->installEventFilter(this);
+    configCard->installEventFilter(this);
 
     outerLayout->addLayout(quickGrid);
     outerLayout->addSpacing(36);
@@ -554,70 +605,64 @@ void MainWindow::onMenuTreeItemDoubleClicked(QTreeWidgetItem* item, int column)
     QString toolName = item->text(0);
     Logger::instance().info("APP", "Tool launched: " + toolName);
 
-    // ── Tool routing ──
-    auto addWidget = [this](QWidget* w, const QString& title) {
-        m_workArea->addTab(w, title);
-        m_workArea->setCurrentWidget(w);
-    };
-
     if (toolName == "SSH") { openSSHDialog(); return; }
-    if (toolName == "Ping") { addWidget(new PingWidget(), toolName); return; }
-    if (toolName == "Traceroute") { addWidget(new TracerouteWidget(), toolName); return; }
-    if (toolName == "DNS") { addWidget(new DNSWidget(), toolName); return; }
-    if (toolName == "IP Scanner") { addWidget(new IPScannerWidget(), toolName); return; }
-    if (toolName == "Port Scanner") { addWidget(new PortScannerWidget(), toolName); return; }
-    if (toolName == "SNMP") { addWidget(new SNMPWidget(), toolName); return; }
-    if (toolName == "SFTP") { addWidget(new SFTPWidget(), toolName); return; }
-    if (toolName == "TFTP") { addWidget(new TFTPWidget(), toolName); return; }
-    if (toolName == "Telnet") { addWidget(new TelnetWidget(), toolName); return; }
-    if (toolName == "Serial") { addWidget(new SerialWidget(), toolName); return; }
-    if (toolName == "Syslog") { addWidget(new SyslogWidget(), toolName); return; }
-    if (toolName == "Flow Analyzer") { addWidget(new FlowWidget(), toolName); return; }
-    if (toolName == "Packet Capture") { addWidget(new PacketCaptureWidget(), toolName); return; }
-    if (toolName == "Protocol Analyzer") { addWidget(new ProtocolAnalyzerWidget(), toolName); return; }
-    if (toolName == "ARP") { addWidget(new ARPWidget(), toolName); return; }
-    if (toolName == "DHCP") { addWidget(new DHCPWidget(), toolName); return; }
-    if (toolName == "HTTP") { addWidget(new HttpWidget(), toolName); return; }
-    if (toolName == "WOL") { addWidget(new WOLWidget(), toolName); return; }
-    if (toolName == "Device Center") { addWidget(new DeviceCenter(), toolName); return; }
-    if (toolName == QString::fromUtf8("MAC 地址工具")) { addWidget(new MacToolkitWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("IP 计算器")) { addWidget(new IpCalculatorWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("子网规划")) { addWidget(new PlannerWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("DNS 诊断")) { addWidget(new DnsToolkitWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("SNMP 监控")) { addWidget(new SNMPMonitorWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("MIB 浏览器")) { addWidget(new MibWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("设备监控")) { addWidget(new MonitorCenterWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("告警中心")) { addWidget(new AlarmCenterWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("日志中心")) { addWidget(new SyslogCenterWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("配置中心")) { addWidget(new ConfigCenterWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("巡检中心")) { addWidget(new InspectionWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("安全审计中心")) { addWidget(new SecurityWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("报表中心")) { addWidget(new ReportWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("设备发现")) { addWidget(new DiscoveryWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("网络拓扑")) { addWidget(new TopologyWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("HA 高可用性管理")) { addWidget(new HAWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("VPN 管理中心")) { addWidget(new VPNWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("插件管理")) { addWidget(new PluginWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("运维总览")) { addWidget(new DashboardWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("性能分析")) { addWidget(new PerformanceWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("流量分析")) { addWidget(new TrafficWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("QoS 分析")) { addWidget(new QoSWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("自动化运维")) { addWidget(new AutomationWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("资产管理")) { addWidget(new AssetWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("AAA 认证管理")) { addWidget(new AAAWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("流采集器")) { addWidget(new FlowCollectorWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("无线管理")) { addWidget(new WirelessWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("IPv6 管理")) { addWidget(new IPv6Widget(), toolName); return; }
-    if (toolName == QString::fromUtf8("系统设置")) { addWidget(new SettingsWidget(), toolName); return; }
-    if (toolName == "Whois") { addWidget(new WhoisWidget(), toolName); return; }
-    if (toolName == "FTP") { addWidget(new FTPWidget(), toolName); return; }
-    if (toolName == "SCP") { addWidget(new SCPWidget(), toolName); return; }
-    if (toolName == "MQTT") { addWidget(new MQTTWidget(), toolName); return; }
-    if (toolName == "Modbus") { addWidget(new ModbusWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("配置Diff")) { addWidget(new ConfigDiffWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("配置生成")) { addWidget(new ConfigGenWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("MAC查询")) { addWidget(new MacLookupWidget(), toolName); return; }
-    if (toolName == QString::fromUtf8("日志")) { addWidget(new LogViewerWidget(), toolName); return; }
+    if (toolName == "Ping") { openOrSwitchToTab(toolName, []() -> QWidget* { return new PingWidget(); }); return; }
+    if (toolName == "Traceroute") { openOrSwitchToTab(toolName, []() -> QWidget* { return new TracerouteWidget(); }); return; }
+    if (toolName == "DNS") { openOrSwitchToTab(toolName, []() -> QWidget* { return new DNSWidget(); }); return; }
+    if (toolName == "IP Scanner") { openOrSwitchToTab(toolName, []() -> QWidget* { return new IPScannerWidget(); }); return; }
+    if (toolName == "Port Scanner") { openOrSwitchToTab(toolName, []() -> QWidget* { return new PortScannerWidget(); }); return; }
+    if (toolName == "SNMP") { openOrSwitchToTab(toolName, []() -> QWidget* { return new SNMPWidget(); }); return; }
+    if (toolName == "SFTP") { openOrSwitchToTab(toolName, []() -> QWidget* { return new SFTPWidget(); }); return; }
+    if (toolName == "TFTP") { openOrSwitchToTab(toolName, []() -> QWidget* { return new TFTPWidget(); }); return; }
+    if (toolName == "Telnet") { openOrSwitchToTab(toolName, []() -> QWidget* { return new TelnetWidget(); }); return; }
+    if (toolName == "Serial") { openOrSwitchToTab(toolName, []() -> QWidget* { return new SerialWidget(); }); return; }
+    if (toolName == "Syslog") { openOrSwitchToTab(toolName, []() -> QWidget* { return new SyslogWidget(); }); return; }
+    if (toolName == "Flow Analyzer") { openOrSwitchToTab(toolName, []() -> QWidget* { return new FlowWidget(); }); return; }
+    if (toolName == "Packet Capture") { openOrSwitchToTab(toolName, []() -> QWidget* { return new PacketCaptureWidget(); }); return; }
+    if (toolName == "Protocol Analyzer") { openOrSwitchToTab(toolName, []() -> QWidget* { return new ProtocolAnalyzerWidget(); }); return; }
+    if (toolName == "ARP") { openOrSwitchToTab(toolName, []() -> QWidget* { return new ARPWidget(); }); return; }
+    if (toolName == "DHCP") { openOrSwitchToTab(toolName, []() -> QWidget* { return new DHCPWidget(); }); return; }
+    if (toolName == "HTTP") { openOrSwitchToTab(toolName, []() -> QWidget* { return new HttpWidget(); }); return; }
+    if (toolName == "WOL") { openOrSwitchToTab(toolName, []() -> QWidget* { return new WOLWidget(); }); return; }
+    if (toolName == "Device Center") { openOrSwitchToTab(toolName, []() -> QWidget* { return new DeviceCenter(); }); return; }
+    if (toolName == QString::fromUtf8("MAC 地址工具")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new MacToolkitWidget(); }); return; }
+    if (toolName == QString::fromUtf8("IP 计算器")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new IpCalculatorWidget(); }); return; }
+    if (toolName == QString::fromUtf8("子网规划")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new PlannerWidget(); }); return; }
+    if (toolName == QString::fromUtf8("DNS 诊断")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new DnsToolkitWidget(); }); return; }
+    if (toolName == QString::fromUtf8("SNMP 监控")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new SNMPMonitorWidget(); }); return; }
+    if (toolName == QString::fromUtf8("MIB 浏览器")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new MibWidget(); }); return; }
+    if (toolName == QString::fromUtf8("设备监控")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new MonitorCenterWidget(); }); return; }
+    if (toolName == QString::fromUtf8("告警中心")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new AlarmCenterWidget(); }); return; }
+    if (toolName == QString::fromUtf8("日志中心")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new SyslogCenterWidget(); }); return; }
+    if (toolName == QString::fromUtf8("配置中心")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new ConfigCenterWidget(); }); return; }
+    if (toolName == QString::fromUtf8("巡检中心")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new InspectionWidget(); }); return; }
+    if (toolName == QString::fromUtf8("安全审计中心")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new SecurityWidget(); }); return; }
+    if (toolName == QString::fromUtf8("报表中心")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new ReportWidget(); }); return; }
+    if (toolName == QString::fromUtf8("设备发现")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new DiscoveryWidget(); }); return; }
+    if (toolName == QString::fromUtf8("网络拓扑")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new TopologyWidget(); }); return; }
+    if (toolName == QString::fromUtf8("HA 高可用性管理")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new HAWidget(); }); return; }
+    if (toolName == QString::fromUtf8("VPN 管理中心")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new VPNWidget(); }); return; }
+    if (toolName == QString::fromUtf8("插件管理")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new PluginWidget(); }); return; }
+    if (toolName == QString::fromUtf8("运维总览")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new DashboardWidget(); }); return; }
+    if (toolName == QString::fromUtf8("性能分析")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new PerformanceWidget(); }); return; }
+    if (toolName == QString::fromUtf8("流量分析")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new TrafficWidget(); }); return; }
+    if (toolName == QString::fromUtf8("QoS 分析")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new QoSWidget(); }); return; }
+    if (toolName == QString::fromUtf8("自动化运维")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new AutomationWidget(); }); return; }
+    if (toolName == QString::fromUtf8("资产管理")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new AssetWidget(); }); return; }
+    if (toolName == QString::fromUtf8("AAA 认证管理")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new AAAWidget(); }); return; }
+    if (toolName == QString::fromUtf8("流采集器")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new FlowCollectorWidget(); }); return; }
+    if (toolName == QString::fromUtf8("无线管理")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new WirelessWidget(); }); return; }
+    if (toolName == QString::fromUtf8("IPv6 管理")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new IPv6Widget(); }); return; }
+    if (toolName == QString::fromUtf8("系统设置")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new SettingsWidget(); }); return; }
+    if (toolName == "Whois") { openOrSwitchToTab(toolName, []() -> QWidget* { return new WhoisWidget(); }); return; }
+    if (toolName == "FTP") { openOrSwitchToTab(toolName, []() -> QWidget* { return new FTPWidget(); }); return; }
+    if (toolName == "SCP") { openOrSwitchToTab(toolName, []() -> QWidget* { return new SCPWidget(); }); return; }
+    if (toolName == "MQTT") { openOrSwitchToTab(toolName, []() -> QWidget* { return new MQTTWidget(); }); return; }
+    if (toolName == "Modbus") { openOrSwitchToTab(toolName, []() -> QWidget* { return new ModbusWidget(); }); return; }
+    if (toolName == QString::fromUtf8("配置Diff")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new ConfigDiffWidget(); }); return; }
+    if (toolName == QString::fromUtf8("配置生成")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new ConfigGenWidget(); }); return; }
+    if (toolName == QString::fromUtf8("MAC查询")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new MacLookupWidget(); }); return; }
+    if (toolName == QString::fromUtf8("日志")) { openOrSwitchToTab(toolName, []() -> QWidget* { return new LogViewerWidget(); }); return; }
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -785,6 +830,42 @@ void MainWindow::openSSHTab(const QString& host, int port,
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
+// EVENT FILTER — handle quick card clicks on welcome page
+// ═══════════════════════════════════════════════════════════════════════════
+
+bool MainWindow::eventFilter(QObject* obj, QEvent* event)
+{
+    if (event->type() == QEvent::MouseButtonRelease) {
+        QWidget* w = qobject_cast<QWidget*>(obj);
+        if (w && w->property("cardFactory").isValid()) {
+            quintptr ptr = w->property("cardFactory").value<quintptr>();
+            auto* factory = reinterpret_cast<WidgetFactory*>(ptr);
+            if (factory) {
+                QWidget* toolWidget = (*factory)();
+                if (toolWidget) {
+                    // Determine title from card content
+                    QString title;
+                    // Find the title label inside the card
+                    auto labels = w->findChildren<QLabel*>();
+                    for (auto* lbl : labels) {
+                        QString s = lbl->text();
+                        if (!s.isEmpty() && lbl->styleSheet().contains("font-weight: 700")) {
+                            title = s;
+                            break;
+                        }
+                    }
+                    if (title.isEmpty()) title = QString::fromUtf8("工具");
+                    openOrSwitchToTab(title, [toolWidget]() -> QWidget* { return toolWidget; });
+                }
+                Logger::instance().info("APP", "Quick card clicked");
+            }
+            return true;
+        }
+    }
+    return QMainWindow::eventFilter(obj, event);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // LAYOUT PERSISTENCE
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -809,4 +890,48 @@ void MainWindow::restoreLayout()
         restoreState(QByteArray::fromBase64(state.toLatin1()));
     }
     Logger::instance().debug("APP", "Layout restored");
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TAB MANAGEMENT — reuse existing tabs, limit to 3 tool tabs max
+// ═══════════════════════════════════════════════════════════════════════════
+
+void MainWindow::openOrSwitchToTab(const QString& title, WidgetFactory factory)
+{
+    // 1. Already open? Just switch to it
+    for (int i = 0; i < m_workArea->count(); ++i) {
+        if (m_workArea->tabText(i) == title) {
+            m_workArea->setCurrentIndex(i);
+            return;
+        }
+    }
+
+    // 2. Count existing tool tabs (exclude index 0 = welcome, SSH tabs)
+    int toolTabCount = 0;
+    for (int i = 1; i < m_workArea->count(); ++i) {
+        QWidget* w = m_workArea->widget(i);
+        if (!m_sshTabs.contains(w)) {
+            toolTabCount++;
+        }
+    }
+
+    // 3. Limit: remove oldest tool tab if at limit (3)
+    const int kMaxToolTabs = 3;
+    while (toolTabCount >= kMaxToolTabs) {
+        for (int i = 1; i < m_workArea->count(); ++i) {
+            QWidget* w = m_workArea->widget(i);
+            if (!m_sshTabs.contains(w)) {
+                m_workArea->removeTab(i);
+                w->deleteLater();
+                toolTabCount--;
+                break;
+            }
+        }
+    }
+
+    // 4. Create and add
+    QWidget* w = factory();
+    m_workArea->addTab(w, title);
+    m_workArea->setCurrentWidget(w);
+    Logger::instance().info("APP", "Tab opened: " + title);
 }

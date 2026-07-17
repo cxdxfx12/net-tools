@@ -6,6 +6,8 @@
 #include <QPlainTextEdit>
 #include <QTabWidget>
 #include <QMap>
+#include <QEvent>
+#include <functional>
 
 class StatusBarManager;
 class TerminalWidget;
@@ -40,6 +42,12 @@ private:
     void openSSHDialog();
     void openSSHTab(const QString& host, int port, const QString& user,
                     const QString& password);
+
+    // 打开工具Tab或切换到已有Tab（复用 + 限制最多3个工具Tab）
+    using WidgetFactory = std::function<QWidget*()>;
+    void openOrSwitchToTab(const QString& title, WidgetFactory factory);
+
+    bool eventFilter(QObject* obj, QEvent* event) override;
 
     // Menu tree
     QDockWidget* m_menuDock;
