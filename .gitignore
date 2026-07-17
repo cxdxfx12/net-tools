@@ -1,0 +1,40 @@
+# Build output
+build/
+out/
+cmake-build-*/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Qt
+*.pro.user
+*.pro.user.*
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+Makefile
+Makefile.*
+object_script.*
+
+# Object files
+*.o
+*.obj
+*.dylib
+*.so
+*.dll
+*.exe
+*.app
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
