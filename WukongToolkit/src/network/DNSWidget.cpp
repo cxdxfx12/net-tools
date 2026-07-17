@@ -60,13 +60,13 @@ void DNSWidget::setupUI()
     queryRow->setSpacing(8);
 
     auto* domainLabel = new QLabel("域名:");
-    domainLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_domainEdit = new QLineEdit();
     m_domainEdit->setPlaceholderText("例如: example.com");
     m_domainEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -74,13 +74,13 @@ void DNSWidget::setupUI()
     queryRow->addWidget(m_domainEdit, 2);
 
     auto* serverLabel = new QLabel("DNS 服务器:");
-    serverLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_serverEdit = new QLineEdit();
     m_serverEdit->setPlaceholderText("默认: 8.8.8.8");
     m_serverEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -88,20 +88,20 @@ void DNSWidget::setupUI()
     queryRow->addWidget(m_serverEdit, 1);
 
     auto* typeLabel = new QLabel("记录类型:");
-    typeLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_recordTypeCombo = new QComboBox();
     m_recordTypeCombo->addItems({"A", "AAAA", "MX", "NS", "CNAME", "TXT", "SOA", "PTR", "SRV"});
     m_recordTypeCombo->setStyleSheet(
         "QComboBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
         "QComboBox::drop-down { border: none; }"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #409EFF;"
-        "  border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #58A6FF;"
+        "  border: 1px solid #30363D;"
         "}"
     );
     queryRow->addWidget(typeLabel);
@@ -110,12 +110,12 @@ void DNSWidget::setupUI()
     m_queryBtn = new QPushButton("查询");
     m_queryBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_queryBtn->setFixedHeight(32);
     queryRow->addWidget(m_queryBtn);
@@ -127,13 +127,13 @@ void DNSWidget::setupUI()
     reverseRow->setSpacing(8);
 
     auto* reverseLabel = new QLabel("反向查询 (IP):");
-    reverseLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_reverseEdit = new QLineEdit();
     m_reverseEdit->setPlaceholderText("例如: 8.8.8.8");
     m_reverseEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -143,12 +143,12 @@ void DNSWidget::setupUI()
     m_reverseBtn = new QPushButton("反向查询");
     m_reverseBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #E6A23C; color: white;"
+        "  background-color: #D29922; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #EBB563; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #DBAB4A; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_reverseBtn->setFixedHeight(32);
     reverseRow->addWidget(m_reverseBtn);
@@ -158,7 +158,7 @@ void DNSWidget::setupUI()
 
     // 批量查询行
     auto* bulkLabel = new QLabel("批量查询 (每行一个域名):");
-    bulkLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     configLayout->addWidget(bulkLabel);
 
     auto* bulkRow = new QHBoxLayout();
@@ -169,8 +169,8 @@ void DNSWidget::setupUI()
     m_bulkEdit->setMaximumHeight(80);
     m_bulkEdit->setStyleSheet(
         "QTextEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -179,12 +179,12 @@ void DNSWidget::setupUI()
     m_bulkBtn = new QPushButton("批量查询");
     m_bulkBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #67C23A; color: white;"
+        "  background-color: #3FB950; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #85CE61; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #56D364; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_bulkBtn->setFixedHeight(32);
     m_bulkBtn->setFixedWidth(100);
@@ -206,9 +206,9 @@ void DNSWidget::setupUI()
     // 信息标签
     auto* infoRow = new QHBoxLayout();
     m_serverInfoLabel = new QLabel("服务器: -");
-    m_serverInfoLabel->setStyleSheet("font-size: 12px; color: #8C8C8C; padding: 2px 0;");
+    
     m_queryTimeLabel = new QLabel("查询耗时: -");
-    m_queryTimeLabel->setStyleSheet("font-size: 12px; color: #8C8C8C; padding: 2px 0;");
+    
     infoRow->addWidget(m_serverInfoLabel);
     infoRow->addWidget(m_queryTimeLabel);
     infoRow->addStretch();
@@ -216,12 +216,12 @@ void DNSWidget::setupUI()
     m_exportBtn = new QPushButton("导出 CSV");
     m_exportBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 5px 14px; border-radius: 3px;"
         "  font-size: 12px;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_exportBtn->setEnabled(false);
     infoRow->addWidget(m_exportBtn);
@@ -242,17 +242,17 @@ void DNSWidget::setupUI()
     m_resultTable->verticalHeader()->setVisible(false);
     m_resultTable->setStyleSheet(
         "QTableWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  gridline-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  gridline-color: #30363D; border: 1px solid #30363D;"
         "  font-size: 12px;"
         "}"
         "QTableWidget::item { padding: 3px 6px; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
         "}"
-        "QTableWidget::item:alternate { background-color: #25262B; }"
+        "QTableWidget::item:alternate { background-color: #161B22; }"
     );
     resultLayout->addWidget(m_resultTable, 1);
 
@@ -291,31 +291,31 @@ void DNSWidget::setupUI()
     historyLayout->setSpacing(4);
 
     auto* historyTitle = new QLabel("查询历史");
-    historyTitle->setStyleSheet("font-size: 13px; font-weight: bold; color: #DCDCDC; padding: 2px 0;");
+    historyTitle->setStyleSheet("font-size: 13px; font-weight: bold; color: #E6EDF3; padding: 2px 0;");
     historyLayout->addWidget(historyTitle);
 
     m_historyList = new QListWidget();
     m_historyList->setStyleSheet(
         "QListWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D;"
         "  font-size: 12px;"
         "}"
-        "QListWidget::item { padding: 5px 8px; border-bottom: 1px solid #3C3F41; }"
+        "QListWidget::item { padding: 5px 8px; border-bottom: 1px solid #30363D; }"
         "QListWidget::item:hover { background-color: #2B2D30; }"
-        "QListWidget::item:selected { background-color: #409EFF; color: white; }"
+        "QListWidget::item:selected { background-color: #58A6FF; color: white; }"
     );
     historyLayout->addWidget(m_historyList, 1);
 
     m_clearHistoryBtn = new QPushButton("清除历史");
     m_clearHistoryBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #F56C6C; color: white;"
+        "  background-color: #F85149; color: white;"
         "  border: none; padding: 5px 14px; border-radius: 3px;"
         "  font-size: 12px;"
         "}"
-        "QPushButton:hover { background-color: #F78989; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #FF7B72; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     historyLayout->addWidget(m_clearHistoryBtn);
 
@@ -628,12 +628,12 @@ void DNSWidget::addResultRow(const QString& name, int ttl, const QString& type, 
     typeItem->setTextAlignment(Qt::AlignCenter);
     // 根据记录类型着色
     QColor typeColor;
-    if (type == "A") typeColor = QColor(0x40, 0x9E, 0xFF);
-    else if (type == "AAAA") typeColor = QColor(0x67, 0xC2, 0x3A);
-    else if (type == "MX") typeColor = QColor(0xE6, 0xA2, 0x3C);
+    if (type == "A") typeColor = QColor(0x58, 0xA6, 0xFF);
+    else if (type == "AAAA") typeColor = QColor(0x3F, 0xB9, 0x50);
+    else if (type == "MX") typeColor = QColor(0xD2, 0x99, 0x22);
     else if (type == "NS") typeColor = QColor(0x90, 0x90, 0x90);
     else if (type == "CNAME") typeColor = QColor(0x9B, 0x59, 0xB6);
-    else if (type == "TXT") typeColor = QColor(0xF5, 0x6C, 0x6C);
+    else if (type == "TXT") typeColor = QColor(0xF8, 0x51, 0x49);
     else if (type == "SOA") typeColor = QColor(0x00, 0xB4, 0xD8);
     else if (type == "PTR") typeColor = QColor(0x2C, 0xCC, 0x70);
     else if (type == "SRV") typeColor = QColor(0xFF, 0x85, 0x1B);

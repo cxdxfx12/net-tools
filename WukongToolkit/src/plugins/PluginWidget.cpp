@@ -22,10 +22,10 @@
 // Helpers
 // ═══════════════════════════════════════════════════════════════════════════════
 
-static const char* kDarkBg     = "#1E1F22";
-static const char* kDarkPanel  = "#25262B";
-static const char* kDarkBorder = "#3C3F41";
-static const char* kTextColor  = "#DCDCDC";
+static const char* kDarkBg     = "#0D1117";
+static const char* kDarkPanel  = "#161B22";
+static const char* kDarkBorder = "#30363D";
+static const char* kTextColor  = "#E6EDF3";
 static const char* kAccent     = "#4A90D9";
 static const char* kGreen      = "#5CB85C";
 static const char* kRed        = "#D9534F";

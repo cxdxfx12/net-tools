@@ -14,6 +14,7 @@ Logger::Logger(QObject* parent)
 
 Logger::~Logger()
 {
+    QMutexLocker locker(&m_mutex);
     if (m_logFile.isOpen()) {
         m_logFile.close();
     }
@@ -27,6 +28,7 @@ Logger& Logger::instance()
 
 void Logger::setLogDir(const QString& dir)
 {
+    QMutexLocker locker(&m_mutex);
     m_logDir = dir;
     QDir().mkpath(m_logDir);
     rotateLogFile();
@@ -34,11 +36,13 @@ void Logger::setLogDir(const QString& dir)
 
 QString Logger::logDir() const
 {
+    QMutexLocker locker(&m_mutex);
     return m_logDir;
 }
 
 void Logger::rotateLogFile()
 {
+    // 注意：调用者必须已持有 m_mutex
     QDate today = QDate::currentDate();
     if (m_logFile.isOpen()) {
         m_logFile.close();
@@ -68,42 +72,34 @@ void Logger::writeToFile(const QString& line)
     m_stream.flush();
 }
 
-void Logger::info(const QString& module, const QString& msg)
+// 公共日志方法，避免代码重复
+void Logger::log(const QString& level, const QString& module, const QString& msg)
 {
-    QString time = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
-    QString line = QString("%1 [INFO] [%2] %3").arg(time, module, msg);
+    // 使用 24 小时制避免上午/下午混淆
+    QString time = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
+    QString line = QString("%1 [%2] [%3] %4").arg(time, level, module, msg);
 
     writeToFile(line);
     qDebug().noquote() << line;
-    emit logMessage(time, "INFO", module, msg);
+    emit logMessage(time, level, module, msg);
+}
+
+void Logger::info(const QString& module, const QString& msg)
+{
+    log(QStringLiteral("INFO"), module, msg);
 }
 
 void Logger::warning(const QString& module, const QString& msg)
 {
-    QString time = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
-    QString line = QString("%1 [WARNING] [%2] %3").arg(time, module, msg);
-
-    writeToFile(line);
-    qDebug().noquote() << line;
-    emit logMessage(time, "WARNING", module, msg);
+    log(QStringLiteral("WARNING"), module, msg);
 }
 
 void Logger::error(const QString& module, const QString& msg)
 {
-    QString time = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
-    QString line = QString("%1 [ERROR] [%2] %3").arg(time, module, msg);
-
-    writeToFile(line);
-    qDebug().noquote() << line;
-    emit logMessage(time, "ERROR", module, msg);
+    log(QStringLiteral("ERROR"), module, msg);
 }
 
 void Logger::debug(const QString& module, const QString& msg)
 {
-    QString time = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
-    QString line = QString("%1 [DEBUG] [%2] %3").arg(time, module, msg);
-
-    writeToFile(line);
-    qDebug().noquote() << line;
-    emit logMessage(time, "DEBUG", module, msg);
+    log(QStringLiteral("DEBUG"), module, msg);
 }

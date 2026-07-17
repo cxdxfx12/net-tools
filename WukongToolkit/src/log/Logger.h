@@ -32,10 +32,11 @@ private:
     Logger(const Logger&) = delete;
     Logger& operator=(const Logger&) = delete;
 
+    void log(const QString& level, const QString& module, const QString& msg);
     void writeToFile(const QString& line);
     void rotateLogFile();
 
-    QMutex m_mutex;
+    mutable QMutex m_mutex;
     QString m_logDir;
     QFile m_logFile;
     QTextStream m_stream;

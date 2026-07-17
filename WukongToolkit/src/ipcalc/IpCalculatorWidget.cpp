@@ -92,8 +92,8 @@ void IpCalculatorWidget::setupUI()
     m_ipEdit->setPlaceholderText("例如: 192.168.1.0");
     m_ipEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -105,8 +105,8 @@ void IpCalculatorWidget::setupUI()
     m_prefixSpin->setSuffix(" /");
     m_prefixSpin->setStyleSheet(
         "QSpinBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -117,11 +117,11 @@ void IpCalculatorWidget::setupUI()
     m_calcBtn = new QPushButton("计算");
     m_calcBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
     );
     singleLayout->addWidget(m_calcBtn);
 
@@ -137,8 +137,8 @@ void IpCalculatorWidget::setupUI()
     m_batchEdit->setMaximumHeight(120);
     m_batchEdit->setStyleSheet(
         "QPlainTextEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -147,11 +147,11 @@ void IpCalculatorWidget::setupUI()
     m_batchBtn = new QPushButton("批量计算");
     m_batchBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #E6A23C; color: white;"
+        "  background-color: #D29922; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #EBB563; }"
+        "QPushButton:hover { background-color: #DBAB4A; }"
     );
     batchLayout->addWidget(m_batchBtn);
 
@@ -175,8 +175,8 @@ void IpCalculatorWidget::setupUI()
         edit->setReadOnly(true);
         edit->setStyleSheet(
             "QLineEdit {"
-            "  background: #1E1F22; color: #409EFF;"
-            "  border: 1px solid #3C3F41; padding: 4px 8px;"
+            "  background: #0D1117; color: #58A6FF;"
+            "  border: 1px solid #30363D; padding: 4px 8px;"
             "  border-radius: 3px; font-size: 13px; font-weight: bold;"
             "}"
         );
@@ -213,7 +213,7 @@ void IpCalculatorWidget::setupUI()
     m_binaryEdit->setMaximumHeight(140);
     m_binaryEdit->setStyleSheet(
         "QPlainTextEdit {"
-        "  background: #1E1F22; color: #DCDCDC;"
+        "  background: #0D1117; color: #E6EDF3;"
         "  border: none; font-size: 12px; font-family: monospace;"
         "}"
     );
@@ -252,29 +252,29 @@ void IpCalculatorWidget::setupUI()
     m_historyTable->setAlternatingRowColors(true);
     m_historyTable->setStyleSheet(
         "QTableWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  gridline-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  gridline-color: #30363D; border: 1px solid #30363D;"
         "  font-size: 12px;"
         "}"
         "QTableWidget::item { padding: 3px 6px; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
         "}"
-        "QTableWidget::item:alternate { background-color: #25262B; }"
+        "QTableWidget::item:alternate { background-color: #161B22; }"
     );
     historyLayout->addWidget(m_historyTable);
 
     m_exportBtn = new QPushButton("导出 CSV");
     m_exportBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #67C23A; color: white;"
+        "  background-color: #3FB950; color: white;"
         "  border: none; padding: 8px 16px; border-radius: 4px;"
         "  font-size: 13px;"
         "}"
-        "QPushButton:hover { background-color: #85CE61; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #56D364; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     historyLayout->addWidget(m_exportBtn);
 

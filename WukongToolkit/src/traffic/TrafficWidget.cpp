@@ -45,7 +45,7 @@ BandwidthTrendWidget::BandwidthTrendWidget(QWidget* parent)
     : QWidget(parent)
 {
     setMinimumHeight(200);
-    setStyleSheet("background-color: #1E1F22; border: 1px solid #3C3F41;");
+    
 }
 
 void BandwidthTrendWidget::setData(const QList<TrafficData>& data)
@@ -70,7 +70,7 @@ void BandwidthTrendWidget::paintEvent(QPaintEvent* event)
     int marginBottom = 50;
 
     // Background
-    painter.fillRect(rect(), QColor("#1E1F22"));
+    painter.fillRect(rect(), QColor("#0D1117"));
 
     int plotW = w - marginLeft - marginRight;
     int plotH = h - marginTop - marginBottom;
@@ -83,14 +83,14 @@ void BandwidthTrendWidget::paintEvent(QPaintEvent* event)
     if (maxVal == 0) maxVal = 1;
 
     // Grid lines
-    painter.setPen(QPen(QColor("#3C3F41"), 1, Qt::DotLine));
+    painter.setPen(QPen(QColor("#30363D"), 1, Qt::DotLine));
     for (int i = 0; i <= 4; ++i) {
         int y = marginTop + plotH * i / 4;
         painter.drawLine(marginLeft, y, w - marginRight, y);
     }
 
     // Y-axis labels
-    painter.setPen(QColor("#8C8C8C"));
+    painter.setPen(QColor("#8B949E"));
     QFont labelFont = painter.font();
     labelFont.setPixelSize(10);
     painter.setFont(labelFont);
@@ -116,19 +116,19 @@ void BandwidthTrendWidget::paintEvent(QPaintEvent* event)
         int outX = groupX + groupWidth / 2 + 2;
 
         // Inbound bar (blue)
-        painter.setBrush(QColor("#409EFF"));
+        painter.setBrush(QColor("#58A6FF"));
         painter.setPen(Qt::NoPen);
         painter.drawRect(QRectF(inX, marginTop + plotH - inH, barWidth, inH));
 
         // Outbound bar (green)
-        painter.setBrush(QColor("#67C23A"));
+        painter.setBrush(QColor("#3FB950"));
         painter.setPen(Qt::NoPen);
         painter.drawRect(QRectF(outX, marginTop + plotH - outH, barWidth, outH));
 
         // Interface name label (rotated or abbreviated)
         QString ifName = d.interface;
         if (ifName.length() > 8) ifName = ifName.left(7) + ".";
-        painter.setPen(QColor("#8C8C8C"));
+        painter.setPen(QColor("#8B949E"));
         painter.drawText(QRect(groupX, marginTop + plotH + 4, groupWidth, marginBottom - 8),
                          Qt::AlignHCenter | Qt::AlignTop, ifName);
     }
@@ -136,14 +136,14 @@ void BandwidthTrendWidget::paintEvent(QPaintEvent* event)
     // Legend
     int legendY = marginTop - 16;
     painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor("#409EFF"));
+    painter.setBrush(QColor("#58A6FF"));
     painter.drawRect(marginLeft, legendY + 2, 10, 10);
-    painter.setPen(QColor("#DCDCDC"));
+    painter.setPen(QColor("#E6EDF3"));
     painter.drawText(marginLeft + 14, legendY + 2, 10, 10, Qt::AlignVCenter, "入");
     painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor("#67C23A"));
+    painter.setBrush(QColor("#3FB950"));
     painter.drawRect(marginLeft + 40, legendY + 2, 10, 10);
-    painter.setPen(QColor("#DCDCDC"));
+    painter.setPen(QColor("#E6EDF3"));
     painter.drawText(marginLeft + 54, legendY + 2, 10, 10, Qt::AlignVCenter, "出");
 }
 
@@ -155,7 +155,7 @@ ProtocolPieWidget::ProtocolPieWidget(QWidget* parent)
     : QWidget(parent)
 {
     setMinimumSize(200, 200);
-    setStyleSheet("background-color: #1E1F22; border: 1px solid #3C3F41;");
+    
 }
 
 void ProtocolPieWidget::setData(qint64 tcpBytes, qint64 udpBytes, qint64 icmpBytes, qint64 othersBytes)
@@ -183,11 +183,11 @@ void ProtocolPieWidget::paintEvent(QPaintEvent* event)
     int legendX = cx + pieSize / 2 + 30;
 
     // Background
-    painter.fillRect(rect(), QColor("#1E1F22"));
+    painter.fillRect(rect(), QColor("#0D1117"));
 
     qint64 total = m_tcpBytes + m_udpBytes + m_icmpBytes + m_othersBytes;
     if (total == 0) {
-        painter.setPen(QColor("#8C8C8C"));
+        painter.setPen(QColor("#8B949E"));
         painter.drawText(rect(), Qt::AlignCenter, "无数据");
         return;
     }
@@ -199,10 +199,10 @@ void ProtocolPieWidget::paintEvent(QPaintEvent* event)
     };
 
     QList<Slice> slices = {
-        {"TCP",    m_tcpBytes,    QColor("#409EFF")},
-        {"UDP",    m_udpBytes,    QColor("#67C23A")},
-        {"ICMP",   m_icmpBytes,   QColor("#E6A23C")},
-        {"Others", m_othersBytes, QColor("#909399")},
+        {"TCP",    m_tcpBytes,    QColor("#58A6FF")},
+        {"UDP",    m_udpBytes,    QColor("#3FB950")},
+        {"ICMP",   m_icmpBytes,   QColor("#D29922")},
+        {"Others", m_othersBytes, QColor("#8B949E")},
     };
 
     // Draw pie slices
@@ -214,7 +214,7 @@ void ProtocolPieWidget::paintEvent(QPaintEvent* event)
 
         qreal spanAngle = (qreal)slice.value / total * 360.0 * 16.0;
         painter.setBrush(slice.color);
-        painter.setPen(QPen(QColor("#1E1F22"), 2));
+        painter.setPen(QPen(QColor("#0D1117"), 2));
         painter.drawPie(pieRect, static_cast<int>(startAngle * 16), static_cast<int>(spanAngle));
         startAngle += spanAngle / 16.0;
     }
@@ -240,7 +240,7 @@ void ProtocolPieWidget::paintEvent(QPaintEvent* event)
 
         // Label
         double pct = (total > 0) ? (100.0 * slice.value / total) : 0.0;
-        painter.setPen(QColor("#DCDCDC"));
+        painter.setPen(QColor("#E6EDF3"));
         painter.drawText(legendX + 18, itemY, 120, legendItemH, Qt::AlignVCenter,
                          QString("%1 (%2%)").arg(slice.label).arg(pct, 0, 'f', 1));
     }
@@ -275,38 +275,8 @@ void TrafficWidget::setupUI()
     mainLayout->setContentsMargins(8, 8, 8, 8);
     mainLayout->setSpacing(8);
 
-    // ── Common style helpers ──
-    auto styleCombo = [](QComboBox* combo, int minWidth = 160) {
-        combo->setMinimumWidth(minWidth);
-        combo->setStyleSheet(
-            "QComboBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px 8px;"
-            "  border-radius: 3px; font-size: 13px;"
-            "}"
-            "QComboBox::drop-down { border: none; }"
-            "QComboBox QAbstractItemView {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  selection-background-color: #3C3F41;"
-            "}"
-        );
-    };
-
-    auto styleTable = [](QTableWidget* table) {
-        table->setStyleSheet(
-            "QTableWidget {"
-            "  background-color: #1E1F22; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; font-size: 12px;"
-            "  gridline-color: #2C2D30;"
-            "}"
-            "QTableWidget::item { padding: 3px 6px; }"
-            "QTableWidget::item:selected { background-color: #3C3F41; }"
-            "QHeaderView::section {"
-            "  background-color: #25262B; color: #8C8C8C;"
-            "  border: none; border-bottom: 2px solid #3C3F41;"
-            "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
-            "}"
-        );
+    // ── Table helper (layout config only, styling via global QSS) ──
+    auto configTable = [](QTableWidget* table) {
         table->setAlternatingRowColors(true);
         table->setSelectionBehavior(QAbstractItemView::SelectRows);
         table->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -314,62 +284,33 @@ void TrafficWidget::setupUI()
         table->verticalHeader()->setVisible(false);
     };
 
-    auto styleButton = [](QPushButton* btn, const QString& bgColor, const QString& hoverColor) {
-        btn->setStyleSheet(
-            QString("QPushButton {"
-                    "  background-color: %1; color: white;"
-                    "  border: none; padding: 8px 20px; border-radius: 4px;"
-                    "  font-size: 13px; font-weight: bold;"
-                    "}"
-                    "QPushButton:hover { background-color: %2; }"
-                    "QPushButton:disabled { background-color: #5C5C5C; }")
-                .arg(bgColor, hoverColor)
-        );
-        btn->setFixedHeight(34);
-    };
-
-    auto styleLabel = [](QLabel* label, const QString& color = "#8C8C8C", int fontSize = 12) {
-        label->setStyleSheet(
-            QString("font-size: %1px; color: %2;").arg(fontSize).arg(color)
-        );
-    };
-
     // ── Top: Device selection and time range ──
     auto* topGroup = new QGroupBox("流量分析中心");
-    topGroup->setStyleSheet(
-        "QGroupBox {"
-        "  color: #409EFF; font-size: 13px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
-        "  padding-top: 16px;"
-        "}"
-        "QGroupBox::title {"
-        "  subcontrol-origin: margin; left: 10px; padding: 0 4px;"
-        "}"
-    );
+    topGroup->setStyleSheet("QGroupBox { color: #58A6FF; font-weight: bold; }");
     auto* topLayout = new QHBoxLayout(topGroup);
     topLayout->setSpacing(12);
 
     auto* deviceLabel = new QLabel("设备:");
-    styleLabel(deviceLabel, "#8C8C8C", 13);
     m_deviceCombo = new QComboBox();
-    styleCombo(m_deviceCombo, 200);
+    m_deviceCombo->setMinimumWidth(200);
     m_deviceCombo->addItems({"Core-Switch-01", "Core-Switch-02", "Agg-Switch-01",
                              "Agg-Switch-02", "Access-Switch-01", "Router-01",
                              "Firewall-01", "Firewall-02"});
 
     auto* timeLabel = new QLabel("时间范围:");
-    styleLabel(timeLabel, "#8C8C8C", 13);
     m_timeRangeCombo = new QComboBox();
-    styleCombo(m_timeRangeCombo, 140);
+    m_timeRangeCombo->setMinimumWidth(140);
     m_timeRangeCombo->addItems({"最近 5 分钟", "最近 15 分钟", "最近 1 小时",
                                 "最近 6 小时", "最近 24 小时", "最近 7 天"});
     m_timeRangeCombo->setCurrentIndex(2);
 
     auto* refreshBtn = new QPushButton("立即刷新");
-    styleButton(refreshBtn, "#67C23A", "#85CE61");
+    refreshBtn->setStyleSheet("QPushButton { background-color: #3FB950; color: white; border: none; } QPushButton:hover { background-color: #56D364; }");
+    refreshBtn->setFixedHeight(34);
 
     m_exportBtn = new QPushButton("导出 CSV");
-    styleButton(m_exportBtn, "#E6A23C", "#EBB563");
+    m_exportBtn->setStyleSheet("QPushButton { background-color: #D29922; color: white; border: none; } QPushButton:hover { background-color: #DBAB4A; }");
+    m_exportBtn->setFixedHeight(34);
 
     topLayout->addWidget(deviceLabel);
     topLayout->addWidget(m_deviceCombo);
@@ -391,16 +332,7 @@ void TrafficWidget::setupUI()
 
     // Top-left: Bandwidth trend chart
     auto* bwGroup = new QGroupBox("带宽趋势");
-    bwGroup->setStyleSheet(
-        "QGroupBox {"
-        "  color: #409EFF; font-size: 12px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
-        "  padding-top: 16px;"
-        "}"
-        "QGroupBox::title {"
-        "  subcontrol-origin: margin; left: 10px; padding: 0 4px;"
-        "}"
-    );
+    bwGroup->setStyleSheet("QGroupBox { color: #58A6FF; font-weight: bold; }");
     auto* bwLayout = new QVBoxLayout(bwGroup);
     bwLayout->setContentsMargins(4, 8, 4, 4);
     m_bandwidthChart = new BandwidthTrendWidget();
@@ -408,16 +340,7 @@ void TrafficWidget::setupUI()
 
     // Top-right: Protocol pie chart
     auto* protoGroup = new QGroupBox("协议分布");
-    protoGroup->setStyleSheet(
-        "QGroupBox {"
-        "  color: #409EFF; font-size: 12px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
-        "  padding-top: 16px;"
-        "}"
-        "QGroupBox::title {"
-        "  subcontrol-origin: margin; left: 10px; padding: 0 4px;"
-        "}"
-    );
+    protoGroup->setStyleSheet("QGroupBox { color: #58A6FF; font-weight: bold; }");
     auto* protoLayout = new QVBoxLayout(protoGroup);
     protoLayout->setContentsMargins(4, 8, 4, 4);
     m_protocolPie = new ProtocolPieWidget();
@@ -425,16 +348,7 @@ void TrafficWidget::setupUI()
 
     // Bottom-left: Top Interface table
     auto* ifGroup = new QGroupBox("Top Interface");
-    ifGroup->setStyleSheet(
-        "QGroupBox {"
-        "  color: #409EFF; font-size: 12px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
-        "  padding-top: 16px;"
-        "}"
-        "QGroupBox::title {"
-        "  subcontrol-origin: margin; left: 10px; padding: 0 4px;"
-        "}"
-    );
+    ifGroup->setStyleSheet("QGroupBox { color: #58A6FF; font-weight: bold; }");
     auto* ifLayout = new QVBoxLayout(ifGroup);
     ifLayout->setContentsMargins(4, 8, 4, 4);
     m_topInterfaceTable = new QTableWidget(0, 5);
@@ -444,21 +358,12 @@ void TrafficWidget::setupUI()
     m_topInterfaceTable->setColumnWidth(2, 100);
     m_topInterfaceTable->setColumnWidth(3, 80);
     m_topInterfaceTable->setColumnWidth(4, 70);
-    styleTable(m_topInterfaceTable);
+    configTable(m_topInterfaceTable);
     ifLayout->addWidget(m_topInterfaceTable);
 
     // Bottom-right: Top Talker table
     auto* talkerGroup = new QGroupBox("Top Talker");
-    talkerGroup->setStyleSheet(
-        "QGroupBox {"
-        "  color: #409EFF; font-size: 12px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
-        "  padding-top: 16px;"
-        "}"
-        "QGroupBox::title {"
-        "  subcontrol-origin: margin; left: 10px; padding: 0 4px;"
-        "}"
-    );
+    talkerGroup->setStyleSheet("QGroupBox { color: #58A6FF; font-weight: bold; }");
     auto* talkerLayout = new QVBoxLayout(talkerGroup);
     talkerLayout->setContentsMargins(4, 8, 4, 4);
     m_topTalkerTable = new QTableWidget(0, 5);
@@ -468,7 +373,7 @@ void TrafficWidget::setupUI()
     m_topTalkerTable->setColumnWidth(2, 70);
     m_topTalkerTable->setColumnWidth(3, 90);
     m_topTalkerTable->setColumnWidth(4, 70);
-    styleTable(m_topTalkerTable);
+    configTable(m_topTalkerTable);
     talkerLayout->addWidget(m_topTalkerTable);
 
     grid->addWidget(bwGroup, 0, 0);
@@ -484,16 +389,7 @@ void TrafficWidget::setupUI()
 
     // ── Bottom: Broadcast/Multicast statistics ──
     auto* bcastGroup = new QGroupBox("广播/组播统计");
-    bcastGroup->setStyleSheet(
-        "QGroupBox {"
-        "  color: #409EFF; font-size: 13px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
-        "  padding-top: 16px;"
-        "}"
-        "QGroupBox::title {"
-        "  subcontrol-origin: margin; left: 10px; padding: 0 4px;"
-        "}"
-    );
+    bcastGroup->setStyleSheet("QGroupBox { color: #58A6FF; font-weight: bold; }");
     auto* bcastLayout = new QVBoxLayout(bcastGroup);
     bcastLayout->setContentsMargins(4, 8, 4, 4);
 
@@ -503,7 +399,7 @@ void TrafficWidget::setupUI()
     m_broadcastTable->setColumnWidth(1, 120);
     m_broadcastTable->setColumnWidth(2, 120);
     m_broadcastTable->setColumnWidth(3, 80);
-    styleTable(m_broadcastTable);
+    configTable(m_broadcastTable);
     m_broadcastTable->setMaximumHeight(160);
     bcastLayout->addWidget(m_broadcastTable);
 
@@ -591,19 +487,19 @@ void TrafficWidget::generateMockData()
 
         auto* utilItem = new QTableWidgetItem(QString("%1%").arg(d.utilization, 0, 'f', 1));
         if (d.utilization > 80) {
-            utilItem->setForeground(QColor("#F56C6C"));
+            utilItem->setForeground(QColor("#F85149"));
         } else if (d.utilization > 60) {
-            utilItem->setForeground(QColor("#E6A23C"));
+            utilItem->setForeground(QColor("#D29922"));
         } else {
-            utilItem->setForeground(QColor("#67C23A"));
+            utilItem->setForeground(QColor("#3FB950"));
         }
         m_topInterfaceTable->setItem(i, 3, utilItem);
 
         auto* statusItem = new QTableWidgetItem(d.status);
         if (d.status == "Up") {
-            statusItem->setForeground(QColor("#67C23A"));
+            statusItem->setForeground(QColor("#3FB950"));
         } else {
-            statusItem->setForeground(QColor("#F56C6C"));
+            statusItem->setForeground(QColor("#F85149"));
         }
         m_topInterfaceTable->setItem(i, 4, statusItem);
     }
@@ -642,11 +538,11 @@ void TrafficWidget::generateMockData()
 
         auto* pctItem = new QTableWidgetItem(QString("%1%").arg(b.percentage, 0, 'f', 1));
         if (b.percentage > 30) {
-            pctItem->setForeground(QColor("#F56C6C"));
+            pctItem->setForeground(QColor("#F85149"));
         } else if (b.percentage > 15) {
-            pctItem->setForeground(QColor("#E6A23C"));
+            pctItem->setForeground(QColor("#D29922"));
         } else {
-            pctItem->setForeground(QColor("#67C23A"));
+            pctItem->setForeground(QColor("#3FB950"));
         }
         m_broadcastTable->setItem(i, 3, pctItem);
     }
@@ -693,11 +589,11 @@ void TrafficWidget::updateTopTalker()
 
         auto* protoItem = new QTableWidgetItem(t.protocol);
         if (t.protocol == "TCP") {
-            protoItem->setForeground(QColor("#409EFF"));
+            protoItem->setForeground(QColor("#58A6FF"));
         } else if (t.protocol == "UDP") {
-            protoItem->setForeground(QColor("#67C23A"));
+            protoItem->setForeground(QColor("#3FB950"));
         } else if (t.protocol == "ICMP") {
-            protoItem->setForeground(QColor("#E6A23C"));
+            protoItem->setForeground(QColor("#D29922"));
         }
         m_topTalkerTable->setItem(i, 2, protoItem);
 

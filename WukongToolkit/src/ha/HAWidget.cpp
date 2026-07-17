@@ -163,15 +163,15 @@ void HAWidget::setupUI()
         table->setStyleSheet(
             QStringLiteral(
                 "QTableWidget {"
-                "  background-color: #1E1F22; color: #DCDCDC;"
-                "  border: 1px solid #3C3F41; font-size: 12px;"
-                "  gridline-color: #2C2D30;"
+                "  background-color: #0D1117; color: #E6EDF3;"
+                "  border: 1px solid #30363D; font-size: 12px;"
+                "  gridline-color: #21262D;"
                 "}"
                 "QTableWidget::item { padding: 3px 6px; }"
-                "QTableWidget::item:selected { background-color: #3C3F41; }"
+                "QTableWidget::item:selected { background-color: #30363D; }"
                 "QHeaderView::section {"
-                "  background-color: #25262B; color: #8C8C8C;"
-                "  border: none; border-bottom: 2px solid #3C3F41;"
+                "  background-color: #161B22; color: #8B949E;"
+                "  border: none; border-bottom: 2px solid #30363D;"
                 "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
                 "}"
             )
@@ -192,7 +192,7 @@ void HAWidget::setupUI()
                 "  font-size: 13px; font-weight: bold;"
                 "}"
                 "QPushButton:hover { background-color: %2; }"
-                "QPushButton:disabled { background-color: #5C5C5C; }"
+                "QPushButton:disabled { background-color: #484F58; }"
             )).arg(bgColor, hoverColor)
         );
         btn->setFixedHeight(34);
@@ -207,7 +207,7 @@ void HAWidget::setupUI()
     // Device selector row
     auto* selectorRow = new QHBoxLayout();
     auto* selectorLabel = new QLabel(QStringLiteral("选择设备:"));
-    selectorLabel->setStyleSheet(QStringLiteral("font-size: 13px; color: #8C8C8C; font-weight: bold;"));
+    selectorLabel->setStyleSheet(QStringLiteral("font-size: 13px; color: #8B949E; font-weight: bold;"));
     selectorLabel->setFixedWidth(70);
 
     m_deviceCombo = new QComboBox();
@@ -215,20 +215,20 @@ void HAWidget::setupUI()
     m_deviceCombo->setStyleSheet(
         QStringLiteral(
             "QComboBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 6px 12px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 6px 12px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
             "QComboBox::drop-down { border: none; width: 24px; }"
             "QComboBox QAbstractItemView {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  selection-background-color: #3C3F41;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  selection-background-color: #30363D;"
             "}"
         )
     );
 
     auto* refreshBtn = new QPushButton(QStringLiteral("刷新"));
-    styleButton(refreshBtn, QStringLiteral("#409EFF"), QStringLiteral("#66B1FF"));
+    styleButton(refreshBtn, QStringLiteral("#58A6FF"), QStringLiteral("#79C0FF"));
 
     selectorRow->addWidget(selectorLabel);
     selectorRow->addWidget(m_deviceCombo);
@@ -245,8 +245,8 @@ void HAWidget::setupUI()
         card->setStyleSheet(
             QStringLiteral(
                 "QFrame {"
-                "  background-color: #25262B;"
-                "  border: 1px solid #3C3F41;"
+                "  background-color: #161B22;"
+                "  border: 1px solid #30363D;"
                 "  border-radius: 6px;"
                 "}"
             )
@@ -257,7 +257,7 @@ void HAWidget::setupUI()
         cardLayout->setSpacing(4);
 
         auto* titleLbl = new QLabel(title);
-        titleLbl->setStyleSheet(QStringLiteral("font-size: 11px; color: #8C8C8C;"));
+        
         titleLbl->setAlignment(Qt::AlignCenter);
 
         valueLabel = new QLabel(QStringLiteral("--"));
@@ -271,11 +271,11 @@ void HAWidget::setupUI()
         return card;
     };
 
-    cardsRow->addWidget(createCard(QStringLiteral("HA 状态"), m_haStatusLabel, QStringLiteral("#67C23A")));
-    cardsRow->addWidget(createCard(QStringLiteral("主设备"), m_primaryDeviceLabel, QStringLiteral("#409EFF")));
-    cardsRow->addWidget(createCard(QStringLiteral("备设备"), m_standbyDeviceLabel, QStringLiteral("#E6A23C")));
-    cardsRow->addWidget(createCard(QStringLiteral("切换时间"), m_switchTimeLabel, QStringLiteral("#8C8C8C")));
-    cardsRow->addWidget(createCard(QStringLiteral("上次切换"), m_lastSwitchLabel, QStringLiteral("#8C8C8C")));
+    cardsRow->addWidget(createCard(QStringLiteral("HA 状态"), m_haStatusLabel, QStringLiteral("#3FB950")));
+    cardsRow->addWidget(createCard(QStringLiteral("主设备"), m_primaryDeviceLabel, QStringLiteral("#58A6FF")));
+    cardsRow->addWidget(createCard(QStringLiteral("备设备"), m_standbyDeviceLabel, QStringLiteral("#D29922")));
+    cardsRow->addWidget(createCard(QStringLiteral("切换时间"), m_switchTimeLabel, QStringLiteral("#8B949E")));
+    cardsRow->addWidget(createCard(QStringLiteral("上次切换"), m_lastSwitchLabel, QStringLiteral("#8B949E")));
 
     topLayout->addLayout(cardsRow);
     mainLayout->addWidget(topArea);
@@ -285,21 +285,21 @@ void HAWidget::setupUI()
     tabWidget->setStyleSheet(
         QStringLiteral(
             "QTabWidget::pane {"
-            "  background-color: #1E1F22;"
-            "  border: 1px solid #3C3F41;"
+            "  background-color: #0D1117;"
+            "  border: 1px solid #30363D;"
             "}"
             "QTabBar::tab {"
-            "  background-color: #25262B; color: #8C8C8C;"
-            "  padding: 8px 20px; border: 1px solid #3C3F41;"
+            "  background-color: #161B22; color: #8B949E;"
+            "  padding: 8px 20px; border: 1px solid #30363D;"
             "  border-bottom: none; font-size: 13px;"
             "  border-top-left-radius: 4px; border-top-right-radius: 4px;"
             "}"
             "QTabBar::tab:selected {"
-            "  background-color: #1E1F22; color: #409EFF;"
+            "  background-color: #0D1117; color: #58A6FF;"
             "  font-weight: bold;"
             "}"
             "QTabBar::tab:hover {"
-            "  color: #DCDCDC;"
+            "  color: #E6EDF3;"
             "}"
         )
     );
@@ -403,13 +403,13 @@ void HAWidget::setupUI()
     bottomLayout->setSpacing(12);
 
     m_switchTestBtn = new QPushButton(QStringLiteral("手动触发 HA 切换"));
-    styleButton(m_switchTestBtn, QStringLiteral("#E6A23C"), QStringLiteral("#EBB563"));
+    styleButton(m_switchTestBtn, QStringLiteral("#D29922"), QStringLiteral("#DBAB4A"));
 
     m_configSyncBtn = new QPushButton(QStringLiteral("配置文件同步"));
-    styleButton(m_configSyncBtn, QStringLiteral("#409EFF"), QStringLiteral("#66B1FF"));
+    styleButton(m_configSyncBtn, QStringLiteral("#58A6FF"), QStringLiteral("#79C0FF"));
 
     m_exportBtn = new QPushButton(QStringLiteral("导出报告"));
-    styleButton(m_exportBtn, QStringLiteral("#67C23A"), QStringLiteral("#85CE61"));
+    styleButton(m_exportBtn, QStringLiteral("#3FB950"), QStringLiteral("#56D364"));
 
     bottomLayout->addWidget(m_switchTestBtn);
     bottomLayout->addWidget(m_configSyncBtn);
@@ -455,8 +455,8 @@ void HAWidget::updateHAStatus(int haIndex)
     const HAConfig& cfg = m_haConfigs[haIndex];
 
     // 更新概览卡片
-    QString statusColor = (cfg.status == QStringLiteral("Active")) ? QStringLiteral("#67C23A") :
-                          (cfg.status == QStringLiteral("Standby")) ? QStringLiteral("#E6A23C") : QStringLiteral("#F56C6C");
+    QString statusColor = (cfg.status == QStringLiteral("Active")) ? QStringLiteral("#3FB950") :
+                          (cfg.status == QStringLiteral("Standby")) ? QStringLiteral("#D29922") : QStringLiteral("#F85149");
     m_haStatusLabel->setStyleSheet(
         QString(QStringLiteral("font-size: 18px; color: %1; font-weight: bold;")).arg(statusColor)
     );
@@ -477,7 +477,7 @@ void HAWidget::updateHAStatus(int haIndex)
     // 上次切换时间
     if (haIndex < m_haSwitchLogs.size() && !m_haSwitchLogs[haIndex].isEmpty()) {
         const SwitchLog& lastLog = m_haSwitchLogs[haIndex].first();
-        m_lastSwitchLabel->setStyleSheet(QStringLiteral("font-size: 12px; color: #8C8C8C; font-weight: bold;"));
+        m_lastSwitchLabel->setStyleSheet(QStringLiteral("font-size: 12px; color: #8B949E; font-weight: bold;"));
         m_lastSwitchLabel->setText(lastLog.time.mid(5)); // 只显示月-日 时:分:秒
     } else {
         m_lastSwitchLabel->setText(QStringLiteral("无记录"));
@@ -514,11 +514,11 @@ void HAWidget::updateHAStatus(int haIndex)
 
         auto* statusCell = new QTableWidgetItem(status);
         if (status == QStringLiteral("正常")) {
-            statusCell->setForeground(QColor(QStringLiteral("#67C23A")));
+            statusCell->setForeground(QColor(QStringLiteral("#3FB950")));
         } else if (status == QStringLiteral("警告")) {
-            statusCell->setForeground(QColor(QStringLiteral("#E6A23C")));
+            statusCell->setForeground(QColor(QStringLiteral("#D29922")));
         } else {
-            statusCell->setForeground(QColor(QStringLiteral("#F56C6C")));
+            statusCell->setForeground(QColor(QStringLiteral("#F85149")));
         }
         m_deviceCompareTable->setItem(r, 3, statusCell);
     };
@@ -584,12 +584,12 @@ void HAWidget::updateHAStatus(int haIndex)
 
             auto* statusCell = new QTableWidgetItem(iface.status);
             statusCell->setForeground(iface.status == QStringLiteral("Up")
-                ? QColor(QStringLiteral("#67C23A")) : QColor(QStringLiteral("#F56C6C")));
+                ? QColor(QStringLiteral("#3FB950")) : QColor(QStringLiteral("#F85149")));
             m_ifStatusTable->setItem(r, 3, statusCell);
 
             auto* linkCell = new QTableWidgetItem(iface.linkState);
             linkCell->setForeground(iface.linkState == QStringLiteral("Link Up")
-                ? QColor(QStringLiteral("#67C23A")) : QColor(QStringLiteral("#F56C6C")));
+                ? QColor(QStringLiteral("#3FB950")) : QColor(QStringLiteral("#F85149")));
             m_ifStatusTable->setItem(r, 4, linkCell);
         }
     }
@@ -607,11 +607,11 @@ void HAWidget::updateHAStatus(int haIndex)
 
             auto* durationItem = new QTableWidgetItem(QString::number(log.durationMs));
             if (log.durationMs > 1000) {
-                durationItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+                durationItem->setForeground(QColor(QStringLiteral("#D29922")));
             } else if (log.durationMs > 500) {
-                durationItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+                durationItem->setForeground(QColor(QStringLiteral("#D29922")));
             } else {
-                durationItem->setForeground(QColor(QStringLiteral("#67C23A")));
+                durationItem->setForeground(QColor(QStringLiteral("#3FB950")));
             }
             m_switchLogTable->setItem(r, 4, durationItem);
         }
@@ -780,27 +780,27 @@ void HAWidget::onExport()
     stream << QStringLiteral("<title>HA 高可用性状态报告</title>\n");
     stream << QStringLiteral("<style>\n");
     stream << QStringLiteral("body { font-family: 'Microsoft YaHei', sans-serif; "
-                              "background: #1E1F22; color: #DCDCDC; padding: 20px; }\n");
-    stream << QStringLiteral("h1 { color: #409EFF; text-align: center; }\n");
-    stream << QStringLiteral("h2 { color: #409EFF; margin-top: 30px; }\n");
+                              "background: #0D1117; color: #E6EDF3; padding: 20px; }\n");
+    stream << QStringLiteral("h1 { color: #58A6FF; text-align: center; }\n");
+    stream << QStringLiteral("h2 { color: #58A6FF; margin-top: 30px; }\n");
     stream << QStringLiteral(".summary { display: flex; justify-content: space-around; "
                               "margin: 20px 0; }\n");
-    stream << QStringLiteral(".card { background: #25262B; border: 1px solid #3C3F41; "
+    stream << QStringLiteral(".card { background: #161B22; border: 1px solid #30363D; "
                               "border-radius: 8px; padding: 16px 24px; text-align: center; }\n");
-    stream << QStringLiteral(".card .label { color: #8C8C8C; font-size: 12px; }\n");
+    stream << QStringLiteral(".card .label { color: #8B949E; font-size: 12px; }\n");
     stream << QStringLiteral(".card .value { font-size: 20px; font-weight: bold; "
                               "margin-top: 4px; }\n");
-    stream << QStringLiteral(".card .green { color: #67C23A; }\n");
-    stream << QStringLiteral(".card .blue { color: #409EFF; }\n");
-    stream << QStringLiteral(".card .orange { color: #E6A23C; }\n");
+    stream << QStringLiteral(".card .green { color: #3FB950; }\n");
+    stream << QStringLiteral(".card .blue { color: #58A6FF; }\n");
+    stream << QStringLiteral(".card .orange { color: #D29922; }\n");
     stream << QStringLiteral("table { width: 100%%; border-collapse: collapse; "
                               "margin-top: 10px; }\n");
-    stream << QStringLiteral("th { background: #25262B; color: #8C8C8C; padding: 10px; "
-                              "border-bottom: 2px solid #3C3F41; text-align: left; }\n");
-    stream << QStringLiteral("td { padding: 8px; border-bottom: 1px solid #2C2D30; }\n");
-    stream << QStringLiteral(".up { color: #67C23A; font-weight: bold; }\n");
-    stream << QStringLiteral(".down { color: #F56C6C; font-weight: bold; }\n");
-    stream << QStringLiteral(".footer { text-align: center; color: #8C8C8C; "
+    stream << QStringLiteral("th { background: #161B22; color: #8B949E; padding: 10px; "
+                              "border-bottom: 2px solid #30363D; text-align: left; }\n");
+    stream << QStringLiteral("td { padding: 8px; border-bottom: 1px solid #21262D; }\n");
+    stream << QStringLiteral(".up { color: #3FB950; font-weight: bold; }\n");
+    stream << QStringLiteral(".down { color: #F85149; font-weight: bold; }\n");
+    stream << QStringLiteral(".footer { text-align: center; color: #8B949E; "
                               "margin-top: 30px; font-size: 12px; }\n");
     stream << QStringLiteral("</style>\n</head>\n<body>\n");
 

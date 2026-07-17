@@ -66,13 +66,13 @@ void SerialWidget::setupUI()
     m_portCombo->setEditable(true);
     m_portCombo->setStyleSheet(
         "QComboBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #30363D; border: 1px solid #30363D;"
         "}"
     );
     leftForm->addRow("端口:", m_portCombo);
@@ -86,13 +86,13 @@ void SerialWidget::setupUI()
     m_baudRateCombo->setCurrentText("115200");
     m_baudRateCombo->setStyleSheet(
         "QComboBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #30363D; border: 1px solid #30363D;"
         "}"
     );
     leftForm->addRow("波特率:", m_baudRateCombo);
@@ -103,13 +103,13 @@ void SerialWidget::setupUI()
     m_dataBitsCombo->setCurrentText("8");
     m_dataBitsCombo->setStyleSheet(
         "QComboBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #30363D; border: 1px solid #30363D;"
         "}"
     );
     leftForm->addRow("数据位:", m_dataBitsCombo);
@@ -123,13 +123,13 @@ void SerialWidget::setupUI()
     m_stopBitsCombo->setCurrentText("1");
     m_stopBitsCombo->setStyleSheet(
         "QComboBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #30363D; border: 1px solid #30363D;"
         "}"
     );
     rightForm->addRow("停止位:", m_stopBitsCombo);
@@ -140,13 +140,13 @@ void SerialWidget::setupUI()
     m_parityCombo->setCurrentText("None");
     m_parityCombo->setStyleSheet(
         "QComboBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #30363D; border: 1px solid #30363D;"
         "}"
     );
     rightForm->addRow("校验位:", m_parityCombo);
@@ -157,13 +157,13 @@ void SerialWidget::setupUI()
     m_flowControlCombo->setCurrentText("None");
     m_flowControlCombo->setStyleSheet(
         "QComboBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #30363D; border: 1px solid #30363D;"
         "}"
     );
     rightForm->addRow("流控:", m_flowControlCombo);
@@ -175,13 +175,13 @@ void SerialWidget::setupUI()
     m_encodingCombo->setCurrentText("UTF-8");
     m_encodingCombo->setStyleSheet(
         "QComboBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #30363D; border: 1px solid #30363D;"
         "}"
     );
     rightForm->addRow("编码:", m_encodingCombo);
@@ -196,19 +196,19 @@ void SerialWidget::setupUI()
     m_openBtn = new QPushButton("打开串口");
     m_openBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_openBtn->setFixedHeight(36);
 
     m_refreshBtn = new QPushButton("刷新端口");
     m_refreshBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #3C3F41; color: #DCDCDC;"
+        "  background-color: #30363D; color: #E6EDF3;"
         "  border: 1px solid #555; padding: 6px 14px; border-radius: 4px;"
         "  font-size: 12px;"
         "}"
@@ -219,7 +219,7 @@ void SerialWidget::setupUI()
     m_sendFileBtn = new QPushButton("发送文件...");
     m_sendFileBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #3C3F41; color: #DCDCDC;"
+        "  background-color: #30363D; color: #E6EDF3;"
         "  border: 1px solid #555; padding: 6px 14px; border-radius: 4px;"
         "  font-size: 12px;"
         "}"
@@ -243,14 +243,14 @@ void SerialWidget::setupUI()
 
     m_dtrCheck = new QCheckBox("DTR");
     m_dtrCheck->setStyleSheet(
-        "QCheckBox { color: #DCDCDC; font-size: 12px; }"
+        "QCheckBox { color: #E6EDF3; font-size: 12px; }"
         "QCheckBox::indicator { width: 16px; height: 16px; }"
     );
     m_dtrCheck->setEnabled(false);
 
     m_rtsCheck = new QCheckBox("RTS");
     m_rtsCheck->setStyleSheet(
-        "QCheckBox { color: #DCDCDC; font-size: 12px; }"
+        "QCheckBox { color: #E6EDF3; font-size: 12px; }"
         "QCheckBox::indicator { width: 16px; height: 16px; }"
     );
     m_rtsCheck->setEnabled(false);
@@ -260,14 +260,14 @@ void SerialWidget::setupUI()
     m_statusIcon->setFixedSize(12, 12);
     m_statusIcon->setStyleSheet(
         "QLabel {"
-        "  background-color: #F56C6C; border-radius: 6px;"
+        "  background-color: #F85149; border-radius: 6px;"
         "  border: 1px solid #444;"
         "}"
     );
 
     m_statusLabel = new QLabel("未连接");
     m_statusLabel->setStyleSheet(
-        "QLabel { color: #8C8C8C; font-size: 12px; }"
+        "QLabel { color: #8B949E; font-size: 12px; }"
     );
 
     ctrlLayout->addWidget(m_statusIcon);
@@ -284,7 +284,7 @@ void SerialWidget::setupUI()
     m_terminal->setMinimumHeight(200);
     m_terminal->setStyleSheet(
         "TerminalWidget {"
-        "  background-color: #1E1F22; border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; border: 1px solid #30363D;"
         "}"
     );
     mainLayout->addWidget(m_terminal, 1);
@@ -510,38 +510,38 @@ void SerialWidget::updatePortStatus()
     m_openBtn->setText(m_portOpen ? "关闭串口" : "打开串口");
     m_openBtn->setStyleSheet(m_portOpen ?
         "QPushButton {"
-        "  background-color: #F56C6C; color: white;"
+        "  background-color: #F85149; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #F78989; }" :
+        "QPushButton:hover { background-color: #FF7B72; }" :
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
     );
 
     // 更新状态指示器
     if (m_portOpen) {
         m_statusIcon->setStyleSheet(
             "QLabel {"
-            "  background-color: #67C23A; border-radius: 6px;"
+            "  background-color: #3FB950; border-radius: 6px;"
             "  border: 1px solid #444;"
             "}"
         );
         m_statusLabel->setText("已连接 - " + m_serialPort->portName());
-        m_statusLabel->setStyleSheet("QLabel { color: #67C23A; font-size: 12px; font-weight: bold; }");
+        m_statusLabel->setStyleSheet("QLabel { color: #3FB950; font-size: 12px; font-weight: bold; }");
     } else {
         m_statusIcon->setStyleSheet(
             "QLabel {"
-            "  background-color: #F56C6C; border-radius: 6px;"
+            "  background-color: #F85149; border-radius: 6px;"
             "  border: 1px solid #444;"
             "}"
         );
         m_statusLabel->setText("未连接");
-        m_statusLabel->setStyleSheet("QLabel { color: #8C8C8C; font-size: 12px; }");
+        m_statusLabel->setStyleSheet("QLabel { color: #8B949E; font-size: 12px; }");
     }
 
     // 更新控件可用性

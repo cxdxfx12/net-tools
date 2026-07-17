@@ -35,7 +35,7 @@ HealthPieChart::HealthPieChart(QWidget* parent)
     , m_danger(0)
 {
     setMinimumSize(200, 180);
-    setStyleSheet("background-color: transparent;");
+    
 }
 
 void HealthPieChart::setData(int healthy, int warning, int danger)
@@ -76,7 +76,7 @@ void HealthPieChart::paintEvent(QPaintEvent* /*event*/)
         path.arcTo(outerRect, startAngle / 16.0, spanAngle / 16.0);
         path.arcTo(innerRect, (startAngle + spanAngle) / 16.0, -spanAngle / 16.0);
         path.closeSubpath();
-        painter.setBrush(QColor("#67C23A"));
+        painter.setBrush(QColor("#3FB950"));
         painter.setPen(Qt::NoPen);
         painter.drawPath(path);
         startAngle += spanAngle;
@@ -90,7 +90,7 @@ void HealthPieChart::paintEvent(QPaintEvent* /*event*/)
         path.arcTo(outerRect, startAngle / 16.0, spanAngle / 16.0);
         path.arcTo(innerRect, (startAngle + spanAngle) / 16.0, -spanAngle / 16.0);
         path.closeSubpath();
-        painter.setBrush(QColor("#E6A23C"));
+        painter.setBrush(QColor("#D29922"));
         painter.setPen(Qt::NoPen);
         painter.drawPath(path);
         startAngle += spanAngle;
@@ -104,13 +104,13 @@ void HealthPieChart::paintEvent(QPaintEvent* /*event*/)
         path.arcTo(outerRect, startAngle / 16.0, spanAngle / 16.0);
         path.arcTo(innerRect, (startAngle + spanAngle) / 16.0, -spanAngle / 16.0);
         path.closeSubpath();
-        painter.setBrush(QColor("#F56C6C"));
+        painter.setBrush(QColor("#F85149"));
         painter.setPen(Qt::NoPen);
         painter.drawPath(path);
     }
 
     // Center text
-    painter.setPen(QColor("#DCDCDC"));
+    painter.setPen(QColor("#E6EDF3"));
     QFont font = painter.font();
     font.setPixelSize(14);
     font.setBold(true);
@@ -119,7 +119,7 @@ void HealthPieChart::paintEvent(QPaintEvent* /*event*/)
 
     font.setPixelSize(18);
     painter.setFont(font);
-    painter.setPen(QColor("#67C23A"));
+    painter.setPen(QColor("#3FB950"));
     double healthPct = total > 0 ? (100.0 * m_healthy / total) : 0;
     painter.drawText(QRectF(cx - 50, cy + 6, 100, 24), Qt::AlignCenter,
                      QString("%1%").arg(static_cast<int>(healthPct)));
@@ -132,13 +132,13 @@ void HealthPieChart::paintEvent(QPaintEvent* /*event*/)
     int legendY = h - 16;
     int legendX = cx - 90;
 
-    painter.setPen(QColor("#67C23A"));
+    painter.setPen(QColor("#3FB950"));
     painter.drawText(QRectF(legendX, legendY, 60, 14), Qt::AlignHCenter,
                      QString("健康 %1").arg(m_healthy));
-    painter.setPen(QColor("#E6A23C"));
+    painter.setPen(QColor("#D29922"));
     painter.drawText(QRectF(legendX + 60, legendY, 60, 14), Qt::AlignHCenter,
                      QString("警告 %1").arg(m_warning));
-    painter.setPen(QColor("#F56C6C"));
+    painter.setPen(QColor("#F85149"));
     painter.drawText(QRectF(legendX + 120, legendY, 60, 14), Qt::AlignHCenter,
                      QString("危险 %1").arg(m_danger));
 }
@@ -152,7 +152,7 @@ AlertTrendChart::AlertTrendChart(QWidget* parent)
     , m_maxValue(0)
 {
     setMinimumSize(200, 180);
-    setStyleSheet("background-color: transparent;");
+    
 }
 
 void AlertTrendChart::setData(const QList<int>& data)
@@ -187,27 +187,27 @@ void AlertTrendChart::paintEvent(QPaintEvent* /*event*/)
     if (plotW <= 0 || plotH <= 0) return;
 
     // Background
-    painter.fillRect(rect(), QColor("#1E1F22"));
+    painter.fillRect(rect(), QColor("#0D1117"));
 
     // Grid lines
-    painter.setPen(QPen(QColor("#2C2D30"), 1, Qt::DashLine));
+    painter.setPen(QPen(QColor("#21262D"), 1, Qt::DashLine));
     for (int i = 0; i <= 4; ++i) {
         int y = marginTop + plotH * i / 4;
         painter.drawLine(marginLeft, y, w - marginRight, y);
 
         // Y-axis labels
-        painter.setPen(QColor("#8C8C8C"));
+        painter.setPen(QColor("#8B949E"));
         QFont font = painter.font();
         font.setPixelSize(10);
         painter.setFont(font);
         int val = m_maxValue * (4 - i) / 4;
         painter.drawText(QRectF(0, y - 7, marginLeft - 4, 14),
                          Qt::AlignRight | Qt::AlignVCenter, QString::number(val));
-        painter.setPen(QPen(QColor("#2C2D30"), 1, Qt::DashLine));
+        painter.setPen(QPen(QColor("#21262D"), 1, Qt::DashLine));
     }
 
     if (m_data.isEmpty()) {
-        painter.setPen(QColor("#8C8C8C"));
+        painter.setPen(QColor("#8B949E"));
         QFont font = painter.font();
         font.setPixelSize(12);
         painter.setFont(font);
@@ -222,7 +222,7 @@ void AlertTrendChart::paintEvent(QPaintEvent* /*event*/)
     double stepX = static_cast<double>(plotW) / (n - 1);
 
     // X-axis labels
-    painter.setPen(QColor("#8C8C8C"));
+    painter.setPen(QColor("#8B949E"));
     QFont font = painter.font();
     font.setPixelSize(10);
     painter.setFont(font);
@@ -264,7 +264,7 @@ void AlertTrendChart::paintEvent(QPaintEvent* /*event*/)
         else
             linePath.lineTo(x, y);
     }
-    painter.setPen(QPen(QColor("#409EFF"), 2));
+    painter.setPen(QPen(QColor("#58A6FF"), 2));
     painter.setBrush(Qt::NoBrush);
     painter.drawPath(linePath);
 
@@ -273,12 +273,12 @@ void AlertTrendChart::paintEvent(QPaintEvent* /*event*/)
     for (int i = 0; i < n; ++i) {
         double x = marginLeft + i * stepX;
         double y = marginTop + plotH - (static_cast<double>(m_data[i]) / m_maxValue * plotH);
-        painter.setBrush(QColor("#409EFF"));
+        painter.setBrush(QColor("#58A6FF"));
         painter.drawEllipse(QPointF(x, y), 3, 3);
     }
 
     // Title
-    painter.setPen(QColor("#409EFF"));
+    painter.setPen(QColor("#58A6FF"));
     QFont titleFont = painter.font();
     titleFont.setPixelSize(12);
     titleFont.setBold(true);
@@ -295,7 +295,7 @@ TrafficAreaChart::TrafficAreaChart(QWidget* parent)
     , m_maxValue(0)
 {
     setMinimumSize(200, 180);
-    setStyleSheet("background-color: transparent;");
+    
 }
 
 void TrafficAreaChart::setData(const QList<double>& inData, const QList<double>& outData)
@@ -332,15 +332,15 @@ void TrafficAreaChart::paintEvent(QPaintEvent* /*event*/)
     if (plotW <= 0 || plotH <= 0) return;
 
     // Background
-    painter.fillRect(rect(), QColor("#1E1F22"));
+    painter.fillRect(rect(), QColor("#0D1117"));
 
     // Grid lines
-    painter.setPen(QPen(QColor("#2C2D30"), 1, Qt::DashLine));
+    painter.setPen(QPen(QColor("#21262D"), 1, Qt::DashLine));
     for (int i = 0; i <= 4; ++i) {
         int y = marginTop + plotH * i / 4;
         painter.drawLine(marginLeft, y, w - marginRight, y);
 
-        painter.setPen(QColor("#8C8C8C"));
+        painter.setPen(QColor("#8B949E"));
         QFont font = painter.font();
         font.setPixelSize(10);
         painter.setFont(font);
@@ -353,11 +353,11 @@ void TrafficAreaChart::paintEvent(QPaintEvent* /*event*/)
         }
         painter.drawText(QRectF(0, y - 7, marginLeft - 4, 14),
                          Qt::AlignRight | Qt::AlignVCenter, label);
-        painter.setPen(QPen(QColor("#2C2D30"), 1, Qt::DashLine));
+        painter.setPen(QPen(QColor("#21262D"), 1, Qt::DashLine));
     }
 
     if (m_inData.isEmpty() && m_outData.isEmpty()) {
-        painter.setPen(QColor("#8C8C8C"));
+        painter.setPen(QColor("#8B949E"));
         QFont font = painter.font();
         font.setPixelSize(12);
         painter.setFont(font);
@@ -372,7 +372,7 @@ void TrafficAreaChart::paintEvent(QPaintEvent* /*event*/)
     double stepX = static_cast<double>(plotW) / (n - 1);
 
     // X-axis labels
-    painter.setPen(QColor("#8C8C8C"));
+    painter.setPen(QColor("#8B949E"));
     QFont font = painter.font();
     font.setPixelSize(10);
     painter.setFont(font);
@@ -435,7 +435,7 @@ void TrafficAreaChart::paintEvent(QPaintEvent* /*event*/)
             else
                 inLine.lineTo(x, y);
         }
-        painter.setPen(QPen(QColor("#409EFF"), 2));
+        painter.setPen(QPen(QColor("#58A6FF"), 2));
         painter.setBrush(Qt::NoBrush);
         painter.drawPath(inLine);
     }
@@ -451,13 +451,13 @@ void TrafficAreaChart::paintEvent(QPaintEvent* /*event*/)
             else
                 outLine.lineTo(x, y);
         }
-        painter.setPen(QPen(QColor("#67C23A"), 2));
+        painter.setPen(QPen(QColor("#3FB950"), 2));
         painter.setBrush(Qt::NoBrush);
         painter.drawPath(outLine);
     }
 
     // Title
-    painter.setPen(QColor("#409EFF"));
+    painter.setPen(QColor("#58A6FF"));
     QFont titleFont = painter.font();
     titleFont.setPixelSize(12);
     titleFont.setBold(true);
@@ -465,13 +465,13 @@ void TrafficAreaChart::paintEvent(QPaintEvent* /*event*/)
     painter.drawText(QRectF(marginLeft, 2, plotW, 16), Qt::AlignLeft, "全网流量趋势");
 
     // Legend
-    painter.setPen(QColor("#409EFF"));
+    painter.setPen(QColor("#58A6FF"));
     QFont legendFont = painter.font();
     legendFont.setPixelSize(10);
     legendFont.setBold(false);
     painter.setFont(legendFont);
     painter.drawText(QRectF(marginLeft + plotW - 120, 2, 50, 16), Qt::AlignRight, "入流量");
-    painter.setPen(QColor("#67C23A"));
+    painter.setPen(QColor("#3FB950"));
     painter.drawText(QRectF(marginLeft + plotW - 60, 2, 50, 16), Qt::AlignRight, "出流量");
 }
 
@@ -508,31 +508,11 @@ void DashboardWidget::setupUI()
 
     auto styleCard = [](QFrame* card, const QString& accentColor) {
         card->setStyleSheet(
-            QString("QFrame {"
-                    "  background-color: #25262B;"
-                    "  border: 1px solid #3C3F41;"
-                    "  border-top: 3px solid %1;"
-                    "  border-radius: 6px;"
-                    "}")
-                .arg(accentColor)
+            QString("QFrame { border-top: 3px solid %1; }").arg(accentColor)
         );
     };
 
-    auto styleTable = [](QTableWidget* table) {
-        table->setStyleSheet(
-            "QTableWidget {"
-            "  background-color: #1E1F22; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; font-size: 12px;"
-            "  gridline-color: #2C2D30;"
-            "}"
-            "QTableWidget::item { padding: 3px 6px; }"
-            "QTableWidget::item:selected { background-color: #3C3F41; }"
-            "QHeaderView::section {"
-            "  background-color: #25262B; color: #8C8C8C;"
-            "  border: none; border-bottom: 2px solid #3C3F41;"
-            "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
-            "}"
-        );
+    auto configTable = [](QTableWidget* table) {
         table->setAlternatingRowColors(true);
         table->setSelectionBehavior(QAbstractItemView::SelectRows);
         table->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -541,29 +521,11 @@ void DashboardWidget::setupUI()
 
     auto styleButton = [](QPushButton* btn, const QString& bgColor, const QString& hoverColor) {
         btn->setStyleSheet(
-            QString("QPushButton {"
-                    "  background-color: %1; color: white;"
-                    "  border: none; padding: 8px 20px; border-radius: 4px;"
-                    "  font-size: 13px; font-weight: bold;"
-                    "}"
-                    "QPushButton:hover { background-color: %2; }"
-                    "QPushButton:disabled { background-color: #5C5C5C; }")
+            QString("QPushButton { background-color: %1; color: white; border: none; }"
+                    "QPushButton:hover { background-color: %2; }")
                 .arg(bgColor, hoverColor)
         );
         btn->setFixedHeight(34);
-    };
-
-    auto styleGroupBox = [](QGroupBox* gb) {
-        gb->setStyleSheet(
-            "QGroupBox {"
-            "  color: #409EFF; font-size: 13px; font-weight: bold;"
-            "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
-            "  padding-top: 16px;"
-            "}"
-            "QGroupBox::title {"
-            "  subcontrol-origin: margin; left: 10px; padding: 0 4px;"
-            "}"
-        );
     };
 
     auto makeStatusCard = [&](const QString& icon, const QString& title, const QString& accentColor) -> QLabel* {
@@ -578,7 +540,7 @@ void DashboardWidget::setupUI()
         iconLabel->setStyleSheet("font-size: 16px; background: transparent; border: none;");
         auto* titleLabel = new QLabel(title);
         titleLabel->setStyleSheet(
-            QString("font-size: 11px; color: #8C8C8C; background: transparent; border: none;"));
+            QString("font-size: 11px; color: #8B949E; background: transparent; border: none;"));
         header->addWidget(iconLabel);
         header->addWidget(titleLabel);
         header->addStretch();
@@ -600,26 +562,26 @@ void DashboardWidget::setupUI()
     // ═══════════════════════════════════════════════════════════════════════════
 
     auto* topGroup = new QGroupBox("Dashboard");
-    styleGroupBox(topGroup);
+    topGroup;
     auto* topLayout = new QHBoxLayout(topGroup);
     topLayout->setSpacing(8);
 
-    m_onlineDevicesLabel = makeStatusCard("🟢", "在线设备", "#67C23A");
+    m_onlineDevicesLabel = makeStatusCard("🟢", "在线设备", "#3FB950");
     topLayout->addWidget(m_onlineDevicesLabel->parentWidget());
 
-    m_totalDevicesLabel = makeStatusCard("📡", "总设备", "#409EFF");
+    m_totalDevicesLabel = makeStatusCard("📡", "总设备", "#58A6FF");
     topLayout->addWidget(m_totalDevicesLabel->parentWidget());
 
-    m_alertCountLabel = makeStatusCard("🔔", "告警数", "#F56C6C");
+    m_alertCountLabel = makeStatusCard("🔔", "告警数", "#F85149");
     topLayout->addWidget(m_alertCountLabel->parentWidget());
 
-    m_cpuAvgLabel = makeStatusCard("🖥", "CPU% 均值", "#E6A23C");
+    m_cpuAvgLabel = makeStatusCard("🖥", "CPU% 均值", "#D29922");
     topLayout->addWidget(m_cpuAvgLabel->parentWidget());
 
-    m_memAvgLabel = makeStatusCard("💾", "内存% 均值", "#909399");
+    m_memAvgLabel = makeStatusCard("💾", "内存% 均值", "#8B949E");
     topLayout->addWidget(m_memAvgLabel->parentWidget());
 
-    m_bandwidthAvgLabel = makeStatusCard("🌐", "带宽利用率", "#67C23A");
+    m_bandwidthAvgLabel = makeStatusCard("🌐", "带宽利用率", "#3FB950");
     topLayout->addWidget(m_bandwidthAvgLabel->parentWidget());
 
     mainLayout->addWidget(topGroup);
@@ -629,22 +591,12 @@ void DashboardWidget::setupUI()
     // ═══════════════════════════════════════════════════════════════════════════
 
     auto* chartGroup = new QGroupBox("监控图表");
-    styleGroupBox(chartGroup);
+    chartGroup;
     auto* chartLayout = new QHBoxLayout(chartGroup);
     chartLayout->setSpacing(8);
 
     // 健康度饼图
     auto* healthBox = new QGroupBox();
-    healthBox->setStyleSheet(
-        "QGroupBox {"
-        "  color: #DCDCDC; font-size: 12px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
-        "  padding-top: 16px;"
-        "}"
-        "QGroupBox::title {"
-        "  subcontrol-origin: margin; left: 8px; padding: 0 4px;"
-        "}"
-    );
     auto* healthLayout = new QVBoxLayout(healthBox);
     healthLayout->setContentsMargins(4, 4, 4, 4);
     m_healthPieChart = new HealthPieChart();
@@ -653,16 +605,6 @@ void DashboardWidget::setupUI()
 
     // 告警趋势图
     auto* alertBox = new QGroupBox();
-    alertBox->setStyleSheet(
-        "QGroupBox {"
-        "  color: #DCDCDC; font-size: 12px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
-        "  padding-top: 16px;"
-        "}"
-        "QGroupBox::title {"
-        "  subcontrol-origin: margin; left: 8px; padding: 0 4px;"
-        "}"
-    );
     auto* alertLayout = new QVBoxLayout(alertBox);
     alertLayout->setContentsMargins(4, 4, 4, 4);
     m_alertTrendChart = new AlertTrendChart();
@@ -671,16 +613,6 @@ void DashboardWidget::setupUI()
 
     // 全网流量面积图
     auto* trafficBox = new QGroupBox();
-    trafficBox->setStyleSheet(
-        "QGroupBox {"
-        "  color: #DCDCDC; font-size: 12px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
-        "  padding-top: 16px;"
-        "}"
-        "QGroupBox::title {"
-        "  subcontrol-origin: margin; left: 8px; padding: 0 4px;"
-        "}"
-    );
     auto* trafficLayout = new QVBoxLayout(trafficBox);
     trafficLayout->setContentsMargins(4, 4, 4, 4);
     m_trafficAreaChart = new TrafficAreaChart();
@@ -703,7 +635,7 @@ void DashboardWidget::setupUI()
     leftLayout->setSpacing(6);
 
     auto* deviceGroup = new QGroupBox("设备状态");
-    styleGroupBox(deviceGroup);
+    deviceGroup;
     auto* deviceLayout = new QVBoxLayout(deviceGroup);
     m_deviceTable = new QTableWidget(0, 8);
     m_deviceTable->setHorizontalHeaderLabels(
@@ -718,7 +650,7 @@ void DashboardWidget::setupUI()
     m_deviceTable->setColumnWidth(7, 140);
     m_deviceTable->verticalHeader()->setVisible(false);
     m_deviceTable->setMinimumHeight(200);
-    styleTable(m_deviceTable);
+    configTable(m_deviceTable);
     deviceLayout->addWidget(m_deviceTable);
     leftLayout->addWidget(deviceGroup, 1);
 
@@ -727,23 +659,23 @@ void DashboardWidget::setupUI()
     actionLayout->setSpacing(8);
 
     m_pingBtn = new QPushButton("Ping");
-    styleButton(m_pingBtn, "#409EFF", "#66B1FF");
+    styleButton(m_pingBtn, "#58A6FF", "#79C0FF");
     m_pingBtn->setProperty("action", "ping");
 
     m_inspectionBtn = new QPushButton("巡检");
-    styleButton(m_inspectionBtn, "#67C23A", "#85CE61");
+    styleButton(m_inspectionBtn, "#3FB950", "#56D364");
     m_inspectionBtn->setProperty("action", "inspection");
 
     m_backupBtn = new QPushButton("备份");
-    styleButton(m_backupBtn, "#E6A23C", "#EBB563");
+    styleButton(m_backupBtn, "#D29922", "#DBAB4A");
     m_backupBtn->setProperty("action", "backup");
 
     m_scanBtn = new QPushButton("扫描");
-    styleButton(m_scanBtn, "#909399", "#B4B4B4");
+    styleButton(m_scanBtn, "#8B949E", "#B4B4B4");
     m_scanBtn->setProperty("action", "scan");
 
     m_exportBtn = new QPushButton("导出");
-    styleButton(m_exportBtn, "#F56C6C", "#F78989");
+    styleButton(m_exportBtn, "#F85149", "#FF7B72");
 
     actionLayout->addWidget(m_pingBtn);
     actionLayout->addWidget(m_inspectionBtn);
@@ -763,17 +695,9 @@ void DashboardWidget::setupUI()
 
     // 实时告警滚动区
     auto* alertScrollGroup = new QGroupBox("实时告警");
-    styleGroupBox(alertScrollGroup);
+    alertScrollGroup;
     auto* alertScrollLayout = new QVBoxLayout(alertScrollGroup);
     m_alertListWidget = new QListWidget();
-    m_alertListWidget->setStyleSheet(
-        "QListWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; font-size: 11px;"
-        "}"
-        "QListWidget::item { padding: 4px 6px; border-bottom: 1px solid #2C2D30; }"
-        "QListWidget::item:selected { background-color: #3C3F41; }"
-    );
     m_alertListWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_alertListWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_alertListWidget->setMaximumHeight(150);
@@ -783,7 +707,7 @@ void DashboardWidget::setupUI()
 
     // Top 告警设备表
     auto* topAlertGroup = new QGroupBox("Top 告警设备");
-    styleGroupBox(topAlertGroup);
+    topAlertGroup;
     auto* topAlertLayout = new QVBoxLayout(topAlertGroup);
     m_topAlertTable = new QTableWidget(0, 4);
     m_topAlertTable->setHorizontalHeaderLabels(
@@ -793,7 +717,7 @@ void DashboardWidget::setupUI()
     m_topAlertTable->setColumnWidth(2, 70);
     m_topAlertTable->setColumnWidth(3, 140);
     m_topAlertTable->verticalHeader()->setVisible(false);
-    styleTable(m_topAlertTable);
+    configTable(m_topAlertTable);
     topAlertLayout->addWidget(m_topAlertTable);
     rightLayout->addWidget(topAlertGroup, 1);
 
@@ -995,25 +919,25 @@ void DashboardWidget::updateDeviceStatus()
     // Alert count color
     if (totalAlerts > 10) {
         m_alertCountLabel->setStyleSheet(
-            "font-size: 24px; color: #F56C6C; font-weight: bold; background: transparent; border: none;");
+            "font-size: 24px; color: #F85149; font-weight: bold; background: transparent; border: none;");
     } else if (totalAlerts > 5) {
         m_alertCountLabel->setStyleSheet(
-            "font-size: 24px; color: #E6A23C; font-weight: bold; background: transparent; border: none;");
+            "font-size: 24px; color: #D29922; font-weight: bold; background: transparent; border: none;");
     } else {
         m_alertCountLabel->setStyleSheet(
-            "font-size: 24px; color: #67C23A; font-weight: bold; background: transparent; border: none;");
+            "font-size: 24px; color: #3FB950; font-weight: bold; background: transparent; border: none;");
     }
 
     // CPU avg color
     if (cpuAvg > 80) {
         m_cpuAvgLabel->setStyleSheet(
-            "font-size: 24px; color: #F56C6C; font-weight: bold; background: transparent; border: none;");
+            "font-size: 24px; color: #F85149; font-weight: bold; background: transparent; border: none;");
     } else if (cpuAvg > 60) {
         m_cpuAvgLabel->setStyleSheet(
-            "font-size: 24px; color: #E6A23C; font-weight: bold; background: transparent; border: none;");
+            "font-size: 24px; color: #D29922; font-weight: bold; background: transparent; border: none;");
     } else {
         m_cpuAvgLabel->setStyleSheet(
-            "font-size: 24px; color: #E6A23C; font-weight: bold; background: transparent; border: none;");
+            "font-size: 24px; color: #D29922; font-weight: bold; background: transparent; border: none;");
     }
 
     // ── 更新健康度饼图 ──
@@ -1045,33 +969,33 @@ void DashboardWidget::updateDeviceStatus()
 
         auto* cpuItem = new QTableWidgetItem(QString("%1%").arg(d.cpuUsage));
         cpuItem->setTextAlignment(Qt::AlignCenter);
-        if (d.cpuUsage > 80) cpuItem->setForeground(QColor("#F56C6C"));
-        else if (d.cpuUsage > 60) cpuItem->setForeground(QColor("#E6A23C"));
-        else cpuItem->setForeground(QColor("#67C23A"));
+        if (d.cpuUsage > 80) cpuItem->setForeground(QColor("#F85149"));
+        else if (d.cpuUsage > 60) cpuItem->setForeground(QColor("#D29922"));
+        else cpuItem->setForeground(QColor("#3FB950"));
         m_deviceTable->setItem(row, 3, cpuItem);
 
         auto* memItem = new QTableWidgetItem(QString("%1%").arg(d.memUsage));
         memItem->setTextAlignment(Qt::AlignCenter);
-        if (d.memUsage > 85) memItem->setForeground(QColor("#F56C6C"));
-        else if (d.memUsage > 70) memItem->setForeground(QColor("#E6A23C"));
-        else memItem->setForeground(QColor("#67C23A"));
+        if (d.memUsage > 85) memItem->setForeground(QColor("#F85149"));
+        else if (d.memUsage > 70) memItem->setForeground(QColor("#D29922"));
+        else memItem->setForeground(QColor("#3FB950"));
         m_deviceTable->setItem(row, 4, memItem);
 
         auto* bwItem = new QTableWidgetItem(QString("%1%").arg(d.bandwidthUsage));
         bwItem->setTextAlignment(Qt::AlignCenter);
-        if (d.bandwidthUsage > 80) bwItem->setForeground(QColor("#F56C6C"));
-        else if (d.bandwidthUsage > 60) bwItem->setForeground(QColor("#E6A23C"));
-        else bwItem->setForeground(QColor("#67C23A"));
+        if (d.bandwidthUsage > 80) bwItem->setForeground(QColor("#F85149"));
+        else if (d.bandwidthUsage > 60) bwItem->setForeground(QColor("#D29922"));
+        else bwItem->setForeground(QColor("#3FB950"));
         m_deviceTable->setItem(row, 5, bwItem);
 
         auto* statusItem = new QTableWidgetItem(d.status);
         statusItem->setTextAlignment(Qt::AlignCenter);
         if (d.status == "Online") {
-            statusItem->setForeground(QColor("#67C23A"));
+            statusItem->setForeground(QColor("#3FB950"));
         } else if (d.status == "Warning") {
-            statusItem->setForeground(QColor("#E6A23C"));
+            statusItem->setForeground(QColor("#D29922"));
         } else {
-            statusItem->setForeground(QColor("#F56C6C"));
+            statusItem->setForeground(QColor("#F85149"));
         }
         m_deviceTable->setItem(row, 6, statusItem);
 
@@ -1093,26 +1017,25 @@ void DashboardWidget::updateDeviceStatus()
         QString levelColor;
         QString levelIcon;
         if (level == "Critical" || level == "Emergency") {
-            levelColor = "#F56C6C";
+            levelColor = "#F85149";
             levelIcon = "🔴";
         } else if (level == "Warning") {
-            levelColor = "#E6A23C";
+            levelColor = "#D29922";
             levelIcon = "🟡";
         } else {
-            levelColor = "#409EFF";
+            levelColor = "#58A6FF";
             levelIcon = "🔵";
         }
 
         QString text = QString("<span style='color:#8C8C8C;'>[%1]</span> "
                                "<span style='color:%2;'>%3 %4</span> "
-                               "<span style='color:#DCDCDC;'>%5</span> - "
+                               "<span style='color:#E6EDF3;'>%5</span> - "
                                "<span style='color:#909399;'>%6</span>")
                            .arg(time, levelColor, levelIcon, level, device, msg);
 
         auto* item = new QListWidgetItem();
         auto* label = new QLabel(text);
         label->setTextFormat(Qt::RichText);
-        label->setStyleSheet("background: transparent; border: none;");
         item->setSizeHint(label->sizeHint());
         m_alertListWidget->addItem(item);
         m_alertListWidget->setItemWidget(item, label);
@@ -1145,13 +1068,13 @@ void DashboardWidget::updateDeviceStatus()
 
         auto* countItem = new QTableWidgetItem(QString::number(sorted[i].alertCount));
         countItem->setTextAlignment(Qt::AlignCenter);
-        if (sorted[i].alertCount > 10) countItem->setForeground(QColor("#F56C6C"));
-        else if (sorted[i].alertCount > 5) countItem->setForeground(QColor("#E6A23C"));
+        if (sorted[i].alertCount > 10) countItem->setForeground(QColor("#F85149"));
+        else if (sorted[i].alertCount > 5) countItem->setForeground(QColor("#D29922"));
         m_topAlertTable->setItem(row, 1, countItem);
 
         auto* criticalItem = new QTableWidgetItem(QString::number(sorted[i].criticalAlerts));
         criticalItem->setTextAlignment(Qt::AlignCenter);
-        if (sorted[i].criticalAlerts > 0) criticalItem->setForeground(QColor("#F56C6C"));
+        if (sorted[i].criticalAlerts > 0) criticalItem->setForeground(QColor("#F85149"));
         m_topAlertTable->setItem(row, 2, criticalItem);
 
         auto* timeItem = new QTableWidgetItem(sorted[i].lastAlertTime);

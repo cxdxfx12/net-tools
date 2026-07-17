@@ -181,8 +181,8 @@ void SyslogCenterWidget::setupUI()
     m_startBtn = new QPushButton("启动");
     m_startBtn->setFixedWidth(70);
     m_startBtn->setStyleSheet(
-        "QPushButton { background-color: #67C23A; color: #FFFFFF; }"
-        "QPushButton:hover { background-color: #85CE61; }"
+        "QPushButton { background-color: #3FB950; color: #FFFFFF; }"
+        "QPushButton:hover { background-color: #56D364; }"
         "QPushButton:pressed { background-color: #5DAF33; }"
     );
     serverLayout->addWidget(m_startBtn);
@@ -191,9 +191,9 @@ void SyslogCenterWidget::setupUI()
     m_stopBtn->setFixedWidth(70);
     m_stopBtn->setEnabled(false);
     m_stopBtn->setStyleSheet(
-        "QPushButton:disabled { background-color: #4A4D52; color: #8C8C8C; }"
-        "QPushButton:!disabled { background-color: #F56C6C; color: #FFFFFF; }"
-        "QPushButton:!disabled:hover { background-color: #F78989; }"
+        "QPushButton:disabled { background-color: #4A4D52; color: #8B949E; }"
+        "QPushButton:!disabled { background-color: #F85149; color: #FFFFFF; }"
+        "QPushButton:!disabled:hover { background-color: #FF7B72; }"
         "QPushButton:!disabled:pressed { background-color: #DD6161; }"
     );
     serverLayout->addWidget(m_stopBtn);
@@ -329,7 +329,7 @@ void SyslogCenterWidget::setupUI()
 
     statsLayout->addSpacing(20);
     m_errorCountLabel = new QLabel("错误数: 0");
-    m_errorCountLabel->setStyleSheet("font-weight: bold; font-size: 14px; color: #F56C6C;");
+    m_errorCountLabel->setStyleSheet("font-weight: bold; font-size: 14px; color: #F85149;");
     statsLayout->addWidget(m_errorCountLabel);
 
     statsLayout->addStretch();
@@ -343,8 +343,8 @@ void SyslogCenterWidget::setupUI()
 
     m_clearBtn = new QPushButton("清空日志");
     m_clearBtn->setStyleSheet(
-        "QPushButton { background-color: #F56C6C; color: #FFFFFF; }"
-        "QPushButton:hover { background-color: #F78989; }"
+        "QPushButton { background-color: #F85149; color: #FFFFFF; }"
+        "QPushButton:hover { background-color: #FF7B72; }"
         "QPushButton:pressed { background-color: #DD6161; }"
     );
     statsLayout->addWidget(m_clearBtn);
@@ -493,7 +493,7 @@ void SyslogCenterWidget::updateStatus(bool running)
 {
     if (running) {
         m_statusLabel->setText("● 运行中");
-        m_statusLabel->setStyleSheet("color: #67C23A; font-weight: bold;");
+        m_statusLabel->setStyleSheet("color: #3FB950; font-weight: bold;");
         m_startBtn->setEnabled(false);
         m_stopBtn->setEnabled(true);
         m_portSpin->setEnabled(false);
@@ -1032,9 +1032,9 @@ QString SyslogCenterWidget::severityToColor(const QString& severity) const
         case 3: return "#FF4444"; // Error — 红色
         case 4: return "#FFD700"; // Warning — 黄色
         case 5: return "#6495ED"; // Notice — 蓝色
-        case 6: return "#DCDCDC"; // Info — 白色
+        case 6: return "#E6EDF3"; // Info — 白色
         case 7: return "#808080"; // Debug — 灰色
-        default: return "#DCDCDC";
+        default: return "#E6EDF3";
     }
 }
 

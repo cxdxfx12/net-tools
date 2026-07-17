@@ -145,108 +145,64 @@ return
 // Dark theme stylesheets
 // ============================================================================
 
-static const char* g_darkLineEditStyle = R"STYLE(
-QLineEdit {
-    background: #25262B; color: #DCDCDC;
-    border: 1px solid #3C3F41; padding: 4px 8px;
-    border-radius: 3px; font-size: 13px;
-}
-)STYLE";
-
-static const char* g_darkComboStyle = R"STYLE(
-QComboBox {
-    background: #25262B; color: #DCDCDC;
-    border: 1px solid #3C3F41; padding: 4px 8px;
-    border-radius: 3px; font-size: 13px;
-}
-QComboBox::drop-down { border: none; }
-QComboBox QAbstractItemView {
-    background: #25262B; color: #DCDCDC;
-    selection-background-color: #3C3F41;
-}
-)STYLE";
 
 static const char* g_darkSpinStyle = R"STYLE(
 QSpinBox {
-    background: #25262B; color: #DCDCDC;
-    border: 1px solid #3C3F41; padding: 4px;
+    background: #161B22; color: #E6EDF3;
+    border: 1px solid #30363D; padding: 4px;
     border-radius: 3px; font-size: 13px;
 }
 )STYLE";
 
-static const char* g_darkPlainTextStyle = R"STYLE(
-QPlainTextEdit {
-    background-color: #1E1F22; color: #DCDCDC;
-    border: 1px solid #3C3F41; font-size: 13px;
-    font-family: 'Menlo', 'Consolas', 'Courier New', monospace;
-    padding: 8px;
-}
-)STYLE";
-
-static const char* g_darkTableStyle = R"STYLE(
-QTableWidget {
-    background-color: #1E1F22; color: #DCDCDC;
-    border: 1px solid #3C3F41; font-size: 12px;
-    gridline-color: #3C3F41;
-}
-QTableWidget::item { padding: 3px 4px; }
-QTableWidget::item:hover { background-color: #2C2D30; }
-QTableWidget::item:selected { background-color: #3C3F41; }
-QHeaderView::section {
-    background-color: #25262B; color: #8C8C8C;
-    border: none; border-bottom: 2px solid #3C3F41;
-    padding: 4px 8px; font-size: 12px; font-weight: bold;
-}
-)STYLE";
 
 static const char* g_primaryBtnStyle = R"STYLE(
 QPushButton {
-    background-color: #409EFF; color: white;
+    background-color: #58A6FF; color: white;
     border: none; padding: 8px 20px; border-radius: 4px;
     font-size: 13px; font-weight: bold;
 }
-QPushButton:hover { background-color: #66B1FF; }
-QPushButton:disabled { background-color: #5C5C5C; }
+QPushButton:hover { background-color: #79C0FF; }
+QPushButton:disabled { background-color: #484F58; }
 )STYLE";
 
 static const char* g_successBtnStyle = R"STYLE(
 QPushButton {
-    background-color: #67C23A; color: white;
+    background-color: #3FB950; color: white;
     border: none; padding: 8px 16px; border-radius: 4px;
     font-size: 13px;
 }
-QPushButton:hover { background-color: #85CE61; }
-QPushButton:disabled { background-color: #5C5C5C; }
+QPushButton:hover { background-color: #56D364; }
+QPushButton:disabled { background-color: #484F58; }
 )STYLE";
 
 static const char* g_dangerBtnStyle = R"STYLE(
 QPushButton {
-    background-color: #F56C6C; color: white;
+    background-color: #F85149; color: white;
     border: none; padding: 8px 16px; border-radius: 4px;
     font-size: 13px;
 }
-QPushButton:hover { background-color: #F78989; }
-QPushButton:disabled { background-color: #5C5C5C; }
+QPushButton:hover { background-color: #FF7B72; }
+QPushButton:disabled { background-color: #484F58; }
 )STYLE";
 
 static const char* g_warningBtnStyle = R"STYLE(
 QPushButton {
-    background-color: #E6A23C; color: white;
+    background-color: #D29922; color: white;
     border: none; padding: 8px 16px; border-radius: 4px;
     font-size: 13px;
 }
-QPushButton:hover { background-color: #EBB563; }
-QPushButton:disabled { background-color: #5C5C5C; }
+QPushButton:hover { background-color: #DBAB4A; }
+QPushButton:disabled { background-color: #484F58; }
 )STYLE";
 
 static const char* g_infoBtnStyle = R"STYLE(
 QPushButton {
-    background-color: #909399; color: white;
+    background-color: #8B949E; color: white;
     border: none; padding: 8px 16px; border-radius: 4px;
     font-size: 13px;
 }
 QPushButton:hover { background-color: #B4B4B9; }
-QPushButton:disabled { background-color: #5C5C5C; }
+QPushButton:disabled { background-color: #484F58; }
 )STYLE";
 
 // ============================================================================
@@ -297,7 +253,6 @@ void ConfigCenterWidget::setupUI()
     auto* deviceRow = new QHBoxLayout();
     m_deviceCombo = new QComboBox();
     m_deviceCombo->setMinimumWidth(160);
-    m_deviceCombo->setStyleSheet(g_darkComboStyle);
     deviceRow->addWidget(m_deviceCombo, 1);
 
     m_addDeviceBtn = new QPushButton(QStringLiteral("添加设备"));
@@ -321,21 +276,20 @@ void ConfigCenterWidget::setupUI()
 
     m_autoBackupCheck = new QCheckBox(QStringLiteral("启用定时备份"));
     m_autoBackupCheck->setStyleSheet(QStringLiteral(
-        "QCheckBox { color: #DCDCDC; font-size: 13px; }"
+        "QCheckBox { color: #E6EDF3; font-size: 13px; }"
         "QCheckBox::indicator { width: 16px; height: 16px; }"
     ));
     autoLayout->addWidget(m_autoBackupCheck);
 
     auto* intervalRow = new QHBoxLayout();
     auto* intervalLabel = new QLabel(QStringLiteral("备份间隔:"));
-    intervalLabel->setStyleSheet("color: #8C8C8C; font-size: 12px;");
+    
     intervalRow->addWidget(intervalLabel);
 
     m_backupIntervalCombo = new QComboBox();
     m_backupIntervalCombo->addItem(QStringLiteral("每天"), QStringLiteral("daily"));
     m_backupIntervalCombo->addItem(QStringLiteral("每周"), QStringLiteral("weekly"));
     m_backupIntervalCombo->addItem(QStringLiteral("每月"), QStringLiteral("monthly"));
-    m_backupIntervalCombo->setStyleSheet(g_darkComboStyle);
     m_backupIntervalCombo->setEnabled(false);
     intervalRow->addWidget(m_backupIntervalCombo, 1);
     autoLayout->addLayout(intervalRow);
@@ -376,7 +330,6 @@ void ConfigCenterWidget::setupUI()
     m_versionTable->horizontalHeader()->setSectionResizeMode(VER_COL_TIME, QHeaderView::ResizeToContents);
     m_versionTable->horizontalHeader()->setSectionResizeMode(VER_COL_SIZE, QHeaderView::ResizeToContents);
     m_versionTable->verticalHeader()->setVisible(false);
-    m_versionTable->setStyleSheet(g_darkTableStyle);
     versionLayout->addWidget(m_versionTable);
     midLayout->addWidget(versionGroup, 1);
 
@@ -387,7 +340,6 @@ void ConfigCenterWidget::setupUI()
     m_configView = new QPlainTextEdit();
     m_configView->setReadOnly(true);
     m_configView->setPlaceholderText(QStringLiteral("选择版本后显示配置内容..."));
-    m_configView->setStyleSheet(g_darkPlainTextStyle);
     configLayout->addWidget(m_configView);
     midLayout->addWidget(configGroup, 2);
     splitter->addWidget(midWidget);
@@ -411,7 +363,6 @@ void ConfigCenterWidget::setupUI()
     m_diffView = new QPlainTextEdit();
     m_diffView->setReadOnly(true);
     m_diffView->setPlaceholderText(QStringLiteral("选择两个版本后点击对比..."));
-    m_diffView->setStyleSheet(g_darkPlainTextStyle);
     diffLayout->addWidget(m_diffView);
     rightLayout->addWidget(diffGroup, 1);
 
@@ -424,12 +375,10 @@ void ConfigCenterWidget::setupUI()
     m_templateCombo->addItem(QStringLiteral("Cisco IOS"), QStringLiteral("cisco"));
     m_templateCombo->addItem(QStringLiteral("Huawei VRP"), QStringLiteral("huawei"));
     m_templateCombo->addItem(QStringLiteral("H3C Comware"), QStringLiteral("h3c"));
-    m_templateCombo->setStyleSheet(g_darkComboStyle);
     templateLayout->addWidget(m_templateCombo);
 
     m_templateEditor = new QPlainTextEdit();
     m_templateEditor->setPlaceholderText(QStringLiteral("选择模板或编辑配置内容..."));
-    m_templateEditor->setStyleSheet(g_darkPlainTextStyle);
     templateLayout->addWidget(m_templateEditor);
 
     auto* btnRow = new QHBoxLayout();
@@ -509,12 +458,10 @@ void ConfigCenterWidget::onAddDevice()
 
     auto* nameEdit = new QLineEdit();
     nameEdit->setPlaceholderText(QStringLiteral("设备名称"));
-    nameEdit->setStyleSheet(g_darkLineEditStyle);
     form->addRow(QStringLiteral("名称:"), nameEdit);
 
     auto* ipEdit = new QLineEdit();
     ipEdit->setPlaceholderText(QStringLiteral("192.168.1.1"));
-    ipEdit->setStyleSheet(g_darkLineEditStyle);
     form->addRow(QStringLiteral("IP 地址:"), ipEdit);
 
     auto* portSpin = new QSpinBox();
@@ -525,13 +472,11 @@ void ConfigCenterWidget::onAddDevice()
 
     auto* userEdit = new QLineEdit();
     userEdit->setPlaceholderText(QStringLiteral("SSH 用户名"));
-    userEdit->setStyleSheet(g_darkLineEditStyle);
     form->addRow(QStringLiteral("用户名:"), userEdit);
 
     auto* passEdit = new QLineEdit();
     passEdit->setPlaceholderText(QStringLiteral("SSH 密码"));
     passEdit->setEchoMode(QLineEdit::Password);
-    passEdit->setStyleSheet(g_darkLineEditStyle);
     form->addRow(QStringLiteral("密码:"), passEdit);
 
     mainLayout->addWidget(formGroup);

@@ -1,7 +1,7 @@
 #include "terminal/TerminalColor.h"
 
 TerminalColor::TerminalColor()
-    : m_defaultFg("#DCDCDC")
+    : m_defaultFg("#E6EDF3")
     , m_defaultBg("#0C0C0C")
 {
     initStandardColors();

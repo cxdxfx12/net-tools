@@ -99,14 +99,14 @@ void SettingsWidget::setupUI()
         combo->setStyleSheet(
             QStringLiteral(
                 "QComboBox {"
-                "  background: #25262B; color: #DCDCDC;"
-                "  border: 1px solid #3C3F41; padding: 4px 8px;"
+                "  background: #161B22; color: #E6EDF3;"
+                "  border: 1px solid #30363D; padding: 4px 8px;"
                 "  border-radius: 3px; font-size: 13px;"
                 "}"
                 "QComboBox::drop-down { border: none; }"
                 "QComboBox QAbstractItemView {"
-                "  background: #25262B; color: #DCDCDC;"
-                "  selection-background-color: #3C3F41;"
+                "  background: #161B22; color: #E6EDF3;"
+                "  selection-background-color: #30363D;"
                 "}"
             )
         );
@@ -116,8 +116,8 @@ void SettingsWidget::setupUI()
         spin->setStyleSheet(
             QStringLiteral(
                 "QSpinBox {"
-                "  background: #25262B; color: #DCDCDC;"
-                "  border: 1px solid #3C3F41; padding: 4px 8px;"
+                "  background: #161B22; color: #E6EDF3;"
+                "  border: 1px solid #30363D; padding: 4px 8px;"
                 "  border-radius: 3px; font-size: 13px;"
                 "}"
             )
@@ -128,8 +128,8 @@ void SettingsWidget::setupUI()
         edit->setStyleSheet(
             QStringLiteral(
                 "QLineEdit {"
-                "  background: #25262B; color: #DCDCDC;"
-                "  border: 1px solid #3C3F41; padding: 4px 8px;"
+                "  background: #161B22; color: #E6EDF3;"
+                "  border: 1px solid #30363D; padding: 4px 8px;"
                 "  border-radius: 3px; font-size: 13px;"
                 "}"
             )
@@ -140,7 +140,7 @@ void SettingsWidget::setupUI()
         check->setStyleSheet(
             QStringLiteral(
                 "QCheckBox {"
-                "  color: #DCDCDC; font-size: 13px;"
+                "  color: #E6EDF3; font-size: 13px;"
                 "  spacing: 8px;"
                 "}"
                 "QCheckBox::indicator {"
@@ -159,7 +159,7 @@ void SettingsWidget::setupUI()
                 "  font-size: 13px; font-weight: bold;"
                 "}"
                 "QPushButton:hover { background-color: %2; }"
-                "QPushButton:disabled { background-color: #5C5C5C; }"
+                "QPushButton:disabled { background-color: #484F58; }"
             )).arg(bgColor, hoverColor)
         );
         btn->setFixedHeight(34);
@@ -169,8 +169,8 @@ void SettingsWidget::setupUI()
         group->setStyleSheet(
             QStringLiteral(
                 "QGroupBox {"
-                "  color: #409EFF; font-size: 13px; font-weight: bold;"
-                "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+                "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+                "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
                 "  padding-top: 16px;"
                 "}"
                 "QGroupBox::title {"
@@ -181,15 +181,13 @@ void SettingsWidget::setupUI()
     };
 
     auto styleLabel = [](QLabel* label) {
-        label->setStyleSheet(
-            QStringLiteral("color: #DCDCDC; font-size: 13px;")
-        );
+        
     };
 
     // ── 水平分割器 ──
     auto* splitter = new QSplitter(Qt::Horizontal);
     splitter->setStyleSheet(
-        QStringLiteral("QSplitter::handle { background-color: #3C3F41; width: 2px; }")
+        QStringLiteral("QSplitter::handle { background-color: #30363D; width: 2px; }")
     );
 
     // ─── 左侧分类列表 ───
@@ -198,11 +196,11 @@ void SettingsWidget::setupUI()
     m_categoryList->setStyleSheet(
         QStringLiteral(
             "QListWidget {"
-            "  background-color: #1E1F22; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; font-size: 14px;"
+            "  background-color: #0D1117; color: #E6EDF3;"
+            "  border: 1px solid #30363D; font-size: 14px;"
             "}"
             "QListWidget::item { padding: 10px 12px; }"
-            "QListWidget::item:selected { background-color: #3C3F41; color: #409EFF; }"
+            "QListWidget::item:selected { background-color: #30363D; color: #58A6FF; }"
             "QListWidget::item:hover { background-color: #30323A; }"
         )
     );
@@ -218,10 +216,6 @@ void SettingsWidget::setupUI()
 
     // ─── 右侧设置区 QStackedWidget ───
     m_settingsStack = new QStackedWidget();
-    m_settingsStack->setStyleSheet(
-        QStringLiteral("QStackedWidget { background-color: #1E1F22; border: 1px solid #3C3F41; }")
-    );
-
     // ═══════════════════════════════════════════════════════════════════════════
     // 页面 0: 通用
     // ═══════════════════════════════════════════════════════════════════════════
@@ -280,9 +274,9 @@ void SettingsWidget::setupUI()
     appearanceForm->setContentsMargins(12, 20, 12, 12);
 
     m_themeCombo = new QComboBox();
-    m_themeCombo->addItem(QStringLiteral("暗色"), QStringLiteral("dark"));
-    m_themeCombo->addItem(QStringLiteral("亮色"), QStringLiteral("light"));
-    m_themeCombo->addItem(QStringLiteral("自定义"), QStringLiteral("custom"));
+    m_themeCombo->addItem(QStringLiteral("暗夜蓝"), QStringLiteral("ocean"));
+    m_themeCombo->addItem(QStringLiteral("森林绿"), QStringLiteral("forest"));
+    m_themeCombo->addItem(QStringLiteral("日落橙"), QStringLiteral("sunset"));
     styleCombo(m_themeCombo);
     auto* themeLabel = new QLabel(QStringLiteral("主题:"));
     styleLabel(themeLabel);
@@ -292,14 +286,14 @@ void SettingsWidget::setupUI()
     m_fontCombo->setStyleSheet(
         QStringLiteral(
             "QFontComboBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px 8px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 4px 8px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
             "QFontComboBox::drop-down { border: none; }"
             "QFontComboBox QAbstractItemView {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  selection-background-color: #3C3F41;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  selection-background-color: #30363D;"
             "}"
         )
     );
@@ -320,14 +314,14 @@ void SettingsWidget::setupUI()
     m_terminalFontCombo->setStyleSheet(
         QStringLiteral(
             "QFontComboBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px 8px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 4px 8px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
             "QFontComboBox::drop-down { border: none; }"
             "QFontComboBox QAbstractItemView {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  selection-background-color: #3C3F41;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  selection-background-color: #30363D;"
             "}"
         )
     );
@@ -462,7 +456,7 @@ void SettingsWidget::setupUI()
     keyDirLayout->addWidget(m_keyDirEdit);
 
     m_browseKeyBtn = new QPushButton(QStringLiteral("浏览..."));
-    styleButton(m_browseKeyBtn, QStringLiteral("#409EFF"), QStringLiteral("#66B1FF"));
+    styleButton(m_browseKeyBtn, QStringLiteral("#58A6FF"), QStringLiteral("#79C0FF"));
     m_browseKeyBtn->setFixedWidth(70);
     keyDirLayout->addWidget(m_browseKeyBtn);
     keyDirLayout->addStretch();
@@ -633,19 +627,19 @@ void SettingsWidget::setupUI()
     aboutForm->setContentsMargins(12, 20, 12, 12);
 
     m_versionLabel = new QLabel(QStringLiteral("1.0.0"));
-    m_versionLabel->setStyleSheet(QStringLiteral("color: #409EFF; font-size: 16px; font-weight: bold;"));
+    m_versionLabel->setStyleSheet(QStringLiteral("color: #58A6FF; font-size: 16px; font-weight: bold;"));
     auto* versionTitleLabel = new QLabel(QStringLiteral("版本号:"));
     styleLabel(versionTitleLabel);
     aboutForm->addRow(versionTitleLabel, m_versionLabel);
 
     m_buildDateLabel = new QLabel(QDate::currentDate().toString(QStringLiteral("yyyy-MM-dd")));
-    m_buildDateLabel->setStyleSheet(QStringLiteral("color: #DCDCDC; font-size: 13px;"));
+    
     auto* buildDateTitleLabel = new QLabel(QStringLiteral("构建日期:"));
     styleLabel(buildDateTitleLabel);
     aboutForm->addRow(buildDateTitleLabel, m_buildDateLabel);
 
     m_qtVersionLabel = new QLabel(QString::fromLatin1(qVersion()));
-    m_qtVersionLabel->setStyleSheet(QStringLiteral("color: #DCDCDC; font-size: 13px;"));
+    
     auto* qtVersionTitleLabel = new QLabel(QStringLiteral("Qt 版本:"));
     styleLabel(qtVersionTitleLabel);
     aboutForm->addRow(qtVersionTitleLabel, m_qtVersionLabel);
@@ -663,8 +657,8 @@ void SettingsWidget::setupUI()
     m_ossListEdit->setStyleSheet(
         QStringLiteral(
             "QPlainTextEdit {"
-            "  background-color: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; font-size: 12px;"
+            "  background-color: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; font-size: 12px;"
             "  font-family: 'Courier New', monospace;"
             "}"
         )
@@ -694,13 +688,13 @@ void SettingsWidget::setupUI()
     bottomLayout->setSpacing(12);
 
     m_saveBtn = new QPushButton(QStringLiteral("保存"));
-    styleButton(m_saveBtn, QStringLiteral("#67C23A"), QStringLiteral("#85CE61"));
+    styleButton(m_saveBtn, QStringLiteral("#3FB950"), QStringLiteral("#56D364"));
 
     m_resetBtn = new QPushButton(QStringLiteral("重置"));
-    styleButton(m_resetBtn, QStringLiteral("#E6A23C"), QStringLiteral("#EBB563"));
+    styleButton(m_resetBtn, QStringLiteral("#D29922"), QStringLiteral("#DBAB4A"));
 
     m_restoreDefaultsBtn = new QPushButton(QStringLiteral("恢复默认"));
-    styleButton(m_restoreDefaultsBtn, QStringLiteral("#F56C6C"), QStringLiteral("#F89898"));
+    styleButton(m_restoreDefaultsBtn, QStringLiteral("#F85149"), QStringLiteral("#F89898"));
 
     bottomLayout->addStretch();
     bottomLayout->addWidget(m_restoreDefaultsBtn);
@@ -726,10 +720,12 @@ void SettingsWidget::setupConnections()
 
     connect(m_themeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](int idx) {
         QString theme = m_themeCombo->itemData(idx).toString();
-        if (theme == QStringLiteral("dark")) {
-            ThemeManager::instance().applyDarkTheme();
-        } else if (theme == QStringLiteral("light")) {
-            ThemeManager::instance().applyLightTheme();
+        if (theme == QStringLiteral("ocean")) {
+            ThemeManager::instance().applyOceanTheme();
+        } else if (theme == QStringLiteral("forest")) {
+            ThemeManager::instance().applyForestTheme();
+        } else if (theme == QStringLiteral("sunset")) {
+            ThemeManager::instance().applySunsetTheme();
         }
     });
 

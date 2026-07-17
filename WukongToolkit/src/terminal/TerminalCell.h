@@ -6,7 +6,7 @@
 struct TerminalCell
 {
     QChar ch = QChar(' ');
-    QColor fg = QColor("#DCDCDC");
+    QColor fg = QColor("#E6EDF3");
     QColor bg = QColor("#0C0C0C");
     bool bold = false;
     bool underline = false;
@@ -16,7 +16,7 @@ struct TerminalCell
     void reset()
     {
         ch = QChar(' ');
-        fg = QColor("#DCDCDC");
+        fg = QColor("#E6EDF3");
         bg = QColor("#0C0C0C");
         bold = false;
         underline = false;

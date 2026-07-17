@@ -80,7 +80,7 @@ void SFTPWidget::setupUI()
     // ── Dual-pane file browser ──
     auto* splitter = new QSplitter(Qt::Horizontal);
     splitter->setStyleSheet(
-        "QSplitter::handle { background-color: #3C3F41; width: 2px; }"
+        "QSplitter::handle { background-color: #30363D; width: 2px; }"
     );
 
     auto* localPane = new QWidget();
@@ -118,17 +118,17 @@ void SFTPWidget::setupUI()
     m_transferTable->setMaximumHeight(120);
     m_transferTable->setStyleSheet(
         "QTableWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  gridline-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  gridline-color: #30363D; border: 1px solid #30363D;"
         "  font-size: 12px;"
         "}"
         "QTableWidget::item { padding: 2px 4px; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 3px 6px; font-size: 11px; font-weight: bold;"
         "}"
-        "QTableWidget::item:alternate { background-color: #25262B; }"
+        "QTableWidget::item:alternate { background-color: #161B22; }"
     );
     transferLayout->addWidget(m_transferTable);
     mainLayout->addWidget(transferGroup);
@@ -141,7 +141,7 @@ void SFTPWidget::setupLocalPane(QWidget* parent)
     layout->setSpacing(4);
 
     auto* paneLabel = new QLabel("本地文件系统");
-    paneLabel->setStyleSheet("font-size: 13px; font-weight: bold; color: #409EFF; padding: 2px 0;");
+    paneLabel->setStyleSheet("font-size: 13px; font-weight: bold; color: #58A6FF; padding: 2px 0;");
     layout->addWidget(paneLabel);
 
     // ── Path navigation bar ──
@@ -153,11 +153,11 @@ void SFTPWidget::setupLocalPane(QWidget* parent)
     m_localUpBtn->setFixedSize(28, 28);
     m_localUpBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; border-radius: 3px;"
+        "  background-color: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; border-radius: 3px;"
         "  font-size: 14px;"
         "}"
-        "QPushButton:hover { background-color: #3C3F41; }"
+        "QPushButton:hover { background-color: #30363D; }"
     );
 
     m_localHomeBtn = new QPushButton("⌂");
@@ -169,8 +169,8 @@ void SFTPWidget::setupLocalPane(QWidget* parent)
     m_localPathEdit->setPlaceholderText("本地路径...");
     m_localPathEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 12px;"
         "}"
     );
@@ -204,15 +204,15 @@ void SFTPWidget::setupLocalPane(QWidget* parent)
     m_localTree->hideColumn(3); // Date Modified
     m_localTree->setStyleSheet(
         "QTreeView {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D;"
         "  font-size: 12px;"
         "  outline: none;"
         "}"
         "QTreeView::item { padding: 2px 4px; }"
         "QTreeView::item:hover { background-color: #2B2D30; }"
-        "QTreeView::item:selected { background-color: #3C3F41; color: #409EFF; }"
-        "QTreeView::branch { background-color: #1E1F22; }"
+        "QTreeView::item:selected { background-color: #30363D; color: #58A6FF; }"
+        "QTreeView::branch { background-color: #0D1117; }"
         "QTreeView::branch:has-children:!has-siblings:closed,"
         "QTreeView::branch:closed:has-children:has-siblings {"
         "  border-image: none;"
@@ -230,7 +230,7 @@ void SFTPWidget::setupRemotePane(QWidget* parent)
     layout->setSpacing(4);
 
     auto* paneLabel = new QLabel("远程文件系统");
-    paneLabel->setStyleSheet("font-size: 13px; font-weight: bold; color: #67C23A; padding: 2px 0;");
+    paneLabel->setStyleSheet("font-size: 13px; font-weight: bold; color: #3FB950; padding: 2px 0;");
     layout->addWidget(paneLabel);
 
     // ── Path navigation bar ──
@@ -242,11 +242,11 @@ void SFTPWidget::setupRemotePane(QWidget* parent)
     m_remoteUpBtn->setFixedSize(28, 28);
     m_remoteUpBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; border-radius: 3px;"
+        "  background-color: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; border-radius: 3px;"
         "  font-size: 14px;"
         "}"
-        "QPushButton:hover { background-color: #3C3F41; }"
+        "QPushButton:hover { background-color: #30363D; }"
     );
 
     m_remoteHomeBtn = new QPushButton("⌂");
@@ -259,8 +259,8 @@ void SFTPWidget::setupRemotePane(QWidget* parent)
     m_remotePathEdit->setText("/");
     m_remotePathEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 12px;"
         "}"
     );
@@ -292,17 +292,17 @@ void SFTPWidget::setupRemotePane(QWidget* parent)
     m_remoteTree->setRootIsDecorated(true);
     m_remoteTree->setStyleSheet(
         "QTreeWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D;"
         "  font-size: 12px;"
         "  outline: none;"
         "}"
         "QTreeWidget::item { padding: 2px 4px; }"
         "QTreeWidget::item:hover { background-color: #2B2D30; }"
-        "QTreeWidget::item:selected { background-color: #3C3F41; color: #67C23A; }"
+        "QTreeWidget::item:selected { background-color: #30363D; color: #3FB950; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 3px 6px; font-size: 11px; font-weight: bold;"
         "}"
     );
@@ -314,25 +314,25 @@ void SFTPWidget::setupRemotePane(QWidget* parent)
 
     auto remoteOpBtnStyle = QString(
         "QPushButton {"
-        "  background-color: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 10px;"
+        "  background-color: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 10px;"
         "  border-radius: 3px; font-size: 11px;"
         "}"
-        "QPushButton:hover { background-color: #3C3F41; }"
-        "QPushButton:disabled { background-color: #1E1F22; color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #30363D; }"
+        "QPushButton:disabled { background-color: #0D1117; color: #484F58; }"
     );
 
     m_remoteDeleteBtn = new QPushButton("删除");
     m_remoteDeleteBtn->setToolTip("删除选中的远程文件/目录");
-    m_remoteDeleteBtn->setStyleSheet(remoteOpBtnStyle);
+    
 
     m_remoteRenameBtn = new QPushButton("重命名");
     m_remoteRenameBtn->setToolTip("重命名选中的远程文件/目录");
-    m_remoteRenameBtn->setStyleSheet(remoteOpBtnStyle);
+    
 
     m_remoteMkdirBtn = new QPushButton("新建目录");
     m_remoteMkdirBtn->setToolTip("在远程当前路径创建目录");
-    m_remoteMkdirBtn->setStyleSheet(remoteOpBtnStyle);
+    
 
     opsLayout->addWidget(m_remoteDeleteBtn);
     opsLayout->addWidget(m_remoteRenameBtn);
@@ -351,31 +351,31 @@ void SFTPWidget::setupTransferPanel(QVBoxLayout* mainLayout)
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:disabled { background-color: #5C5C5C; color: #8C8C8C; }"
+        "QPushButton:disabled { background-color: #484F58; color: #8B949E; }"
     );
 
     m_uploadBtn = new QPushButton("⬆ 上传");
     m_uploadBtn->setToolTip("将选中的本地文件上传到远程当前目录");
     m_uploadBtn->setStyleSheet(
         transferBtnStyle +
-        "QPushButton { background-color: #409EFF; color: white; }"
-        "QPushButton:hover { background-color: #66B1FF; }"
+        "QPushButton { background-color: #58A6FF; color: white; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
     );
 
     m_downloadBtn = new QPushButton("⬇ 下载");
     m_downloadBtn->setToolTip("将选中的远程文件下载到本地当前目录");
     m_downloadBtn->setStyleSheet(
         transferBtnStyle +
-        "QPushButton { background-color: #67C23A; color: white; }"
-        "QPushButton:hover { background-color: #85CE61; }"
+        "QPushButton { background-color: #3FB950; color: white; }"
+        "QPushButton:hover { background-color: #56D364; }"
     );
 
     m_cancelBtn = new QPushButton("取消");
     m_cancelBtn->setToolTip("取消当前传输");
     m_cancelBtn->setStyleSheet(
         transferBtnStyle +
-        "QPushButton { background-color: #F56C6C; color: white; }"
-        "QPushButton:hover { background-color: #F78989; }"
+        "QPushButton { background-color: #F85149; color: white; }"
+        "QPushButton:hover { background-color: #FF7B72; }"
     );
     m_cancelBtn->setEnabled(false);
 
@@ -394,7 +394,7 @@ void SFTPWidget::setupProgressPanel(QVBoxLayout* mainLayout)
     layout->setSpacing(8);
 
     m_progressLabel = new QLabel("就绪");
-    m_progressLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
 
     m_progressBar = new QProgressBar();
     m_progressBar->setMinimum(0);
@@ -404,12 +404,12 @@ void SFTPWidget::setupProgressPanel(QVBoxLayout* mainLayout)
     m_progressBar->setFixedHeight(18);
     m_progressBar->setStyleSheet(
         "QProgressBar {"
-        "  background-color: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; border-radius: 3px;"
+        "  background-color: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; border-radius: 3px;"
         "  font-size: 11px; text-align: center;"
         "}"
         "QProgressBar::chunk {"
-        "  background-color: #409EFF; border-radius: 2px;"
+        "  background-color: #58A6FF; border-radius: 2px;"
         "}"
     );
 
@@ -783,9 +783,9 @@ void SFTPWidget::addTransferEntry(const QString& localPath, const QString& remot
 
     auto* dirItem = new QTableWidgetItem(direction);
     if (direction == "上传") {
-        dirItem->setForeground(QColor(0x40, 0x9E, 0xFF));
+        dirItem->setForeground(QColor(0x58, 0xA6, 0xFF));
     } else {
-        dirItem->setForeground(QColor(0x67, 0xC2, 0x3A));
+        dirItem->setForeground(QColor(0x3F, 0xB9, 0x50));
     }
 
     auto* localItem = new QTableWidgetItem(localPath);
@@ -816,10 +816,10 @@ void SFTPWidget::updateTransferProgress(int row, qint64 transferred, qint64 tota
     if (statusItem) {
         if (percent >= 100) {
             statusItem->setText("完成");
-            statusItem->setForeground(QColor(0x67, 0xC2, 0x3A));
+            statusItem->setForeground(QColor(0x3F, 0xB9, 0x50));
         } else {
             statusItem->setText("传输中");
-            statusItem->setForeground(QColor(0x40, 0x9E, 0xFF));
+            statusItem->setForeground(QColor(0x58, 0xA6, 0xFF));
         }
     }
 

@@ -2,6 +2,7 @@
 #include "log/Logger.h"
 #include "database/DatabaseManager.h"
 #include "config/ConfigManager.h"
+#include "core/AppCore.h"
 #include "plugins/PluginManager.h"
 #include "ui/ThemeManager.h"
 #include "ui/MainWindow.h"
@@ -20,6 +21,8 @@ Application::Application(int& argc, char** argv)
 
 Application::~Application()
 {
+    AppCore::instance().shutdown();
+    ConfigManager::instance().saveToDb();
     DatabaseManager::instance().close();
     Logger::instance().info("APP", "Application shutdown complete");
 }
@@ -47,14 +50,20 @@ bool Application::initialize()
     ConfigManager::instance().loadFromDb();
     Logger::instance().info("APP", "Configuration loaded");
 
-    // Step 4: Initialize plugin manager
+    // Step 4: Initialize AppCore (EventBus + TaskScheduler)
+    if (!AppCore::instance().initialize()) {
+        Logger::instance().error("APP", "Failed to initialize AppCore");
+        return false;
+    }
+
+    // Step 5: Initialize plugin manager
     PluginManager::instance().setPluginDir(dataDir + "/plugins");
     PluginManager::instance().scanPlugins();
     Logger::instance().info("APP", "Plugin manager initialized");
 
-    // Step 5: Initialize theme
-    ThemeManager::instance().applyDarkTheme();
-    Logger::instance().info("APP", "Dark theme applied");
+    // Step 6: Initialize theme
+    ThemeManager::instance().applyOceanTheme();
+    Logger::instance().info("APP", "Ocean theme applied");
 
     return true;
 }
@@ -65,18 +74,26 @@ int Application::run()
         return 1;
     }
 
-    // Step 6: Initialize MainWindow
+    // Start AppCore services (TaskScheduler begins)
+    AppCore::instance().start();
+
+    // Step 7: Initialize MainWindow
     MainWindow mainWindow;
     mainWindow.show();
 
-    // Step 7: Load plugins (deferred)
+    // Step 8: Load plugins (deferred)
     PluginManager::instance().scanPlugins();
 
-    // Step 8: Restore layout
+    // Step 9: Restore layout
     mainWindow.restoreLayout();
 
     Logger::instance().info("APP", "MainWindow ready, entering event loop");
 
-    // Step 9: Enter event loop
-    return exec();
+    // Step 10: Enter event loop
+    int ret = exec();
+
+    // Clean shutdown
+    ConfigManager::instance().saveToDb();
+
+    return ret;
 }

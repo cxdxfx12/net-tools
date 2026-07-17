@@ -169,19 +169,19 @@ void IPv6Widget::setupUI()
 
     // Style
     setStyleSheet(QStringLiteral(
-        "QWidget { background-color: #1E1F22; color: #DCDCDC; font-size: 13px; }"
-        "QGroupBox { border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px; padding-top: 16px; font-weight: bold; }"
+        "QWidget { background-color: #0D1117; color: #E6EDF3; font-size: 13px; }"
+        "QGroupBox { border: 1px solid #30363D; border-radius: 4px; margin-top: 8px; padding-top: 16px; font-weight: bold; }"
         "QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 5px; }"
-        "QTableWidget { background-color: #25262B; alternate-background-color: #2B2D31; border: 1px solid #3C3F41; gridline-color: #3C3F41; }"
+        "QTableWidget { background-color: #161B22; alternate-background-color: #2B2D31; border: 1px solid #30363D; gridline-color: #30363D; }"
         "QTableWidget::item { padding: 4px; }"
-        "QHeaderView::section { background-color: #2B2D31; color: #DCDCDC; border: 1px solid #3C3F41; padding: 4px; }"
-        "QLineEdit, QSpinBox, QPlainTextEdit { background-color: #25262B; border: 1px solid #3C3F41; border-radius: 3px; padding: 4px; color: #DCDCDC; }"
-        "QPushButton { background-color: #3C3F41; border: 1px solid #555; border-radius: 3px; padding: 5px 15px; color: #DCDCDC; }"
+        "QHeaderView::section { background-color: #2B2D31; color: #E6EDF3; border: 1px solid #30363D; padding: 4px; }"
+        "QLineEdit, QSpinBox, QPlainTextEdit { background-color: #161B22; border: 1px solid #30363D; border-radius: 3px; padding: 4px; color: #E6EDF3; }"
+        "QPushButton { background-color: #30363D; border: 1px solid #555; border-radius: 3px; padding: 5px 15px; color: #E6EDF3; }"
         "QPushButton:hover { background-color: #4A4D51; }"
         "QPushButton:pressed { background-color: #2B2D31; }"
-        "QTabWidget::pane { border: 1px solid #3C3F41; background-color: #1E1F22; }"
-        "QTabBar::tab { background-color: #25262B; color: #DCDCDC; padding: 6px 15px; border: 1px solid #3C3F41; }"
-        "QTabBar::tab:selected { background-color: #3C3F41; }"
+        "QTabWidget::pane { border: 1px solid #30363D; background-color: #0D1117; }"
+        "QTabBar::tab { background-color: #161B22; color: #E6EDF3; padding: 6px 15px; border: 1px solid #30363D; }"
+        "QTabBar::tab:selected { background-color: #30363D; }"
     ));
 
     // Pre-populate NDP mock data
@@ -322,55 +322,49 @@ void IPv6Widget::onHealthCheck()
     // IPv4 check
     m_healthResult->appendPlainText(QStringLiteral("[1] IPv4 连通性检查..."));
     m_ipv4Status->setText(QStringLiteral("检查中..."));
-    m_ipv4Status->setStyleSheet(QStringLiteral("color: #E6A23C;"));
-
     QProcess ipv4Proc;
     ipv4Proc.start(QStringLiteral("ping"), {QStringLiteral("-c"), QStringLiteral("2"), QStringLiteral("-W"), QStringLiteral("2"), QStringLiteral("8.8.8.8")});
     ipv4Proc.waitForFinished(5000);
     if (ipv4Proc.exitCode() == 0) {
         m_ipv4Status->setText(QStringLiteral("正常"));
-        m_ipv4Status->setStyleSheet(QStringLiteral("color: #67C23A; font-weight: bold;"));
+        m_ipv4Status->setStyleSheet(QStringLiteral("color: #3FB950; font-weight: bold;"));
         m_healthResult->appendPlainText(QStringLiteral("  IPv4 连通性: 正常"));
     } else {
         m_ipv4Status->setText(QStringLiteral("异常"));
-        m_ipv4Status->setStyleSheet(QStringLiteral("color: #F56C6C; font-weight: bold;"));
+        m_ipv4Status->setStyleSheet(QStringLiteral("color: #F85149; font-weight: bold;"));
         m_healthResult->appendPlainText(QStringLiteral("  IPv4 连通性: 异常"));
     }
 
     // IPv6 check
     m_healthResult->appendPlainText(QStringLiteral("\n[2] IPv6 连通性检查..."));
     m_ipv6Status->setText(QStringLiteral("检查中..."));
-    m_ipv6Status->setStyleSheet(QStringLiteral("color: #E6A23C;"));
-
     QProcess ipv6Proc;
     ipv6Proc.start(QStringLiteral("ping6"), {QStringLiteral("-c"), QStringLiteral("2"), QStringLiteral("-W"), QStringLiteral("2"), QStringLiteral("2001:4860:4860::8888")});
     ipv6Proc.waitForFinished(5000);
     if (ipv6Proc.exitCode() == 0) {
         m_ipv6Status->setText(QStringLiteral("正常"));
-        m_ipv6Status->setStyleSheet(QStringLiteral("color: #67C23A; font-weight: bold;"));
+        m_ipv6Status->setStyleSheet(QStringLiteral("color: #3FB950; font-weight: bold;"));
         m_healthResult->appendPlainText(QStringLiteral("  IPv6 连通性: 正常"));
     } else {
         m_ipv6Status->setText(QStringLiteral("异常"));
-        m_ipv6Status->setStyleSheet(QStringLiteral("color: #F56C6C; font-weight: bold;"));
+        m_ipv6Status->setStyleSheet(QStringLiteral("color: #F85149; font-weight: bold;"));
         m_healthResult->appendPlainText(QStringLiteral("  IPv6 连通性: 异常"));
     }
 
     // DNS check
     m_healthResult->appendPlainText(QStringLiteral("\n[3] DNS AAAA 解析检查..."));
     m_dnsStatus->setText(QStringLiteral("检查中..."));
-    m_dnsStatus->setStyleSheet(QStringLiteral("color: #E6A23C;"));
-
     QProcess dnsProc;
     dnsProc.start(QStringLiteral("nslookup"), {QStringLiteral("-type=AAAA"), QStringLiteral("google.com")});
     dnsProc.waitForFinished(5000);
     QString dnsOutput = dnsProc.readAllStandardOutput();
     if (dnsOutput.contains(QStringLiteral("IPv6")) || dnsOutput.contains(QStringLiteral("AAAA"))) {
         m_dnsStatus->setText(QStringLiteral("正常"));
-        m_dnsStatus->setStyleSheet(QStringLiteral("color: #67C23A; font-weight: bold;"));
+        m_dnsStatus->setStyleSheet(QStringLiteral("color: #3FB950; font-weight: bold;"));
         m_healthResult->appendPlainText(QStringLiteral("  DNS AAAA 解析: 正常"));
     } else {
         m_dnsStatus->setText(QStringLiteral("异常"));
-        m_dnsStatus->setStyleSheet(QStringLiteral("color: #F56C6C; font-weight: bold;"));
+        m_dnsStatus->setStyleSheet(QStringLiteral("color: #F85149; font-weight: bold;"));
         m_healthResult->appendPlainText(QStringLiteral("  DNS AAAA 解析: 异常"));
     }
 
@@ -447,9 +441,9 @@ void IPv6Widget::onNDPRefresh()
             m_ndpTable->setItem(r, 1, new QTableWidgetItem(e.mac));
             m_ndpTable->setItem(r, 2, new QTableWidgetItem(e.iface));
             auto* stateItem = new QTableWidgetItem(e.state);
-            if (e.state == QStringLiteral("REACHABLE")) stateItem->setForeground(QColor(QStringLiteral("#67C23A")));
-            else if (e.state == QStringLiteral("STALE")) stateItem->setForeground(QColor(QStringLiteral("#E6A23C")));
-            else if (e.state == QStringLiteral("PROBE")) stateItem->setForeground(QColor(QStringLiteral("#409EFF")));
+            if (e.state == QStringLiteral("REACHABLE")) stateItem->setForeground(QColor(QStringLiteral("#3FB950")));
+            else if (e.state == QStringLiteral("STALE")) stateItem->setForeground(QColor(QStringLiteral("#D29922")));
+            else if (e.state == QStringLiteral("PROBE")) stateItem->setForeground(QColor(QStringLiteral("#58A6FF")));
             m_ndpTable->setItem(r, 3, stateItem);
         }
     }

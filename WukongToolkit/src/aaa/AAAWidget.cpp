@@ -311,15 +311,15 @@ void AAAWidget::setupUI()
         table->setStyleSheet(
             QStringLiteral(
                 "QTableWidget {"
-                "  background-color: #1E1F22; color: #DCDCDC;"
-                "  border: 1px solid #3C3F41; font-size: 12px;"
-                "  gridline-color: #2C2D30;"
+                "  background-color: #0D1117; color: #E6EDF3;"
+                "  border: 1px solid #30363D; font-size: 12px;"
+                "  gridline-color: #21262D;"
                 "}"
                 "QTableWidget::item { padding: 3px 6px; }"
-                "QTableWidget::item:selected { background-color: #3C3F41; }"
+                "QTableWidget::item:selected { background-color: #30363D; }"
                 "QHeaderView::section {"
-                "  background-color: #25262B; color: #8C8C8C;"
-                "  border: none; border-bottom: 2px solid #3C3F41;"
+                "  background-color: #161B22; color: #8B949E;"
+                "  border: none; border-bottom: 2px solid #30363D;"
                 "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
                 "}"
             )
@@ -335,8 +335,8 @@ void AAAWidget::setupUI()
         group->setStyleSheet(
             QStringLiteral(
                 "QGroupBox {"
-                "  color: #409EFF; font-size: 13px; font-weight: bold;"
-                "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+                "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+                "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
                 "  padding-top: 16px;"
                 "}"
                 "QGroupBox::title {"
@@ -349,20 +349,20 @@ void AAAWidget::setupUI()
     // ── 顶部: 设备选择 ─────────────────────────────────────────────────
     auto* topLayout = new QHBoxLayout();
     auto* deviceLabel = new QLabel(QStringLiteral("选择设备:"));
-    deviceLabel->setStyleSheet(QStringLiteral("color: #DCDCDC; font-size: 13px; font-weight: bold;"));
+    deviceLabel->setStyleSheet(QStringLiteral("color: #E6EDF3; font-size: 13px; font-weight: bold;"));
     m_deviceCombo = new QComboBox();
     m_deviceCombo->setMinimumWidth(200);
     m_deviceCombo->setStyleSheet(
         QStringLiteral(
             "QComboBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 6px 12px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 6px 12px;"
             "  border-radius: 3px; font-size: 13px; min-width: 180px;"
             "}"
             "QComboBox::drop-down { border: none; }"
             "QComboBox QAbstractItemView {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  selection-background-color: #3C3F41;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  selection-background-color: #30363D;"
             "}"
         )
     );
@@ -372,7 +372,7 @@ void AAAWidget::setupUI()
     m_exportBtn = new QPushButton(QStringLiteral("导出 CSV"));
     m_exportBtn->setStyleSheet(
         QStringLiteral(
-            "QPushButton { background-color: #4A4D52; color: #DCDCDC;"
+            "QPushButton { background-color: #4A4D52; color: #E6EDF3;"
             "  border: none; padding: 8px 20px; border-radius: 4px;"
             "  font-size: 13px; font-weight: bold; }"
             "QPushButton:hover { background-color: #5A5D62; }"
@@ -395,18 +395,18 @@ void AAAWidget::setupUI()
         label->setStyleSheet(
             QString(QStringLiteral(
                 "font-size: 14px; font-weight: bold; color: %1;"
-                "background-color: #25262B; border-radius: 8px;"
+                "background-color: #161B22; border-radius: 8px;"
                 "padding: 10px 12px; border: 2px solid %1;"
             )).arg(color)
         );
         return label;
     };
 
-    m_aaaStatusLabel    = makeCard(QStringLiteral("AAA 状态"),    QStringLiteral("#409EFF"));
-    m_sshStatusLabel    = makeCard(QStringLiteral("SSH 状态"),    QStringLiteral("#67C23A"));
-    m_telnetStatusLabel = makeCard(QStringLiteral("Telnet 状态"), QStringLiteral("#E6A23C"));
-    m_authMethodLabel   = makeCard(QStringLiteral("认证方式"),    QStringLiteral("#909399"));
-    m_healthScoreLabel  = makeCard(QStringLiteral("健康评分"),    QStringLiteral("#F56C6C"));
+    m_aaaStatusLabel    = makeCard(QStringLiteral("AAA 状态"),    QStringLiteral("#58A6FF"));
+    m_sshStatusLabel    = makeCard(QStringLiteral("SSH 状态"),    QStringLiteral("#3FB950"));
+    m_telnetStatusLabel = makeCard(QStringLiteral("Telnet 状态"), QStringLiteral("#D29922"));
+    m_authMethodLabel   = makeCard(QStringLiteral("认证方式"),    QStringLiteral("#8B949E"));
+    m_healthScoreLabel  = makeCard(QStringLiteral("健康评分"),    QStringLiteral("#F85149"));
 
     overviewLayout->addWidget(m_aaaStatusLabel);
     overviewLayout->addWidget(m_sshStatusLabel);
@@ -421,22 +421,22 @@ void AAAWidget::setupUI()
     tabWidget->setStyleSheet(
         QStringLiteral(
             "QTabWidget::pane {"
-            "  border: 1px solid #3C3F41; background-color: #1E1F22;"
+            "  border: 1px solid #30363D; background-color: #0D1117;"
             "  border-top: 2px solid #409EFF;"
             "}"
             "QTabBar::tab {"
-            "  background-color: #25262B; color: #8C8C8C;"
+            "  background-color: #161B22; color: #8B949E;"
             "  padding: 8px 20px; font-size: 13px; font-weight: bold;"
-            "  border: 1px solid #3C3F41; border-bottom: none;"
+            "  border: 1px solid #30363D; border-bottom: none;"
             "  border-top-left-radius: 4px; border-top-right-radius: 4px;"
             "  margin-right: 2px;"
             "}"
             "QTabBar::tab:selected {"
-            "  background-color: #1E1F22; color: #409EFF;"
+            "  background-color: #0D1117; color: #58A6FF;"
             "  border-bottom: 2px solid #409EFF;"
             "}"
             "QTabBar::tab:hover {"
-            "  background-color: #3C3F41; color: #DCDCDC;"
+            "  background-color: #30363D; color: #E6EDF3;"
             "}"
         )
     );
@@ -583,16 +583,16 @@ void AAAWidget::checkAAAStatus()
     if (cfg.aaaStatus == QStringLiteral("已启用")) {
         m_aaaStatusLabel->setStyleSheet(
             QStringLiteral(
-                "font-size: 14px; font-weight: bold; color: #67C23A;"
-                "background-color: #25262B; border-radius: 8px;"
+                "font-size: 14px; font-weight: bold; color: #3FB950;"
+                "background-color: #161B22; border-radius: 8px;"
                 "padding: 10px 12px; border: 2px solid #67C23A;"
             )
         );
     } else {
         m_aaaStatusLabel->setStyleSheet(
             QStringLiteral(
-                "font-size: 14px; font-weight: bold; color: #F56C6C;"
-                "background-color: #25262B; border-radius: 8px;"
+                "font-size: 14px; font-weight: bold; color: #F85149;"
+                "background-color: #161B22; border-radius: 8px;"
                 "padding: 10px 12px; border: 2px solid #F56C6C;"
             )
         );
@@ -602,16 +602,16 @@ void AAAWidget::checkAAAStatus()
     if (cfg.sshStatus == QStringLiteral("已启用")) {
         m_sshStatusLabel->setStyleSheet(
             QStringLiteral(
-                "font-size: 14px; font-weight: bold; color: #67C23A;"
-                "background-color: #25262B; border-radius: 8px;"
+                "font-size: 14px; font-weight: bold; color: #3FB950;"
+                "background-color: #161B22; border-radius: 8px;"
                 "padding: 10px 12px; border: 2px solid #67C23A;"
             )
         );
     } else {
         m_sshStatusLabel->setStyleSheet(
             QStringLiteral(
-                "font-size: 14px; font-weight: bold; color: #F56C6C;"
-                "background-color: #25262B; border-radius: 8px;"
+                "font-size: 14px; font-weight: bold; color: #F85149;"
+                "background-color: #161B22; border-radius: 8px;"
                 "padding: 10px 12px; border: 2px solid #F56C6C;"
             )
         );
@@ -621,34 +621,34 @@ void AAAWidget::checkAAAStatus()
     if (cfg.telnetStatus == QStringLiteral("未启用")) {
         m_telnetStatusLabel->setStyleSheet(
             QStringLiteral(
-                "font-size: 14px; font-weight: bold; color: #67C23A;"
-                "background-color: #25262B; border-radius: 8px;"
+                "font-size: 14px; font-weight: bold; color: #3FB950;"
+                "background-color: #161B22; border-radius: 8px;"
                 "padding: 10px 12px; border: 2px solid #67C23A;"
             )
         );
     } else {
         m_telnetStatusLabel->setStyleSheet(
             QStringLiteral(
-                "font-size: 14px; font-weight: bold; color: #E6A23C;"
-                "background-color: #25262B; border-radius: 8px;"
+                "font-size: 14px; font-weight: bold; color: #D29922;"
+                "background-color: #161B22; border-radius: 8px;"
                 "padding: 10px 12px; border: 2px solid #E6A23C;"
             )
         );
     }
 
     // 认证方式卡片
-    QString methodColor = QStringLiteral("#909399");
+    QString methodColor = QStringLiteral("#8B949E");
     if (cfg.authMethod == QStringLiteral("混合")) {
-        methodColor = QStringLiteral("#67C23A");
+        methodColor = QStringLiteral("#3FB950");
     } else if (cfg.authMethod == QStringLiteral("Local")) {
-        methodColor = QStringLiteral("#E6A23C");
+        methodColor = QStringLiteral("#D29922");
     } else {
-        methodColor = QStringLiteral("#409EFF");
+        methodColor = QStringLiteral("#58A6FF");
     }
     m_authMethodLabel->setStyleSheet(
         QString(QStringLiteral(
             "font-size: 14px; font-weight: bold; color: %1;"
-            "background-color: #25262B; border-radius: 8px;"
+            "background-color: #161B22; border-radius: 8px;"
             "padding: 10px 12px; border: 2px solid %1;"
         )).arg(methodColor)
     );
@@ -670,7 +670,7 @@ void AAAWidget::checkRadius()
 
     if (cfg.radiusServers.isEmpty()) {
         QTableWidgetItem* emptyItem = new QTableWidgetItem(QStringLiteral("未配置 RADIUS 服务器"));
-        emptyItem->setForeground(QColor(QStringLiteral("#8C8C8C")));
+        emptyItem->setForeground(QColor(QStringLiteral("#8B949E")));
         m_radiusTable->setRowCount(1);
         m_radiusTable->setItem(0, 0, emptyItem);
         m_radiusTable->setSpan(0, 0, 1, 7);
@@ -698,25 +698,25 @@ void AAAWidget::checkRadius()
         auto* roleItem = new QTableWidgetItem(rs.role);
         roleItem->setTextAlignment(Qt::AlignCenter);
         if (rs.role == QStringLiteral("主")) {
-            roleItem->setForeground(QColor(QStringLiteral("#409EFF")));
+            roleItem->setForeground(QColor(QStringLiteral("#58A6FF")));
         }
         m_radiusTable->setItem(row, 4, roleItem);
 
         auto* statusItem = new QTableWidgetItem(rs.status);
         statusItem->setTextAlignment(Qt::AlignCenter);
         if (rs.status == QStringLiteral("Active")) {
-            statusItem->setForeground(QColor(QStringLiteral("#67C23A")));
+            statusItem->setForeground(QColor(QStringLiteral("#3FB950")));
         } else {
-            statusItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+            statusItem->setForeground(QColor(QStringLiteral("#F85149")));
         }
         m_radiusTable->setItem(row, 5, statusItem);
 
         auto* reachItem = new QTableWidgetItem(rs.reachability);
         reachItem->setTextAlignment(Qt::AlignCenter);
         if (rs.reachability == QStringLiteral("可达")) {
-            reachItem->setForeground(QColor(QStringLiteral("#67C23A")));
+            reachItem->setForeground(QColor(QStringLiteral("#3FB950")));
         } else {
-            reachItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+            reachItem->setForeground(QColor(QStringLiteral("#F85149")));
         }
         m_radiusTable->setItem(row, 6, reachItem);
     }
@@ -735,7 +735,7 @@ void AAAWidget::checkTacacs()
 
     if (cfg.tacacsServers.isEmpty()) {
         QTableWidgetItem* emptyItem = new QTableWidgetItem(QStringLiteral("未配置 TACACS+ 服务器"));
-        emptyItem->setForeground(QColor(QStringLiteral("#8C8C8C")));
+        emptyItem->setForeground(QColor(QStringLiteral("#8B949E")));
         m_tacacsTable->setRowCount(1);
         m_tacacsTable->setItem(0, 0, emptyItem);
         m_tacacsTable->setSpan(0, 0, 1, 6);
@@ -755,18 +755,18 @@ void AAAWidget::checkTacacs()
         auto* keyItem = new QTableWidgetItem(ts.keyStatus);
         keyItem->setTextAlignment(Qt::AlignCenter);
         if (ts.keyStatus == QStringLiteral("已加密")) {
-            keyItem->setForeground(QColor(QStringLiteral("#67C23A")));
+            keyItem->setForeground(QColor(QStringLiteral("#3FB950")));
         } else if (ts.keyStatus == QStringLiteral("未配置")) {
-            keyItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+            keyItem->setForeground(QColor(QStringLiteral("#F85149")));
         } else {
-            keyItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+            keyItem->setForeground(QColor(QStringLiteral("#D29922")));
         }
         m_tacacsTable->setItem(row, 2, keyItem);
 
         auto* roleItem = new QTableWidgetItem(ts.role);
         roleItem->setTextAlignment(Qt::AlignCenter);
         if (ts.role == QStringLiteral("主")) {
-            roleItem->setForeground(QColor(QStringLiteral("#409EFF")));
+            roleItem->setForeground(QColor(QStringLiteral("#58A6FF")));
         }
         m_tacacsTable->setItem(row, 3, roleItem);
 
@@ -777,11 +777,11 @@ void AAAWidget::checkTacacs()
         auto* authItem = new QTableWidgetItem(ts.authStatus);
         authItem->setTextAlignment(Qt::AlignCenter);
         if (ts.authStatus == QStringLiteral("认证成功")) {
-            authItem->setForeground(QColor(QStringLiteral("#67C23A")));
+            authItem->setForeground(QColor(QStringLiteral("#3FB950")));
         } else if (ts.authStatus == QStringLiteral("认证失败")) {
-            authItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+            authItem->setForeground(QColor(QStringLiteral("#F85149")));
         } else {
-            authItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+            authItem->setForeground(QColor(QStringLiteral("#D29922")));
         }
         m_tacacsTable->setItem(row, 5, authItem);
     }
@@ -807,9 +807,9 @@ void AAAWidget::checkAccounts()
         auto* privItem = new QTableWidgetItem(QString::number(acct.privilegeLevel));
         privItem->setTextAlignment(Qt::AlignCenter);
         if (acct.privilegeLevel == 15) {
-            privItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+            privItem->setForeground(QColor(QStringLiteral("#F85149")));
         } else if (acct.privilegeLevel >= 5) {
-            privItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+            privItem->setForeground(QColor(QStringLiteral("#D29922")));
         }
         m_accountTable->setItem(row, 1, privItem);
 
@@ -818,11 +818,11 @@ void AAAWidget::checkAccounts()
         auto* statusItem = new QTableWidgetItem(acct.status);
         statusItem->setTextAlignment(Qt::AlignCenter);
         if (acct.status == QStringLiteral("活跃")) {
-            statusItem->setForeground(QColor(QStringLiteral("#67C23A")));
+            statusItem->setForeground(QColor(QStringLiteral("#3FB950")));
         } else if (acct.status == QStringLiteral("锁定")) {
-            statusItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+            statusItem->setForeground(QColor(QStringLiteral("#F85149")));
         } else {
-            statusItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+            statusItem->setForeground(QColor(QStringLiteral("#D29922")));
         }
         m_accountTable->setItem(row, 3, statusItem);
 
@@ -831,7 +831,7 @@ void AAAWidget::checkAccounts()
         if (acct.expiryDate != QStringLiteral("永久")) {
             QDate expiry = QDate::fromString(acct.expiryDate, QStringLiteral("yyyy-MM-dd"));
             if (expiry.isValid() && expiry < QDate::currentDate()) {
-                expiryItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+                expiryItem->setForeground(QColor(QStringLiteral("#F85149")));
             }
         }
         m_accountTable->setItem(row, 4, expiryItem);
@@ -860,18 +860,18 @@ void AAAWidget::checkLoginStats()
         auto* resultItem = new QTableWidgetItem(lr.result);
         resultItem->setTextAlignment(Qt::AlignCenter);
         if (lr.result == QStringLiteral("成功")) {
-            resultItem->setForeground(QColor(QStringLiteral("#67C23A")));
+            resultItem->setForeground(QColor(QStringLiteral("#3FB950")));
         } else {
-            resultItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+            resultItem->setForeground(QColor(QStringLiteral("#F85149")));
         }
         m_loginStatsTable->setItem(row, 3, resultItem);
 
         auto* methodItem = new QTableWidgetItem(lr.method);
         methodItem->setTextAlignment(Qt::AlignCenter);
         if (lr.method == QStringLiteral("Telnet")) {
-            methodItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+            methodItem->setForeground(QColor(QStringLiteral("#D29922")));
         } else if (lr.method == QStringLiteral("SSH")) {
-            methodItem->setForeground(QColor(QStringLiteral("#67C23A")));
+            methodItem->setForeground(QColor(QStringLiteral("#3FB950")));
         }
         m_loginStatsTable->setItem(row, 4, methodItem);
     }
@@ -977,18 +977,18 @@ void AAAWidget::calculateHealthScore()
     // 更新健康评分卡片
     QString scoreColor;
     if (score >= 80) {
-        scoreColor = QStringLiteral("#67C23A");
+        scoreColor = QStringLiteral("#3FB950");
     } else if (score >= 60) {
-        scoreColor = QStringLiteral("#E6A23C");
+        scoreColor = QStringLiteral("#D29922");
     } else {
-        scoreColor = QStringLiteral("#F56C6C");
+        scoreColor = QStringLiteral("#F85149");
     }
 
     m_healthScoreLabel->setText(QStringLiteral("健康评分\n%1 分").arg(score));
     m_healthScoreLabel->setStyleSheet(
         QString(QStringLiteral(
             "font-size: 14px; font-weight: bold; color: %1;"
-            "background-color: #25262B; border-radius: 8px;"
+            "background-color: #161B22; border-radius: 8px;"
             "padding: 10px 12px; border: 2px solid %1;"
         )).arg(scoreColor)
     );
@@ -1004,11 +1004,11 @@ void AAAWidget::calculateHealthScore()
         auto* sevItem = new QTableWidgetItem(risk.severity);
         sevItem->setTextAlignment(Qt::AlignCenter);
         if (risk.severity == QStringLiteral("高")) {
-            sevItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+            sevItem->setForeground(QColor(QStringLiteral("#F85149")));
         } else if (risk.severity == QStringLiteral("中")) {
-            sevItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+            sevItem->setForeground(QColor(QStringLiteral("#D29922")));
         } else {
-            sevItem->setForeground(QColor(QStringLiteral("#409EFF")));
+            sevItem->setForeground(QColor(QStringLiteral("#58A6FF")));
         }
         m_riskTable->setItem(row, 1, sevItem);
 

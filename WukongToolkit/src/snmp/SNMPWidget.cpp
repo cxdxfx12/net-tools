@@ -58,8 +58,8 @@ void SNMPWidget::setupUI()
         edit->setMinimumWidth(minWidth);
         edit->setStyleSheet(
             "QLineEdit {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px 8px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 4px 8px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
         );
@@ -69,14 +69,14 @@ void SNMPWidget::setupUI()
         combo->setMinimumWidth(minWidth);
         combo->setStyleSheet(
             "QComboBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px 8px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 4px 8px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
             "QComboBox::drop-down { border: none; }"
             "QComboBox QAbstractItemView {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  selection-background-color: #3C3F41;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  selection-background-color: #30363D;"
             "}"
         );
     };
@@ -84,7 +84,7 @@ void SNMPWidget::setupUI()
     // Target host
     auto* hostLayout = new QVBoxLayout();
     auto* hostLabel = new QLabel("目标主机:");
-    hostLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_targetEdit = new QLineEdit();
     styleLineEdit(m_targetEdit, "例如: 192.168.1.1 或 switch.example.com", 180);
     hostLayout->addWidget(hostLabel);
@@ -94,15 +94,15 @@ void SNMPWidget::setupUI()
     // Port
     auto* portLayout = new QVBoxLayout();
     auto* portLabel = new QLabel("端口:");
-    portLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_portSpin = new QSpinBox();
     m_portSpin->setRange(1, 65535);
     m_portSpin->setValue(161);
     m_portSpin->setFixedWidth(90);
     m_portSpin->setStyleSheet(
         "QSpinBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -113,7 +113,7 @@ void SNMPWidget::setupUI()
     // Community
     auto* communityLayout = new QVBoxLayout();
     auto* communityLabel = new QLabel("Community:");
-    communityLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_communityEdit = new QLineEdit();
     m_communityEdit->setText("public");
     styleLineEdit(m_communityEdit, "public", 130);
@@ -124,7 +124,7 @@ void SNMPWidget::setupUI()
     // Version
     auto* versionLayout = new QVBoxLayout();
     auto* versionLabel = new QLabel("版本:");
-    versionLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_versionCombo = new QComboBox();
     m_versionCombo->addItem("v1", "1");
     m_versionCombo->addItem("v2c", "2c");
@@ -142,14 +142,14 @@ void SNMPWidget::setupUI()
     oidLayout->setSpacing(12);
 
     auto* oidLabel = new QLabel("OID:");
-    oidLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_oidEdit = new QLineEdit();
     m_oidEdit->setPlaceholderText("例如: 1.3.6.1.2.1.1.1.0 或 sysDescr.0");
     m_oidEdit->setMinimumWidth(280);
     m_oidEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -167,24 +167,24 @@ void SNMPWidget::setupUI()
     m_sendBtn = new QPushButton("发送");
     m_sendBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_sendBtn->setFixedHeight(36);
 
     m_stopBtn = new QPushButton("停止");
     m_stopBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #F56C6C; color: white;"
+        "  background-color: #F85149; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #F78989; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #FF7B72; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_stopBtn->setFixedHeight(36);
     m_stopBtn->setEnabled(false);
@@ -192,24 +192,24 @@ void SNMPWidget::setupUI()
     m_exportBtn = new QPushButton("导出 CSV");
     m_exportBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #67C23A; color: white;"
+        "  background-color: #3FB950; color: white;"
         "  border: none; padding: 8px 16px; border-radius: 4px;"
         "  font-size: 13px;"
         "}"
-        "QPushButton:hover { background-color: #85CE61; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #56D364; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_exportBtn->setFixedHeight(36);
 
     m_clearBtn = new QPushButton("清空");
     m_clearBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #909399; color: white;"
+        "  background-color: #8B949E; color: white;"
         "  border: none; padding: 8px 16px; border-radius: 4px;"
         "  font-size: 13px;"
         "}"
         "QPushButton:hover { background-color: #B4B4B9; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_clearBtn->setFixedHeight(36);
 
@@ -247,12 +247,12 @@ void SNMPWidget::setupUI()
         btn->setProperty("snmp_oid", sc.oid);
         btn->setStyleSheet(
             "QPushButton {"
-            "  background-color: #25262B; color: #409EFF;"
-            "  border: 1px solid #3C3F41; padding: 5px 12px;"
+            "  background-color: #161B22; color: #58A6FF;"
+            "  border: 1px solid #30363D; padding: 5px 12px;"
             "  border-radius: 3px; font-size: 12px;"
             "}"
             "QPushButton:hover {"
-            "  background-color: #3C3F41; color: #66B1FF;"
+            "  background-color: #30363D; color: #79C0FF;"
             "}"
         );
         shortcutLayout->addWidget(btn);
@@ -271,11 +271,11 @@ void SNMPWidget::setupUI()
     m_progressBar->setVisible(false);
     m_progressBar->setStyleSheet(
         "QProgressBar {"
-        "  background: #25262B; border: 1px solid #3C3F41;"
+        "  background: #161B22; border: 1px solid #30363D;"
         "  border-radius: 3px;"
         "}"
         "QProgressBar::chunk {"
-        "  background: #409EFF; border-radius: 3px;"
+        "  background: #58A6FF; border-radius: 3px;"
         "}"
     );
     mainLayout->addWidget(m_progressBar);
@@ -297,15 +297,15 @@ void SNMPWidget::setupUI()
     m_mibTree->setAlternatingRowColors(true);
     m_mibTree->setStyleSheet(
         "QTreeWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; font-size: 12px;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D; font-size: 12px;"
         "}"
         "QTreeWidget::item { padding: 3px 4px; }"
-        "QTreeWidget::item:hover { background-color: #2C2D30; }"
-        "QTreeWidget::item:selected { background-color: #3C3F41; }"
+        "QTreeWidget::item:hover { background-color: #21262D; }"
+        "QTreeWidget::item:selected { background-color: #30363D; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
         "}"
     );
@@ -322,8 +322,8 @@ void SNMPWidget::setupUI()
     m_resultsArea->setPlaceholderText("SNMP 查询结果将显示在这里...");
     m_resultsArea->setStyleSheet(
         "QPlainTextEdit {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; font-size: 13px;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D; font-size: 13px;"
         "  font-family: 'Menlo', 'Consolas', 'Courier New', monospace;"
         "  padding: 8px;"
         "}"

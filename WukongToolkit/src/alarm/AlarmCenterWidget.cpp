@@ -71,17 +71,17 @@ void AlarmCenterWidget::setupUI()
         auto* label = new QLabel(QString("%1: 0").arg(title));
         label->setStyleSheet(
             QString("font-size: 16px; font-weight: bold; color: %1; "
-                    "background-color: #25262B; border-radius: 8px; "
+                    "background-color: #161B22; border-radius: 8px; "
                     "padding: 10px 16px;").arg(color));
         label->setAlignment(Qt::AlignCenter);
         label->setMinimumWidth(140);
         return label;
     };
 
-    m_totalLabel          = makeStatLabel("总数", "#DCDCDC");
-    m_unacknowledgedLabel = makeStatLabel("未确认", "#409EFF");
-    m_criticalLabel       = makeStatLabel("严重", "#E6A23C");
-    m_emergencyLabel      = makeStatLabel("紧急", "#F56C6C");
+    m_totalLabel          = makeStatLabel("总数", "#E6EDF3");
+    m_unacknowledgedLabel = makeStatLabel("未确认", "#58A6FF");
+    m_criticalLabel       = makeStatLabel("严重", "#D29922");
+    m_emergencyLabel      = makeStatLabel("紧急", "#F85149");
 
     statsLayout->addWidget(m_totalLabel);
     statsLayout->addWidget(m_unacknowledgedLabel);
@@ -127,7 +127,7 @@ void AlarmCenterWidget::setupUI()
 
     m_clearFilterBtn = new QPushButton("清除");
     m_clearFilterBtn->setStyleSheet(
-        "QPushButton { background-color: #4A4D52; color: #DCDCDC; }"
+        "QPushButton { background-color: #4A4D52; color: #E6EDF3; }"
         "QPushButton:hover { background-color: #5A5D62; }");
     filterLayout->addWidget(m_clearFilterBtn);
 
@@ -142,19 +142,19 @@ void AlarmCenterWidget::setupUI()
 
     m_recoverBtn = new QPushButton("恢复告警");
     m_recoverBtn->setStyleSheet(
-        "QPushButton { background-color: #67C23A; color: #FFFFFF; }"
-        "QPushButton:hover { background-color: #85CE61; }");
+        "QPushButton { background-color: #3FB950; color: #FFFFFF; }"
+        "QPushButton:hover { background-color: #56D364; }");
     actionLayout->addWidget(m_recoverBtn);
 
     m_ackAllBtn = new QPushButton("全部确认");
     m_ackAllBtn->setStyleSheet(
-        "QPushButton { background-color: #409EFF; color: #FFFFFF; }"
-        "QPushButton:hover { background-color: #66B1FF; }");
+        "QPushButton { background-color: #58A6FF; color: #FFFFFF; }"
+        "QPushButton:hover { background-color: #79C0FF; }");
     actionLayout->addWidget(m_ackAllBtn);
 
     m_exportBtn = new QPushButton("导出 CSV");
     m_exportBtn->setStyleSheet(
-        "QPushButton { background-color: #4A4D52; color: #DCDCDC; }"
+        "QPushButton { background-color: #4A4D52; color: #E6EDF3; }"
         "QPushButton:hover { background-color: #5A5D62; }");
     actionLayout->addWidget(m_exportBtn);
 
@@ -220,11 +220,11 @@ void AlarmCenterWidget::setupConnections()
 // ============================================================================
 QString AlarmCenterWidget::levelToColor(const QString& level) const
 {
-    if (level == "Emergency") return "#F56C6C";
-    if (level == "Critical")  return "#E6A23C";
+    if (level == "Emergency") return "#F85149";
+    if (level == "Critical")  return "#D29922";
     if (level == "Warning")   return "#E6DB5C";
-    if (level == "Info")      return "#409EFF";
-    return "#DCDCDC";
+    if (level == "Info")      return "#58A6FF";
+    return "#E6EDF3";
 }
 
 // ============================================================================
@@ -305,7 +305,7 @@ void AlarmCenterWidget::applyFilters()
 
         // 已确认的行用灰色
         bool isAcknowledged = (alarm.status == "Acknowledged" || alarm.status == "Recovered");
-        QColor rowColor = isAcknowledged ? QColor("#8C8C8C") : levelColor;
+        QColor rowColor = isAcknowledged ? QColor("#8B949E") : levelColor;
 
         // 时间
         auto* timeItem = new QTableWidgetItem(alarm.time);

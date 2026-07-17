@@ -4,6 +4,7 @@
 #include <QString>
 #include <QVariant>
 #include <QSettings>
+#include <QHash>
 
 class ConfigManager : public QObject
 {
@@ -31,4 +32,5 @@ private:
     ConfigManager& operator=(const ConfigManager&) = delete;
 
     QString m_configPath;
+    QHash<QString, QVariant> m_cache;
 };

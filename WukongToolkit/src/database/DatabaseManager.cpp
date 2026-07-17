@@ -5,6 +5,10 @@
 #include <QDir>
 #include <QFileInfo>
 
+namespace {
+    const char* DB_CONNECTION_NAME = "wukong_main";
+}
+
 DatabaseManager::DatabaseManager(QObject* parent)
     : QObject(parent)
 {
@@ -30,7 +34,12 @@ bool DatabaseManager::initialize(const QString& dbPath)
     QFileInfo fi(dbPath);
     QDir().mkpath(fi.absolutePath());
 
-    m_db = QSqlDatabase::addDatabase("QSQLITE");
+    // 使用固定连接名避免重复 addDatabase 时的警告
+    if (QSqlDatabase::contains(DB_CONNECTION_NAME)) {
+        m_db = QSqlDatabase::database(DB_CONNECTION_NAME);
+    } else {
+        m_db = QSqlDatabase::addDatabase("QSQLITE", DB_CONNECTION_NAME);
+    }
     m_db.setDatabaseName(dbPath);
 
     if (!m_db.open()) {
@@ -61,9 +70,14 @@ bool DatabaseManager::isOpen() const
     return m_initialized && m_db.isOpen();
 }
 
-QSqlDatabase& DatabaseManager::database()
+const QSqlDatabase& DatabaseManager::database() const
 {
     return m_db;
+}
+
+QSqlQuery DatabaseManager::createQuery() const
+{
+    return QSqlQuery(m_db);
 }
 
 bool DatabaseManager::createTables()

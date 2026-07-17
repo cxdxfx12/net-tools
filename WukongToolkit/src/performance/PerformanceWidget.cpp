@@ -49,12 +49,12 @@ void TrendChartWidget::setTitle(const QString& title)
 QColor TrendChartWidget::lineColor() const
 {
     switch (m_chartType) {
-    case CPU:        return QColor("#409EFF");
-    case Memory:     return QColor("#67C23A");
-    case Bandwidth:  return QColor("#E6A23C");
-    case Temperature:return QColor("#F56C6C");
+    case CPU:        return QColor("#58A6FF");
+    case Memory:     return QColor("#3FB950");
+    case Bandwidth:  return QColor("#D29922");
+    case Temperature:return QColor("#F85149");
     }
-    return QColor("#409EFF");
+    return QColor("#58A6FF");
 }
 
 QColor TrendChartWidget::fillColor() const
@@ -120,8 +120,8 @@ void TrendChartWidget::paintEvent(QPaintEvent* /*event*/)
     int h = height();
 
     // ── 背景 ──
-    painter.fillRect(rect(), QColor("#1E1F22"));
-    painter.setPen(QPen(QColor("#3C3F41"), 1));
+    painter.fillRect(rect(), QColor("#0D1117"));
+    painter.setPen(QPen(QColor("#30363D"), 1));
     painter.drawRect(0, 0, w - 1, h - 1);
 
     // ── 内边距 ──
@@ -135,7 +135,7 @@ void TrendChartWidget::paintEvent(QPaintEvent* /*event*/)
     if (plotW <= 0 || plotH <= 0) return;
 
     // ── 标题 ──
-    painter.setPen(QColor("#8C8C8C"));
+    painter.setPen(QColor("#8B949E"));
     QFont titleFont = painter.font();
     titleFont.setPointSize(10);
     titleFont.setBold(true);
@@ -147,7 +147,7 @@ void TrendChartWidget::paintEvent(QPaintEvent* /*event*/)
     double vMax = maxValue();
     if (vMax - vMin < 0.001) vMax = vMin + 1;
 
-    painter.setPen(QPen(QColor("#2C2D30"), 1, Qt::DashLine));
+    painter.setPen(QPen(QColor("#21262D"), 1, Qt::DashLine));
     QFont labelFont = painter.font();
     labelFont.setPointSize(8);
     painter.setFont(labelFont);
@@ -159,22 +159,22 @@ void TrendChartWidget::paintEvent(QPaintEvent* /*event*/)
         painter.drawLine(padLeft, y, w - padRight, y);
 
         double val = vMin + ratio * (vMax - vMin);
-        painter.setPen(QColor("#8C8C8C"));
+        painter.setPen(QColor("#8B949E"));
         painter.drawText(QRect(0, y - 8, padLeft - 4, 16),
                          Qt::AlignRight | Qt::AlignVCenter,
                          valueLabel(val));
-        painter.setPen(QPen(QColor("#2C2D30"), 1, Qt::DashLine));
+        painter.setPen(QPen(QColor("#21262D"), 1, Qt::DashLine));
     }
 
     if (m_data.size() < 2) {
-        painter.setPen(QColor("#8C8C8C"));
+        painter.setPen(QColor("#8B949E"));
         painter.drawText(QRect(padLeft, padTop, plotW, plotH),
                          Qt::AlignCenter, "暂无数据");
         return;
     }
 
     // ── X轴时间标签 ──
-    painter.setPen(QColor("#8C8C8C"));
+    painter.setPen(QColor("#8B949E"));
     int xLabelCount = qMin(5, m_data.size());
     for (int i = 0; i < xLabelCount; ++i) {
         int idx = (int)(i * (m_data.size() - 1) / (double)(xLabelCount - 1));
@@ -266,7 +266,7 @@ void TrendChartWidget::paintEvent(QPaintEvent* /*event*/)
         int labelY = (int)lastY - labelH - 4;
 
         painter.setPen(Qt::NoPen);
-        painter.setBrush(QColor("#25262B"));
+        painter.setBrush(QColor("#161B22"));
         painter.drawRoundedRect(labelX, labelY, labelW, labelH, 3, 3);
 
         painter.setPen(lineColor());
@@ -308,14 +308,14 @@ void PerformanceWidget::setupUI()
         combo->setMinimumWidth(minWidth);
         combo->setStyleSheet(
             "QComboBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px 8px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 4px 8px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
             "QComboBox::drop-down { border: none; }"
             "QComboBox QAbstractItemView {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  selection-background-color: #3C3F41;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  selection-background-color: #30363D;"
             "}"
         );
     };
@@ -323,15 +323,15 @@ void PerformanceWidget::setupUI()
     auto styleTable = [](QTableWidget* table) {
         table->setStyleSheet(
             "QTableWidget {"
-            "  background-color: #1E1F22; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; font-size: 12px;"
-            "  gridline-color: #2C2D30;"
+            "  background-color: #0D1117; color: #E6EDF3;"
+            "  border: 1px solid #30363D; font-size: 12px;"
+            "  gridline-color: #21262D;"
             "}"
             "QTableWidget::item { padding: 3px 6px; }"
-            "QTableWidget::item:selected { background-color: #3C3F41; }"
+            "QTableWidget::item:selected { background-color: #30363D; }"
             "QHeaderView::section {"
-            "  background-color: #25262B; color: #8C8C8C;"
-            "  border: none; border-bottom: 2px solid #3C3F41;"
+            "  background-color: #161B22; color: #8B949E;"
+            "  border: none; border-bottom: 2px solid #30363D;"
             "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
             "}"
         );
@@ -349,7 +349,7 @@ void PerformanceWidget::setupUI()
                     "  font-size: 13px; font-weight: bold;"
                     "}"
                     "QPushButton:hover { background-color: %2; }"
-                    "QPushButton:disabled { background-color: #5C5C5C; }")
+                    "QPushButton:disabled { background-color: #484F58; }")
                 .arg(bgColor, hoverColor)
         );
         btn->setFixedHeight(34);
@@ -359,8 +359,8 @@ void PerformanceWidget::setupUI()
     auto* topGroup = new QGroupBox("性能管理中心");
     topGroup->setStyleSheet(
         "QGroupBox {"
-        "  color: #409EFF; font-size: 13px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+        "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+        "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
         "  padding-top: 16px;"
         "}"
         "QGroupBox::title {"
@@ -371,7 +371,7 @@ void PerformanceWidget::setupUI()
     topLayout->setSpacing(12);
 
     auto* deviceLabel = new QLabel("设备选择:");
-    deviceLabel->setStyleSheet("font-size: 13px; color: #8C8C8C;");
+    
     m_deviceCombo = new QComboBox();
     styleCombo(m_deviceCombo, 200);
     m_deviceCombo->addItems({
@@ -384,14 +384,14 @@ void PerformanceWidget::setupUI()
     });
 
     auto* timeLabel = new QLabel("时间范围:");
-    timeLabel->setStyleSheet("font-size: 13px; color: #8C8C8C;");
+    
     m_timeRangeCombo = new QComboBox();
     styleCombo(m_timeRangeCombo, 100);
     m_timeRangeCombo->addItems({"24H", "7D", "30D", "90D"});
     m_timeRangeCombo->setCurrentIndex(2); // 默认 30D
 
     m_exportBtn = new QPushButton("导出 CSV");
-    styleButton(m_exportBtn, "#E6A23C", "#EBB563");
+    styleButton(m_exportBtn, "#D29922", "#DBAB4A");
 
     topLayout->addWidget(deviceLabel);
     topLayout->addWidget(m_deviceCombo);
@@ -405,7 +405,7 @@ void PerformanceWidget::setupUI()
     // ── 中间：左右分栏 ──
     auto* bodySplitter = new QSplitter(Qt::Horizontal);
     bodySplitter->setStyleSheet(
-        "QSplitter::handle { background-color: #3C3F41; width: 2px; }"
+        "QSplitter::handle { background-color: #30363D; width: 2px; }"
     );
 
     // ── 左侧：2x2 趋势图网格 ──
@@ -443,8 +443,8 @@ void PerformanceWidget::setupUI()
     auto* topNGroup = new QGroupBox("Top N 设备排行");
     topNGroup->setStyleSheet(
         "QGroupBox {"
-        "  color: #E6A23C; font-size: 12px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+        "  color: #D29922; font-size: 12px; font-weight: bold;"
+        "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
         "  padding-top: 16px;"
         "}"
         "QGroupBox::title {"
@@ -470,8 +470,8 @@ void PerformanceWidget::setupUI()
     auto* historyGroup = new QGroupBox("历史数据");
     historyGroup->setStyleSheet(
         "QGroupBox {"
-        "  color: #409EFF; font-size: 12px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+        "  color: #58A6FF; font-size: 12px; font-weight: bold;"
+        "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
         "  padding-top: 16px;"
         "}"
         "QGroupBox::title {"
@@ -630,9 +630,9 @@ void PerformanceWidget::updateTopN()
         auto makeItem = [](double val, const QString& suffix) -> QTableWidgetItem* {
             auto* item = new QTableWidgetItem(QString("%1%2").arg(val, 0, 'f', 1).arg(suffix));
             item->setTextAlignment(Qt::AlignCenter);
-            if (val > 80)      item->setForeground(QColor("#F56C6C"));
-            else if (val > 60) item->setForeground(QColor("#E6A23C"));
-            else               item->setForeground(QColor("#67C23A"));
+            if (val > 80)      item->setForeground(QColor("#F85149"));
+            else if (val > 60) item->setForeground(QColor("#D29922"));
+            else               item->setForeground(QColor("#3FB950"));
             return item;
         };
 

@@ -24,10 +24,13 @@ TerminalWidget::TerminalWidget(QWidget* parent)
     setCursor(Qt::IBeamCursor);
     setMinimumSize(200, 100);
 
-    // Initialize core components
+    // Initialize core components — 所有不继承 QObject 的对象使用 std::unique_ptr 管理
     m_buffer = new TerminalBuffer(80, 24);
-    m_cursor = new TerminalCursor(this);
     m_color = new TerminalColor();
+    m_parser = new AnsiParser(m_buffer, m_cursor, m_color);
+
+    // QObject 子类设置 parent 由 Qt 父子机制管理
+    m_cursor = new TerminalCursor(this);
     m_renderer = new TerminalRenderer(m_buffer, m_cursor, m_color, this);
     m_selection = new SelectionManager(this);
     m_selection->setBuffer(m_buffer);
@@ -35,7 +38,6 @@ TerminalWidget::TerminalWidget(QWidget* parent)
     m_search = new TerminalSearch(this);
     m_search->setBuffer(m_buffer);
 
-    m_parser = new AnsiParser(m_buffer, m_cursor, m_color);
     m_parser->setOutputCallback([this](const QByteArray& data) {
         emit dataReady(data);
     });
@@ -49,7 +51,13 @@ TerminalWidget::TerminalWidget(QWidget* parent)
     blinkTimer->start();
 }
 
-TerminalWidget::~TerminalWidget() = default;
+TerminalWidget::~TerminalWidget()
+{
+    // 手动释放不继承 QObject 的裸指针对象
+    delete m_buffer;
+    delete m_color;
+    delete m_parser;
+}
 
 void TerminalWidget::appendOutput(const QByteArray& data)
 {
@@ -326,7 +334,7 @@ void TerminalWidget::contextMenuEvent(QContextMenuEvent* event)
 {
     QMenu menu(this);
     menu.setStyleSheet(
-        "QMenu { background-color: #25262B; color: #DCDCDC; border: 1px solid #3C3F41; }"
+        "QMenu { background-color: #161B22; color: #E6EDF3; border: 1px solid #30363D; }"
         "QMenu::item:selected { background-color: #30323A; }"
     );
 

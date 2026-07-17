@@ -90,14 +90,14 @@ void ReportWidget::setupUI()
         combo->setMinimumWidth(minWidth);
         combo->setStyleSheet(QStringLiteral(
             "QComboBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px 8px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 4px 8px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
             "QComboBox::drop-down { border: none; }"
             "QComboBox QAbstractItemView {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  selection-background-color: #3C3F41;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  selection-background-color: #30363D;"
             "}"
         ));
     };
@@ -111,7 +111,7 @@ void ReportWidget::setupUI()
                 "  font-size: 13px; font-weight: bold;"
                 "}"
                 "QPushButton:hover { background-color: %2; }"
-                "QPushButton:disabled { background-color: #5C5C5C; }"
+                "QPushButton:disabled { background-color: #484F58; }"
             )).arg(bgColor, hoverColor)
         );
         btn->setFixedHeight(34);
@@ -120,15 +120,15 @@ void ReportWidget::setupUI()
     auto styleTable = [](QTableWidget* table) {
         table->setStyleSheet(QStringLiteral(
             "QTableWidget {"
-            "  background-color: #1E1F22; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; font-size: 12px;"
-            "  gridline-color: #2C2D30;"
+            "  background-color: #0D1117; color: #E6EDF3;"
+            "  border: 1px solid #30363D; font-size: 12px;"
+            "  gridline-color: #21262D;"
             "}"
             "QTableWidget::item { padding: 3px 6px; }"
-            "QTableWidget::item:selected { background-color: #3C3F41; }"
+            "QTableWidget::item:selected { background-color: #30363D; }"
             "QHeaderView::section {"
-            "  background-color: #25262B; color: #8C8C8C;"
-            "  border: none; border-bottom: 2px solid #3C3F41;"
+            "  background-color: #161B22; color: #8B949E;"
+            "  border: none; border-bottom: 2px solid #30363D;"
             "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
             "}"
         ));
@@ -142,13 +142,13 @@ void ReportWidget::setupUI()
         edit->setCalendarPopup(true);
         edit->setStyleSheet(QStringLiteral(
             "QDateEdit {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px 8px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 4px 8px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
             "QDateEdit::drop-down { border: none; }"
             "QDateEdit QCalendarWidget {"
-            "  background-color: #25262B; color: #DCDCDC;"
+            "  background-color: #161B22; color: #E6EDF3;"
             "}"
         ));
     };
@@ -156,8 +156,8 @@ void ReportWidget::setupUI()
     auto styleGroupBox = [](QGroupBox* group) {
         group->setStyleSheet(QStringLiteral(
             "QGroupBox {"
-            "  color: #409EFF; font-size: 13px; font-weight: bold;"
-            "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+            "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+            "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
             "  padding-top: 16px;"
             "}"
             "QGroupBox::title {"
@@ -236,7 +236,7 @@ void ReportWidget::setupUI()
 
     // 生成按钮
     m_generateBtn = new QPushButton(QStringLiteral("生成报表"));
-    styleButton(m_generateBtn, QStringLiteral("#409EFF"), QStringLiteral("#66B1FF"));
+    styleButton(m_generateBtn, QStringLiteral("#58A6FF"), QStringLiteral("#79C0FF"));
     configLayout->addWidget(m_generateBtn);
 
     configLayout->addStretch();
@@ -247,7 +247,7 @@ void ReportWidget::setupUI()
     // ────────────────────────────────────────────────────────────────────
     auto* middleSplitter = new QSplitter(Qt::Horizontal, this);
     middleSplitter->setStyleSheet(QStringLiteral(
-        "QSplitter::handle { background-color: #3C3F41; width: 2px; }"
+        "QSplitter::handle { background-color: #30363D; width: 2px; }"
     ));
 
     // 预览区
@@ -260,8 +260,8 @@ void ReportWidget::setupUI()
     m_previewEdit->setPlaceholderText(QStringLiteral("\u70B9\u51FB\u300C\u751F\u6210\u62A5\u8868\u300D\u6309\u94AE\u67E5\u770B\u62A5\u8868\u5185\u5BB9..."));
     m_previewEdit->setStyleSheet(QStringLiteral(
         "QTextEdit {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; font-size: 13px;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D; font-size: 13px;"
         "  padding: 8px;"
         "}"
     ));
@@ -276,9 +276,6 @@ void ReportWidget::setupUI()
 
     auto* chartPainter = new ChartPainterWidget();
     chartPainter->setMinimumSize(280, 200);
-    chartPainter->setStyleSheet(QStringLiteral(
-        "background-color: #1E1F22; border: 1px solid #3C3F41; border-radius: 4px;"
-    ));
     chartPainter->setDrawCallback([this](QPainter& painter, const QRect& r) {
         drawChart(painter, r);
     });
@@ -311,21 +308,21 @@ void ReportWidget::setupUI()
     exportLayout->addWidget(m_exportFormatCombo);
 
     m_exportBtn = new QPushButton(QStringLiteral("导出报表"));
-    styleButton(m_exportBtn, QStringLiteral("#67C23A"), QStringLiteral("#85CE61"));
+    styleButton(m_exportBtn, QStringLiteral("#3FB950"), QStringLiteral("#56D364"));
     exportLayout->addWidget(m_exportBtn);
 
     exportLayout->addSpacing(24);
 
     m_autoReportCheck = new QCheckBox(QStringLiteral("定时报表"));
     m_autoReportCheck->setStyleSheet(QStringLiteral(
-        "QCheckBox { color: #DCDCDC; font-size: 13px; }"
+        "QCheckBox { color: #E6EDF3; font-size: 13px; }"
         "QCheckBox::indicator {"
         "  width: 16px; height: 16px;"
-        "  border: 1px solid #3C3F41; border-radius: 3px;"
-        "  background-color: #25262B;"
+        "  border: 1px solid #30363D; border-radius: 3px;"
+        "  background-color: #161B22;"
         "}"
         "QCheckBox::indicator:checked {"
-        "  background-color: #409EFF; border-color: #409EFF;"
+        "  background-color: #58A6FF; border-color: #58A6FF;"
         "}"
     ));
     exportLayout->addWidget(m_autoReportCheck);
@@ -568,7 +565,7 @@ QString ReportWidget::generateInspectionReport()
 
     int idx = 1;
     for (const auto& item : items) {
-        QString statusColor = item.ok ? QStringLiteral("#67C23A") : QStringLiteral("#F56C6C");
+        QString statusColor = item.ok ? QStringLiteral("#3FB950") : QStringLiteral("#F85149");
         QString statusText = item.ok ? QStringLiteral("✓ 通过") : QStringLiteral("✗ 异常");
         body += QString(QStringLiteral(
             "<tr>"
@@ -654,10 +651,10 @@ QString ReportWidget::generateAlarmReport()
 
     for (int i = 0; i < topDevices.size(); ++i) {
         const auto& d = topDevices[i];
-        QString levelColor = QStringLiteral("#F56C6C");
-        if (d.topLevel == QStringLiteral("Critical")) levelColor = QStringLiteral("#E6A23C");
+        QString levelColor = QStringLiteral("#F85149");
+        if (d.topLevel == QStringLiteral("Critical")) levelColor = QStringLiteral("#D29922");
         else if (d.topLevel == QStringLiteral("Warning")) levelColor = QStringLiteral("#E6DB5C");
-        else if (d.topLevel == QStringLiteral("Info")) levelColor = QStringLiteral("#409EFF");
+        else if (d.topLevel == QStringLiteral("Info")) levelColor = QStringLiteral("#58A6FF");
 
         body += QString(QStringLiteral(
             "<tr><td>%1</td><td>%2</td><td>%3</td>"
@@ -698,10 +695,10 @@ QString ReportWidget::generatePerformanceReport()
         int mem = rng->bounded(30, 85);
         int temp = rng->bounded(38, 65);
 
-        QString cpuColor = cpu > 70 ? QStringLiteral("#F56C6C") :
-                           (cpu > 50 ? QStringLiteral("#E6A23C") : QStringLiteral("#67C23A"));
-        QString memColor = mem > 80 ? QStringLiteral("#F56C6C") :
-                           (mem > 60 ? QStringLiteral("#E6A23C") : QStringLiteral("#67C23A"));
+        QString cpuColor = cpu > 70 ? QStringLiteral("#F85149") :
+                           (cpu > 50 ? QStringLiteral("#D29922") : QStringLiteral("#3FB950"));
+        QString memColor = mem > 80 ? QStringLiteral("#F85149") :
+                           (mem > 60 ? QStringLiteral("#D29922") : QStringLiteral("#3FB950"));
 
         body += QString(QStringLiteral(
             "<tr><td>%1:00</td>"
@@ -735,8 +732,8 @@ QString ReportWidget::generatePerformanceReport()
     };
 
     for (const auto& t : traffics) {
-        QString peakColor = t.peakPct > 80 ? QStringLiteral("#F56C6C") :
-                            (t.peakPct > 60 ? QStringLiteral("#E6A23C") : QStringLiteral("#67C23A"));
+        QString peakColor = t.peakPct > 80 ? QStringLiteral("#F85149") :
+                            (t.peakPct > 60 ? QStringLiteral("#D29922") : QStringLiteral("#3FB950"));
         body += QString(QStringLiteral(
             "<tr><td>%1</td><td>%2 Gbps</td><td>%3 Gbps</td>"
             "<td>%4 Gbps</td>"
@@ -844,7 +841,7 @@ QString ReportWidget::generateConfigChangeReport()
 
     for (const auto& c : changes) {
         QString typeColor = (c.type == QStringLiteral("ACL") || c.type == QStringLiteral("VPN"))
-            ? QStringLiteral("#F56C6C") : QStringLiteral("#409EFF");
+            ? QStringLiteral("#F85149") : QStringLiteral("#58A6FF");
         body += QString(QStringLiteral(
             "<tr><td>%1</td><td>%2</td>"
             "<td style=\"color:%3; font-weight:bold;\">%4</td>"
@@ -878,15 +875,15 @@ QString ReportWidget::generateHealthReport()
     body += QString(QStringLiteral("<p>评估时间: %1</p>")).arg(timeStr);
 
     // 综合评分大卡片
-    QString scoreColor = overallScore >= 90 ? QStringLiteral("#67C23A") :
-                         (overallScore >= 80 ? QStringLiteral("#409EFF") :
-                          (overallScore >= 70 ? QStringLiteral("#E6A23C") : QStringLiteral("#F56C6C")));
+    QString scoreColor = overallScore >= 90 ? QStringLiteral("#3FB950") :
+                         (overallScore >= 80 ? QStringLiteral("#58A6FF") :
+                          (overallScore >= 70 ? QStringLiteral("#D29922") : QStringLiteral("#F85149")));
     QString scoreGrade = overallScore >= 90 ? QStringLiteral("优秀") :
                          (overallScore >= 80 ? QStringLiteral("良好") :
                           (overallScore >= 70 ? QStringLiteral("一般") : QStringLiteral("较差")));
 
     body += QString(QStringLiteral(
-        "<div style=\"text-align:center; padding:20px; background-color:#25262B; "
+        "<div style=\"text-align:center; padding:20px; background-color:#161B22; "
         "border-radius:8px; margin:10px 0;\">"
         "<p style=\"font-size:48px; color:%1; font-weight:bold; margin:0;\">%2</p>"
         "<p style=\"font-size:18px; color:%1; margin:5px 0;\">%3</p>"
@@ -913,9 +910,9 @@ QString ReportWidget::generateHealthReport()
     };
 
     for (const auto& d : dims) {
-        QString color = d.score >= 90 ? QStringLiteral("#67C23A") :
-                        (d.score >= 80 ? QStringLiteral("#409EFF") :
-                         (d.score >= 70 ? QStringLiteral("#E6A23C") : QStringLiteral("#F56C6C")));
+        QString color = d.score >= 90 ? QStringLiteral("#3FB950") :
+                        (d.score >= 80 ? QStringLiteral("#58A6FF") :
+                         (d.score >= 70 ? QStringLiteral("#D29922") : QStringLiteral("#F85149")));
         QString grade = d.score >= 90 ? QStringLiteral("优秀") :
                         (d.score >= 80 ? QStringLiteral("良好") :
                          (d.score >= 70 ? QStringLiteral("一般") : QStringLiteral("较差")));
@@ -957,7 +954,7 @@ QString ReportWidget::generateDailyReport()
         "<tr><td>平均 CPU</td><td>%5%</td><td style=\"color:#67C23A;\">正常</td></tr>"
         "<tr><td>峰值流量</td><td>%6 Gbps</td><td style=\"color:#67C23A;\">正常</td></tr>"))
         .arg(rng->bounded(2, 5))
-        .arg(rng->bounded(2, 5) > 3 ? QStringLiteral("#E6A23C") : QStringLiteral("#67C23A"))
+        .arg(rng->bounded(2, 5) > 3 ? QStringLiteral("#D29922") : QStringLiteral("#3FB950"))
         .arg(rng->bounded(2, 5) > 3 ? QStringLiteral("关注") : QStringLiteral("正常"))
         .arg(rng->bounded(0, 3))
         .arg(rng->bounded(20, 40))
@@ -1117,37 +1114,37 @@ QString ReportWidget::generateHtmlTemplate(const QString& title, const QString& 
     html += QStringLiteral("<style>");
     html += QStringLiteral(
         "body { font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; "
-        "background-color: #1E1F22; color: #DCDCDC; "
+        "background-color: #0D1117; color: #E6EDF3; "
         "padding: 20px; margin: 0; }");
     html += QStringLiteral(
-        "h1 { color: #409EFF; border-bottom: 2px solid #409EFF; "
+        "h1 { color: #58A6FF; border-bottom: 2px solid #409EFF; "
         "padding-bottom: 8px; font-size: 22px; }");
     html += QStringLiteral(
-        "h2 { color: #409EFF; font-size: 18px; margin-top: 20px; }");
+        "h2 { color: #58A6FF; font-size: 18px; margin-top: 20px; }");
     html += QStringLiteral(
-        "h3 { color: #67C23A; font-size: 15px; margin-top: 16px; }");
+        "h3 { color: #3FB950; font-size: 15px; margin-top: 16px; }");
     html += QStringLiteral(
-        "p { line-height: 1.6; color: #DCDCDC; }");
+        "p { line-height: 1.6; color: #E6EDF3; }");
     html += QStringLiteral(
         "table { width: 100%%; border-collapse: collapse; "
         "margin: 10px 0; font-size: 13px; }");
     html += QStringLiteral(
-        "th { background-color: #25262B; color: #8C8C8C; "
+        "th { background-color: #161B22; color: #8B949E; "
         "padding: 8px 10px; text-align: left; "
-        "border-bottom: 2px solid #3C3F41; font-weight: bold; }");
+        "border-bottom: 2px solid #30363D; font-weight: bold; }");
     html += QStringLiteral(
-        "td { padding: 6px 10px; border-bottom: 1px solid #2C2D30; }");
+        "td { padding: 6px 10px; border-bottom: 1px solid #21262D; }");
     html += QStringLiteral(
         "tr:nth-child(even) { background-color: #222326; }");
     html += QStringLiteral(
-        "tr:hover { background-color: #2C2D30; }");
+        "tr:hover { background-color: #21262D; }");
     html += QStringLiteral(
-        "ul { color: #DCDCDC; line-height: 1.8; }");
+        "ul { color: #E6EDF3; line-height: 1.8; }");
     html += QStringLiteral(
-        "strong { color: #E6A23C; }");
+        "strong { color: #D29922; }");
     html += QStringLiteral(
         ".footer { margin-top: 30px; padding-top: 10px; "
-        "border-top: 1px solid #3C3F41; color: #8C8C8C; "
+        "border-top: 1px solid #30363D; color: #8B949E; "
         "font-size: 12px; text-align: center; }");
     html += QStringLiteral("</style></head><body>");
 
@@ -1407,7 +1404,7 @@ void ReportWidget::drawChart(QPainter& painter, const QRect& rect)
     painter.save();
 
     // 背景
-    painter.fillRect(rect, QColor(QStringLiteral("#1E1F22")));
+    painter.fillRect(rect, QColor(QStringLiteral("#0D1117")));
 
     QRect chartRect = rect.adjusted(40, 20, -20, -40);
     if (chartRect.width() <= 0 || chartRect.height() <= 0) {
@@ -1423,12 +1420,12 @@ void ReportWidget::drawChart(QPainter& painter, const QRect& rect)
     };
 
     QList<BarData> bars = {
-        {QStringLiteral("巡检"), 92.5, QColor(QStringLiteral("#67C23A"))},
-        {QStringLiteral("告警"), 128.0, QColor(QStringLiteral("#F56C6C"))},
-        {QStringLiteral("性能"), 85.0, QColor(QStringLiteral("#409EFF"))},
-        {QStringLiteral("资产"), 84.0, QColor(QStringLiteral("#E6A23C"))},
+        {QStringLiteral("巡检"), 92.5, QColor(QStringLiteral("#3FB950"))},
+        {QStringLiteral("告警"), 128.0, QColor(QStringLiteral("#F85149"))},
+        {QStringLiteral("性能"), 85.0, QColor(QStringLiteral("#58A6FF"))},
+        {QStringLiteral("资产"), 84.0, QColor(QStringLiteral("#D29922"))},
         {QStringLiteral("变更"), 7.0, QColor(QStringLiteral("#E6DB5C"))},
-        {QStringLiteral("健康"), 88.0, QColor(QStringLiteral("#67C23A"))},
+        {QStringLiteral("健康"), 88.0, QColor(QStringLiteral("#3FB950"))},
     };
 
     double maxVal = 0;
@@ -1441,7 +1438,7 @@ void ReportWidget::drawChart(QPainter& painter, const QRect& rect)
     double gap = (double)chartRect.width() / bars.size();
 
     // 标题
-    painter.setPen(QColor(QStringLiteral("#8C8C8C")));
+    painter.setPen(QColor(QStringLiteral("#8B949E")));
     painter.setFont(QFont(QStringLiteral("PingFang SC"), 11));
     painter.drawText(QRect(rect.left(), rect.top(), rect.width(), 20),
         Qt::AlignCenter, QStringLiteral("报表统计概览"));
@@ -1475,7 +1472,7 @@ void ReportWidget::drawChart(QPainter& painter, const QRect& rect)
         painter.drawRoundedRect(x, y, w, h, 3, 3);
 
         // 数值标签
-        painter.setPen(QColor(QStringLiteral("#DCDCDC")));
+        painter.setPen(QColor(QStringLiteral("#E6EDF3")));
         painter.setFont(QFont(QStringLiteral("PingFang SC"), 9));
         painter.drawText(QRect(x - 5, y - 18, w + 10, 16),
             Qt::AlignCenter, QString::number(bars[i].value, 'f', 1));

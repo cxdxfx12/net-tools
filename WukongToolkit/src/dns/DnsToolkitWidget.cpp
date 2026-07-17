@@ -67,13 +67,13 @@ void DnsToolkitWidget::setupUI()
 
     // 域名
     auto* domainLabel = new QLabel("域名:");
-    domainLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_domainEdit = new QLineEdit();
     m_domainEdit->setPlaceholderText("例如: example.com");
     m_domainEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -82,20 +82,20 @@ void DnsToolkitWidget::setupUI()
 
     // 记录类型
     auto* typeLabel = new QLabel("记录类型:");
-    typeLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_recordTypeCombo = new QComboBox();
     m_recordTypeCombo->addItems({"A", "AAAA", "CNAME", "MX", "TXT", "NS", "PTR", "SOA", "SRV", "CAA", "ANY"});
     m_recordTypeCombo->setStyleSheet(
         "QComboBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
         "QComboBox::drop-down { border: none; }"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #409EFF;"
-        "  border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #58A6FF;"
+        "  border: 1px solid #30363D;"
         "}"
     );
     queryLayout->addWidget(typeLabel);
@@ -103,20 +103,20 @@ void DnsToolkitWidget::setupUI()
 
     // DNS 服务器
     auto* serverLabel = new QLabel("DNS 服务器:");
-    serverLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_dnsServerCombo = new QComboBox();
     m_dnsServerCombo->addItems({"8.8.8.8", "114.114.114.114", "223.5.5.5", "自定义"});
     m_dnsServerCombo->setStyleSheet(
         "QComboBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
         "QComboBox::drop-down { border: none; }"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #409EFF;"
-        "  border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #58A6FF;"
+        "  border: 1px solid #30363D;"
         "}"
     );
     queryLayout->addWidget(serverLabel);
@@ -124,13 +124,13 @@ void DnsToolkitWidget::setupUI()
 
     // 自定义服务器
     auto* customLabel = new QLabel("自定义服务器:");
-    customLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_customServerEdit = new QLineEdit();
     m_customServerEdit->setPlaceholderText("例如: 1.1.1.1");
     m_customServerEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -142,12 +142,12 @@ void DnsToolkitWidget::setupUI()
     m_queryBtn = new QPushButton("查询");
     m_queryBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_queryBtn->setFixedHeight(32);
     queryLayout->addWidget(m_queryBtn);
@@ -160,14 +160,14 @@ void DnsToolkitWidget::setupUI()
     batchLayout->setSpacing(6);
 
     auto* batchLabel = new QLabel("每行输入一个域名:");
-    batchLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_batchEdit = new QPlainTextEdit();
     m_batchEdit->setPlaceholderText("example.com\ngoogle.com\ngithub.com");
     m_batchEdit->setMaximumHeight(100);
     m_batchEdit->setStyleSheet(
         "QPlainTextEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -177,12 +177,12 @@ void DnsToolkitWidget::setupUI()
     m_batchBtn = new QPushButton("批量查询");
     m_batchBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #67C23A; color: white;"
+        "  background-color: #3FB950; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #85CE61; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #56D364; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_batchBtn->setFixedHeight(32);
     batchLayout->addWidget(m_batchBtn);
@@ -195,17 +195,17 @@ void DnsToolkitWidget::setupUI()
     compareLayout->setSpacing(6);
 
     auto* compareLabel = new QLabel("同时向多个 DNS 服务器查询同一域名，对比结果");
-    compareLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     compareLabel->setWordWrap(true);
     m_compareBtn = new QPushButton("多 DNS 对比");
     m_compareBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #E6A23C; color: white;"
+        "  background-color: #D29922; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #EBB563; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #DBAB4A; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_compareBtn->setFixedHeight(32);
     compareLayout->addWidget(compareLabel);
@@ -221,7 +221,7 @@ void DnsToolkitWidget::setupUI()
     centerLayout->setSpacing(4);
 
     auto* resultTitle = new QLabel("查询结果");
-    resultTitle->setStyleSheet("font-size: 13px; font-weight: bold; color: #DCDCDC; padding: 2px 0;");
+    resultTitle->setStyleSheet("font-size: 13px; font-weight: bold; color: #E6EDF3; padding: 2px 0;");
 
     auto* resultHeaderRow = new QHBoxLayout();
     resultHeaderRow->addWidget(resultTitle);
@@ -230,12 +230,12 @@ void DnsToolkitWidget::setupUI()
     m_exportBtn = new QPushButton("导出 CSV");
     m_exportBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 5px 14px; border-radius: 3px;"
         "  font-size: 12px;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     resultHeaderRow->addWidget(m_exportBtn);
 
@@ -256,30 +256,30 @@ void DnsToolkitWidget::setupUI()
     m_resultTable->verticalHeader()->setVisible(false);
     m_resultTable->setStyleSheet(
         "QTableWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  gridline-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  gridline-color: #30363D; border: 1px solid #30363D;"
         "  font-size: 12px;"
         "}"
         "QTableWidget::item { padding: 3px 6px; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
         "}"
-        "QTableWidget::item:alternate { background-color: #25262B; }"
+        "QTableWidget::item:alternate { background-color: #161B22; }"
     );
     centerLayout->addWidget(m_resultTable, 1);
 
     // 响应详情
     auto* detailLabel = new QLabel("响应详情");
-    detailLabel->setStyleSheet("font-size: 13px; font-weight: bold; color: #DCDCDC; padding: 2px 0;");
+    detailLabel->setStyleSheet("font-size: 13px; font-weight: bold; color: #E6EDF3; padding: 2px 0;");
     m_detailEdit = new QPlainTextEdit();
     m_detailEdit->setReadOnly(true);
     m_detailEdit->setMaximumHeight(150);
     m_detailEdit->setStyleSheet(
         "QPlainTextEdit {"
-        "  background: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px;"
+        "  background: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px;"
         "  border-radius: 3px; font-size: 12px; font-family: 'Menlo', 'Consolas', monospace;"
         "}"
     );
@@ -293,7 +293,7 @@ void DnsToolkitWidget::setupUI()
     rightLayout->setSpacing(4);
 
     auto* historyTitle = new QLabel("查询历史");
-    historyTitle->setStyleSheet("font-size: 13px; font-weight: bold; color: #DCDCDC; padding: 2px 0;");
+    historyTitle->setStyleSheet("font-size: 13px; font-weight: bold; color: #E6EDF3; padding: 2px 0;");
     rightLayout->addWidget(historyTitle);
 
     m_historyTable = new QTableWidget(0, 4);
@@ -308,17 +308,17 @@ void DnsToolkitWidget::setupUI()
     m_historyTable->verticalHeader()->setVisible(false);
     m_historyTable->setStyleSheet(
         "QTableWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  gridline-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  gridline-color: #30363D; border: 1px solid #30363D;"
         "  font-size: 12px;"
         "}"
         "QTableWidget::item { padding: 3px 6px; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
         "}"
-        "QTableWidget::item:alternate { background-color: #25262B; }"
+        "QTableWidget::item:alternate { background-color: #161B22; }"
     );
     rightLayout->addWidget(m_historyTable, 1);
 
@@ -634,9 +634,9 @@ void DnsToolkitWidget::addHistoryEntry(const QString& domain, const QString& typ
 
     auto* statusItem = new QTableWidgetItem(status);
     if (status == "成功") {
-        statusItem->setForeground(QColor(0x67, 0xC2, 0x3A));
+        statusItem->setForeground(QColor(0x3F, 0xB9, 0x50));
     } else {
-        statusItem->setForeground(QColor(0xF5, 0x6C, 0x6C));
+        statusItem->setForeground(QColor(0xF8, 0x51, 0x49));
     }
     statusItem->setTextAlignment(Qt::AlignCenter);
     m_historyTable->setItem(0, 3, statusItem);

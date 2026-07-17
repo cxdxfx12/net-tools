@@ -18,15 +18,15 @@ void SessionManager::setupUI()
     auto* toolbar = new QHBoxLayout();
     m_newSessionBtn = new QPushButton("+ 新建会话");
     m_newSessionBtn->setStyleSheet(
-        "QPushButton { background-color: #409EFF; color: #FFF; border-radius: 4px; "
+        "QPushButton { background-color: #58A6FF; color: #FFF; border-radius: 4px; "
         "padding: 4px 12px; min-height: 28px; font-size: 12px; }"
-        "QPushButton:hover { background-color: #66B1FF; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
     );
     m_closeAllBtn = new QPushButton("关闭全部");
     m_closeAllBtn->setStyleSheet(
-        "QPushButton { background-color: #4A4D52; color: #DCDCDC; border-radius: 4px; "
+        "QPushButton { background-color: #4A4D52; color: #E6EDF3; border-radius: 4px; "
         "padding: 4px 12px; min-height: 28px; font-size: 12px; }"
-        "QPushButton:hover { background-color: #F56C6C; }"
+        "QPushButton:hover { background-color: #F85149; }"
     );
 
     toolbar->addWidget(m_newSessionBtn);
@@ -42,11 +42,11 @@ void SessionManager::setupUI()
     m_sessionTree->setRootIsDecorated(false);
     m_sessionTree->setAlternatingRowColors(false);
     m_sessionTree->setStyleSheet(
-        "QTreeWidget { background-color: #1E1F22; border: 1px solid #3C3F41; }"
+        "QTreeWidget { background-color: #0D1117; border: 1px solid #30363D; }"
         "QTreeWidget::item { padding: 4px; }"
         "QTreeWidget::item:selected { background-color: #30323A; }"
-        "QHeaderView::section { background-color: #25262B; color: #8C8C8C; "
-        "padding: 4px; border: none; border-bottom: 1px solid #3C3F41; font-size: 11px; }"
+        "QHeaderView::section { background-color: #161B22; color: #8B949E; "
+        "padding: 4px; border: none; border-bottom: 1px solid #30363D; font-size: 11px; }"
     );
     layout->addWidget(m_sessionTree);
 
@@ -71,7 +71,7 @@ void SessionManager::addSession(const QString& id, const QString& host, const QS
     item->setText(0, QString("%1 (%2)").arg(host, protocol));
     item->setText(1, "连接中");
     item->setData(0, Qt::UserRole, id);
-    item->setForeground(1, QColor("#E6A23C"));
+    item->setForeground(1, QColor("#D29922"));
 }
 
 void SessionManager::removeSession(const QString& id)
@@ -92,13 +92,13 @@ void SessionManager::updateSessionState(const QString& id, const QString& state)
         if (item->data(0, Qt::UserRole).toString() == id) {
             item->setText(1, state);
             if (state == "已连接") {
-                item->setForeground(1, QColor("#67C23A"));
+                item->setForeground(1, QColor("#3FB950"));
             } else if (state == "已断开") {
-                item->setForeground(1, QColor("#F56C6C"));
+                item->setForeground(1, QColor("#F85149"));
             } else if (state == "错误") {
-                item->setForeground(1, QColor("#F56C6C"));
+                item->setForeground(1, QColor("#F85149"));
             } else {
-                item->setForeground(1, QColor("#E6A23C"));
+                item->setForeground(1, QColor("#D29922"));
             }
             return;
         }

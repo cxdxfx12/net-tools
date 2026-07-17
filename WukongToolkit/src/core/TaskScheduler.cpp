@@ -88,16 +88,24 @@ void TaskScheduler::removeTask(const QString& taskId)
     }
 
     ScheduledTask* task = m_tasks[taskId];
+
+    // 先停止 timer 并断开所有信号连接，防止 pending 事件访问已删除的 task
     if (task->timer) {
         task->timer->stop();
+        task->timer->disconnect();
         task->timer->deleteLater();
+        task->timer = nullptr;
     }
 
-    Logger::instance().info(QStringLiteral("SCHEDULER"),
-        QStringLiteral("Task removed: %1 (id=%2)").arg(task->name, taskId));
-
-    delete task;
+    // 从 map 中移除，确保 executeTask 不会再找到此 task
+    QString taskName = task->name;
     m_tasks.remove(taskId);
+
+    Logger::instance().info(QStringLiteral("SCHEDULER"),
+        QStringLiteral("Task removed: %1 (id=%2)").arg(taskName, taskId));
+
+    // 最后安全删除 task
+    delete task;
 }
 
 void TaskScheduler::pauseTask(const QString& taskId)

@@ -28,7 +28,7 @@ public:
         : QWidget(parent)
     {
         setMinimumHeight(200);
-        setStyleSheet("background-color: #1E1F22; border: 1px solid #3C3F41;");
+        
     }
 
     void setChannelData(const QList<int>& ch24G, const QList<int>& ch5G)
@@ -55,7 +55,7 @@ protected:
         int marginBottom = 40;
 
         // Background
-        painter.fillRect(rect(), QColor("#1E1F22"));
+        painter.fillRect(rect(), QColor("#0D1117"));
 
         int chartW = w - marginLeft - marginRight;
         int chartH = h - marginTop - marginBottom;
@@ -67,7 +67,7 @@ protected:
         maxVal = std::max(maxVal, 100);
 
         // Grid lines
-        painter.setPen(QPen(QColor("#3C3F41"), 1, Qt::DotLine));
+        painter.setPen(QPen(QColor("#30363D"), 1, Qt::DotLine));
         int yStep = chartH / 4;
         for (int i = 0; i <= 4; ++i) {
             int y = marginTop + i * yStep;
@@ -75,7 +75,7 @@ protected:
         }
 
         // Y-axis labels
-        painter.setPen(QColor("#8C8C8C"));
+        painter.setPen(QColor("#8B949E"));
         painter.setFont(QFont("Arial", 9));
         for (int i = 0; i <= 4; ++i) {
             int y = marginTop + i * yStep;
@@ -95,7 +95,7 @@ protected:
 
         // 2.4G section label
         if (total24GBars > 0) {
-            painter.setPen(QColor("#E6A23C"));
+            painter.setPen(QColor("#D29922"));
             painter.setFont(QFont("Arial", 10, QFont::Bold));
             int labelX = x;
             painter.drawText(labelX, marginTop - 4, "2.4 GHz");
@@ -105,12 +105,12 @@ protected:
             int barH = (int)((qreal)m_ch24G[i] / maxVal * chartH);
             int y = marginTop + chartH - barH;
 
-            QColor barColor = m_ch24G[i] > 70 ? QColor("#F56C6C") :
-                              m_ch24G[i] > 40 ? QColor("#E6A23C") : QColor("#67C23A");
+            QColor barColor = m_ch24G[i] > 70 ? QColor("#F85149") :
+                              m_ch24G[i] > 40 ? QColor("#D29922") : QColor("#3FB950");
             painter.fillRect(x, y, barW, barH, barColor);
 
             // Channel label
-            painter.setPen(QColor("#8C8C8C"));
+            painter.setPen(QColor("#8B949E"));
             painter.setFont(QFont("Arial", 8));
             QString label = QString("CH%1").arg(i + 1);
             painter.drawText(x, h - marginBottom + 14, barW, 16, Qt::AlignCenter, label);
@@ -123,7 +123,7 @@ protected:
 
         // 5G section label
         if (total5GBars > 0) {
-            painter.setPen(QColor("#409EFF"));
+            painter.setPen(QColor("#58A6FF"));
             painter.setFont(QFont("Arial", 10, QFont::Bold));
             painter.drawText(x, marginTop - 4, "5 GHz");
         }
@@ -132,11 +132,11 @@ protected:
             int barH = (int)((qreal)m_ch5G[i] / maxVal * chartH);
             int y = marginTop + chartH - barH;
 
-            QColor barColor = m_ch5G[i] > 70 ? QColor("#F56C6C") :
-                              m_ch5G[i] > 40 ? QColor("#E6A23C") : QColor("#409EFF");
+            QColor barColor = m_ch5G[i] > 70 ? QColor("#F85149") :
+                              m_ch5G[i] > 40 ? QColor("#D29922") : QColor("#58A6FF");
             painter.fillRect(x, y, barW, barH, barColor);
 
-            painter.setPen(QColor("#8C8C8C"));
+            painter.setPen(QColor("#8B949E"));
             painter.setFont(QFont("Arial", 8));
             QString label = QString("CH%1").arg(36 + i * 4);
             painter.drawText(x, h - marginBottom + 14, barW, 16, Qt::AlignCenter, label);
@@ -145,7 +145,7 @@ protected:
         }
 
         // X-axis title
-        painter.setPen(QColor("#8C8C8C"));
+        painter.setPen(QColor("#8B949E"));
         painter.setFont(QFont("Arial", 9));
         painter.drawText(marginLeft, h - 4, chartW, 16, Qt::AlignCenter, "信道");
     }
@@ -191,14 +191,14 @@ void WirelessWidget::setupUI()
         combo->setMinimumWidth(minWidth);
         combo->setStyleSheet(
             "QComboBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px 8px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 4px 8px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
             "QComboBox::drop-down { border: none; }"
             "QComboBox QAbstractItemView {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  selection-background-color: #3C3F41;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  selection-background-color: #30363D;"
             "}"
         );
     };
@@ -206,15 +206,15 @@ void WirelessWidget::setupUI()
     auto styleTable = [](QTableWidget* table) {
         table->setStyleSheet(
             "QTableWidget {"
-            "  background-color: #1E1F22; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; font-size: 12px;"
-            "  gridline-color: #2C2D30;"
+            "  background-color: #0D1117; color: #E6EDF3;"
+            "  border: 1px solid #30363D; font-size: 12px;"
+            "  gridline-color: #21262D;"
             "}"
             "QTableWidget::item { padding: 3px 6px; }"
-            "QTableWidget::item:selected { background-color: #3C3F41; }"
+            "QTableWidget::item:selected { background-color: #30363D; }"
             "QHeaderView::section {"
-            "  background-color: #25262B; color: #8C8C8C;"
-            "  border: none; border-bottom: 2px solid #3C3F41;"
+            "  background-color: #161B22; color: #8B949E;"
+            "  border: none; border-bottom: 2px solid #30363D;"
             "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
             "}"
         );
@@ -233,7 +233,7 @@ void WirelessWidget::setupUI()
                     "  font-size: 13px; font-weight: bold;"
                     "}"
                     "QPushButton:hover { background-color: %2; }"
-                    "QPushButton:disabled { background-color: #5C5C5C; }")
+                    "QPushButton:disabled { background-color: #484F58; }")
                 .arg(bgColor, hoverColor)
         );
         btn->setFixedHeight(34);
@@ -242,8 +242,8 @@ void WirelessWidget::setupUI()
     auto styleCard = [](QFrame* card) {
         card->setStyleSheet(
             "QFrame {"
-            "  background-color: #25262B;"
-            "  border: 1px solid #3C3F41;"
+            "  background-color: #161B22;"
+            "  border: 1px solid #30363D;"
             "  border-radius: 6px;"
             "}"
         );
@@ -252,8 +252,8 @@ void WirelessWidget::setupUI()
     auto styleGroupBox = [](QGroupBox* group, const QString& title) {
         group->setStyleSheet(
             "QGroupBox {"
-            "  color: #409EFF; font-size: 13px; font-weight: bold;"
-            "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+            "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+            "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
             "  padding-top: 16px;"
             "}"
             "QGroupBox::title {"
@@ -263,7 +263,7 @@ void WirelessWidget::setupUI()
         group->setTitle(title);
     };
 
-    auto styleLabel = [](QLabel* label, const QString& color = "#8C8C8C", int fontSize = 12) {
+    auto styleLabel = [](QLabel* label, const QString& color = "#8B949E", int fontSize = 12) {
         label->setStyleSheet(
             QString("font-size: %1px; color: %2;").arg(fontSize).arg(color)
         );
@@ -276,15 +276,15 @@ void WirelessWidget::setupUI()
     topLayout->setSpacing(12);
 
     auto* acLabel = new QLabel("AC 控制器:");
-    styleLabel(acLabel, "#8C8C8C", 13);
+    styleLabel(acLabel, "#8B949E", 13);
     m_acCombo = new QComboBox();
     styleCombo(m_acCombo, 200);
 
     auto* refreshBtn = new QPushButton("立即刷新");
-    styleButton(refreshBtn, "#67C23A", "#85CE61");
+    styleButton(refreshBtn, "#3FB950", "#56D364");
 
     m_exportBtn = new QPushButton("导出 CSV");
-    styleButton(m_exportBtn, "#E6A23C", "#EBB563");
+    styleButton(m_exportBtn, "#D29922", "#DBAB4A");
 
     topLayout->addWidget(acLabel);
     topLayout->addWidget(m_acCombo);
@@ -311,9 +311,9 @@ void WirelessWidget::setupUI()
         iconLabel->setStyleSheet("font-size: 22px; border: none;");
         auto* textLayout = new QVBoxLayout();
         auto* titleLabel = new QLabel(title);
-        styleLabel(titleLabel, "#8C8C8C", 11);
+        styleLabel(titleLabel, "#8B949E", 11);
         valueLabel = new QLabel("--");
-        valueLabel->setStyleSheet("font-size: 16px; color: #409EFF; font-weight: bold; border: none;");
+        valueLabel->setStyleSheet("font-size: 16px; color: #58A6FF; font-weight: bold; border: none;");
         textLayout->addWidget(titleLabel);
         textLayout->addWidget(valueLabel);
 
@@ -334,7 +334,7 @@ void WirelessWidget::setupUI()
     // ── Middle: AP List + SSID Management (Tab Widget) ──
     auto* middleSplitter = new QSplitter(Qt::Horizontal);
     middleSplitter->setStyleSheet(
-        "QSplitter::handle { background-color: #3C3F41; width: 2px; }"
+        "QSplitter::handle { background-color: #30363D; width: 2px; }"
     );
 
     // Left: AP List
@@ -369,15 +369,15 @@ void WirelessWidget::setupUI()
     auto* tabWidget = new QTabWidget();
     tabWidget->setStyleSheet(
         "QTabWidget::pane {"
-        "  border: 1px solid #3C3F41; background-color: #1E1F22;"
+        "  border: 1px solid #30363D; background-color: #0D1117;"
         "}"
         "QTabBar::tab {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  padding: 6px 16px; border: 1px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  padding: 6px 16px; border: 1px solid #30363D;"
         "  border-bottom: none; margin-right: 2px; font-size: 12px;"
         "}"
         "QTabBar::tab:selected {"
-        "  background-color: #1E1F22; color: #409EFF;"
+        "  background-color: #0D1117; color: #58A6FF;"
         "  border-bottom: 2px solid #409EFF;"
         "}"
     );
@@ -445,7 +445,7 @@ void WirelessWidget::setupUI()
     // ── Connect refresh button ──
     connect(refreshBtn, &QPushButton::clicked, this, &WirelessWidget::onRefresh);
 
-    setStyleSheet("background-color: #1E1F22;");
+    
 }
 
 // ─── Connections ─────────────────────────────────────────────────────────────
@@ -499,9 +499,9 @@ void WirelessWidget::onRefresh()
 
         auto* statusItem = new QTableWidgetItem(ap.status);
         if (ap.status == "Online") {
-            statusItem->setForeground(QColor("#67C23A"));
+            statusItem->setForeground(QColor("#3FB950"));
         } else {
-            statusItem->setForeground(QColor("#F56C6C"));
+            statusItem->setForeground(QColor("#F85149"));
         }
         m_apTable->setItem(i, 6, statusItem);
 
@@ -519,9 +519,9 @@ void WirelessWidget::onRefresh()
 
         auto* statusItem = new QTableWidgetItem(ssid.status);
         if (ssid.status == "启用") {
-            statusItem->setForeground(QColor("#67C23A"));
+            statusItem->setForeground(QColor("#3FB950"));
         } else {
-            statusItem->setForeground(QColor("#F56C6C"));
+            statusItem->setForeground(QColor("#F85149"));
         }
         m_ssidTable->setItem(i, 4, statusItem);
     }
@@ -537,11 +537,11 @@ void WirelessWidget::onRefresh()
 
         auto* signalItem = new QTableWidgetItem(QString::number(client.signalStrength));
         if (client.signalStrength > -50) {
-            signalItem->setForeground(QColor("#67C23A"));
+            signalItem->setForeground(QColor("#3FB950"));
         } else if (client.signalStrength > -70) {
-            signalItem->setForeground(QColor("#E6A23C"));
+            signalItem->setForeground(QColor("#D29922"));
         } else {
-            signalItem->setForeground(QColor("#F56C6C"));
+            signalItem->setForeground(QColor("#F85149"));
         }
         m_clientTable->setItem(i, 4, signalItem);
 

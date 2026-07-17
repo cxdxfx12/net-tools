@@ -30,7 +30,7 @@ DscpChartWidget::DscpChartWidget(QWidget* parent)
     , m_be(0)
 {
     setMinimumSize(280, 180);
-    setStyleSheet("background-color: #1E1F22; border: 1px solid #3C3F41; border-radius: 4px;");
+    
 }
 
 void DscpChartWidget::setData(int ef, int af41, int af31, int af21, int be)
@@ -59,22 +59,22 @@ void DscpChartWidget::paintEvent(QPaintEvent* /*event*/)
     int chartH = h - marginTop - marginBottom;
 
     // Title
-    painter.setPen(QColor("#8C8C8C"));
+    painter.setPen(QColor("#8B949E"));
     painter.setFont(QFont("sans-serif", 11, QFont::Bold));
     painter.drawText(QRect(0, 4, w, 20), Qt::AlignCenter, "DSCP 分布");
 
     // Background
-    painter.fillRect(marginLeft, marginTop, chartW, chartH, QColor("#25262B"));
+    painter.fillRect(marginLeft, marginTop, chartW, chartH, QColor("#161B22"));
 
     // Grid lines
-    painter.setPen(QPen(QColor("#3C3F41"), 1, Qt::DotLine));
+    painter.setPen(QPen(QColor("#30363D"), 1, Qt::DotLine));
     for (int i = 0; i <= 4; ++i) {
         int y = marginTop + chartH * i / 4;
         painter.drawLine(marginLeft, y, marginLeft + chartW, y);
     }
 
     // Y-axis labels
-    painter.setPen(QColor("#8C8C8C"));
+    painter.setPen(QColor("#8B949E"));
     painter.setFont(QFont("sans-serif", 9));
     for (int i = 0; i <= 4; ++i) {
         int y = marginTop + chartH * i / 4;
@@ -90,11 +90,11 @@ void DscpChartWidget::paintEvent(QPaintEvent* /*event*/)
         QColor color;
     };
     QList<Segment> segments = {
-        {"EF",   m_ef,   QColor("#F56C6C")},
-        {"AF41", m_af41, QColor("#E6A23C")},
+        {"EF",   m_ef,   QColor("#F85149")},
+        {"AF41", m_af41, QColor("#D29922")},
         {"AF31", m_af31, QColor("#F2C94C")},
-        {"AF21", m_af21, QColor("#409EFF")},
-        {"BE",   m_be,   QColor("#909399")},
+        {"AF21", m_af21, QColor("#58A6FF")},
+        {"BE",   m_be,   QColor("#8B949E")},
     };
 
     int total = m_ef + m_af41 + m_af31 + m_af21 + m_be;
@@ -109,7 +109,7 @@ void DscpChartWidget::paintEvent(QPaintEvent* /*event*/)
         int segH = chartH * seg.value / total;
         if (segH < 1 && seg.value > 0) segH = 1;
         painter.fillRect(barX, barTop, barW, segH, seg.color);
-        painter.setPen(QPen(QColor("#1E1F22"), 1));
+        painter.setPen(QPen(QColor("#0D1117"), 1));
         painter.drawRect(barX, barTop, barW, segH);
         barTop += segH;
     }
@@ -120,7 +120,7 @@ void DscpChartWidget::paintEvent(QPaintEvent* /*event*/)
     painter.setFont(QFont("sans-serif", 9));
     for (const auto& seg : segments) {
         painter.fillRect(legendX, legendY, 12, 10, seg.color);
-        painter.setPen(QColor("#DCDCDC"));
+        painter.setPen(QColor("#E6EDF3"));
         painter.drawText(QRect(legendX + 16, legendY - 2, 60, 14),
                          Qt::AlignLeft, seg.label);
         legendX += 72;
@@ -139,7 +139,7 @@ QueueChartWidget::QueueChartWidget(QWidget* parent)
     : QWidget(parent)
 {
     setMinimumSize(280, 180);
-    setStyleSheet("background-color: #1E1F22; border: 1px solid #3C3F41; border-radius: 4px;");
+    
 }
 
 void QueueChartWidget::setQueues(const QList<QueueInfo>& queues)
@@ -163,12 +163,12 @@ void QueueChartWidget::paintEvent(QPaintEvent* /*event*/)
     int chartW = w - marginLeft - marginRight;
 
     // Title
-    painter.setPen(QColor("#8C8C8C"));
+    painter.setPen(QColor("#8B949E"));
     painter.setFont(QFont("sans-serif", 11, QFont::Bold));
     painter.drawText(QRect(0, 4, w, 20), Qt::AlignCenter, "队列利用率");
 
     if (m_queues.isEmpty()) {
-        painter.setPen(QColor("#5C5C5C"));
+        painter.setPen(QColor("#484F58"));
         painter.setFont(QFont("sans-serif", 10));
         painter.drawText(QRect(marginLeft, marginTop, chartW, h - marginTop - marginBottom),
                          Qt::AlignCenter, "暂无数据");
@@ -181,14 +181,14 @@ void QueueChartWidget::paintEvent(QPaintEvent* /*event*/)
     int startY = marginTop + ((h - marginTop - marginBottom) - totalBarsH) / 2;
 
     // Grid lines
-    painter.setPen(QPen(QColor("#3C3F41"), 1, Qt::DotLine));
+    painter.setPen(QPen(QColor("#30363D"), 1, Qt::DotLine));
     for (int i = 0; i <= 4; ++i) {
         int x = marginLeft + chartW * i / 4;
         painter.drawLine(x, marginTop, x, marginTop + totalBarsH + (n > 0 ? barH : 0));
     }
 
     // X-axis labels
-    painter.setPen(QColor("#8C8C8C"));
+    painter.setPen(QColor("#8B949E"));
     painter.setFont(QFont("sans-serif", 8));
     for (int i = 0; i <= 4; ++i) {
         int x = marginLeft + chartW * i / 4;
@@ -202,12 +202,12 @@ void QueueChartWidget::paintEvent(QPaintEvent* /*event*/)
         int y = startY + i * (barH + 8);
 
         // Queue name
-        painter.setPen(QColor("#DCDCDC"));
+        painter.setPen(QColor("#E6EDF3"));
         painter.drawText(QRect(0, y, marginLeft - 8, barH),
                          Qt::AlignRight | Qt::AlignVCenter, q.name);
 
         // Background bar
-        painter.fillRect(marginLeft, y, chartW, barH, QColor("#25262B"));
+        painter.fillRect(marginLeft, y, chartW, barH, QColor("#161B22"));
 
         // Value bar
         int val = qMin(q.currentUtilization, 100);
@@ -215,11 +215,11 @@ void QueueChartWidget::paintEvent(QPaintEvent* /*event*/)
 
         QColor barColor;
         if (val < 60) {
-            barColor = QColor("#67C23A");
+            barColor = QColor("#3FB950");
         } else if (val < 80) {
-            barColor = QColor("#E6A23C");
+            barColor = QColor("#D29922");
         } else {
-            barColor = QColor("#F56C6C");
+            barColor = QColor("#F85149");
         }
 
         painter.fillRect(marginLeft, y, fillW, barH, barColor);
@@ -233,7 +233,7 @@ void QueueChartWidget::paintEvent(QPaintEvent* /*event*/)
                          Qt::AlignLeft | Qt::AlignVCenter, QString("%1%").arg(val));
 
         // Right-side percentage
-        painter.setPen(QColor("#8C8C8C"));
+        painter.setPen(QColor("#8B949E"));
         painter.drawText(QRect(marginLeft + chartW + 4, y, marginRight - 8, barH),
                          Qt::AlignLeft | Qt::AlignVCenter, QString("%1%").arg(val));
     }
@@ -274,14 +274,14 @@ void QoSWidget::setupUI()
         combo->setMinimumWidth(minWidth);
         combo->setStyleSheet(
             "QComboBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px 8px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 4px 8px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
             "QComboBox::drop-down { border: none; }"
             "QComboBox QAbstractItemView {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  selection-background-color: #3C3F41;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  selection-background-color: #30363D;"
             "}"
         );
     };
@@ -289,15 +289,15 @@ void QoSWidget::setupUI()
     auto styleTable = [](QTableWidget* table) {
         table->setStyleSheet(
             "QTableWidget {"
-            "  background-color: #1E1F22; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; font-size: 12px;"
-            "  gridline-color: #2C2D30;"
+            "  background-color: #0D1117; color: #E6EDF3;"
+            "  border: 1px solid #30363D; font-size: 12px;"
+            "  gridline-color: #21262D;"
             "}"
             "QTableWidget::item { padding: 3px 6px; }"
-            "QTableWidget::item:selected { background-color: #3C3F41; }"
+            "QTableWidget::item:selected { background-color: #30363D; }"
             "QHeaderView::section {"
-            "  background-color: #25262B; color: #8C8C8C;"
-            "  border: none; border-bottom: 2px solid #3C3F41;"
+            "  background-color: #161B22; color: #8B949E;"
+            "  border: none; border-bottom: 2px solid #30363D;"
             "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
             "}"
         );
@@ -315,13 +315,13 @@ void QoSWidget::setupUI()
                     "  font-size: 13px; font-weight: bold;"
                     "}"
                     "QPushButton:hover { background-color: %2; }"
-                    "QPushButton:disabled { background-color: #5C5C5C; }")
+                    "QPushButton:disabled { background-color: #484F58; }")
                 .arg(bgColor, hoverColor)
         );
         btn->setFixedHeight(34);
     };
 
-    auto styleLabel = [](QLabel* label, const QString& color = "#8C8C8C", int fontSize = 12) {
+    auto styleLabel = [](QLabel* label, const QString& color = "#8B949E", int fontSize = 12) {
         label->setStyleSheet(
             QString("font-size: %1px; color: %2;").arg(fontSize).arg(color)
         );
@@ -331,8 +331,8 @@ void QoSWidget::setupUI()
     auto* topGroup = new QGroupBox("QoS 分析中心");
     topGroup->setStyleSheet(
         "QGroupBox {"
-        "  color: #409EFF; font-size: 13px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+        "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+        "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
         "  padding-top: 16px;"
         "}"
         "QGroupBox::title {"
@@ -343,22 +343,22 @@ void QoSWidget::setupUI()
     topLayout->setSpacing(12);
 
     auto* deviceLabel = new QLabel("设备:");
-    styleLabel(deviceLabel, "#8C8C8C", 13);
+    styleLabel(deviceLabel, "#8B949E", 13);
     m_deviceCombo = new QComboBox();
     styleCombo(m_deviceCombo, 180);
     m_deviceCombo->addItems({"Core-Router-01", "Dist-Switch-02", "Access-Switch-03", "Edge-Router-04"});
 
     auto* ifaceLabel = new QLabel("接口:");
-    styleLabel(ifaceLabel, "#8C8C8C", 13);
+    styleLabel(ifaceLabel, "#8B949E", 13);
     m_interfaceCombo = new QComboBox();
     styleCombo(m_interfaceCombo, 180);
     m_interfaceCombo->addItems({"GigabitEthernet0/0/0", "GigabitEthernet0/0/1", "GigabitEthernet0/0/2", "GigabitEthernet0/0/3"});
 
     m_refreshBtn = new QPushButton("刷新");
-    styleButton(m_refreshBtn, "#67C23A", "#85CE61");
+    styleButton(m_refreshBtn, "#3FB950", "#56D364");
 
     m_exportBtn = new QPushButton("导出报告");
-    styleButton(m_exportBtn, "#E6A23C", "#EBB563");
+    styleButton(m_exportBtn, "#D29922", "#DBAB4A");
 
     topLayout->addWidget(deviceLabel);
     topLayout->addWidget(m_deviceCombo);
@@ -371,8 +371,8 @@ void QoSWidget::setupUI()
     auto* healthFrame = new QFrame();
     healthFrame->setStyleSheet(
         "QFrame {"
-        "  background-color: #25262B;"
-        "  border: 1px solid #3C3F41;"
+        "  background-color: #161B22;"
+        "  border: 1px solid #30363D;"
         "  border-radius: 6px;"
         "}"
     );
@@ -380,10 +380,10 @@ void QoSWidget::setupUI()
     healthLayout->setContentsMargins(16, 6, 16, 6);
 
     auto* healthTitleLabel = new QLabel("QoS 健康评分");
-    healthTitleLabel->setStyleSheet("font-size: 13px; color: #8C8C8C;");
+    
 
     m_healthScoreLabel = new QLabel("--");
-    m_healthScoreLabel->setStyleSheet("font-size: 28px; color: #67C23A; font-weight: bold;");
+    m_healthScoreLabel->setStyleSheet("font-size: 28px; color: #3FB950; font-weight: bold;");
     m_healthScoreLabel->setMinimumWidth(60);
     m_healthScoreLabel->setAlignment(Qt::AlignCenter);
 
@@ -398,7 +398,7 @@ void QoSWidget::setupUI()
     // ── Middle: DSCP chart + Queue chart (left/right) ──
     auto* middleSplitter = new QSplitter(Qt::Horizontal);
     middleSplitter->setStyleSheet(
-        "QSplitter::handle { background-color: #3C3F41; width: 2px; }"
+        "QSplitter::handle { background-color: #30363D; width: 2px; }"
     );
 
     m_dscpChart = new DscpChartWidget();
@@ -419,8 +419,8 @@ void QoSWidget::setupUI()
         auto* frame = new QFrame();
         frame->setStyleSheet(
             "QFrame {"
-            "  background-color: #25262B;"
-            "  border: 1px solid #3C3F41;"
+            "  background-color: #161B22;"
+            "  border: 1px solid #30363D;"
             "  border-radius: 6px;"
             "}"
         );
@@ -429,10 +429,10 @@ void QoSWidget::setupUI()
         layout->setSpacing(4);
 
         auto* titleLbl = new QLabel(title);
-        titleLbl->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+        
 
         valueLabel = new QLabel("--");
-        valueLabel->setStyleSheet("font-size: 20px; color: #409EFF; font-weight: bold;");
+        valueLabel->setStyleSheet("font-size: 20px; color: #58A6FF; font-weight: bold;");
 
         layout->addWidget(titleLbl);
         layout->addWidget(valueLabel);
@@ -448,7 +448,7 @@ void QoSWidget::setupUI()
     // ── Bottom: QoS Policy Table + Queue Detail Table ──
     auto* bottomSplitter = new QSplitter(Qt::Horizontal);
     bottomSplitter->setStyleSheet(
-        "QSplitter::handle { background-color: #3C3F41; width: 2px; }"
+        "QSplitter::handle { background-color: #30363D; width: 2px; }"
     );
 
     // QoS Policy Table
@@ -458,7 +458,7 @@ void QoSWidget::setupUI()
     policyLayout->setSpacing(4);
 
     auto* policyTitle = new QLabel("QoS 策略");
-    policyTitle->setStyleSheet("font-size: 13px; color: #409EFF; font-weight: bold; padding: 4px 0;");
+    policyTitle->setStyleSheet("font-size: 13px; color: #58A6FF; font-weight: bold; padding: 4px 0;");
 
     m_policyTable = new QTableWidget(0, 5);
     m_policyTable->setHorizontalHeaderLabels({"策略名", "接口", "分类器", "行为", "方向"});
@@ -480,7 +480,7 @@ void QoSWidget::setupUI()
     queueLayout->setSpacing(4);
 
     auto* queueTitle = new QLabel("队列详情");
-    queueTitle->setStyleSheet("font-size: 13px; color: #409EFF; font-weight: bold; padding: 4px 0;");
+    queueTitle->setStyleSheet("font-size: 13px; color: #58A6FF; font-weight: bold; padding: 4px 0;");
 
     m_queueDetailTable = new QTableWidget(0, 5);
     m_queueDetailTable->setHorizontalHeaderLabels({"队列名", "当前利用率", "峰值利用率", "排队时长", "丢弃包数"});
@@ -506,8 +506,8 @@ void QoSWidget::setupUI()
     auto* congestionGroup = new QGroupBox("拥塞检测");
     congestionGroup->setStyleSheet(
         "QGroupBox {"
-        "  color: #F56C6C; font-size: 13px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+        "  color: #F85149; font-size: 13px; font-weight: bold;"
+        "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
         "  padding-top: 16px;"
         "}"
         "QGroupBox::title {"
@@ -522,11 +522,11 @@ void QoSWidget::setupUI()
     m_congestionText->setMaximumBlockCount(200);
     m_congestionText->setStyleSheet(
         "QPlainTextEdit {"
-        "  background-color: #1E1F22;"
-        "  color: #DCDCDC;"
+        "  background-color: #0D1117;"
+        "  color: #E6EDF3;"
         "  font-family: 'Consolas', 'Courier New', monospace;"
         "  font-size: 12px;"
-        "  border: 1px solid #3C3F41;"
+        "  border: 1px solid #30363D;"
         "}"
     );
     m_congestionText->setFixedHeight(100);
@@ -752,21 +752,21 @@ void QoSWidget::analyzeQoS()
 
         auto* utilItem = new QTableWidgetItem(QString("%1%").arg(q.currentUtilization));
         if (q.currentUtilization >= 80) {
-            utilItem->setForeground(QColor("#F56C6C"));
+            utilItem->setForeground(QColor("#F85149"));
         } else if (q.currentUtilization >= 60) {
-            utilItem->setForeground(QColor("#E6A23C"));
+            utilItem->setForeground(QColor("#D29922"));
         } else {
-            utilItem->setForeground(QColor("#67C23A"));
+            utilItem->setForeground(QColor("#3FB950"));
         }
         m_queueDetailTable->setItem(row, 1, utilItem);
 
         auto* peakItem = new QTableWidgetItem(QString("%1%").arg(q.peakUtilization));
         if (q.peakUtilization >= 80) {
-            peakItem->setForeground(QColor("#F56C6C"));
+            peakItem->setForeground(QColor("#F85149"));
         } else if (q.peakUtilization >= 60) {
-            peakItem->setForeground(QColor("#E6A23C"));
+            peakItem->setForeground(QColor("#D29922"));
         } else {
-            peakItem->setForeground(QColor("#67C23A"));
+            peakItem->setForeground(QColor("#3FB950"));
         }
         m_queueDetailTable->setItem(row, 2, peakItem);
 
@@ -774,9 +774,9 @@ void QoSWidget::analyzeQoS()
 
         auto* dropItem = new QTableWidgetItem(QString::number(q.droppedPackets));
         if (q.droppedPackets > 50) {
-            dropItem->setForeground(QColor("#F56C6C"));
+            dropItem->setForeground(QColor("#F85149"));
         } else if (q.droppedPackets > 10) {
-            dropItem->setForeground(QColor("#E6A23C"));
+            dropItem->setForeground(QColor("#D29922"));
         }
         m_queueDetailTable->setItem(row, 4, dropItem);
     }
@@ -794,27 +794,27 @@ void QoSWidget::analyzeQoS()
     m_packetLossLabel->setText(QString("%1%").arg(packetLoss, 0, 'f', 2));
 
     if (latency > 20) {
-        m_latencyLabel->setStyleSheet("font-size: 20px; color: #F56C6C; font-weight: bold;");
+        m_latencyLabel->setStyleSheet("font-size: 20px; color: #F85149; font-weight: bold;");
     } else if (latency > 10) {
-        m_latencyLabel->setStyleSheet("font-size: 20px; color: #E6A23C; font-weight: bold;");
+        m_latencyLabel->setStyleSheet("font-size: 20px; color: #D29922; font-weight: bold;");
     } else {
-        m_latencyLabel->setStyleSheet("font-size: 20px; color: #67C23A; font-weight: bold;");
+        m_latencyLabel->setStyleSheet("font-size: 20px; color: #3FB950; font-weight: bold;");
     }
 
     if (jitter > 8) {
-        m_jitterLabel->setStyleSheet("font-size: 20px; color: #F56C6C; font-weight: bold;");
+        m_jitterLabel->setStyleSheet("font-size: 20px; color: #F85149; font-weight: bold;");
     } else if (jitter > 4) {
-        m_jitterLabel->setStyleSheet("font-size: 20px; color: #E6A23C; font-weight: bold;");
+        m_jitterLabel->setStyleSheet("font-size: 20px; color: #D29922; font-weight: bold;");
     } else {
-        m_jitterLabel->setStyleSheet("font-size: 20px; color: #67C23A; font-weight: bold;");
+        m_jitterLabel->setStyleSheet("font-size: 20px; color: #3FB950; font-weight: bold;");
     }
 
     if (packetLoss > 0.5) {
-        m_packetLossLabel->setStyleSheet("font-size: 20px; color: #F56C6C; font-weight: bold;");
+        m_packetLossLabel->setStyleSheet("font-size: 20px; color: #F85149; font-weight: bold;");
     } else if (packetLoss > 0.1) {
-        m_packetLossLabel->setStyleSheet("font-size: 20px; color: #E6A23C; font-weight: bold;");
+        m_packetLossLabel->setStyleSheet("font-size: 20px; color: #D29922; font-weight: bold;");
     } else {
-        m_packetLossLabel->setStyleSheet("font-size: 20px; color: #67C23A; font-weight: bold;");
+        m_packetLossLabel->setStyleSheet("font-size: 20px; color: #3FB950; font-weight: bold;");
     }
 
     // ── QoS Policy table (simulated) ──
@@ -891,11 +891,11 @@ void QoSWidget::analyzeQoS()
     m_healthScoreLabel->setText(QString::number(score));
 
     if (score >= 80) {
-        m_healthScoreLabel->setStyleSheet("font-size: 28px; color: #67C23A; font-weight: bold;");
+        m_healthScoreLabel->setStyleSheet("font-size: 28px; color: #3FB950; font-weight: bold;");
     } else if (score >= 60) {
-        m_healthScoreLabel->setStyleSheet("font-size: 28px; color: #E6A23C; font-weight: bold;");
+        m_healthScoreLabel->setStyleSheet("font-size: 28px; color: #D29922; font-weight: bold;");
     } else {
-        m_healthScoreLabel->setStyleSheet("font-size: 28px; color: #F56C6C; font-weight: bold;");
+        m_healthScoreLabel->setStyleSheet("font-size: 28px; color: #F85149; font-weight: bold;");
     }
 }
 

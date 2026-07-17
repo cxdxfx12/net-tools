@@ -59,15 +59,15 @@ void AutomationWidget::setupUI()
         table->setStyleSheet(
             QStringLiteral(
                 "QTableWidget {"
-                "  background-color: #1E1F22; color: #DCDCDC;"
-                "  border: 1px solid #3C3F41; font-size: 12px;"
-                "  gridline-color: #2C2D30;"
+                "  background-color: #0D1117; color: #E6EDF3;"
+                "  border: 1px solid #30363D; font-size: 12px;"
+                "  gridline-color: #21262D;"
                 "}"
                 "QTableWidget::item { padding: 3px 6px; }"
-                "QTableWidget::item:selected { background-color: #3C3F41; }"
+                "QTableWidget::item:selected { background-color: #30363D; }"
                 "QHeaderView::section {"
-                "  background-color: #25262B; color: #8C8C8C;"
-                "  border: none; border-bottom: 2px solid #3C3F41;"
+                "  background-color: #161B22; color: #8B949E;"
+                "  border: none; border-bottom: 2px solid #30363D;"
                 "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
                 "}"
             )
@@ -88,7 +88,7 @@ void AutomationWidget::setupUI()
                 "  font-size: 13px; font-weight: bold;"
                 "}"
                 "QPushButton:hover { background-color: %2; }"
-                "QPushButton:disabled { background-color: #5C5C5C; }"
+                "QPushButton:disabled { background-color: #484F58; }"
             )).arg(bgColor, hoverColor)
         );
         btn->setFixedHeight(34);
@@ -98,8 +98,8 @@ void AutomationWidget::setupUI()
         gb->setStyleSheet(
             QStringLiteral(
                 "QGroupBox {"
-                "  color: #409EFF; font-size: 13px; font-weight: bold;"
-                "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+                "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+                "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
                 "  padding-top: 16px;"
                 "}"
                 "QGroupBox::title {"
@@ -113,8 +113,8 @@ void AutomationWidget::setupUI()
         edit->setStyleSheet(
             QStringLiteral(
                 "QPlainTextEdit {"
-                "  background-color: #1E1F22; color: #DCDCDC;"
-                "  border: 1px solid #3C3F41; font-size: 13px;"
+                "  background-color: #0D1117; color: #E6EDF3;"
+                "  border: 1px solid #30363D; font-size: 13px;"
                 "  font-family: 'Menlo', 'Consolas', 'Courier New', monospace;"
                 "}"
             )
@@ -125,33 +125,33 @@ void AutomationWidget::setupUI()
         list->setStyleSheet(
             QStringLiteral(
                 "QListWidget {"
-                "  background-color: #1E1F22; color: #DCDCDC;"
-                "  border: 1px solid #3C3F41; font-size: 13px;"
+                "  background-color: #0D1117; color: #E6EDF3;"
+                "  border: 1px solid #30363D; font-size: 13px;"
                 "}"
                 "QListWidget::item { padding: 4px 8px; }"
-                "QListWidget::item:selected { background-color: #3C3F41; }"
-                "QListWidget::item:hover { background-color: #2C2D30; }"
+                "QListWidget::item:selected { background-color: #30363D; }"
+                "QListWidget::item:hover { background-color: #21262D; }"
             )
         );
     };
 
     QString comboBoxStyle = QStringLiteral(
         "QComboBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px; min-width: 120px;"
         "}"
         "QComboBox::drop-down { border: none; }"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #30363D;"
         "}"
     );
 
     // ── Top: Main splitter (left: script editor + presets, right: device + output) ──
     auto* mainSplitter = new QSplitter(Qt::Horizontal);
     mainSplitter->setStyleSheet(
-        QStringLiteral("QSplitter::handle { background-color: #3C3F41; width: 2px; }")
+        QStringLiteral("QSplitter::handle { background-color: #30363D; width: 2px; }")
     );
 
     // ─── Left Panel: Script Editor + Preset Scripts ───
@@ -169,7 +169,7 @@ void AutomationWidget::setupUI()
     // Language selector + script management buttons
     auto* editorToolbar = new QHBoxLayout();
     auto* langLabel = new QLabel(QStringLiteral("脚本语言:"));
-    langLabel->setStyleSheet(QStringLiteral("color: #8C8C8C; font-size: 13px;"));
+    
     m_languageCombo = new QComboBox();
     m_languageCombo->addItem(QStringLiteral("Python"), QStringLiteral("python"));
     m_languageCombo->addItem(QStringLiteral("Shell"), QStringLiteral("shell"));
@@ -177,13 +177,13 @@ void AutomationWidget::setupUI()
     m_languageCombo->setStyleSheet(comboBoxStyle);
 
     m_saveBtn = new QPushButton(QStringLiteral("保存"));
-    styleButton(m_saveBtn, QStringLiteral("#409EFF"), QStringLiteral("#66B1FF"));
+    styleButton(m_saveBtn, QStringLiteral("#58A6FF"), QStringLiteral("#79C0FF"));
     m_saveBtn->setFixedHeight(30);
     m_loadBtn = new QPushButton(QStringLiteral("加载"));
-    styleButton(m_loadBtn, QStringLiteral("#909399"), QStringLiteral("#B4B4B4"));
+    styleButton(m_loadBtn, QStringLiteral("#8B949E"), QStringLiteral("#B4B4B4"));
     m_loadBtn->setFixedHeight(30);
     m_deleteBtn = new QPushButton(QStringLiteral("删除"));
-    styleButton(m_deleteBtn, QStringLiteral("#F56C6C"), QStringLiteral("#F89898"));
+    styleButton(m_deleteBtn, QStringLiteral("#F85149"), QStringLiteral("#F89898"));
     m_deleteBtn->setFixedHeight(30);
 
     editorToolbar->addWidget(langLabel);
@@ -227,7 +227,7 @@ void AutomationWidget::setupUI()
 
     auto* deviceRow = new QHBoxLayout();
     auto* deviceLabel = new QLabel(QStringLiteral("目标设备:"));
-    deviceLabel->setStyleSheet(QStringLiteral("color: #8C8C8C; font-size: 13px;"));
+    
     m_deviceCombo = new QComboBox();
     m_deviceCombo->setEditable(true);
     m_deviceCombo->setStyleSheet(comboBoxStyle);
@@ -242,9 +242,9 @@ void AutomationWidget::setupUI()
 
     auto* btnRow = new QHBoxLayout();
     m_executeBtn = new QPushButton(QStringLiteral("▶ 执行"));
-    styleButton(m_executeBtn, QStringLiteral("#67C23A"), QStringLiteral("#85CE61"));
+    styleButton(m_executeBtn, QStringLiteral("#3FB950"), QStringLiteral("#56D364"));
     m_stopBtn = new QPushButton(QStringLiteral("■ 停止"));
-    styleButton(m_stopBtn, QStringLiteral("#F56C6C"), QStringLiteral("#F89898"));
+    styleButton(m_stopBtn, QStringLiteral("#F85149"), QStringLiteral("#F89898"));
     m_stopBtn->setEnabled(false);
     btnRow->addWidget(m_executeBtn);
     btnRow->addWidget(m_stopBtn);
@@ -281,8 +281,8 @@ void AutomationWidget::setupUI()
     scheduleFrame->setStyleSheet(
         QStringLiteral(
             "QFrame {"
-            "  background-color: #25262B;"
-            "  border: 1px solid #3C3F41;"
+            "  background-color: #161B22;"
+            "  border: 1px solid #30363D;"
             "  border-radius: 4px;"
             "}"
         )
@@ -292,32 +292,32 @@ void AutomationWidget::setupUI()
     scheduleLayout->setSpacing(12);
 
     auto* scheduleLabel = new QLabel(QStringLiteral("任务调度"));
-    scheduleLabel->setStyleSheet(QStringLiteral("color: #409EFF; font-size: 13px; font-weight: bold;"));
+    scheduleLabel->setStyleSheet(QStringLiteral("color: #58A6FF; font-size: 13px; font-weight: bold;"));
 
     m_scheduleCheck = new QCheckBox(QStringLiteral("定时执行"));
     m_scheduleCheck->setStyleSheet(
         QStringLiteral(
-            "QCheckBox { color: #DCDCDC; font-size: 13px; }"
+            "QCheckBox { color: #E6EDF3; font-size: 13px; }"
             "QCheckBox::indicator {"
             "  width: 16px; height: 16px;"
-            "  border: 1px solid #3C3F41; border-radius: 3px;"
-            "  background-color: #1E1F22;"
+            "  border: 1px solid #30363D; border-radius: 3px;"
+            "  background-color: #0D1117;"
             "}"
             "QCheckBox::indicator:checked {"
-            "  background-color: #409EFF; border-color: #409EFF;"
+            "  background-color: #58A6FF; border-color: #58A6FF;"
             "}"
         )
     );
 
     auto* timeLabel = new QLabel(QStringLiteral("执行时间:"));
-    timeLabel->setStyleSheet(QStringLiteral("color: #8C8C8C; font-size: 13px;"));
+    
     m_scheduleTime = new QTimeEdit(QTime(2, 0));
     m_scheduleTime->setDisplayFormat(QStringLiteral("HH:mm"));
     m_scheduleTime->setStyleSheet(
         QStringLiteral(
             "QTimeEdit {"
-            "  background: #1E1F22; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px 8px;"
+            "  background: #0D1117; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 4px 8px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
             "QTimeEdit::up-button { width: 16px; }"
@@ -326,7 +326,7 @@ void AutomationWidget::setupUI()
     );
 
     m_exportBtn = new QPushButton(QStringLiteral("导出历史"));
-    styleButton(m_exportBtn, QStringLiteral("#E6A23C"), QStringLiteral("#EBB563"));
+    styleButton(m_exportBtn, QStringLiteral("#D29922"), QStringLiteral("#DBAB4A"));
     m_exportBtn->setFixedHeight(30);
 
     scheduleLayout->addWidget(scheduleLabel);
@@ -734,10 +734,10 @@ void AutomationWidget::onExecute()
     m_stopBtn->setEnabled(true);
     m_outputArea->clear();
 
-    QDateTime startTime = QDateTime::currentDateTime();
+    m_executionStartTime = QDateTime::currentDateTime();
     m_outputArea->appendPlainText(
         QString(QStringLiteral("══════ 开始执行 [%1] ══════"))
-            .arg(startTime.toString(QStringLiteral("yyyy-MM-dd hh:mm:ss"))));
+            .arg(m_executionStartTime.toString(QStringLiteral("yyyy-MM-dd HH:mm:ss"))));
     m_outputArea->appendPlainText(
         QString(QStringLiteral("脚本语言: %1  |  目标设备: %2\n"))
             .arg(m_languageCombo->currentText(), device));
@@ -751,25 +751,10 @@ void AutomationWidget::onExecute()
     } else {
         runShellScript(script);
     }
+}
 
-    QDateTime endTime = QDateTime::currentDateTime();
-    qint64 elapsed = startTime.msecsTo(endTime);
-
-    QString durationStr;
-    if (elapsed < 1000) {
-        durationStr = QString(QStringLiteral("%1 ms")).arg(elapsed);
-    } else {
-        durationStr = QString(QStringLiteral("%1 s")).arg(elapsed / 1000.0, 0, 'f', 1);
-    }
-
-    m_outputArea->appendPlainText(
-        QString(QStringLiteral("\n══════ 执行完成 [%1]  耗时: %2 ══════"))
-            .arg(endTime.toString(QStringLiteral("yyyy-MM-dd hh:mm:ss")), durationStr));
-
-    m_isRunning = false;
-    m_executeBtn->setEnabled(true);
-    m_stopBtn->setEnabled(false);
-
+void AutomationWidget::finalizeExecution(bool success, const QString& durationStr)
+{
     // 判断当前选中的预置脚本名称
     QString scriptName = QStringLiteral("自定义脚本");
     if (m_presetList->currentItem()) {
@@ -778,10 +763,10 @@ void AutomationWidget::onExecute()
 
     // 记录历史
     ScriptHistory history;
-    history.time = startTime.toString(QStringLiteral("yyyy-MM-dd hh:mm:ss"));
+    history.time = m_executionStartTime.toString(QStringLiteral("yyyy-MM-dd HH:mm:ss"));
     history.scriptName = scriptName;
-    history.device = device;
-    history.result = QStringLiteral("成功");
+    history.device = m_deviceCombo->currentText().trimmed();
+    history.result = success ? QStringLiteral("成功") : QStringLiteral("失败");
     history.duration = durationStr;
     m_history.append(history);
 
@@ -792,12 +777,51 @@ void AutomationWidget::onExecute()
     m_historyTable->setItem(row, 1, new QTableWidgetItem(history.scriptName));
     m_historyTable->setItem(row, 2, new QTableWidgetItem(history.device));
     auto* resultItem = new QTableWidgetItem(history.result);
-    resultItem->setForeground(QColor(QStringLiteral("#67C23A")));
+    resultItem->setForeground(success ? QColor(QStringLiteral("#3FB950")) : QColor(QStringLiteral("#F85149")));
     m_historyTable->setItem(row, 3, resultItem);
     m_historyTable->setItem(row, 4, new QTableWidgetItem(history.duration));
 
     Logger::instance().info(QStringLiteral("Automation Center"),
         QString(QStringLiteral("脚本执行完成，耗时: %1")).arg(durationStr));
+}
+
+void AutomationWidget::onProcessFinished(int exitCode, QProcess::ExitStatus exitStatus)
+{
+    QDateTime endTime = QDateTime::currentDateTime();
+    qint64 elapsed = m_executionStartTime.msecsTo(endTime);
+
+    QString durationStr;
+    if (elapsed < 1000) {
+        durationStr = QString(QStringLiteral("%1 ms")).arg(elapsed);
+    } else {
+        durationStr = QString(QStringLiteral("%1 s")).arg(elapsed / 1000.0, 0, 'f', 1);
+    }
+
+    bool success = (exitStatus == QProcess::NormalExit && exitCode == 0);
+
+    if (exitStatus != QProcess::NormalExit) {
+        m_outputArea->appendPlainText(
+            QString(QStringLiteral("[ERROR] 脚本异常终止，退出码: %1")).arg(exitCode));
+    } else if (exitCode != 0) {
+        m_outputArea->appendPlainText(
+            QString(QStringLiteral("[WARN] 脚本退出码: %1 (非零)")).arg(exitCode));
+    }
+
+    m_outputArea->appendPlainText(
+        QString(QStringLiteral("\n══════ 执行完成 [%1]  耗时: %2 ══════"))
+            .arg(endTime.toString(QStringLiteral("yyyy-MM-dd HH:mm:ss")), durationStr));
+
+    // 清理临时文件
+    if (!m_tempFilePath.isEmpty()) {
+        QFile::remove(m_tempFilePath);
+        m_tempFilePath.clear();
+    }
+
+    m_isRunning = false;
+    m_executeBtn->setEnabled(true);
+    m_stopBtn->setEnabled(false);
+
+    finalizeExecution(success, durationStr);
 }
 
 // ─── Stop ────────────────────────────────────────────────────────────────────
@@ -822,6 +846,7 @@ void AutomationWidget::onStop()
 
 void AutomationWidget::runPythonScript(const QString& script)
 {
+    // 确保 QProcess 已创建并连接信号
     if (!m_process) {
         m_process = new QProcess(this);
         connect(m_process, &QProcess::readyReadStandardOutput, this, [this]() {
@@ -832,18 +857,22 @@ void AutomationWidget::runPythonScript(const QString& script)
             QString err = QString::fromUtf8(m_process->readAllStandardError());
             m_outputArea->appendPlainText(QString(QStringLiteral("[STDERR] %1")).arg(err));
         });
+        connect(m_process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+                this, &AutomationWidget::onProcessFinished);
     }
 
     // 将脚本写入临时文件
     QString tempPath = QDir::temp().filePath(
         QString(QStringLiteral("wukong_script_%1.py"))
-            .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMddhhmmss"))));
+            .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMddHHmmss"))));
     QFile tempFile(tempPath);
     if (tempFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
         QTextStream stream(&tempFile);
         stream << script;
         tempFile.close();
     }
+
+    m_tempFilePath = tempPath;
 
     QString device = m_deviceCombo->currentText().trimmed();
     // 提取 IP 地址
@@ -856,6 +885,7 @@ void AutomationWidget::runPythonScript(const QString& script)
         }
     }
 
+    // 异步启动进程（不再阻塞 GUI 线程）
     m_process->start(QStringLiteral("python3"), {tempPath, ip});
 
     if (!m_process->waitForStarted(5000)) {
@@ -863,23 +893,20 @@ void AutomationWidget::runPythonScript(const QString& script)
             QString(QStringLiteral("[ERROR] 无法启动 Python 解释器: %1"))
                 .arg(m_process->errorString()));
         QFile::remove(tempPath);
+        m_tempFilePath.clear();
+        // 进程启动失败，手动完成
+        onProcessFinished(-1, QProcess::CrashExit);
         return;
     }
 
-    m_process->waitForFinished(30000);
-
-    if (m_process->exitStatus() != QProcess::NormalExit) {
-        m_outputArea->appendPlainText(
-            QString(QStringLiteral("[ERROR] 脚本异常终止")));
-    }
-
-    QFile::remove(tempPath);
+    // 进程已异步启动，onProcessFinished 将在进程结束时自动调用
 }
 
 // ─── Run Shell Script ────────────────────────────────────────────────────────
 
 void AutomationWidget::runShellScript(const QString& script)
 {
+    // 确保 QProcess 已创建并连接信号
     if (!m_process) {
         m_process = new QProcess(this);
         connect(m_process, &QProcess::readyReadStandardOutput, this, [this]() {
@@ -890,6 +917,8 @@ void AutomationWidget::runShellScript(const QString& script)
             QString err = QString::fromUtf8(m_process->readAllStandardError());
             m_outputArea->appendPlainText(QString(QStringLiteral("[STDERR] %1")).arg(err));
         });
+        connect(m_process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+                this, &AutomationWidget::onProcessFinished);
     }
 
     QString device = m_deviceCombo->currentText().trimmed();
@@ -908,7 +937,7 @@ void AutomationWidget::runShellScript(const QString& script)
         // 将脚本写入临时文件
         QString tempPath = QDir::temp().filePath(
             QString(QStringLiteral("wukong_script_%1.sh"))
-                .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMddhhmmss"))));
+                .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMddHHmmss"))));
         QFile tempFile(tempPath);
         if (tempFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
             QTextStream stream(&tempFile);
@@ -917,43 +946,46 @@ void AutomationWidget::runShellScript(const QString& script)
         }
         tempFile.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner |
                                 QFileDevice::ExeOwner);
+
+        m_tempFilePath = tempPath;
+
         m_process->start(QStringLiteral("bash"), {tempPath, ip});
         if (!m_process->waitForStarted(5000)) {
             m_outputArea->appendPlainText(
                 QString(QStringLiteral("[ERROR] 无法启动 Shell: %1"))
                     .arg(m_process->errorString()));
             QFile::remove(tempPath);
+            m_tempFilePath.clear();
+            onProcessFinished(-1, QProcess::CrashExit);
             return;
         }
-        m_process->waitForFinished(30000);
-        QFile::remove(tempPath);
     } else if (language == QStringLiteral("tcl")) {
         // Tcl 脚本：通过 tclsh 执行
         QString tempPath = QDir::temp().filePath(
             QString(QStringLiteral("wukong_script_%1.tcl"))
-                .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMddhhmmss"))));
+                .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMddHHmmss"))));
         QFile tempFile(tempPath);
         if (tempFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
             QTextStream stream(&tempFile);
             stream << script;
             tempFile.close();
         }
+
+        m_tempFilePath = tempPath;
+
         m_process->start(QStringLiteral("tclsh"), {tempPath, ip});
         if (!m_process->waitForStarted(5000)) {
             m_outputArea->appendPlainText(
                 QString(QStringLiteral("[ERROR] 无法启动 Tcl 解释器: %1\n[INFO] 请确保已安装 tclsh"))
                     .arg(m_process->errorString()));
             QFile::remove(tempPath);
+            m_tempFilePath.clear();
+            onProcessFinished(-1, QProcess::CrashExit);
             return;
         }
-        m_process->waitForFinished(30000);
-        QFile::remove(tempPath);
     }
 
-    if (m_process && m_process->exitStatus() != QProcess::NormalExit) {
-        m_outputArea->appendPlainText(
-            QString(QStringLiteral("[ERROR] 脚本异常终止")));
-    }
+    // 进程已异步启动，onProcessFinished 将在进程结束时自动调用
 }
 
 // ─── Save Script ─────────────────────────────────────────────────────────────
@@ -1117,7 +1149,7 @@ void AutomationWidget::onExport()
     QString filePath = QFileDialog::getSaveFileName(
         this, QStringLiteral("导出执行历史"),
         QString(QStringLiteral("automation_history_%1.csv"))
-            .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMdd_hhmmss"))),
+            .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMdd_HHmmss"))),
         QStringLiteral("CSV 文件 (*.csv)")
     );
 

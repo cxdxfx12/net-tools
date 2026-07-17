@@ -90,7 +90,6 @@ void WOLWidget::setupUI()
     optionsRow->addWidget(m_multiSubnetCheck);
 
     m_statusLabel = new QLabel();
-    m_statusLabel->setStyleSheet(QStringLiteral("color: #888;"));
     optionsRow->addWidget(m_statusLabel, 1);
 
     sendLayout->addLayout(optionsRow);
@@ -345,14 +344,12 @@ void WOLWidget::onSendWOL()
     QString mac = m_macEdit->text().trimmed();
     if (mac.isEmpty()) {
         m_statusLabel->setText(QStringLiteral("请输入 MAC 地址"));
-        m_statusLabel->setStyleSheet(QStringLiteral("color: #E06C75;"));
         return;
     }
 
     QString normalized = normalizeMac(mac);
     if (normalized.isEmpty()) {
         m_statusLabel->setText(QStringLiteral("MAC 地址格式无效"));
-        m_statusLabel->setStyleSheet(QStringLiteral("color: #E06C75;"));
         return;
     }
 
@@ -375,8 +372,6 @@ void WOLWidget::onSendWOL()
             m_statusLabel->setText(
                 QStringLiteral("多子网模式: 正在发送到 %1 个子网").arg(subnets.size()));
         }
-        m_statusLabel->setStyleSheet(QStringLiteral("color: #E5C07B;"));
-
         for (const QString& subnet : subnets) {
             sendMagicPacket(normalized, subnet, port, deviceName);
         }
@@ -411,14 +406,12 @@ void WOLWidget::sendMagicPacket(const QString& mac, const QString& broadcastAddr
         hist.status = 1;
         m_statusLabel->setText(
             QStringLiteral("唤醒包已发送 (%1 bytes) → %2").arg(bytesSent).arg(broadcastAddr));
-        m_statusLabel->setStyleSheet(QStringLiteral("color: #98C379;"));
-    } else {
+        } else {
         hist.status = 2;
         hist.errorMsg = m_socket->errorString();
         m_statusLabel->setText(
             QStringLiteral("发送失败: %1").arg(m_socket->errorString()));
-        m_statusLabel->setStyleSheet(QStringLiteral("color: #E06C75;"));
-    }
+        }
     insertHistory(hist);
 
     // Update device status

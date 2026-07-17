@@ -29,7 +29,7 @@ PingChartWidget::PingChartWidget(QWidget* parent)
     , m_maxPoints(200)
 {
     setMinimumHeight(160);
-    setStyleSheet("background-color: #1E1F22; border: 1px solid #3C3F41;");
+    
 }
 
 void PingChartWidget::addPoint(double value)
@@ -78,7 +78,7 @@ void PingChartWidget::paintEvent(QPaintEvent* /*event*/)
     painter.drawRect(margin, margin, plotW, plotH);
 
     if (m_points.isEmpty()) {
-        painter.setPen(QColor(0x8C, 0x8C, 0x8C));
+        painter.setPen(QColor(0x8B, 0x94, 0x9E));
         painter.setFont(QFont("Arial", 10));
         painter.drawText(rect(), Qt::AlignCenter, "等待数据...");
         return;
@@ -103,7 +103,7 @@ void PingChartWidget::paintEvent(QPaintEvent* /*event*/)
     range = maxVal - minVal;
 
     // Draw line
-    painter.setPen(QPen(QColor(0x40, 0x9E, 0xFF), 2));
+    painter.setPen(QPen(QColor(0x58, 0xA6, 0xFF), 2));
     int count = m_points.size();
     for (int i = 0; i < count - 1; ++i) {
         double x1 = margin + (double)i / (count - 1) * plotW;
@@ -115,7 +115,7 @@ void PingChartWidget::paintEvent(QPaintEvent* /*event*/)
 
     // Draw dots
     painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor(0x40, 0x9E, 0xFF));
+    painter.setBrush(QColor(0x58, 0xA6, 0xFF));
     for (int i = 0; i < count; ++i) {
         double x = margin + (double)i / (count - 1) * plotW;
         double y = margin + plotH - (m_points[i] - minVal) / range * plotH;
@@ -124,7 +124,7 @@ void PingChartWidget::paintEvent(QPaintEvent* /*event*/)
     }
 
     // Axis labels
-    painter.setPen(QColor(0x8C, 0x8C, 0x8C));
+    painter.setPen(QColor(0x8B, 0x94, 0x9E));
     painter.setFont(QFont("Arial", 8));
 
     QString maxLabel = QString::number(maxVal, 'f', 1) + " ms";
@@ -184,14 +184,14 @@ void PingWidget::setupUI()
 
     auto* hostLayout = new QVBoxLayout();
     auto* hostLabel = new QLabel("目标主机:");
-    hostLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_hostEdit = new QLineEdit();
     m_hostEdit->setPlaceholderText("多个主机用逗号分隔, 如: 8.8.8.8, 1.1.1.1");
     m_hostEdit->setMinimumWidth(280);
     m_hostEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -202,7 +202,7 @@ void PingWidget::setupUI()
     auto addSpinBox = [&](const QString& label, int min, int max, int val, const QString& suffix) -> QSpinBox* {
         auto* layout = new QVBoxLayout();
         auto* lbl = new QLabel(label);
-        lbl->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+        
         auto* spin = new QSpinBox();
         spin->setRange(min, max);
         spin->setValue(val);
@@ -210,8 +210,8 @@ void PingWidget::setupUI()
         spin->setFixedWidth(100);
         spin->setStyleSheet(
             "QSpinBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 4px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
         );
@@ -231,24 +231,24 @@ void PingWidget::setupUI()
     m_startBtn = new QPushButton("开始 Ping");
     m_startBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_startBtn->setFixedHeight(36);
 
     m_stopBtn = new QPushButton("停止");
     m_stopBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #F56C6C; color: white;"
+        "  background-color: #F85149; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #F78989; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #FF7B72; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_stopBtn->setFixedHeight(36);
     m_stopBtn->setEnabled(false);
@@ -256,12 +256,12 @@ void PingWidget::setupUI()
     m_exportBtn = new QPushButton("导出 CSV");
     m_exportBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #67C23A; color: white;"
+        "  background-color: #3FB950; color: white;"
         "  border: none; padding: 8px 16px; border-radius: 4px;"
         "  font-size: 13px;"
         "}"
-        "QPushButton:hover { background-color: #85CE61; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #56D364; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_exportBtn->setFixedHeight(36);
 
@@ -296,17 +296,17 @@ void PingWidget::setupUI()
     m_resultTable->setAlternatingRowColors(true);
     m_resultTable->setStyleSheet(
         "QTableWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  gridline-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  gridline-color: #30363D; border: 1px solid #30363D;"
         "  font-size: 12px;"
         "}"
         "QTableWidget::item { padding: 3px 6px; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
         "}"
-        "QTableWidget::item:alternate { background-color: #25262B; }"
+        "QTableWidget::item:alternate { background-color: #161B22; }"
     );
     splitter->addWidget(m_resultTable);
 
@@ -327,9 +327,9 @@ void PingWidget::setupUI()
     auto addStatItem = [&](const QString& title, QLabel*& valueLabel) {
         auto* layout = new QVBoxLayout();
         auto* titleLbl = new QLabel(title);
-        titleLbl->setStyleSheet("font-size: 11px; color: #8C8C8C;");
+        
         valueLabel = new QLabel("-");
-        valueLabel->setStyleSheet("font-size: 18px; font-weight: bold; color: #409EFF;");
+        valueLabel->setStyleSheet("font-size: 18px; font-weight: bold; color: #58A6FF;");
         layout->addWidget(titleLbl);
         layout->addWidget(valueLabel);
         statsLayout->addLayout(layout);
@@ -668,11 +668,11 @@ void PingWidget::addResultRow(const QString& host, int seq, int ttl, double time
     auto* statusItem = new QTableWidgetItem(status);
 
     // Color coding
-    QColor statusColor = (status == "成功") ? QColor(0x67, 0xC2, 0x3A) : QColor(0xF5, 0x6C, 0x6C);
+    QColor statusColor = (status == "成功") ? QColor(0x3F, 0xB9, 0x50) : QColor(0xF8, 0x51, 0x49);
     statusItem->setForeground(statusColor);
 
     if (status == "成功") {
-        timeItem->setForeground(QColor(0x40, 0x9E, 0xFF));
+        timeItem->setForeground(QColor(0x58, 0xA6, 0xFF));
     }
 
     m_resultTable->setItem(row, 0, hostItem);
@@ -697,9 +697,9 @@ void PingWidget::updateStatistics()
         m_lostLabel->setText(QString::number(lossPercent, 'f', 1) + "%");
 
         if (lossPercent > 0) {
-            m_lostLabel->setStyleSheet("font-size: 18px; font-weight: bold; color: #F56C6C;");
+            m_lostLabel->setStyleSheet("font-size: 18px; font-weight: bold; color: #F85149;");
         } else {
-            m_lostLabel->setStyleSheet("font-size: 18px; font-weight: bold; color: #67C23A;");
+            m_lostLabel->setStyleSheet("font-size: 18px; font-weight: bold; color: #3FB950;");
         }
     }
 

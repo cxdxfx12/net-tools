@@ -63,8 +63,8 @@ void SNMPMonitorWidget::setupUI()
         edit->setMinimumWidth(minWidth);
         edit->setStyleSheet(
             "QLineEdit {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px 8px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 4px 8px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
         );
@@ -74,14 +74,14 @@ void SNMPMonitorWidget::setupUI()
         combo->setMinimumWidth(minWidth);
         combo->setStyleSheet(
             "QComboBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px 8px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 4px 8px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
             "QComboBox::drop-down { border: none; }"
             "QComboBox QAbstractItemView {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  selection-background-color: #3C3F41;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  selection-background-color: #30363D;"
             "}"
         );
     };
@@ -89,15 +89,15 @@ void SNMPMonitorWidget::setupUI()
     auto styleTable = [](QTableWidget* table) {
         table->setStyleSheet(
             "QTableWidget {"
-            "  background-color: #1E1F22; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; font-size: 12px;"
-            "  gridline-color: #2C2D30;"
+            "  background-color: #0D1117; color: #E6EDF3;"
+            "  border: 1px solid #30363D; font-size: 12px;"
+            "  gridline-color: #21262D;"
             "}"
             "QTableWidget::item { padding: 3px 6px; }"
-            "QTableWidget::item:selected { background-color: #3C3F41; }"
+            "QTableWidget::item:selected { background-color: #30363D; }"
             "QHeaderView::section {"
-            "  background-color: #25262B; color: #8C8C8C;"
-            "  border: none; border-bottom: 2px solid #3C3F41;"
+            "  background-color: #161B22; color: #8B949E;"
+            "  border: none; border-bottom: 2px solid #30363D;"
             "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
             "}"
         );
@@ -115,22 +115,22 @@ void SNMPMonitorWidget::setupUI()
                     "  font-size: 13px; font-weight: bold;"
                     "}"
                     "QPushButton:hover { background-color: %2; }"
-                    "QPushButton:disabled { background-color: #5C5C5C; }")
+                    "QPushButton:disabled { background-color: #484F58; }")
                 .arg(bgColor, hoverColor)
         );
         btn->setFixedHeight(34);
     };
 
     auto styleLabel = [](QLabel* label) {
-        label->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+        
     };
 
     auto styleSpin = [](QSpinBox* spin, int width = 80) {
         spin->setFixedWidth(width);
         spin->setStyleSheet(
             "QSpinBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 4px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
         );
@@ -209,19 +209,19 @@ void SNMPMonitorWidget::setupUI()
     m_tabWidget = new QTabWidget();
     m_tabWidget->setStyleSheet(
         "QTabWidget::pane {"
-        "  border: 1px solid #3C3F41; background-color: #1E1F22;"
+        "  border: 1px solid #30363D; background-color: #0D1117;"
         "}"
         "QTabBar::tab {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  padding: 6px 16px; border: 1px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  padding: 6px 16px; border: 1px solid #30363D;"
         "  border-bottom: none; font-size: 12px;"
         "}"
         "QTabBar::tab:selected {"
-        "  background-color: #1E1F22; color: #409EFF;"
+        "  background-color: #0D1117; color: #58A6FF;"
         "  border-bottom: 2px solid #409EFF;"
         "}"
         "QTabBar::tab:hover {"
-        "  background-color: #2C2D30; color: #DCDCDC;"
+        "  background-color: #21262D; color: #E6EDF3;"
         "}"
     );
 
@@ -267,11 +267,11 @@ void SNMPMonitorWidget::setupUI()
 
     // Start button
     m_startBtn = new QPushButton("开始监控");
-    styleButton(m_startBtn, "#409EFF", "#66B1FF");
+    styleButton(m_startBtn, "#58A6FF", "#79C0FF");
 
     // Stop button
     m_stopBtn = new QPushButton("停止监控");
-    styleButton(m_stopBtn, "#F56C6C", "#F78989");
+    styleButton(m_stopBtn, "#F85149", "#FF7B72");
     m_stopBtn->setEnabled(false);
 
     // Poll interval
@@ -287,20 +287,20 @@ void SNMPMonitorWidget::setupUI()
     m_autoRefreshCheck = new QCheckBox("自动刷新");
     m_autoRefreshCheck->setChecked(true);
     m_autoRefreshCheck->setStyleSheet(
-        "QCheckBox { color: #DCDCDC; font-size: 13px; }"
+        "QCheckBox { color: #E6EDF3; font-size: 13px; }"
         "QCheckBox::indicator {"
         "  width: 16px; height: 16px;"
-        "  border: 1px solid #3C3F41; border-radius: 3px;"
-        "  background-color: #25262B;"
+        "  border: 1px solid #30363D; border-radius: 3px;"
+        "  background-color: #161B22;"
         "}"
         "QCheckBox::indicator:checked {"
-        "  background-color: #409EFF; border-color: #409EFF;"
+        "  background-color: #58A6FF; border-color: #58A6FF;"
         "}"
     );
 
     // Export button
     m_exportBtn = new QPushButton("导出 CSV");
-    styleButton(m_exportBtn, "#67C23A", "#85CE61");
+    styleButton(m_exportBtn, "#3FB950", "#56D364");
 
     controlLayout->addWidget(m_startBtn);
     controlLayout->addWidget(m_stopBtn);
@@ -992,11 +992,11 @@ void SNMPMonitorWidget::addMetricRowTo(QTableWidget* table, const QString& metri
 
     auto* statusItem = new QTableWidgetItem(status);
     if (status == "OK") {
-        statusItem->setForeground(QColor("#67C23A"));
+        statusItem->setForeground(QColor("#3FB950"));
     } else if (status == "Warning") {
-        statusItem->setForeground(QColor("#E6A23C"));
+        statusItem->setForeground(QColor("#D29922"));
     } else if (status == "Critical" || status == "Error") {
-        statusItem->setForeground(QColor("#F56C6C"));
+        statusItem->setForeground(QColor("#F85149"));
     }
     table->setItem(row, 2, statusItem);
 
@@ -1018,9 +1018,9 @@ void SNMPMonitorWidget::addInterfaceRow(const QString& name, const QString& stat
 
     auto* statusItem = new QTableWidgetItem(status);
     if (status == "Up") {
-        statusItem->setForeground(QColor("#67C23A"));
+        statusItem->setForeground(QColor("#3FB950"));
     } else {
-        statusItem->setForeground(QColor("#F56C6C"));
+        statusItem->setForeground(QColor("#F85149"));
     }
     m_interfaceTable->setItem(row, 1, statusItem);
 

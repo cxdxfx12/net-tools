@@ -77,8 +77,10 @@ set(SOURCES
     src/network/ARPWidget.cpp
     src/network/DHCPWidget.cpp
     src/network/WOLWidget.cpp
+    src/network/WhoisWidget.cpp
     # mac
     src/mac/MacToolkitWidget.cpp
+    src/mac/MacLookupWidget.cpp
     # snmp
     src/snmp/SNMPWidget.cpp
     src/snmp/SNMPMonitorWidget.cpp
@@ -87,6 +89,8 @@ set(SOURCES
     # ftp
     src/ftp/SFTPWidget.cpp
     src/ftp/TFTPWidget.cpp
+    src/ftp/FTPWidget.cpp
+    src/ftp/SCPWidget.cpp
     # serial
     src/serial/SerialWidget.cpp
     # http
@@ -105,6 +109,8 @@ set(SOURCES
     src/syslog/SyslogCenterWidget.cpp
     # configcenter
     src/configcenter/ConfigCenterWidget.cpp
+    src/configcenter/ConfigDiffWidget.cpp
+    src/configcenter/ConfigGenWidget.cpp
     # report
     src/report/ReportWidget.cpp
     # topology
@@ -141,6 +147,12 @@ set(SOURCES
     src/ipv6/IPv6Widget.cpp
     # flow
     src/flow/FlowCollectorWidget.cpp
+    # mqtt
+    src/mqtt/MQTTWidget.cpp
+    # modbus
+    src/modbus/ModbusWidget.cpp
+    # log viewer
+    src/log/LogViewerWidget.cpp
 )
 
 set(HEADERS
@@ -209,8 +221,10 @@ set(HEADERS
     src/network/ARPWidget.h
     src/network/DHCPWidget.h
     src/network/WOLWidget.h
+    src/network/WhoisWidget.h
     # mac
     src/mac/MacToolkitWidget.h
+    src/mac/MacLookupWidget.h
     # snmp
     src/snmp/SNMPWidget.h
     src/snmp/SNMPMonitorWidget.h
@@ -219,6 +233,8 @@ set(HEADERS
     # ftp
     src/ftp/SFTPWidget.h
     src/ftp/TFTPWidget.h
+    src/ftp/FTPWidget.h
+    src/ftp/SCPWidget.h
     # serial
     src/serial/SerialWidget.h
     # http
@@ -237,6 +253,8 @@ set(HEADERS
     src/syslog/SyslogCenterWidget.h
     # configcenter
     src/configcenter/ConfigCenterWidget.h
+    src/configcenter/ConfigDiffWidget.h
+    src/configcenter/ConfigGenWidget.h
     # report
     src/report/ReportWidget.h
     # inspection
@@ -273,6 +291,12 @@ set(HEADERS
     src/ipv6/IPv6Widget.h
     # flow
     src/flow/FlowCollectorWidget.h
+    # mqtt
+    src/mqtt/MQTTWidget.h
+    # modbus
+    src/modbus/ModbusWidget.h
+    # log viewer
+    src/log/LogViewerWidget.h
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})

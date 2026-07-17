@@ -62,55 +62,55 @@ void MibWidget::setupUI()
     m_importMibBtn = new QPushButton(QStringLiteral("导入 MIB"));
     m_importMibBtn->setStyleSheet(QStringLiteral(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 8px 16px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
     ));
     m_importMibBtn->setFixedHeight(32);
 
     m_deleteMibBtn = new QPushButton(QStringLiteral("删除 MIB"));
     m_deleteMibBtn->setStyleSheet(QStringLiteral(
         "QPushButton {"
-        "  background-color: #F56C6C; color: white;"
+        "  background-color: #F85149; color: white;"
         "  border: none; padding: 8px 16px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #F78989; }"
+        "QPushButton:hover { background-color: #FF7B72; }"
     ));
     m_deleteMibBtn->setFixedHeight(32);
 
     m_searchBtn = new QPushButton(QStringLiteral("搜索"));
     m_searchBtn->setStyleSheet(QStringLiteral(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 8px 16px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
     ));
     m_searchBtn->setFixedHeight(32);
 
     m_favoriteBtn = new QPushButton(QStringLiteral("收藏夹"));
     m_favoriteBtn->setStyleSheet(QStringLiteral(
         "QPushButton {"
-        "  background-color: #E6A23C; color: white;"
+        "  background-color: #D29922; color: white;"
         "  border: none; padding: 8px 16px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #EBB563; }"
+        "QPushButton:hover { background-color: #DBAB4A; }"
     ));
     m_favoriteBtn->setFixedHeight(32);
 
     m_exportBtn = new QPushButton(QStringLiteral("导出 CSV"));
     m_exportBtn->setStyleSheet(QStringLiteral(
         "QPushButton {"
-        "  background-color: #67C23A; color: white;"
+        "  background-color: #3FB950; color: white;"
         "  border: none; padding: 8px 16px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #85CE61; }"
+        "QPushButton:hover { background-color: #56D364; }"
     ));
     m_exportBtn->setFixedHeight(32);
 
@@ -126,13 +126,13 @@ void MibWidget::setupUI()
     auto* searchLayout = new QHBoxLayout();
     searchLayout->setSpacing(8);
     auto* searchLabel = new QLabel(QStringLiteral("OID 搜索:"));
-    searchLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_oidSearchEdit = new QLineEdit();
     m_oidSearchEdit->setPlaceholderText(QStringLiteral("输入 OID 或名称进行搜索，例如: 1.3.6.1.2.1.1 或 sysDescr"));
     m_oidSearchEdit->setStyleSheet(QStringLiteral(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 6px 10px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 6px 10px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     ));
@@ -151,12 +151,12 @@ void MibWidget::setupUI()
     m_mibFileList = new QListWidget();
     m_mibFileList->setStyleSheet(QStringLiteral(
         "QListWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; font-size: 12px;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D; font-size: 12px;"
         "}"
         "QListWidget::item { padding: 4px 6px; }"
-        "QListWidget::item:hover { background-color: #2C2D30; }"
-        "QListWidget::item:selected { background-color: #3C3F41; }"
+        "QListWidget::item:hover { background-color: #21262D; }"
+        "QListWidget::item:selected { background-color: #30363D; }"
     ));
     mibFileLayout->addWidget(m_mibFileList);
     splitter->addWidget(mibFileGroup);
@@ -183,15 +183,15 @@ void MibWidget::setupUI()
     m_oidTree->setAlternatingRowColors(true);
     m_oidTree->setStyleSheet(QStringLiteral(
         "QTreeWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; font-size: 12px;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D; font-size: 12px;"
         "}"
         "QTreeWidget::item { padding: 3px 4px; }"
-        "QTreeWidget::item:hover { background-color: #2C2D30; }"
-        "QTreeWidget::item:selected { background-color: #3C3F41; }"
+        "QTreeWidget::item:hover { background-color: #21262D; }"
+        "QTreeWidget::item:selected { background-color: #30363D; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
         "}"
     ));
@@ -214,8 +214,8 @@ void MibWidget::setupUI()
     m_detailArea->setPlaceholderText(QStringLiteral("点击 OID 树中的节点查看详情..."));
     m_detailArea->setStyleSheet(QStringLiteral(
         "QPlainTextEdit {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; font-size: 13px;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D; font-size: 13px;"
         "  font-family: 'Menlo', 'Consolas', 'Courier New', monospace;"
         "  padding: 8px;"
         "}"
@@ -236,8 +236,8 @@ void MibWidget::setupUI()
     m_deviceIpEdit->setPlaceholderText(QStringLiteral("例如: 192.168.1.1"));
     m_deviceIpEdit->setStyleSheet(QStringLiteral(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     ));
@@ -246,16 +246,16 @@ void MibWidget::setupUI()
     m_communityEdit->setText(QStringLiteral("public"));
     m_communityEdit->setStyleSheet(QStringLiteral(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     ));
 
     auto* ipLabel = new QLabel(QStringLiteral("设备 IP:"));
-    ipLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     auto* communityLabel = new QLabel(QStringLiteral("Community:"));
-    communityLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
 
     snmpFormLayout->addRow(ipLabel, m_deviceIpEdit);
     snmpFormLayout->addRow(communityLabel, m_communityEdit);
@@ -267,24 +267,24 @@ void MibWidget::setupUI()
     m_getBtn = new QPushButton(QStringLiteral("SNMP Get"));
     m_getBtn->setStyleSheet(QStringLiteral(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 6px 14px; border-radius: 4px;"
         "  font-size: 12px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     ));
     m_getBtn->setFixedHeight(30);
 
     m_walkBtn = new QPushButton(QStringLiteral("SNMP Walk"));
     m_walkBtn->setStyleSheet(QStringLiteral(
         "QPushButton {"
-        "  background-color: #E6A23C; color: white;"
+        "  background-color: #D29922; color: white;"
         "  border: none; padding: 6px 14px; border-radius: 4px;"
         "  font-size: 12px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #EBB563; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #DBAB4A; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     ));
     m_walkBtn->setFixedHeight(30);
 
@@ -299,8 +299,8 @@ void MibWidget::setupUI()
     m_snmpResultArea->setMaximumHeight(150);
     m_snmpResultArea->setStyleSheet(QStringLiteral(
         "QPlainTextEdit {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; font-size: 12px;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D; font-size: 12px;"
         "  font-family: 'Menlo', 'Consolas', 'Courier New', monospace;"
         "  padding: 6px;"
         "}"

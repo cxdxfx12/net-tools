@@ -71,15 +71,15 @@ void InspectionWidget::setupUI()
         table->setStyleSheet(
             QStringLiteral(
                 "QTableWidget {"
-                "  background-color: #1E1F22; color: #DCDCDC;"
-                "  border: 1px solid #3C3F41; font-size: 12px;"
-                "  gridline-color: #2C2D30;"
+                "  background-color: #0D1117; color: #E6EDF3;"
+                "  border: 1px solid #30363D; font-size: 12px;"
+                "  gridline-color: #21262D;"
                 "}"
                 "QTableWidget::item { padding: 3px 6px; }"
-                "QTableWidget::item:selected { background-color: #3C3F41; }"
+                "QTableWidget::item:selected { background-color: #30363D; }"
                 "QHeaderView::section {"
-                "  background-color: #25262B; color: #8C8C8C;"
-                "  border: none; border-bottom: 2px solid #3C3F41;"
+                "  background-color: #161B22; color: #8B949E;"
+                "  border: none; border-bottom: 2px solid #30363D;"
                 "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
                 "}"
             )
@@ -100,13 +100,13 @@ void InspectionWidget::setupUI()
                 "  font-size: 13px; font-weight: bold;"
                 "}"
                 "QPushButton:hover { background-color: %2; }"
-                "QPushButton:disabled { background-color: #5C5C5C; }"
+                "QPushButton:disabled { background-color: #484F58; }"
             )).arg(bgColor, hoverColor)
         );
         btn->setFixedHeight(34);
     };
 
-    auto styleLabel = [](QLabel* label, const QString& color = QStringLiteral("#8C8C8C"), int fontSize = 12) {
+    auto styleLabel = [](QLabel* label, const QString& color = QStringLiteral("#8B949E"), int fontSize = 12) {
         label->setStyleSheet(
             QString(QStringLiteral("font-size: %1px; color: %2;")).arg(fontSize).arg(color)
         );
@@ -116,11 +116,11 @@ void InspectionWidget::setupUI()
         list->setStyleSheet(
             QStringLiteral(
                 "QListWidget {"
-                "  background-color: #1E1F22; color: #DCDCDC;"
-                "  border: 1px solid #3C3F41; font-size: 13px;"
+                "  background-color: #0D1117; color: #E6EDF3;"
+                "  border: 1px solid #30363D; font-size: 13px;"
                 "}"
                 "QListWidget::item { padding: 4px 8px; }"
-                "QListWidget::item:selected { background-color: #3C3F41; }"
+                "QListWidget::item:selected { background-color: #30363D; }"
             )
         );
     };
@@ -128,7 +128,7 @@ void InspectionWidget::setupUI()
     // ── Top: Main splitter (left: device+items, right: results+history) ──
     auto* mainSplitter = new QSplitter(Qt::Horizontal);
     mainSplitter->setStyleSheet(
-        QStringLiteral("QSplitter::handle { background-color: #3C3F41; width: 2px; }")
+        QStringLiteral("QSplitter::handle { background-color: #30363D; width: 2px; }")
     );
 
     // ─── Left Panel: Device selection + Inspection items ───
@@ -142,8 +142,8 @@ void InspectionWidget::setupUI()
     deviceGroup->setStyleSheet(
         QStringLiteral(
             "QGroupBox {"
-            "  color: #409EFF; font-size: 13px; font-weight: bold;"
-            "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+            "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+            "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
             "  padding-top: 16px;"
             "}"
             "QGroupBox::title {"
@@ -160,7 +160,7 @@ void InspectionWidget::setupUI()
     styleListWidget(m_deviceList);
 
     m_addDeviceBtn = new QPushButton(QStringLiteral("+ 添加设备"));
-    styleButton(m_addDeviceBtn, QStringLiteral("#409EFF"), QStringLiteral("#66B1FF"));
+    styleButton(m_addDeviceBtn, QStringLiteral("#58A6FF"), QStringLiteral("#79C0FF"));
 
     deviceLayout->addWidget(m_deviceList);
     deviceLayout->addWidget(m_addDeviceBtn);
@@ -171,8 +171,8 @@ void InspectionWidget::setupUI()
     itemGroup->setStyleSheet(
         QStringLiteral(
             "QGroupBox {"
-            "  color: #409EFF; font-size: 13px; font-weight: bold;"
-            "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+            "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+            "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
             "  padding-top: 16px;"
             "}"
             "QGroupBox::title {"
@@ -209,10 +209,10 @@ void InspectionWidget::setupUI()
 
     auto* itemBtnLayout = new QHBoxLayout();
     m_selectAllBtn = new QPushButton(QStringLiteral("全选"));
-    styleButton(m_selectAllBtn, QStringLiteral("#909399"), QStringLiteral("#B4B4B4"));
+    styleButton(m_selectAllBtn, QStringLiteral("#8B949E"), QStringLiteral("#B4B4B4"));
     m_selectAllBtn->setFixedHeight(28);
     m_deselectAllBtn = new QPushButton(QStringLiteral("取消全选"));
-    styleButton(m_deselectAllBtn, QStringLiteral("#909399"), QStringLiteral("#B4B4B4"));
+    styleButton(m_deselectAllBtn, QStringLiteral("#8B949E"), QStringLiteral("#B4B4B4"));
     m_deselectAllBtn->setFixedHeight(28);
     itemBtnLayout->addWidget(m_selectAllBtn);
     itemBtnLayout->addWidget(m_deselectAllBtn);
@@ -237,12 +237,12 @@ void InspectionWidget::setupUI()
     m_progressBar->setStyleSheet(
         QStringLiteral(
             "QProgressBar {"
-            "  background-color: #1E1F22; border: 1px solid #3C3F41;"
+            "  background-color: #0D1117; border: 1px solid #30363D;"
             "  border-radius: 4px; text-align: center; color: white;"
             "  font-size: 13px; font-weight: bold;"
             "}"
             "QProgressBar::chunk {"
-            "  background-color: #409EFF; border-radius: 3px;"
+            "  background-color: #58A6FF; border-radius: 3px;"
             "}"
         )
     );
@@ -253,8 +253,8 @@ void InspectionWidget::setupUI()
     resultGroup->setStyleSheet(
         QStringLiteral(
             "QGroupBox {"
-            "  color: #409EFF; font-size: 13px; font-weight: bold;"
-            "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+            "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+            "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
             "  padding-top: 16px;"
             "}"
             "QGroupBox::title {"
@@ -290,8 +290,8 @@ void InspectionWidget::setupUI()
     scoreFrame->setStyleSheet(
         QStringLiteral(
             "QFrame {"
-            "  background-color: #25262B;"
-            "  border: 1px solid #3C3F41;"
+            "  background-color: #161B22;"
+            "  border: 1px solid #30363D;"
             "  border-radius: 6px;"
             "}"
         )
@@ -300,9 +300,9 @@ void InspectionWidget::setupUI()
     scoreLayout->setContentsMargins(16, 12, 16, 12);
 
     auto* scoreTitle = new QLabel(QStringLiteral("巡检总评分:"));
-    scoreTitle->setStyleSheet(QStringLiteral("font-size: 16px; color: #8C8C8C; font-weight: bold;"));
+    scoreTitle->setStyleSheet(QStringLiteral("font-size: 16px; color: #8B949E; font-weight: bold;"));
     m_scoreLabel = new QLabel(QStringLiteral("-- / --"));
-    m_scoreLabel->setStyleSheet(QStringLiteral("font-size: 28px; color: #409EFF; font-weight: bold;"));
+    m_scoreLabel->setStyleSheet(QStringLiteral("font-size: 28px; color: #58A6FF; font-weight: bold;"));
     scoreLayout->addWidget(scoreTitle);
     scoreLayout->addWidget(m_scoreLabel);
     scoreLayout->addStretch();
@@ -314,8 +314,8 @@ void InspectionWidget::setupUI()
     historyGroup->setStyleSheet(
         QStringLiteral(
             "QGroupBox {"
-            "  color: #409EFF; font-size: 13px; font-weight: bold;"
-            "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+            "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+            "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
             "  padding-top: 16px;"
             "}"
             "QGroupBox::title {"
@@ -356,26 +356,26 @@ void InspectionWidget::setupUI()
     bottomLayout->setSpacing(12);
 
     m_startBtn = new QPushButton(QStringLiteral("一键巡检"));
-    styleButton(m_startBtn, QStringLiteral("#67C23A"), QStringLiteral("#85CE61"));
+    styleButton(m_startBtn, QStringLiteral("#3FB950"), QStringLiteral("#56D364"));
 
     m_stopBtn = new QPushButton(QStringLiteral("停止"));
-    styleButton(m_stopBtn, QStringLiteral("#F56C6C"), QStringLiteral("#F89898"));
+    styleButton(m_stopBtn, QStringLiteral("#F85149"), QStringLiteral("#F89898"));
     m_stopBtn->setEnabled(false);
 
     m_exportBtn = new QPushButton(QStringLiteral("导出报告"));
-    styleButton(m_exportBtn, QStringLiteral("#E6A23C"), QStringLiteral("#EBB563"));
+    styleButton(m_exportBtn, QStringLiteral("#D29922"), QStringLiteral("#DBAB4A"));
 
     m_autoCheck = new QCheckBox(QStringLiteral("定时巡检"));
     m_autoCheck->setStyleSheet(
         QStringLiteral(
-            "QCheckBox { color: #DCDCDC; font-size: 13px; }"
+            "QCheckBox { color: #E6EDF3; font-size: 13px; }"
             "QCheckBox::indicator {"
             "  width: 16px; height: 16px;"
-            "  border: 1px solid #3C3F41; border-radius: 3px;"
-            "  background-color: #25262B;"
+            "  border: 1px solid #30363D; border-radius: 3px;"
+            "  background-color: #161B22;"
             "}"
             "QCheckBox::indicator:checked {"
-            "  background-color: #409EFF; border-color: #409EFF;"
+            "  background-color: #58A6FF; border-color: #58A6FF;"
             "}"
         )
     );
@@ -388,14 +388,14 @@ void InspectionWidget::setupUI()
     m_intervalCombo->setStyleSheet(
         QStringLiteral(
             "QComboBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px 8px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 4px 8px;"
             "  border-radius: 3px; font-size: 13px; min-width: 100px;"
             "}"
             "QComboBox::drop-down { border: none; }"
             "QComboBox QAbstractItemView {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  selection-background-color: #3C3F41;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  selection-background-color: #30363D;"
             "}"
         )
     );
@@ -644,11 +644,11 @@ void InspectionWidget::updateScore()
 
     QString color;
     if (passRate >= 80.0) {
-        color = QStringLiteral("#67C23A"); // Green
+        color = QStringLiteral("#3FB950"); // Green
     } else if (passRate >= 60.0) {
-        color = QStringLiteral("#E6A23C"); // Yellow
+        color = QStringLiteral("#D29922"); // Yellow
     } else {
-        color = QStringLiteral("#F56C6C"); // Red
+        color = QStringLiteral("#F85149"); // Red
     }
 
     m_scoreLabel->setStyleSheet(
@@ -675,11 +675,11 @@ void InspectionWidget::addResultRow(const QString& device, const QString& item,
 
     auto* resultItem = new QTableWidgetItem(result);
     if (result == QStringLiteral("通过")) {
-        resultItem->setForeground(QColor(QStringLiteral("#67C23A")));
+        resultItem->setForeground(QColor(QStringLiteral("#3FB950")));
     } else if (result == QStringLiteral("警告")) {
-        resultItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+        resultItem->setForeground(QColor(QStringLiteral("#D29922")));
     } else {
-        resultItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+        resultItem->setForeground(QColor(QStringLiteral("#F85149")));
     }
     m_resultTable->setItem(row, 2, resultItem);
 
@@ -705,11 +705,11 @@ void InspectionWidget::addHistoryEntry(const QString& time, int deviceCount,
     auto* passRateItem = new QTableWidgetItem(
         QString(QStringLiteral("%1%")).arg(QString::number(passRate, 'f', 1)));
     if (passRate >= 80.0) {
-        passRateItem->setForeground(QColor(QStringLiteral("#67C23A")));
+        passRateItem->setForeground(QColor(QStringLiteral("#3FB950")));
     } else if (passRate >= 60.0) {
-        passRateItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+        passRateItem->setForeground(QColor(QStringLiteral("#D29922")));
     } else {
-        passRateItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+        passRateItem->setForeground(QColor(QStringLiteral("#F85149")));
     }
     m_historyTable->setItem(row, 3, passRateItem);
 
@@ -747,28 +747,28 @@ void InspectionWidget::onExportReport()
     QTextStream stream(&file);
 
     double passRate = (m_maxScore > 0) ? (double)m_totalScore / m_maxScore * 100.0 : 0.0;
-    QString scoreColor = (passRate >= 80.0) ? QStringLiteral("#67C23A") :
-                         (passRate >= 60.0) ? QStringLiteral("#E6A23C") : QStringLiteral("#F56C6C");
+    QString scoreColor = (passRate >= 80.0) ? QStringLiteral("#3FB950") :
+                         (passRate >= 60.0) ? QStringLiteral("#D29922") : QStringLiteral("#F85149");
 
     stream << QStringLiteral("<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n");
     stream << QStringLiteral("<meta charset=\"UTF-8\">\n");
     stream << QStringLiteral("<title>巡检报告</title>\n");
     stream << QStringLiteral("<style>\n");
     stream << QStringLiteral("body { font-family: 'Microsoft YaHei', sans-serif; "
-                              "background: #1E1F22; color: #DCDCDC; padding: 20px; }\n");
-    stream << QStringLiteral("h1 { color: #409EFF; text-align: center; }\n");
+                              "background: #0D1117; color: #E6EDF3; padding: 20px; }\n");
+    stream << QStringLiteral("h1 { color: #58A6FF; text-align: center; }\n");
     stream << QStringLiteral(".score { text-align: center; font-size: 32px; font-weight: bold; "
                               "color: %1; margin: 20px 0; }\n").arg(scoreColor);
     stream << QStringLiteral("table { width: 100%%; border-collapse: collapse; "
                               "margin-top: 20px; }\n");
-    stream << QStringLiteral("th { background: #25262B; color: #8C8C8C; padding: 10px; "
-                              "border-bottom: 2px solid #3C3F41; }\n");
-    stream << QStringLiteral("td { padding: 8px; border-bottom: 1px solid #2C2D30; "
+    stream << QStringLiteral("th { background: #161B22; color: #8B949E; padding: 10px; "
+                              "border-bottom: 2px solid #30363D; }\n");
+    stream << QStringLiteral("td { padding: 8px; border-bottom: 1px solid #21262D; "
                               "text-align: center; }\n");
-    stream << QStringLiteral(".pass { color: #67C23A; font-weight: bold; }\n");
-    stream << QStringLiteral(".warn { color: #E6A23C; font-weight: bold; }\n");
-    stream << QStringLiteral(".fail { color: #F56C6C; font-weight: bold; }\n");
-    stream << QStringLiteral(".footer { text-align: center; color: #8C8C8C; "
+    stream << QStringLiteral(".pass { color: #3FB950; font-weight: bold; }\n");
+    stream << QStringLiteral(".warn { color: #D29922; font-weight: bold; }\n");
+    stream << QStringLiteral(".fail { color: #F85149; font-weight: bold; }\n");
+    stream << QStringLiteral(".footer { text-align: center; color: #8B949E; "
                               "margin-top: 30px; font-size: 12px; }\n");
     stream << QStringLiteral("</style>\n</head>\n<body>\n");
 

@@ -435,20 +435,20 @@ void TFTPWidget::setupUI()
     // ── Mode selector ──
     auto* modeLayout = new QHBoxLayout();
     auto* modeLabel = new QLabel("模式:");
-    modeLabel->setStyleSheet("font-size: 13px; color: #DCDCDC; font-weight: bold;");
+    modeLabel->setStyleSheet("font-size: 13px; color: #E6EDF3; font-weight: bold;");
     m_modeCombo = new QComboBox();
     m_modeCombo->addItem("TFTP 服务器", 0);
     m_modeCombo->addItem("TFTP 客户端", 1);
     m_modeCombo->setStyleSheet(
         "QComboBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px; min-width: 160px;"
         "}"
         "QComboBox::drop-down { border: none; }"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #409EFF; border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #58A6FF; border: 1px solid #30363D;"
         "}"
     );
     modeLayout->addWidget(modeLabel);
@@ -483,17 +483,17 @@ void TFTPWidget::setupUI()
     m_historyTable->setMaximumHeight(150);
     m_historyTable->setStyleSheet(
         "QTableWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  gridline-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  gridline-color: #30363D; border: 1px solid #30363D;"
         "  font-size: 12px;"
         "}"
         "QTableWidget::item { padding: 2px 4px; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 3px 6px; font-size: 11px; font-weight: bold;"
         "}"
-        "QTableWidget::item:alternate { background-color: #25262B; }"
+        "QTableWidget::item:alternate { background-color: #161B22; }"
     );
     historyLayout->addWidget(m_historyTable);
 
@@ -503,18 +503,18 @@ void TFTPWidget::setupUI()
     m_exportBtn = new QPushButton("导出 CSV");
     m_exportBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #67C23A; color: white;"
+        "  background-color: #3FB950; color: white;"
         "  border: none; padding: 4px 12px; border-radius: 3px;"
         "  font-size: 12px;"
         "}"
-        "QPushButton:hover { background-color: #85CE61; }"
+        "QPushButton:hover { background-color: #56D364; }"
     );
     historyBtnLayout->addWidget(m_exportBtn);
 
     m_clearBtn = new QPushButton("清空历史");
     m_clearBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #5C5C5C; color: white;"
+        "  background-color: #484F58; color: white;"
         "  border: none; padding: 4px 12px; border-radius: 3px;"
         "  font-size: 12px;"
         "}"
@@ -543,8 +543,8 @@ QWidget* TFTPWidget::createServerPage()
     m_serverPortSpin->setValue(69);
     m_serverPortSpin->setStyleSheet(
         "QSpinBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -555,8 +555,8 @@ QWidget* TFTPWidget::createServerPage()
     m_serverRootDirEdit->setPlaceholderText("选择 TFTP 根目录...");
     m_serverRootDirEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -565,7 +565,7 @@ QWidget* TFTPWidget::createServerPage()
     m_serverBrowseBtn = new QPushButton("浏览");
     m_serverBrowseBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #3C3F41; color: #DCDCDC;"
+        "  background-color: #30363D; color: #E6EDF3;"
         "  border: none; padding: 4px 12px; border-radius: 3px;"
         "  font-size: 12px;"
         "}"
@@ -582,30 +582,30 @@ QWidget* TFTPWidget::createServerPage()
     m_serverStartBtn = new QPushButton("启动服务器");
     m_serverStartBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     controlLayout->addWidget(m_serverStartBtn);
 
     m_serverStopBtn = new QPushButton("停止服务器");
     m_serverStopBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #F56C6C; color: white;"
+        "  background-color: #F85149; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #F78989; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #FF7B72; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_serverStopBtn->setEnabled(false);
     controlLayout->addWidget(m_serverStopBtn);
 
     m_serverStatusLabel = new QLabel("状态: 已停止");
-    m_serverStatusLabel->setStyleSheet("font-size: 13px; color: #8C8C8C; padding: 0 12px;");
+    
     controlLayout->addWidget(m_serverStatusLabel);
 
     controlLayout->addStretch();
@@ -620,8 +620,8 @@ QWidget* TFTPWidget::createServerPage()
     m_serverLogEdit->setReadOnly(true);
     m_serverLogEdit->setStyleSheet(
         "QTextEdit {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D;"
         "  font-family: 'Consolas', 'Menlo', monospace;"
         "  font-size: 12px;"
         "}"
@@ -649,8 +649,8 @@ QWidget* TFTPWidget::createClientPage()
     m_clientServerAddrEdit->setPlaceholderText("输入 TFTP 服务器地址, 如 192.168.1.1");
     m_clientServerAddrEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -661,8 +661,8 @@ QWidget* TFTPWidget::createClientPage()
     m_clientPortSpin->setValue(69);
     m_clientPortSpin->setStyleSheet(
         "QSpinBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -673,8 +673,8 @@ QWidget* TFTPWidget::createClientPage()
     m_clientLocalFileEdit->setPlaceholderText("选择本地文件路径...");
     m_clientLocalFileEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -683,7 +683,7 @@ QWidget* TFTPWidget::createClientPage()
     m_clientBrowseBtn = new QPushButton("浏览");
     m_clientBrowseBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #3C3F41; color: #DCDCDC;"
+        "  background-color: #30363D; color: #E6EDF3;"
         "  border: none; padding: 4px 12px; border-radius: 3px;"
         "  font-size: 12px;"
         "}"
@@ -696,8 +696,8 @@ QWidget* TFTPWidget::createClientPage()
     m_clientRemoteFileEdit->setPlaceholderText("输入远程文件名, 如 config.bin");
     m_clientRemoteFileEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -711,29 +711,29 @@ QWidget* TFTPWidget::createClientPage()
     m_clientUploadBtn = new QPushButton("上传 (PUT)");
     m_clientUploadBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     controlLayout->addWidget(m_clientUploadBtn);
 
     m_clientDownloadBtn = new QPushButton("下载 (GET)");
     m_clientDownloadBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #67C23A; color: white;"
+        "  background-color: #3FB950; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #85CE61; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #56D364; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     controlLayout->addWidget(m_clientDownloadBtn);
 
     m_clientStatusLabel = new QLabel("就绪");
-    m_clientStatusLabel->setStyleSheet("font-size: 13px; color: #8C8C8C; padding: 0 12px;");
+    
     controlLayout->addWidget(m_clientStatusLabel);
 
     controlLayout->addStretch();
@@ -746,12 +746,12 @@ QWidget* TFTPWidget::createClientPage()
     m_clientProgressBar->setTextVisible(true);
     m_clientProgressBar->setStyleSheet(
         "QProgressBar {"
-        "  border: 1px solid #3C3F41; border-radius: 3px;"
-        "  background-color: #25262B; text-align: center;"
-        "  color: #DCDCDC; font-size: 12px; height: 22px;"
+        "  border: 1px solid #30363D; border-radius: 3px;"
+        "  background-color: #161B22; text-align: center;"
+        "  color: #E6EDF3; font-size: 12px; height: 22px;"
         "}"
         "QProgressBar::chunk {"
-        "  background-color: #409EFF; border-radius: 2px;"
+        "  background-color: #58A6FF; border-radius: 2px;"
         "}"
     );
     layout->addWidget(m_clientProgressBar);
@@ -832,7 +832,7 @@ void TFTPWidget::onServerStart()
         m_serverRootDirEdit->setEnabled(false);
         m_serverBrowseBtn->setEnabled(false);
         m_serverStatusLabel->setText(QString("状态: 运行中 (端口 %1)").arg(port));
-        m_serverStatusLabel->setStyleSheet("font-size: 13px; color: #67C23A; padding: 0 12px; font-weight: bold;");
+        m_serverStatusLabel->setStyleSheet("font-size: 13px; color: #3FB950; padding: 0 12px; font-weight: bold;");
         Logger::instance().info("TFTP", QString("Server started on port %1, root: %2").arg(port).arg(rootDir));
     } else {
         m_serverLogEdit->append("[错误] 启动 TFTP 服务器失败");
@@ -856,7 +856,7 @@ void TFTPWidget::onServerStop()
     m_serverRootDirEdit->setEnabled(true);
     m_serverBrowseBtn->setEnabled(true);
     m_serverStatusLabel->setText("状态: 已停止");
-    m_serverStatusLabel->setStyleSheet("font-size: 13px; color: #8C8C8C; padding: 0 12px;");
+    
     Logger::instance().info("TFTP", "Server stopped");
 }
 
@@ -924,19 +924,19 @@ void TFTPWidget::onClientUpload()
     if (serverAddr.isEmpty()) {
         Logger::instance().warning("TFTP", "请填写服务器地址");
         m_clientStatusLabel->setText("请填写服务器地址");
-        m_clientStatusLabel->setStyleSheet("font-size: 13px; color: #F56C6C; padding: 0 12px;");
+        
         return;
     }
     if (localFile.isEmpty()) {
         Logger::instance().warning("TFTP", "请选择本地文件");
         m_clientStatusLabel->setText("请选择本地文件");
-        m_clientStatusLabel->setStyleSheet("font-size: 13px; color: #F56C6C; padding: 0 12px;");
+        
         return;
     }
     if (remoteFile.isEmpty()) {
         Logger::instance().warning("TFTP", "请填写远程文件名");
         m_clientStatusLabel->setText("请填写远程文件名");
-        m_clientStatusLabel->setStyleSheet("font-size: 13px; color: #F56C6C; padding: 0 12px;");
+        
         return;
     }
 
@@ -944,7 +944,7 @@ void TFTPWidget::onClientUpload()
     if (!fileInfo.exists() || !fileInfo.isFile()) {
         Logger::instance().warning("TFTP", "本地文件不存在: " + localFile);
         m_clientStatusLabel->setText("本地文件不存在");
-        m_clientStatusLabel->setStyleSheet("font-size: 13px; color: #F56C6C; padding: 0 12px;");
+        
         return;
     }
 
@@ -963,7 +963,7 @@ void TFTPWidget::onClientUpload()
     m_clientDownloadBtn->setEnabled(false);
     m_clientProgressBar->setValue(0);
     m_clientStatusLabel->setText("上传中...");
-    m_clientStatusLabel->setStyleSheet("font-size: 13px; color: #409EFF; padding: 0 12px;");
+    
 
     if (!m_clientProcess) {
         m_clientProcess = new QProcess(this);
@@ -993,19 +993,19 @@ void TFTPWidget::onClientDownload()
     if (serverAddr.isEmpty()) {
         Logger::instance().warning("TFTP", "请填写服务器地址");
         m_clientStatusLabel->setText("请填写服务器地址");
-        m_clientStatusLabel->setStyleSheet("font-size: 13px; color: #F56C6C; padding: 0 12px;");
+        
         return;
     }
     if (localFile.isEmpty()) {
         Logger::instance().warning("TFTP", "请选择本地保存路径");
         m_clientStatusLabel->setText("请选择本地保存路径");
-        m_clientStatusLabel->setStyleSheet("font-size: 13px; color: #F56C6C; padding: 0 12px;");
+        
         return;
     }
     if (remoteFile.isEmpty()) {
         Logger::instance().warning("TFTP", "请填写远程文件名");
         m_clientStatusLabel->setText("请填写远程文件名");
-        m_clientStatusLabel->setStyleSheet("font-size: 13px; color: #F56C6C; padding: 0 12px;");
+        
         return;
     }
 
@@ -1024,7 +1024,7 @@ void TFTPWidget::onClientDownload()
     m_clientDownloadBtn->setEnabled(false);
     m_clientProgressBar->setValue(0);
     m_clientStatusLabel->setText("下载中...");
-    m_clientStatusLabel->setStyleSheet("font-size: 13px; color: #409EFF; padding: 0 12px;");
+    
 
     if (!m_clientProcess) {
         m_clientProcess = new QProcess(this);
@@ -1066,7 +1066,7 @@ void TFTPWidget::onClientProcessFinished(int exitCode, QProcess::ExitStatus exit
     if (exitCode == 0) {
         m_clientProgressBar->setValue(100);
         m_clientStatusLabel->setText(QString("%1 完成").arg(direction));
-        m_clientStatusLabel->setStyleSheet("font-size: 13px; color: #67C23A; padding: 0 12px;");
+        
 
         // Read file size
         QFileInfo fileInfo(m_clientCurrentLocalFile);
@@ -1078,7 +1078,7 @@ void TFTPWidget::onClientProcessFinished(int exitCode, QProcess::ExitStatus exit
         m_clientProgressBar->setValue(0);
         QString errOutput = m_clientProcess ? QString::fromUtf8(m_clientProcess->readAllStandardError()) : "";
         m_clientStatusLabel->setText(QString("%1 失败").arg(direction));
-        m_clientStatusLabel->setStyleSheet("font-size: 13px; color: #F56C6C; padding: 0 12px;");
+        
         record.fileSize = 0;
         record.success = false;
         record.errorMsg = errOutput.trimmed();
@@ -1115,7 +1115,7 @@ void TFTPWidget::onClientProcessError(QProcess::ProcessError error)
     }
 
     m_clientStatusLabel->setText(errorStr);
-    m_clientStatusLabel->setStyleSheet("font-size: 13px; color: #F56C6C; padding: 0 12px;");
+    
 
     Logger::instance().error("TFTP", errorStr);
 }
@@ -1138,15 +1138,15 @@ void TFTPWidget::addHistoryRecord(const TransferRecord& record)
     auto* statusItem = new QTableWidgetItem(record.success ? "成功" : "失败");
 
     if (record.success) {
-        statusItem->setForeground(QColor(0x67, 0xC2, 0x3A));
+        statusItem->setForeground(QColor(0x3F, 0xB9, 0x50));
     } else {
-        statusItem->setForeground(QColor(0xF5, 0x6C, 0x6C));
+        statusItem->setForeground(QColor(0xF8, 0x51, 0x49));
     }
 
     if (record.direction == "上传") {
-        dirItem->setForeground(QColor(0x40, 0x9E, 0xFF));
+        dirItem->setForeground(QColor(0x58, 0xA6, 0xFF));
     } else {
-        dirItem->setForeground(QColor(0xE6, 0xA2, 0x3C));
+        dirItem->setForeground(QColor(0xD2, 0x99, 0x22));
     }
 
     m_historyTable->setItem(row, 0, timeItem);

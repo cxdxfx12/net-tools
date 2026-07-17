@@ -70,15 +70,15 @@ void VPNWidget::setupUI()
         table->setStyleSheet(
             QStringLiteral(
                 "QTableWidget {"
-                "  background-color: #1E1F22; color: #DCDCDC;"
-                "  border: 1px solid #3C3F41; font-size: 12px;"
-                "  gridline-color: #2C2D30;"
+                "  background-color: #0D1117; color: #E6EDF3;"
+                "  border: 1px solid #30363D; font-size: 12px;"
+                "  gridline-color: #21262D;"
                 "}"
                 "QTableWidget::item { padding: 3px 6px; }"
-                "QTableWidget::item:selected { background-color: #3C3F41; }"
+                "QTableWidget::item:selected { background-color: #30363D; }"
                 "QHeaderView::section {"
-                "  background-color: #25262B; color: #8C8C8C;"
-                "  border: none; border-bottom: 2px solid #3C3F41;"
+                "  background-color: #161B22; color: #8B949E;"
+                "  border: none; border-bottom: 2px solid #30363D;"
                 "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
                 "}"
             )
@@ -99,7 +99,7 @@ void VPNWidget::setupUI()
                 "  font-size: 13px; font-weight: bold;"
                 "}"
                 "QPushButton:hover { background-color: %2; }"
-                "QPushButton:disabled { background-color: #5C5C5C; }"
+                "QPushButton:disabled { background-color: #484F58; }"
             )).arg(bgColor, hoverColor)
         );
         btn->setFixedHeight(34);
@@ -109,14 +109,14 @@ void VPNWidget::setupUI()
         combo->setStyleSheet(
             QStringLiteral(
                 "QComboBox {"
-                "  background: #25262B; color: #DCDCDC;"
-                "  border: 1px solid #3C3F41; padding: 4px 8px;"
+                "  background: #161B22; color: #E6EDF3;"
+                "  border: 1px solid #30363D; padding: 4px 8px;"
                 "  border-radius: 3px; font-size: 13px;"
                 "}"
                 "QComboBox::drop-down { border: none; }"
                 "QComboBox QAbstractItemView {"
-                "  background: #25262B; color: #DCDCDC;"
-                "  selection-background-color: #3C3F41;"
+                "  background: #161B22; color: #E6EDF3;"
+                "  selection-background-color: #30363D;"
                 "}"
             )
         );
@@ -126,8 +126,8 @@ void VPNWidget::setupUI()
         group->setStyleSheet(
             QStringLiteral(
                 "QGroupBox {"
-                "  color: #409EFF; font-size: 13px; font-weight: bold;"
-                "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+                "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+                "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
                 "  padding-top: 16px;"
                 "}"
                 "QGroupBox::title {"
@@ -170,8 +170,8 @@ void VPNWidget::setupUI()
     overviewFrame->setStyleSheet(
         QStringLiteral(
             "QFrame#overviewFrame {"
-            "  background-color: #25262B;"
-            "  border: 1px solid #3C3F41;"
+            "  background-color: #161B22;"
+            "  border: 1px solid #30363D;"
             "  border-radius: 6px;"
             "}"
         )
@@ -186,7 +186,7 @@ void VPNWidget::setupUI()
         card->setStyleSheet(
             QString(QStringLiteral(
                 "QFrame {"
-                "  background-color: #1E1F22;"
+                "  background-color: #0D1117;"
                 "  border: 1px solid %1;"
                 "  border-radius: 6px;"
                 "}"
@@ -197,7 +197,7 @@ void VPNWidget::setupUI()
         cardLayout->setSpacing(4);
 
         auto* titleLabel = new QLabel(title);
-        titleLabel->setStyleSheet(QStringLiteral("color: #8C8C8C; font-size: 12px;"));
+        
         titleLabel->setAlignment(Qt::AlignCenter);
 
         auto* valueLabel = new QLabel(value);
@@ -212,10 +212,10 @@ void VPNWidget::setupUI()
         return card;
     };
 
-    auto* totalCard = createCard(QStringLiteral("总隧道数"), QStringLiteral("0"), QStringLiteral("#409EFF"));
-    auto* onlineCard = createCard(QStringLiteral("在线"), QStringLiteral("0"), QStringLiteral("#67C23A"));
-    auto* offlineCard = createCard(QStringLiteral("离线"), QStringLiteral("0"), QStringLiteral("#E6A23C"));
-    auto* faultCard = createCard(QStringLiteral("故障"), QStringLiteral("0"), QStringLiteral("#F56C6C"));
+    auto* totalCard = createCard(QStringLiteral("总隧道数"), QStringLiteral("0"), QStringLiteral("#58A6FF"));
+    auto* onlineCard = createCard(QStringLiteral("在线"), QStringLiteral("0"), QStringLiteral("#3FB950"));
+    auto* offlineCard = createCard(QStringLiteral("离线"), QStringLiteral("0"), QStringLiteral("#D29922"));
+    auto* faultCard = createCard(QStringLiteral("故障"), QStringLiteral("0"), QStringLiteral("#F85149"));
 
     // 从卡片中获取 QLabel 引用
     m_totalTunnelsLabel = totalCard->findChild<QLabel*>(QStringLiteral("cardValue"));
@@ -240,21 +240,21 @@ void VPNWidget::setupUI()
     tabWidget->setStyleSheet(
         QStringLiteral(
             "QTabWidget::pane {"
-            "  border: 1px solid #3C3F41;"
-            "  background-color: #1E1F22;"
+            "  border: 1px solid #30363D;"
+            "  background-color: #0D1117;"
             "}"
             "QTabBar::tab {"
-            "  background-color: #25262B; color: #8C8C8C;"
-            "  padding: 6px 16px; border: 1px solid #3C3F41;"
+            "  background-color: #161B22; color: #8B949E;"
+            "  padding: 6px 16px; border: 1px solid #30363D;"
             "  border-bottom: none;"
             "  font-size: 12px; font-weight: bold;"
             "}"
             "QTabBar::tab:selected {"
-            "  background-color: #1E1F22; color: #409EFF;"
+            "  background-color: #0D1117; color: #58A6FF;"
             "  border-bottom: 2px solid #409EFF;"
             "}"
             "QTabBar::tab:hover {"
-            "  color: #DCDCDC;"
+            "  color: #E6EDF3;"
             "}"
         )
     );
@@ -357,11 +357,11 @@ void VPNWidget::setupUI()
     bottomBar->setSpacing(12);
 
     m_testBtn = new QPushButton(QStringLiteral("连接测试 (Ping)"));
-    styleButton(m_testBtn, QStringLiteral("#409EFF"), QStringLiteral("#66B1FF"));
+    styleButton(m_testBtn, QStringLiteral("#58A6FF"), QStringLiteral("#79C0FF"));
     bottomBar->addWidget(m_testBtn);
 
     m_exportBtn = new QPushButton(QStringLiteral("导出报告"));
-    styleButton(m_exportBtn, QStringLiteral("#E6A23C"), QStringLiteral("#EBB563"));
+    styleButton(m_exportBtn, QStringLiteral("#D29922"), QStringLiteral("#DBAB4A"));
     bottomBar->addWidget(m_exportBtn);
 
     bottomBar->addStretch();
@@ -571,32 +571,32 @@ void VPNWidget::updateTunnelStatus()
 
         auto* statusItem = new QTableWidgetItem(tunnel.status);
         if (tunnel.status == QStringLiteral("在线")) {
-            statusItem->setForeground(QColor(QStringLiteral("#67C23A")));
+            statusItem->setForeground(QColor(QStringLiteral("#3FB950")));
             onlineCount++;
         } else if (tunnel.status == QStringLiteral("离线")) {
-            statusItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+            statusItem->setForeground(QColor(QStringLiteral("#D29922")));
             offlineCount++;
         } else {
-            statusItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+            statusItem->setForeground(QColor(QStringLiteral("#F85149")));
             faultCount++;
         }
         m_tunnelTable->setItem(row, 6, statusItem);
 
         auto* durItem = new QTableWidgetItem(tunnel.onlineDuration);
-        durItem->setForeground(QColor(QStringLiteral("#8C8C8C")));
+        durItem->setForeground(QColor(QStringLiteral("#8B949E")));
         m_tunnelTable->setItem(row, 7, durItem);
 
         auto* typeItem = new QTableWidgetItem(tunnel.type);
         if (tunnel.type == QStringLiteral("IPSec VPN")) {
-            typeItem->setForeground(QColor(QStringLiteral("#409EFF")));
+            typeItem->setForeground(QColor(QStringLiteral("#58A6FF")));
         } else if (tunnel.type == QStringLiteral("SSL VPN")) {
-            typeItem->setForeground(QColor(QStringLiteral("#67C23A")));
+            typeItem->setForeground(QColor(QStringLiteral("#3FB950")));
         } else if (tunnel.type == QStringLiteral("DMVPN")) {
-            typeItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+            typeItem->setForeground(QColor(QStringLiteral("#D29922")));
         } else if (tunnel.type == QStringLiteral("GRE")) {
-            typeItem->setForeground(QColor(QStringLiteral("#909399")));
+            typeItem->setForeground(QColor(QStringLiteral("#8B949E")));
         } else {
-            typeItem->setForeground(QColor(QStringLiteral("#DCDCDC")));
+            typeItem->setForeground(QColor(QStringLiteral("#E6EDF3")));
         }
         m_tunnelTable->setItem(row, 8, typeItem);
     }
@@ -634,11 +634,11 @@ void VPNWidget::updateTunnelStatus()
 
         auto* statusItem = new QTableWidgetItem(ike.status);
         if (ike.status == QStringLiteral("已建立")) {
-            statusItem->setForeground(QColor(QStringLiteral("#67C23A")));
+            statusItem->setForeground(QColor(QStringLiteral("#3FB950")));
         } else if (ike.status == QStringLiteral("协商中")) {
-            statusItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+            statusItem->setForeground(QColor(QStringLiteral("#D29922")));
         } else {
-            statusItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+            statusItem->setForeground(QColor(QStringLiteral("#F85149")));
         }
         m_ikeTable->setItem(row, 5, statusItem);
 
@@ -671,9 +671,9 @@ void VPNWidget::updateTunnelStatus()
 
         auto* statusItem = new QTableWidgetItem(sa.status);
         if (sa.status == QStringLiteral("活跃")) {
-            statusItem->setForeground(QColor(QStringLiteral("#67C23A")));
+            statusItem->setForeground(QColor(QStringLiteral("#3FB950")));
         } else {
-            statusItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+            statusItem->setForeground(QColor(QStringLiteral("#F85149")));
         }
         m_ipsecTable->setItem(row, 6, statusItem);
 
@@ -705,7 +705,7 @@ void VPNWidget::updateTunnelStatus()
         m_userTable->setItem(row, 5, new QTableWidgetItem(user.traffic));
 
         auto* statusItem = new QTableWidgetItem(QStringLiteral("在线"));
-        statusItem->setForeground(QColor(QStringLiteral("#67C23A")));
+        statusItem->setForeground(QColor(QStringLiteral("#3FB950")));
         m_userTable->setItem(row, 6, statusItem);
     }
 }
@@ -887,23 +887,23 @@ void VPNWidget::onExport()
     stream << QStringLiteral("<title>VPN 管理中心报告</title>\n");
     stream << QStringLiteral("<style>\n");
     stream << QStringLiteral("body { font-family: 'Microsoft YaHei', sans-serif; "
-                              "background: #1E1F22; color: #DCDCDC; padding: 20px; }\n");
-    stream << QStringLiteral("h1 { color: #409EFF; text-align: center; }\n");
-    stream << QStringLiteral(".meta { text-align: center; color: #8C8C8C; margin-bottom: 10px; font-size: 13px; }\n");
+                              "background: #0D1117; color: #E6EDF3; padding: 20px; }\n");
+    stream << QStringLiteral("h1 { color: #58A6FF; text-align: center; }\n");
+    stream << QStringLiteral(".meta { text-align: center; color: #8B949E; margin-bottom: 10px; font-size: 13px; }\n");
     stream << QStringLiteral(".cards { display: flex; justify-content: center; gap: 20px; margin: 20px 0; }\n");
-    stream << QStringLiteral(".card { background: #25262B; border-radius: 8px; padding: 16px 24px; "
+    stream << QStringLiteral(".card { background: #161B22; border-radius: 8px; padding: 16px 24px; "
                               "text-align: center; min-width: 120px; }\n");
     stream << QStringLiteral(".card .value { font-size: 28px; font-weight: bold; }\n");
-    stream << QStringLiteral(".card .label { color: #8C8C8C; font-size: 12px; margin-top: 4px; }\n");
+    stream << QStringLiteral(".card .label { color: #8B949E; font-size: 12px; margin-top: 4px; }\n");
     stream << QStringLiteral("table { width: 100%%; border-collapse: collapse; margin-top: 20px; }\n");
-    stream << QStringLiteral("th { background: #25262B; color: #8C8C8C; padding: 10px; "
-                              "border-bottom: 2px solid #3C3F41; }\n");
-    stream << QStringLiteral("td { padding: 8px; border-bottom: 1px solid #2C2D30; text-align: center; }\n");
-    stream << QStringLiteral(".online { color: #67C23A; font-weight: bold; }\n");
-    stream << QStringLiteral(".offline { color: #E6A23C; font-weight: bold; }\n");
-    stream << QStringLiteral(".fault { color: #F56C6C; font-weight: bold; }\n");
-    stream << QStringLiteral("h2 { color: #409EFF; margin-top: 30px; }\n");
-    stream << QStringLiteral(".footer { text-align: center; color: #8C8C8C; "
+    stream << QStringLiteral("th { background: #161B22; color: #8B949E; padding: 10px; "
+                              "border-bottom: 2px solid #30363D; }\n");
+    stream << QStringLiteral("td { padding: 8px; border-bottom: 1px solid #21262D; text-align: center; }\n");
+    stream << QStringLiteral(".online { color: #3FB950; font-weight: bold; }\n");
+    stream << QStringLiteral(".offline { color: #D29922; font-weight: bold; }\n");
+    stream << QStringLiteral(".fault { color: #F85149; font-weight: bold; }\n");
+    stream << QStringLiteral("h2 { color: #58A6FF; margin-top: 30px; }\n");
+    stream << QStringLiteral(".footer { text-align: center; color: #8B949E; "
                               "margin-top: 30px; font-size: 12px; }\n");
     stream << QStringLiteral("</style>\n</head>\n<body>\n");
 

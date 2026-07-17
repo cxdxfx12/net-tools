@@ -166,7 +166,7 @@ void FlowCollectorWidget::setupUI()
     controlLayout->setSpacing(12);
 
     auto* portLabel = new QLabel(QStringLiteral("UDP 监听端口:"));
-    portLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
 
     m_portSpin = new QSpinBox();
     m_portSpin->setRange(1, 65535);
@@ -174,8 +174,8 @@ void FlowCollectorWidget::setupUI()
     m_portSpin->setFixedWidth(90);
     m_portSpin->setStyleSheet(QStringLiteral(
         "QSpinBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     ));
@@ -187,12 +187,12 @@ void FlowCollectorWidget::setupUI()
     m_startStopBtn->setMinimumWidth(80);
     m_startStopBtn->setStyleSheet(QStringLiteral(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 6px 18px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     ));
     controlLayout->addWidget(m_startStopBtn);
 
@@ -207,12 +207,12 @@ void FlowCollectorWidget::setupUI()
     m_exportBtn->setMinimumWidth(90);
     m_exportBtn->setStyleSheet(QStringLiteral(
         "QPushButton {"
-        "  background-color: #67C23A; color: white;"
+        "  background-color: #3FB950; color: white;"
         "  border: none; padding: 6px 16px; border-radius: 4px;"
         "  font-size: 13px;"
         "}"
-        "QPushButton:hover { background-color: #85CE61; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #56D364; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     ));
     controlLayout->addWidget(m_exportBtn);
 
@@ -255,15 +255,15 @@ void FlowCollectorWidget::setupUI()
     m_flowTable->setColumnWidth(8, 150);
     m_flowTable->setStyleSheet(QStringLiteral(
         "QTableWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; font-size: 12px;"
-        "  gridline-color: #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D; font-size: 12px;"
+        "  gridline-color: #30363D;"
         "}"
         "QTableWidget::item { padding: 3px 4px; }"
-        "QTableWidget::item:selected { background-color: #3C3F41; }"
+        "QTableWidget::item:selected { background-color: #30363D; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
         "}"
     ));
@@ -299,15 +299,15 @@ void FlowCollectorWidget::setupUI()
     m_topTalkerTable->setColumnWidth(2, 80);
     m_topTalkerTable->setStyleSheet(QStringLiteral(
         "QTableWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; font-size: 12px;"
-        "  gridline-color: #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D; font-size: 12px;"
+        "  gridline-color: #30363D;"
         "}"
         "QTableWidget::item { padding: 3px 4px; }"
-        "QTableWidget::item:selected { background-color: #3C3F41; }"
+        "QTableWidget::item:selected { background-color: #30363D; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
         "}"
     ));
@@ -342,15 +342,15 @@ void FlowCollectorWidget::setupUI()
     m_topAppTable->setColumnWidth(3, 70);
     m_topAppTable->setStyleSheet(QStringLiteral(
         "QTableWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; font-size: 12px;"
-        "  gridline-color: #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D; font-size: 12px;"
+        "  gridline-color: #30363D;"
         "}"
         "QTableWidget::item { padding: 3px 4px; }"
-        "QTableWidget::item:selected { background-color: #3C3F41; }"
+        "QTableWidget::item:selected { background-color: #30363D; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
         "}"
     ));
@@ -393,11 +393,11 @@ void FlowCollectorWidget::onStartStop()
         m_startStopBtn->setText(QStringLiteral("启动"));
         m_startStopBtn->setStyleSheet(QStringLiteral(
             "QPushButton {"
-            "  background-color: #409EFF; color: white;"
+            "  background-color: #58A6FF; color: white;"
             "  border: none; padding: 6px 18px; border-radius: 4px;"
             "  font-size: 13px; font-weight: bold;"
             "}"
-            "QPushButton:hover { background-color: #66B1FF; }"
+            "QPushButton:hover { background-color: #79C0FF; }"
         ));
         m_portSpin->setEnabled(true);
         m_statusLabel->setText(QStringLiteral("已停止"));
@@ -426,11 +426,11 @@ void FlowCollectorWidget::onStartStop()
         m_startStopBtn->setText(QStringLiteral("停止"));
         m_startStopBtn->setStyleSheet(QStringLiteral(
             "QPushButton {"
-            "  background-color: #F56C6C; color: white;"
+            "  background-color: #F85149; color: white;"
             "  border: none; padding: 6px 18px; border-radius: 4px;"
             "  font-size: 13px; font-weight: bold;"
             "}"
-            "QPushButton:hover { background-color: #F78989; }"
+            "QPushButton:hover { background-color: #FF7B72; }"
         ));
         m_portSpin->setEnabled(false);
         m_statusLabel->setText(QStringLiteral("运行中"));

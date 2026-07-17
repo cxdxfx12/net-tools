@@ -115,19 +115,19 @@ void DHCPWidget::setupUI()
     auto* tabWidget = new QTabWidget();
     tabWidget->setStyleSheet(
         "QTabWidget::pane {"
-        "  background-color: #1E1F22; border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; border: 1px solid #30363D;"
         "}"
         "QTabBar::tab {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: 1px solid #3C3F41; padding: 8px 20px;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: 1px solid #30363D; padding: 8px 20px;"
         "  font-size: 13px;"
         "}"
         "QTabBar::tab:selected {"
-        "  background-color: #1E1F22; color: #409EFF;"
+        "  background-color: #0D1117; color: #58A6FF;"
         "  border-bottom: 2px solid #409EFF;"
         "}"
         "QTabBar::tab:hover {"
-        "  color: #DCDCDC;"
+        "  color: #E6EDF3;"
         "}"
     );
 
@@ -145,20 +145,20 @@ void DHCPWidget::setupUI()
     discoverConfigLayout->setSpacing(8);
 
     auto* ifaceLabel = new QLabel("网络接口:");
-    ifaceLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_discoverInterfaceCombo = new QComboBox();
     m_discoverInterfaceCombo->setMinimumWidth(180);
     m_discoverInterfaceCombo->setStyleSheet(
         "QComboBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
         "QComboBox::drop-down { border: none; }"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #409EFF;"
-        "  border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #58A6FF;"
+        "  border: 1px solid #30363D;"
         "}"
     );
     discoverConfigLayout->addWidget(ifaceLabel);
@@ -167,29 +167,29 @@ void DHCPWidget::setupUI()
     m_discoverBtn = new QPushButton("发送 Discover");
     m_discoverBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_discoverBtn->setFixedHeight(32);
     discoverConfigLayout->addWidget(m_discoverBtn);
 
     m_discoverStatusLabel = new QLabel("就绪");
-    m_discoverStatusLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     discoverConfigLayout->addWidget(m_discoverStatusLabel);
 
     m_discoverExportBtn = new QPushButton("导出 CSV");
     m_discoverExportBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #67C23A; color: white;"
+        "  background-color: #3FB950; color: white;"
         "  border: none; padding: 5px 14px; border-radius: 3px;"
         "  font-size: 12px;"
         "}"
-        "QPushButton:hover { background-color: #85CE61; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #56D364; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_discoverExportBtn->setEnabled(false);
     discoverConfigLayout->addWidget(m_discoverExportBtn);
@@ -209,17 +209,17 @@ void DHCPWidget::setupUI()
     m_discoverTable->verticalHeader()->setVisible(false);
     m_discoverTable->setStyleSheet(
         "QTableWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  gridline-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  gridline-color: #30363D; border: 1px solid #30363D;"
         "  font-size: 12px;"
         "}"
         "QTableWidget::item { padding: 3px 6px; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
         "}"
-        "QTableWidget::item:alternate { background-color: #25262B; }"
+        "QTableWidget::item:alternate { background-color: #161B22; }"
     );
     discoverLayout->addWidget(m_discoverTable, 1);
 
@@ -265,12 +265,12 @@ void DHCPWidget::setupUI()
     m_serverStartStopBtn = new QPushButton("启动监听");
     m_serverStartStopBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_serverStartStopBtn->setFixedHeight(32);
     serverConfigLayout->addWidget(m_serverStartStopBtn);
@@ -280,30 +280,30 @@ void DHCPWidget::setupUI()
     serverConfigLayout->addWidget(m_serverStatusLabel);
 
     m_serverCountLabel = new QLabel("记录数: 0");
-    m_serverCountLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     serverConfigLayout->addWidget(m_serverCountLabel);
 
     m_serverClearBtn = new QPushButton("清空");
     m_serverClearBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #F56C6C; color: white;"
+        "  background-color: #F85149; color: white;"
         "  border: none; padding: 5px 14px; border-radius: 3px;"
         "  font-size: 12px;"
         "}"
-        "QPushButton:hover { background-color: #F78989; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #FF7B72; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     serverConfigLayout->addWidget(m_serverClearBtn);
 
     m_serverExportBtn = new QPushButton("导出 CSV");
     m_serverExportBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #67C23A; color: white;"
+        "  background-color: #3FB950; color: white;"
         "  border: none; padding: 5px 14px; border-radius: 3px;"
         "  font-size: 12px;"
         "}"
-        "QPushButton:hover { background-color: #85CE61; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #56D364; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_serverExportBtn->setEnabled(false);
     serverConfigLayout->addWidget(m_serverExportBtn);
@@ -330,17 +330,17 @@ void DHCPWidget::setupUI()
     m_serverTable->setColumnWidth(3, 140);
     m_serverTable->setStyleSheet(
         "QTableWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  gridline-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  gridline-color: #30363D; border: 1px solid #30363D;"
         "  font-size: 12px;"
         "}"
         "QTableWidget::item { padding: 3px 6px; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
         "}"
-        "QTableWidget::item:alternate { background-color: #25262B; }"
+        "QTableWidget::item:alternate { background-color: #161B22; }"
     );
     serverLayout->addWidget(m_serverTable, 1);
 
@@ -359,20 +359,20 @@ void DHCPWidget::setupUI()
     leaseConfigLayout->setSpacing(8);
 
     auto* leaseIfaceLabel = new QLabel("网络接口:");
-    leaseIfaceLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_leaseInterfaceCombo = new QComboBox();
     m_leaseInterfaceCombo->setMinimumWidth(180);
     m_leaseInterfaceCombo->setStyleSheet(
         "QComboBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
         "QComboBox::drop-down { border: none; }"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #409EFF;"
-        "  border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #58A6FF;"
+        "  border: 1px solid #30363D;"
         "}"
     );
     leaseConfigLayout->addWidget(leaseIfaceLabel);
@@ -381,29 +381,29 @@ void DHCPWidget::setupUI()
     m_leaseRefreshBtn = new QPushButton("刷新");
     m_leaseRefreshBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_leaseRefreshBtn->setFixedHeight(32);
     leaseConfigLayout->addWidget(m_leaseRefreshBtn);
 
     m_leaseStatusLabel = new QLabel("就绪");
-    m_leaseStatusLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     leaseConfigLayout->addWidget(m_leaseStatusLabel);
 
     m_leaseExportBtn = new QPushButton("导出 CSV");
     m_leaseExportBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #67C23A; color: white;"
+        "  background-color: #3FB950; color: white;"
         "  border: none; padding: 5px 14px; border-radius: 3px;"
         "  font-size: 12px;"
         "}"
-        "QPushButton:hover { background-color: #85CE61; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #56D364; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_leaseExportBtn->setEnabled(false);
     leaseConfigLayout->addWidget(m_leaseExportBtn);
@@ -423,17 +423,17 @@ void DHCPWidget::setupUI()
     m_leaseTable->verticalHeader()->setVisible(false);
     m_leaseTable->setStyleSheet(
         "QTableWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  gridline-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  gridline-color: #30363D; border: 1px solid #30363D;"
         "  font-size: 12px;"
         "}"
         "QTableWidget::item { padding: 3px 6px; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
         "}"
-        "QTableWidget::item:alternate { background-color: #25262B; }"
+        "QTableWidget::item:alternate { background-color: #161B22; }"
     );
     leaseLayout->addWidget(m_leaseTable, 1);
 
@@ -474,7 +474,7 @@ void DHCPWidget::onDiscover()
 
     clearDiscoverTable();
     m_discoverStatusLabel->setText("正在发送 DHCP Discover...");
-    m_discoverStatusLabel->setStyleSheet("font-size: 12px; color: #E6A23C; font-weight: bold;");
+    m_discoverStatusLabel->setStyleSheet("font-size: 12px; color: #D29922; font-weight: bold;");
     m_discoverBtn->setEnabled(false);
     m_discoverExportBtn->setEnabled(false);
 
@@ -522,12 +522,12 @@ void DHCPWidget::onDiscoverProcessFinished(int exitCode, QProcess::ExitStatus ex
     if (exitCode != 0 && !errOutput.isEmpty()) {
         Logger::instance().error("DHCP", "Discover 错误: " + errOutput.trimmed());
         m_discoverStatusLabel->setText("发现失败: " + errOutput.trimmed());
-        m_discoverStatusLabel->setStyleSheet("font-size: 12px; color: #F56C6C; font-weight: bold;");
+        m_discoverStatusLabel->setStyleSheet("font-size: 12px; color: #F85149; font-weight: bold;");
     } else {
         parseDiscoverOutput(output, iface);
         m_discoverStatusLabel->setText(
             QString("发现完成 — %1 条响应").arg(m_discoverTable->rowCount()));
-        m_discoverStatusLabel->setStyleSheet("font-size: 12px; color: #67C23A; font-weight: bold;");
+        m_discoverStatusLabel->setStyleSheet("font-size: 12px; color: #3FB950; font-weight: bold;");
     }
 
     m_discoverBtn->setEnabled(true);
@@ -681,7 +681,7 @@ void DHCPWidget::parseDiscoverOutput(const QString& output, const QString& iface
             Logger::instance().info("DHCP", "原始输出: " + output.trimmed());
         } else {
             m_discoverStatusLabel->setText("未收到 DHCP 响应 — 请确认接口已连接");
-            m_discoverStatusLabel->setStyleSheet("font-size: 12px; color: #E6A23C; font-weight: bold;");
+            m_discoverStatusLabel->setStyleSheet("font-size: 12px; color: #D29922; font-weight: bold;");
         }
     }
 }
@@ -756,7 +756,7 @@ void DHCPWidget::onServerStartStop()
             }
 
             m_serverStatusLabel->setText("● 运行中 (端口 1067)");
-            m_serverStatusLabel->setStyleSheet("color: #E6A23C; font-weight: bold;");
+            m_serverStatusLabel->setStyleSheet("color: #D29922; font-weight: bold;");
         } else {
             m_serverStatusLabel->setText("● 运行中 (端口 67)");
             m_serverStatusLabel->setStyleSheet("color: #0a0; font-weight: bold;");
@@ -774,21 +774,21 @@ void DHCPWidget::updateServerStatus(bool running)
         m_serverStartStopBtn->setText("停止监听");
         m_serverStartStopBtn->setStyleSheet(
             "QPushButton {"
-            "  background-color: #F56C6C; color: white;"
+            "  background-color: #F85149; color: white;"
             "  border: none; padding: 8px 20px; border-radius: 4px;"
             "  font-size: 13px; font-weight: bold;"
             "}"
-            "QPushButton:hover { background-color: #F78989; }"
+            "QPushButton:hover { background-color: #FF7B72; }"
         );
     } else {
         m_serverStartStopBtn->setText("启动监听");
         m_serverStartStopBtn->setStyleSheet(
             "QPushButton {"
-            "  background-color: #409EFF; color: white;"
+            "  background-color: #58A6FF; color: white;"
             "  border: none; padding: 8px 20px; border-radius: 4px;"
             "  font-size: 13px; font-weight: bold;"
             "}"
-            "QPushButton:hover { background-color: #66B1FF; }"
+            "QPushButton:hover { background-color: #79C0FF; }"
         );
         m_serverStatusLabel->setText("● 已停止");
         m_serverStatusLabel->setStyleSheet("color: #888; font-weight: bold;");
@@ -933,11 +933,11 @@ void DHCPWidget::addServerRow(const DHCPServerRecord& record)
     // 请求类型着色
     auto* typeItem = new QTableWidgetItem(record.requestType);
     QColor typeColor;
-    if (record.requestType == "DISCOVER") typeColor = QColor(0x40, 0x9E, 0xFF);
-    else if (record.requestType == "OFFER") typeColor = QColor(0x67, 0xC2, 0x3A);
-    else if (record.requestType == "REQUEST") typeColor = QColor(0xE6, 0xA2, 0x3C);
+    if (record.requestType == "DISCOVER") typeColor = QColor(0x58, 0xA6, 0xFF);
+    else if (record.requestType == "OFFER") typeColor = QColor(0x3F, 0xB9, 0x50);
+    else if (record.requestType == "REQUEST") typeColor = QColor(0xD2, 0x99, 0x22);
     else if (record.requestType == "ACK") typeColor = QColor(0x2C, 0xCC, 0x70);
-    else if (record.requestType == "NAK") typeColor = QColor(0xF5, 0x6C, 0x6C);
+    else if (record.requestType == "NAK") typeColor = QColor(0xF8, 0x51, 0x49);
     else if (record.requestType == "RELEASE") typeColor = QColor(0x90, 0x90, 0x90);
     else typeColor = QColor(0xDC, 0xDC, 0xDC);
     typeItem->setForeground(typeColor);
@@ -977,7 +977,7 @@ void DHCPWidget::onRefreshLease()
 
     clearLeaseTable();
     m_leaseStatusLabel->setText("正在读取租约信息...");
-    m_leaseStatusLabel->setStyleSheet("font-size: 12px; color: #E6A23C; font-weight: bold;");
+    m_leaseStatusLabel->setStyleSheet("font-size: 12px; color: #D29922; font-weight: bold;");
     m_leaseRefreshBtn->setEnabled(false);
     m_leaseExportBtn->setEnabled(false);
 
@@ -1021,12 +1021,12 @@ void DHCPWidget::onRefreshLease()
         if (exitCode != 0 && !errOutput.isEmpty() && output.trimmed().isEmpty()) {
             Logger::instance().error("DHCP", "读取租约错误: " + errOutput.trimmed());
             m_leaseStatusLabel->setText("读取失败: " + errOutput.trimmed());
-            m_leaseStatusLabel->setStyleSheet("font-size: 12px; color: #F56C6C; font-weight: bold;");
+            m_leaseStatusLabel->setStyleSheet("font-size: 12px; color: #F85149; font-weight: bold;");
         } else {
             parseLeaseOutput(output);
             m_leaseStatusLabel->setText(
                 QString("读取完成 — %1 条租约").arg(m_leaseTable->rowCount()));
-            m_leaseStatusLabel->setStyleSheet("font-size: 12px; color: #67C23A; font-weight: bold;");
+            m_leaseStatusLabel->setStyleSheet("font-size: 12px; color: #3FB950; font-weight: bold;");
         }
 
         m_leaseRefreshBtn->setEnabled(true);
@@ -1152,7 +1152,7 @@ void DHCPWidget::parseLeaseOutput(const QString& output)
             // 如果以上都无法解析，直接显示原始输出
             Logger::instance().info("DHCP", "租约原始输出: " + output.trimmed());
             m_leaseStatusLabel->setText("无法解析租约格式 — 请查看日志");
-            m_leaseStatusLabel->setStyleSheet("font-size: 12px; color: #E6A23C; font-weight: bold;");
+            m_leaseStatusLabel->setStyleSheet("font-size: 12px; color: #D29922; font-weight: bold;");
         }
     }
 }

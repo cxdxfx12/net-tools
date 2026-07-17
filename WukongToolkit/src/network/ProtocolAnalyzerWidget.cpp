@@ -27,62 +27,18 @@
 // ============================================================================
 // 通用样式常量
 // ============================================================================
-static const char* kLineEditStyle =
-    "QLineEdit {"
-    "  background: #25262B; color: #DCDCDC;"
-    "  border: 1px solid #3C3F41; padding: 5px 8px;"
-    "  border-radius: 3px; font-size: 13px;"
-    "}";
 
-static const char* kPrimaryBtnStyle =
-    "QPushButton {"
-    "  background-color: #409EFF; color: white;"
-    "  border: none; padding: 8px 20px; border-radius: 4px;"
-    "  font-size: 13px; font-weight: bold;"
-    "}"
-    "QPushButton:hover { background-color: #66B1FF; }"
-    "QPushButton:disabled { background-color: #5C5C5C; }";
-
-static const char* kExportBtnStyle =
-    "QPushButton {"
-    "  background-color: #409EFF; color: white;"
-    "  border: none; padding: 5px 14px; border-radius: 3px;"
-    "  font-size: 12px;"
-    "}"
-    "QPushButton:hover { background-color: #66B1FF; }"
-    "QPushButton:disabled { background-color: #5C5C5C; }";
-
-static const char* kTableStyle =
-    "QTableWidget {"
-    "  background-color: #1E1F22; color: #DCDCDC;"
-    "  gridline-color: #3C3F41; border: 1px solid #3C3F41;"
-    "  font-size: 12px;"
-    "}"
-    "QTableWidget::item { padding: 3px 6px; }"
-    "QHeaderView::section {"
-    "  background-color: #25262B; color: #8C8C8C;"
-    "  border: none; border-bottom: 2px solid #3C3F41;"
-    "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
-    "}"
-    "QTableWidget::item:alternate { background-color: #25262B; }";
-
-static const char* kPlainTextStyle =
-    "QPlainTextEdit {"
-    "  background-color: #1E1F22; color: #DCDCDC;"
-    "  border: 1px solid #3C3F41;"
-    "  font-size: 12px; font-family: 'Menlo', 'Consolas', monospace;"
-    "}";
 
 static const char* kResultLabelStyle =
     "QLabel {"
-    "  background-color: #25262B; color: #DCDCDC;"
-    "  border: 1px solid #3C3F41; border-radius: 3px;"
+    "  background-color: #161B22; color: #E6EDF3;"
+    "  border: 1px solid #30363D; border-radius: 3px;"
     "  padding: 6px 10px; font-size: 13px; font-family: 'Menlo', 'Consolas', monospace;"
     "  min-height: 20px;"
     "}";
 
 static const char* kDescLabelStyle =
-    "font-size: 12px; color: #8C8C8C;";
+    "font-size: 12px; color: #8B949E;";
 
 // ============================================================================
 // 辅助函数
@@ -107,14 +63,12 @@ static QLineEdit* makeLineEdit(const QString& placeholder)
 {
     auto* edit = new QLineEdit();
     edit->setPlaceholderText(placeholder);
-    edit->setStyleSheet(kLineEditStyle);
     return edit;
 }
 
 static QPushButton* makePrimaryBtn(const QString& text)
 {
     auto* btn = new QPushButton(text);
-    btn->setStyleSheet(kPrimaryBtnStyle);
     btn->setFixedHeight(32);
     return btn;
 }
@@ -122,7 +76,6 @@ static QPushButton* makePrimaryBtn(const QString& text)
 static QPushButton* makeExportBtn(const QString& text = "导出结果")
 {
     auto* btn = new QPushButton(text);
-    btn->setStyleSheet(kExportBtnStyle);
     return btn;
 }
 
@@ -165,21 +118,21 @@ void ProtocolAnalyzerWidget::setupUI()
     m_tabWidget = new QTabWidget();
     m_tabWidget->setStyleSheet(
         "QTabWidget::pane {"
-        "  border: 1px solid #3C3F41;"
-        "  background: #1E1F22;"
+        "  border: 1px solid #30363D;"
+        "  background: #0D1117;"
         "}"
         "QTabBar::tab {"
-        "  background: #25262B; color: #8C8C8C;"
-        "  padding: 8px 20px; border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #8B949E;"
+        "  padding: 8px 20px; border: 1px solid #30363D;"
         "  border-bottom: none; font-size: 13px;"
         "  border-top-left-radius: 4px; border-top-right-radius: 4px;"
         "}"
         "QTabBar::tab:selected {"
-        "  background: #1E1F22; color: #409EFF;"
+        "  background: #0D1117; color: #58A6FF;"
         "  border-bottom: 2px solid #409EFF;"
         "}"
         "QTabBar::tab:hover {"
-        "  background: #2B2D30; color: #DCDCDC;"
+        "  background: #2B2D30; color: #E6EDF3;"
         "}"
     );
 
@@ -248,7 +201,7 @@ void ProtocolAnalyzerWidget::setupHttpTab(QWidget* tab)
     inputRow->setSpacing(8);
 
     auto* urlLabel = new QLabel("URL:");
-    urlLabel->setStyleSheet("font-size: 13px; color: #DCDCDC; font-weight: bold;");
+    urlLabel->setStyleSheet("font-size: 13px; color: #E6EDF3; font-weight: bold;");
     inputRow->addWidget(urlLabel);
 
     m_httpUrlEdit = makeLineEdit("https://www.example.com");
@@ -263,7 +216,7 @@ void ProtocolAnalyzerWidget::setupHttpTab(QWidget* tab)
     auto* statusRow = new QHBoxLayout();
     statusRow->setSpacing(8);
     auto* statusLabel = new QLabel("状态码:");
-    statusLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     statusRow->addWidget(statusLabel);
 
     m_httpStatusEdit = new QLineEdit();
@@ -271,8 +224,8 @@ void ProtocolAnalyzerWidget::setupHttpTab(QWidget* tab)
     m_httpStatusEdit->setPlaceholderText("等待请求...");
     m_httpStatusEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #409EFF;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: #58A6FF;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 14px; font-weight: bold;"
         "  max-width: 200px;"
         "}"
@@ -298,7 +251,6 @@ void ProtocolAnalyzerWidget::setupHttpTab(QWidget* tab)
     m_httpHeadersTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_httpHeadersTable->setAlternatingRowColors(true);
     m_httpHeadersTable->verticalHeader()->setVisible(false);
-    m_httpHeadersTable->setStyleSheet(kTableStyle);
     splitter->addWidget(m_httpHeadersTable);
 
     // 原始响应
@@ -308,7 +260,7 @@ void ProtocolAnalyzerWidget::setupHttpTab(QWidget* tab)
     rawLayout->setSpacing(2);
 
     auto* rawLabel = new QLabel("原始响应体:");
-    rawLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     rawLayout->addWidget(rawLabel);
 
     m_httpRawText = new QTextEdit();
@@ -316,8 +268,8 @@ void ProtocolAnalyzerWidget::setupHttpTab(QWidget* tab)
     m_httpRawText->setPlaceholderText("响应体将显示在此处...");
     m_httpRawText->setStyleSheet(
         "QTextEdit {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D;"
         "  font-size: 12px; font-family: 'Menlo', 'Consolas', monospace;"
         "}"
     );
@@ -387,25 +339,25 @@ void ProtocolAnalyzerWidget::onHttpReplyFinished(QNetworkReply* reply)
         // 根据状态码着色
         if (statusCode >= 200 && statusCode < 300) {
             m_httpStatusEdit->setStyleSheet(
-                "QLineEdit { background: #25262B; color: #67C23A;"
-                "  border: 1px solid #3C3F41; padding: 5px 8px;"
+                "QLineEdit { background: #161B22; color: #3FB950;"
+                "  border: 1px solid #30363D; padding: 5px 8px;"
                 "  border-radius: 3px; font-size: 14px; font-weight: bold; max-width: 200px; }");
         } else if (statusCode >= 300 && statusCode < 400) {
             m_httpStatusEdit->setStyleSheet(
-                "QLineEdit { background: #25262B; color: #E6A23C;"
-                "  border: 1px solid #3C3F41; padding: 5px 8px;"
+                "QLineEdit { background: #161B22; color: #D29922;"
+                "  border: 1px solid #30363D; padding: 5px 8px;"
                 "  border-radius: 3px; font-size: 14px; font-weight: bold; max-width: 200px; }");
         } else {
             m_httpStatusEdit->setStyleSheet(
-                "QLineEdit { background: #25262B; color: #F56C6C;"
-                "  border: 1px solid #3C3F41; padding: 5px 8px;"
+                "QLineEdit { background: #161B22; color: #F85149;"
+                "  border: 1px solid #30363D; padding: 5px 8px;"
                 "  border-radius: 3px; font-size: 14px; font-weight: bold; max-width: 200px; }");
         }
     } else if (reply->error() != QNetworkReply::NoError) {
         m_httpStatusEdit->setText("错误: " + reply->errorString());
         m_httpStatusEdit->setStyleSheet(
-            "QLineEdit { background: #25262B; color: #F56C6C;"
-            "  border: 1px solid #3C3F41; padding: 5px 8px;"
+            "QLineEdit { background: #161B22; color: #F85149;"
+            "  border: 1px solid #30363D; padding: 5px 8px;"
             "  border-radius: 3px; font-size: 14px; font-weight: bold; max-width: 400px; }");
         m_httpExportBtn->setEnabled(false);
         Logger::instance().error("HTTP", "请求失败: " + reply->errorString());
@@ -418,7 +370,7 @@ void ProtocolAnalyzerWidget::onHttpReplyFinished(QNetworkReply* reply)
     m_httpHeadersTable->setRowCount(headers.size());
     for (int i = 0; i < headers.size(); ++i) {
         auto* nameItem = new QTableWidgetItem(QString::fromUtf8(headers[i].first));
-        nameItem->setForeground(QColor(0x40, 0x9E, 0xFF));
+        nameItem->setForeground(QColor(0x58, 0xA6, 0xFF));
         m_httpHeadersTable->setItem(i, 0, nameItem);
 
         auto* valueItem = new QTableWidgetItem(QString::fromUtf8(headers[i].second));
@@ -503,14 +455,14 @@ void ProtocolAnalyzerWidget::setupSslTab(QWidget* tab)
     inputRow->setSpacing(8);
 
     auto* hostLabel = new QLabel("主机:");
-    hostLabel->setStyleSheet("font-size: 13px; color: #DCDCDC; font-weight: bold;");
+    hostLabel->setStyleSheet("font-size: 13px; color: #E6EDF3; font-weight: bold;");
     inputRow->addWidget(hostLabel);
 
     m_sslHostEdit = makeLineEdit("example.com");
     inputRow->addWidget(m_sslHostEdit, 1);
 
     auto* portLabel = new QLabel("端口:");
-    portLabel->setStyleSheet("font-size: 13px; color: #DCDCDC;");
+    
     inputRow->addWidget(portLabel);
 
     m_sslPortSpin = new QSpinBox();
@@ -518,8 +470,8 @@ void ProtocolAnalyzerWidget::setupSslTab(QWidget* tab)
     m_sslPortSpin->setValue(443);
     m_sslPortSpin->setStyleSheet(
         "QSpinBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -542,8 +494,8 @@ void ProtocolAnalyzerWidget::setupSslTab(QWidget* tab)
     auto* infoGroup = new QGroupBox("证书信息");
     infoGroup->setStyleSheet(
         "QGroupBox {"
-        "  color: #409EFF; font-size: 13px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px;"
+        "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+        "  border: 1px solid #30363D; border-radius: 4px;"
         "  margin-top: 10px; padding-top: 16px;"
         "}"
         "QGroupBox::title {"
@@ -728,13 +680,13 @@ void ProtocolAnalyzerWidget::onSslProcessFinished(int exitCode, QProcess::ExitSt
             if (expiry.isValid()) {
                 qint64 daysLeft = QDateTime::currentDateTimeUtc().daysTo(expiry);
                 if (daysLeft < 0) {
-                    m_sslValidToLabel->setStyleSheet(kResultLabelStyle + QString(" color: #F56C6C;"));
+                    m_sslValidToLabel->setStyleSheet(kResultLabelStyle + QString(" color: #F85149;"));
                     m_sslValidToLabel->setText(notAfter + QString("  [已过期 %1 天]").arg(-daysLeft));
                 } else if (daysLeft < 30) {
-                    m_sslValidToLabel->setStyleSheet(kResultLabelStyle + QString(" color: #E6A23C;"));
+                    m_sslValidToLabel->setStyleSheet(kResultLabelStyle + QString(" color: #D29922;"));
                     m_sslValidToLabel->setText(notAfter + QString("  [剩余 %1 天]").arg(daysLeft));
                 } else {
-                    m_sslValidToLabel->setStyleSheet(kResultLabelStyle + QString(" color: #67C23A;"));
+                    m_sslValidToLabel->setStyleSheet(kResultLabelStyle + QString(" color: #3FB950;"));
                     m_sslValidToLabel->setText(notAfter + QString("  [剩余 %1 天]").arg(daysLeft));
                 }
             }
@@ -805,7 +757,7 @@ void ProtocolAnalyzerWidget::setupNtpTab(QWidget* tab)
     inputRow->setSpacing(8);
 
     auto* serverLabel = new QLabel("NTP 服务器:");
-    serverLabel->setStyleSheet("font-size: 13px; color: #DCDCDC; font-weight: bold;");
+    serverLabel->setStyleSheet("font-size: 13px; color: #E6EDF3; font-weight: bold;");
     inputRow->addWidget(serverLabel);
 
     m_ntpServerEdit = makeLineEdit("pool.ntp.org");
@@ -828,8 +780,8 @@ void ProtocolAnalyzerWidget::setupNtpTab(QWidget* tab)
     auto* infoGroup = new QGroupBox("NTP 查询结果");
     infoGroup->setStyleSheet(
         "QGroupBox {"
-        "  color: #409EFF; font-size: 13px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px;"
+        "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+        "  border: 1px solid #30363D; border-radius: 4px;"
         "  margin-top: 10px; padding-top: 16px;"
         "}"
         "QGroupBox::title {"
@@ -1025,7 +977,7 @@ void ProtocolAnalyzerWidget::setupWhoisTab(QWidget* tab)
     inputRow->setSpacing(8);
 
     auto* inputLabel = new QLabel("域名/IP:");
-    inputLabel->setStyleSheet("font-size: 13px; color: #DCDCDC; font-weight: bold;");
+    inputLabel->setStyleSheet("font-size: 13px; color: #E6EDF3; font-weight: bold;");
     inputRow->addWidget(inputLabel);
 
     m_whoisInputEdit = makeLineEdit("example.com");
@@ -1048,7 +1000,6 @@ void ProtocolAnalyzerWidget::setupWhoisTab(QWidget* tab)
     m_whoisResultText = new QPlainTextEdit();
     m_whoisResultText->setReadOnly(true);
     m_whoisResultText->setPlaceholderText("WHOIS 查询结果将显示在此处...");
-    m_whoisResultText->setStyleSheet(kPlainTextStyle);
     layout->addWidget(m_whoisResultText, 1);
 }
 
@@ -1165,14 +1116,14 @@ void ProtocolAnalyzerWidget::setupSubnetTab(QWidget* tab)
     inputRow->setSpacing(8);
 
     auto* ipLabel = new QLabel("IP 地址:");
-    ipLabel->setStyleSheet("font-size: 13px; color: #DCDCDC; font-weight: bold;");
+    ipLabel->setStyleSheet("font-size: 13px; color: #E6EDF3; font-weight: bold;");
     inputRow->addWidget(ipLabel);
 
     m_subnetIpEdit = makeLineEdit("192.168.1.0");
     inputRow->addWidget(m_subnetIpEdit, 1);
 
     auto* maskLabel = new QLabel("掩码:");
-    maskLabel->setStyleSheet("font-size: 13px; color: #DCDCDC; font-weight: bold;");
+    maskLabel->setStyleSheet("font-size: 13px; color: #E6EDF3; font-weight: bold;");
     inputRow->addWidget(maskLabel);
 
     m_subnetMaskEdit = makeLineEdit("24 或 255.255.255.0");
@@ -1195,8 +1146,8 @@ void ProtocolAnalyzerWidget::setupSubnetTab(QWidget* tab)
     auto* infoGroup = new QGroupBox("子网计算结果");
     infoGroup->setStyleSheet(
         "QGroupBox {"
-        "  color: #409EFF; font-size: 13px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px;"
+        "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+        "  border: 1px solid #30363D; border-radius: 4px;"
         "  margin-top: 10px; padding-top: 16px;"
         "}"
         "QGroupBox::title {"

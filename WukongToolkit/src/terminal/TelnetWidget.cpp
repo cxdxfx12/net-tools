@@ -67,8 +67,6 @@ void TelnetWidget::setupUI()
 
     m_statusIcon = new QLabel();
     m_statusIcon->setFixedSize(16, 16);
-    m_statusIcon->setStyleSheet(
-        "background-color: #999999; border-radius: 8px;");
     controlLayout->addWidget(m_statusIcon);
 
     m_statusLabel = new QLabel("未连接");
@@ -107,8 +105,6 @@ void TelnetWidget::setState(TelnetState state)
 
     switch (state) {
     case TelnetState::Disconnected:
-        m_statusIcon->setStyleSheet(
-            "background-color: #999999; border-radius: 8px;");
         m_statusLabel->setText("未连接");
         m_connectBtn->setEnabled(true);
         m_disconnectBtn->setEnabled(false);
@@ -117,8 +113,6 @@ void TelnetWidget::setState(TelnetState state)
         m_terminal->setConnected(false);
         break;
     case TelnetState::Connecting:
-        m_statusIcon->setStyleSheet(
-            "background-color: #FFA500; border-radius: 8px;");
         m_statusLabel->setText("正在连接...");
         m_connectBtn->setEnabled(false);
         m_disconnectBtn->setEnabled(true);
@@ -126,8 +120,6 @@ void TelnetWidget::setState(TelnetState state)
         m_portSpin->setEnabled(false);
         break;
     case TelnetState::Connected:
-        m_statusIcon->setStyleSheet(
-            "background-color: #00AA00; border-radius: 8px;");
         m_statusLabel->setText(QString("已连接 — %1:%2")
                                .arg(m_hostEdit->text().trimmed())
                                .arg(m_portSpin->value()));
@@ -138,15 +130,11 @@ void TelnetWidget::setState(TelnetState state)
         m_terminal->setConnected(true);
         break;
     case TelnetState::Disconnecting:
-        m_statusIcon->setStyleSheet(
-            "background-color: #FFA500; border-radius: 8px;");
         m_statusLabel->setText("正在断开...");
         m_connectBtn->setEnabled(false);
         m_disconnectBtn->setEnabled(false);
         break;
     case TelnetState::Error:
-        m_statusIcon->setStyleSheet(
-            "background-color: #CC0000; border-radius: 8px;");
         m_statusLabel->setText("连接错误");
         m_connectBtn->setEnabled(true);
         m_disconnectBtn->setEnabled(false);

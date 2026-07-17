@@ -439,7 +439,7 @@ void TracerouteWidget::onTableItemSelected(int row, int /*column*/)
 
 void TracerouteWidget::ensureHopDetailTable()
 {
-    QSqlDatabase& db = DatabaseManager::instance().database();
+    const QSqlDatabase& db = DatabaseManager::instance().database();
     if (!db.isOpen()) {
         return;
     }
@@ -465,7 +465,7 @@ void TracerouteWidget::ensureHopDetailTable()
 
 void TracerouteWidget::saveToHistory()
 {
-    QSqlDatabase& db = DatabaseManager::instance().database();
+    const QSqlDatabase& db = DatabaseManager::instance().database();
     if (!db.isOpen()) {
         Logger::instance().warning("Traceroute", "Database not open, skipping history save");
         return;

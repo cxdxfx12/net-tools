@@ -45,12 +45,16 @@ private slots:
     void onToggleSchedule(bool enabled);
     void onExport();
 
+private slots:
+    void onProcessFinished(int exitCode, QProcess::ExitStatus exitStatus);
+
 private:
     void setupUI();
     void setupConnections();
     void loadPresetScripts();
     void runPythonScript(const QString& script);
     void runShellScript(const QString& script);
+    void finalizeExecution(bool success, const QString& durationStr);
 
     // --- 脚本编辑器 ---
     QPlainTextEdit* m_scriptEditor;
@@ -93,4 +97,6 @@ private:
 
     // --- 运行状态 ---
     bool m_isRunning;
+    QDateTime m_executionStartTime;
+    QString m_tempFilePath;
 };

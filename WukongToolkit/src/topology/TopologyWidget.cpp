@@ -73,7 +73,7 @@ void TopologyWidget::setupUI()
                     "  font-size: 13px; font-weight: bold;"
                     "}"
                     "QPushButton:hover { background-color: %2; }"
-                    "QPushButton:disabled { background-color: #5C5C5C; }")
+                    "QPushButton:disabled { background-color: #484F58; }")
                 .arg(bgColor, hoverColor)
         );
         btn->setFixedHeight(32);
@@ -83,11 +83,11 @@ void TopologyWidget::setupUI()
         edit->setPlaceholderText(QStringLiteral("搜索设备名称或 IP..."));
         edit->setStyleSheet(
             "QLineEdit {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 6px 12px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 6px 12px;"
             "  border-radius: 4px; font-size: 13px;"
             "}"
-            "QLineEdit:focus { border-color: #409EFF; }"
+            "QLineEdit:focus { border-color: #58A6FF; }"
         );
         edit->setFixedWidth(220);
     };
@@ -96,8 +96,8 @@ void TopologyWidget::setupUI()
         group->setTitle(title);
         group->setStyleSheet(
             "QGroupBox {"
-            "  color: #409EFF; font-size: 13px; font-weight: bold;"
-            "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+            "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+            "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
             "  padding-top: 16px;"
             "}"
             "QGroupBox::title {"
@@ -106,7 +106,7 @@ void TopologyWidget::setupUI()
         );
     };
 
-    auto styleLabel = [](QLabel* label, const QString& color = "#8C8C8C", int fontSize = 12) {
+    auto styleLabel = [](QLabel* label, const QString& color = "#8B949E", int fontSize = 12) {
         label->setStyleSheet(
             QString("font-size: %1px; color: %2;").arg(fontSize).arg(color)
         );
@@ -117,19 +117,19 @@ void TopologyWidget::setupUI()
     toolbarLayout->setSpacing(10);
 
     m_autoLayoutBtn = new QPushButton(QStringLiteral("自动布局"));
-    styleButton(m_autoLayoutBtn, "#409EFF", "#66B1FF");
+    styleButton(m_autoLayoutBtn, "#58A6FF", "#79C0FF");
 
     m_refreshBtn = new QPushButton(QStringLiteral("刷新"));
-    styleButton(m_refreshBtn, "#67C23A", "#85CE61");
+    styleButton(m_refreshBtn, "#3FB950", "#56D364");
 
     m_searchEdit = new QLineEdit();
     styleSearch(m_searchEdit);
 
     m_exportImageBtn = new QPushButton(QStringLiteral("导出图片"));
-    styleButton(m_exportImageBtn, "#E6A23C", "#EBB563");
+    styleButton(m_exportImageBtn, "#D29922", "#DBAB4A");
 
     auto* zoomLabel = new QLabel(QStringLiteral("缩放:"));
-    styleLabel(zoomLabel, "#DCDCDC", 13);
+    styleLabel(zoomLabel, "#E6EDF3", 13);
 
     m_zoomSlider = new QSlider(Qt::Horizontal);
     m_zoomSlider->setRange(10, 300);
@@ -137,13 +137,13 @@ void TopologyWidget::setupUI()
     m_zoomSlider->setFixedWidth(150);
     m_zoomSlider->setStyleSheet(
         "QSlider::groove:horizontal {"
-        "  background: #25262B; height: 4px; border-radius: 2px;"
+        "  background: #161B22; height: 4px; border-radius: 2px;"
         "}"
         "QSlider::handle:horizontal {"
-        "  background: #409EFF; width: 14px; height: 14px;"
+        "  background: #58A6FF; width: 14px; height: 14px;"
         "  margin: -5px 0; border-radius: 7px;"
         "}"
-        "QSlider::sub-page:horizontal { background: #409EFF; border-radius: 2px; }"
+        "QSlider::sub-page:horizontal { background: #58A6FF; border-radius: 2px; }"
     );
 
     toolbarLayout->addWidget(m_autoLayoutBtn);
@@ -161,7 +161,7 @@ void TopologyWidget::setupUI()
     // ── Middle: Scene + Right Panel ──
     auto* middleSplitter = new QSplitter(Qt::Horizontal);
     middleSplitter->setStyleSheet(
-        "QSplitter::handle { background-color: #3C3F41; width: 2px; }"
+        "QSplitter::handle { background-color: #30363D; width: 2px; }"
     );
 
     // ── Graphics View ──
@@ -179,7 +179,7 @@ void TopologyWidget::setupUI()
     m_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     m_view->setStyleSheet(
         "QGraphicsView {"
-        "  border: 1px solid #3C3F41;"
+        "  border: 1px solid #30363D;"
         "  background-color: #1A1A1A;"
         "}"
     );
@@ -200,12 +200,12 @@ void TopologyWidget::setupUI()
     m_deviceList = new QListWidget();
     m_deviceList->setStyleSheet(
         "QListWidget {"
-        "  background: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; font-size: 12px;"
+        "  background: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D; font-size: 12px;"
         "}"
         "QListWidget::item { padding: 4px 8px; }"
-        "QListWidget::item:selected { background-color: #3C3F41; }"
-        "QListWidget::item:hover { background-color: #2C2D30; }"
+        "QListWidget::item:selected { background-color: #30363D; }"
+        "QListWidget::item:hover { background-color: #21262D; }"
     );
     m_deviceList->setDragEnabled(true);
     deviceListLayout->addWidget(m_deviceList);
@@ -218,10 +218,7 @@ void TopologyWidget::setupUI()
 
     m_deviceDetailLabel = new QLabel(QStringLiteral("请选择一个设备节点"));
     m_deviceDetailLabel->setWordWrap(true);
-    m_deviceDetailLabel->setStyleSheet(
-        "color: #DCDCDC; font-size: 12px; padding: 8px;"
-        "background: #1E1F22; border: 1px solid #3C3F41; border-radius: 3px;"
-    );
+    
     m_deviceDetailLabel->setMinimumHeight(100);
     deviceDetailLayout->addWidget(m_deviceDetailLabel);
     rightLayout->addWidget(m_deviceDetailGroup);
@@ -233,10 +230,7 @@ void TopologyWidget::setupUI()
 
     m_linkDetailLabel = new QLabel(QStringLiteral("请选择一条链路"));
     m_linkDetailLabel->setWordWrap(true);
-    m_linkDetailLabel->setStyleSheet(
-        "color: #DCDCDC; font-size: 12px; padding: 8px;"
-        "background: #1E1F22; border: 1px solid #3C3F41; border-radius: 3px;"
-    );
+    
     m_linkDetailLabel->setMinimumHeight(80);
     linkDetailLayout->addWidget(m_linkDetailLabel);
     rightLayout->addWidget(m_linkDetailGroup);
@@ -253,15 +247,12 @@ void TopologyWidget::setupUI()
     // ── Bottom Status Bar ──
     auto* statusBar = new QWidget();
     statusBar->setFixedHeight(28);
-    statusBar->setStyleSheet(
-        "background: #25262B; border: 1px solid #3C3F41; border-radius: 3px;"
-    );
     auto* statusLayout = new QHBoxLayout(statusBar);
     statusLayout->setContentsMargins(12, 0, 12, 0);
     statusLayout->setSpacing(20);
 
     auto* statusLabel = new QLabel(QStringLiteral("就绪 | 节点: 0 | 链路: 0"));
-    styleLabel(statusLabel, "#8C8C8C", 12);
+    styleLabel(statusLabel, "#8B949E", 12);
     statusLayout->addWidget(statusLabel);
     statusLayout->addStretch();
 
@@ -400,7 +391,7 @@ void TopologyWidget::onSceneSelectionChanged()
             for (const auto& node : m_nodes) {
                 if (node.id == nodeId) {
                     QString statusStr = node.online ? QStringLiteral("在线") : QStringLiteral("离线");
-                    QString statusColor = node.online ? "#67C23A" : "#F56C6C";
+                    QString statusColor = node.online ? "#3FB950" : "#F85149";
                     QString typeMap;
                     if (node.type == QStringLiteral("switch")) typeMap = QStringLiteral("交换机");
                     else if (node.type == QStringLiteral("router")) typeMap = QStringLiteral("路由器");
@@ -443,7 +434,7 @@ void TopologyWidget::onSceneSelectionChanged()
                     }
 
                     QString statusStr = link.up ? QStringLiteral("Up") : QStringLiteral("Down");
-                    QString statusColor = link.up ? "#67C23A" : "#F56C6C";
+                    QString statusColor = link.up ? "#3FB950" : "#F85149";
                     QString bwStr;
                     if (link.bandwidth >= 1000) {
                         bwStr = QStringLiteral("%1 Gbps").arg(link.bandwidth / 1000.0, 0, 'f', 1);
@@ -624,7 +615,7 @@ QGraphicsEllipseItem* TopologyWidget::createNodeItem(const TopoNode& node)
 
     if (node.type == QStringLiteral("switch")) {
         // Switch: rectangle 60x40
-        fillColor = node.online ? QColor("#409EFF") : QColor("#5C5C5C");
+        fillColor = node.online ? QColor("#58A6FF") : QColor("#484F58");
         rect = QRectF(-30, -20, 60, 40);
 
         auto* item = new QGraphicsEllipseItem();
@@ -632,7 +623,7 @@ QGraphicsEllipseItem* TopologyWidget::createNodeItem(const TopoNode& node)
         // Actually we create a rounded rect representation via ellipse
         item->setRect(rect);
         item->setBrush(QBrush(fillColor));
-        item->setPen(QPen(QColor("#3C3F41"), 2));
+        item->setPen(QPen(QColor("#30363D"), 2));
         item->setPos(node.pos);
         item->setFlags(QGraphicsItem::ItemIsSelectable);
         item->setData(0, node.id);
@@ -644,7 +635,7 @@ QGraphicsEllipseItem* TopologyWidget::createNodeItem(const TopoNode& node)
         font.setPointSize(9);
         font.setBold(true);
         text->setFont(font);
-        text->setDefaultTextColor(QColor("#DCDCDC"));
+        text->setDefaultTextColor(QColor("#E6EDF3"));
         text->setPos(node.pos.x() - text->boundingRect().width() / 2, node.pos.y() + 22);
         text->setParentItem(item);
         text->setFlags(QGraphicsItem::ItemIgnoresTransformations);
@@ -654,13 +645,13 @@ QGraphicsEllipseItem* TopologyWidget::createNodeItem(const TopoNode& node)
 
     if (node.type == QStringLiteral("router")) {
         // Router: circle radius 25
-        fillColor = node.online ? QColor("#E6A23C") : QColor("#5C5C5C");
+        fillColor = node.online ? QColor("#D29922") : QColor("#484F58");
         rect = QRectF(-25, -25, 50, 50);
 
         auto* item = new QGraphicsEllipseItem();
         item->setRect(rect);
         item->setBrush(QBrush(fillColor));
-        item->setPen(QPen(QColor("#3C3F41"), 2));
+        item->setPen(QPen(QColor("#30363D"), 2));
         item->setPos(node.pos);
         item->setFlags(QGraphicsItem::ItemIsSelectable);
         item->setData(0, node.id);
@@ -671,7 +662,7 @@ QGraphicsEllipseItem* TopologyWidget::createNodeItem(const TopoNode& node)
         font.setPointSize(9);
         font.setBold(true);
         text->setFont(font);
-        text->setDefaultTextColor(QColor("#DCDCDC"));
+        text->setDefaultTextColor(QColor("#E6EDF3"));
         text->setPos(node.pos.x() - text->boundingRect().width() / 2, node.pos.y() + 28);
         text->setParentItem(item);
         text->setFlags(QGraphicsItem::ItemIgnoresTransformations);
@@ -681,13 +672,13 @@ QGraphicsEllipseItem* TopologyWidget::createNodeItem(const TopoNode& node)
 
     if (node.type == QStringLiteral("firewall")) {
         // Firewall: approximated hexagon using a diamond shape
-        fillColor = node.online ? QColor("#F56C6C") : QColor("#5C5C5C");
+        fillColor = node.online ? QColor("#F85149") : QColor("#484F58");
         rect = QRectF(-28, -28, 56, 56);
 
         auto* item = new QGraphicsEllipseItem();
         item->setRect(rect);
         item->setBrush(QBrush(fillColor));
-        item->setPen(QPen(QColor("#3C3F41"), 2));
+        item->setPen(QPen(QColor("#30363D"), 2));
         item->setPos(node.pos);
         item->setFlags(QGraphicsItem::ItemIsSelectable);
         item->setData(0, node.id);
@@ -698,7 +689,7 @@ QGraphicsEllipseItem* TopologyWidget::createNodeItem(const TopoNode& node)
         font.setPointSize(9);
         font.setBold(true);
         text->setFont(font);
-        text->setDefaultTextColor(QColor("#DCDCDC"));
+        text->setDefaultTextColor(QColor("#E6EDF3"));
         text->setPos(node.pos.x() - text->boundingRect().width() / 2, node.pos.y() + 30);
         text->setParentItem(item);
         text->setFlags(QGraphicsItem::ItemIgnoresTransformations);
@@ -708,13 +699,13 @@ QGraphicsEllipseItem* TopologyWidget::createNodeItem(const TopoNode& node)
 
     if (node.type == QStringLiteral("server")) {
         // Server: rectangle 50x50
-        fillColor = node.online ? QColor("#67C23A") : QColor("#5C5C5C");
+        fillColor = node.online ? QColor("#3FB950") : QColor("#484F58");
         rect = QRectF(-25, -25, 50, 50);
 
         auto* item = new QGraphicsEllipseItem();
         item->setRect(rect);
         item->setBrush(QBrush(fillColor));
-        item->setPen(QPen(QColor("#3C3F41"), 2));
+        item->setPen(QPen(QColor("#30363D"), 2));
         item->setPos(node.pos);
         item->setFlags(QGraphicsItem::ItemIsSelectable);
         item->setData(0, node.id);
@@ -725,7 +716,7 @@ QGraphicsEllipseItem* TopologyWidget::createNodeItem(const TopoNode& node)
         font.setPointSize(9);
         font.setBold(true);
         text->setFont(font);
-        text->setDefaultTextColor(QColor("#DCDCDC"));
+        text->setDefaultTextColor(QColor("#E6EDF3"));
         text->setPos(node.pos.x() - text->boundingRect().width() / 2, node.pos.y() + 28);
         text->setParentItem(item);
         text->setFlags(QGraphicsItem::ItemIgnoresTransformations);
@@ -735,11 +726,11 @@ QGraphicsEllipseItem* TopologyWidget::createNodeItem(const TopoNode& node)
 
     // AP, ISP, default: circle
     if (node.type == QStringLiteral("ap")) {
-        fillColor = node.online ? QColor("#9B59B6") : QColor("#5C5C5C");
+        fillColor = node.online ? QColor("#9B59B6") : QColor("#484F58");
     } else if (node.type == QStringLiteral("isp")) {
-        fillColor = node.online ? QColor("#1ABC9C") : QColor("#5C5C5C");
+        fillColor = node.online ? QColor("#1ABC9C") : QColor("#484F58");
     } else {
-        fillColor = node.online ? QColor("#909399") : QColor("#5C5C5C");
+        fillColor = node.online ? QColor("#8B949E") : QColor("#484F58");
     }
 
     rect = QRectF(-22, -22, 44, 44);
@@ -747,7 +738,7 @@ QGraphicsEllipseItem* TopologyWidget::createNodeItem(const TopoNode& node)
     auto* item = new QGraphicsEllipseItem();
     item->setRect(rect);
     item->setBrush(QBrush(fillColor));
-    item->setPen(QPen(QColor("#3C3F41"), 2));
+    item->setPen(QPen(QColor("#30363D"), 2));
     item->setPos(node.pos);
     item->setFlags(QGraphicsItem::ItemIsSelectable);
     item->setData(0, node.id);
@@ -758,7 +749,7 @@ QGraphicsEllipseItem* TopologyWidget::createNodeItem(const TopoNode& node)
     font.setPointSize(9);
     font.setBold(true);
     text->setFont(font);
-    text->setDefaultTextColor(QColor("#DCDCDC"));
+    text->setDefaultTextColor(QColor("#E6EDF3"));
     text->setPos(node.pos.x() - text->boundingRect().width() / 2, node.pos.y() + 25);
     text->setParentItem(item);
     text->setFlags(QGraphicsItem::ItemIgnoresTransformations);
@@ -780,9 +771,9 @@ QGraphicsLineItem* TopologyWidget::createLinkItem(const TopoLink& link)
     item->setLine(QLineF(srcPos, dstPos));
 
     if (link.up) {
-        item->setPen(QPen(QColor("#67C23A"), 2, Qt::SolidLine));
+        item->setPen(QPen(QColor("#3FB950"), 2, Qt::SolidLine));
     } else {
-        QPen pen(QColor("#F56C6C"), 2, Qt::DashLine);
+        QPen pen(QColor("#F85149"), 2, Qt::DashLine);
         pen.setDashPattern({4, 4});
         item->setPen(pen);
     }

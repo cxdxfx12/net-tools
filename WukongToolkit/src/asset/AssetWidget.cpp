@@ -66,15 +66,15 @@ void AssetWidget::setupUI()
         table->setStyleSheet(
             QStringLiteral(
                 "QTableWidget {"
-                "  background-color: #1E1F22; color: #DCDCDC;"
-                "  border: 1px solid #3C3F41; font-size: 12px;"
-                "  gridline-color: #2C2D30;"
+                "  background-color: #0D1117; color: #E6EDF3;"
+                "  border: 1px solid #30363D; font-size: 12px;"
+                "  gridline-color: #21262D;"
                 "}"
                 "QTableWidget::item { padding: 3px 6px; }"
-                "QTableWidget::item:selected { background-color: #3C3F41; }"
+                "QTableWidget::item:selected { background-color: #30363D; }"
                 "QHeaderView::section {"
-                "  background-color: #25262B; color: #8C8C8C;"
-                "  border: none; border-bottom: 2px solid #3C3F41;"
+                "  background-color: #161B22; color: #8B949E;"
+                "  border: none; border-bottom: 2px solid #30363D;"
                 "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
                 "}"
             )
@@ -90,8 +90,8 @@ void AssetWidget::setupUI()
         group->setStyleSheet(
             QStringLiteral(
                 "QGroupBox {"
-                "  color: #409EFF; font-size: 13px; font-weight: bold;"
-                "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+                "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+                "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
                 "  padding-top: 16px;"
                 "}"
                 "QGroupBox::title {"
@@ -114,17 +114,17 @@ void AssetWidget::setupUI()
         label->setStyleSheet(
             QString(QStringLiteral(
                 "font-size: 14px; font-weight: bold; color: %1;"
-                "background-color: #25262B; border-radius: 8px;"
+                "background-color: #161B22; border-radius: 8px;"
                 "padding: 10px 12px; border: 2px solid %1;"
             )).arg(color)
         );
         return label;
     };
 
-    m_totalAssetsLabel = makeCard(QStringLiteral("设备总数"),    QStringLiteral("#409EFF"));
-    m_expiringLabel    = makeCard(QStringLiteral("即将到期"),    QStringLiteral("#E6A23C"));
-    m_newDevicesLabel  = makeCard(QStringLiteral("新建资产"),    QStringLiteral("#67C23A"));
-    m_maintenanceLabel = makeCard(QStringLiteral("维保中"),      QStringLiteral("#909399"));
+    m_totalAssetsLabel = makeCard(QStringLiteral("设备总数"),    QStringLiteral("#58A6FF"));
+    m_expiringLabel    = makeCard(QStringLiteral("即将到期"),    QStringLiteral("#D29922"));
+    m_newDevicesLabel  = makeCard(QStringLiteral("新建资产"),    QStringLiteral("#3FB950"));
+    m_maintenanceLabel = makeCard(QStringLiteral("维保中"),      QStringLiteral("#8B949E"));
 
     overviewLayout->addWidget(m_totalAssetsLabel);
     overviewLayout->addWidget(m_expiringLabel);
@@ -140,7 +140,7 @@ void AssetWidget::setupUI()
     m_warrantyAlertLabel->setVisible(false);
     m_warrantyAlertLabel->setStyleSheet(
         QStringLiteral(
-            "font-size: 13px; font-weight: bold; color: #F56C6C;"
+            "font-size: 13px; font-weight: bold; color: #F85149;"
             "background-color: #2D1B1B; border-radius: 4px;"
             "padding: 6px 12px; border: 1px solid #F56C6C;"
         )
@@ -152,22 +152,22 @@ void AssetWidget::setupUI()
     tabWidget->setStyleSheet(
         QStringLiteral(
             "QTabWidget::pane {"
-            "  border: 1px solid #3C3F41; background-color: #1E1F22;"
+            "  border: 1px solid #30363D; background-color: #0D1117;"
             "  border-top: 2px solid #409EFF;"
             "}"
             "QTabBar::tab {"
-            "  background-color: #25262B; color: #8C8C8C;"
+            "  background-color: #161B22; color: #8B949E;"
             "  padding: 8px 20px; font-size: 13px; font-weight: bold;"
-            "  border: 1px solid #3C3F41; border-bottom: none;"
+            "  border: 1px solid #30363D; border-bottom: none;"
             "  border-top-left-radius: 4px; border-top-right-radius: 4px;"
             "  margin-right: 2px;"
             "}"
             "QTabBar::tab:selected {"
-            "  background-color: #1E1F22; color: #409EFF;"
+            "  background-color: #0D1117; color: #58A6FF;"
             "  border-bottom: 2px solid #409EFF;"
             "}"
             "QTabBar::tab:hover {"
-            "  background-color: #3C3F41; color: #DCDCDC;"
+            "  background-color: #30363D; color: #E6EDF3;"
             "}"
         )
     );
@@ -218,11 +218,11 @@ void AssetWidget::setupUI()
     m_searchEdit->setStyleSheet(
         QStringLiteral(
             "QLineEdit {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 6px 12px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 6px 12px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
-            "QLineEdit:focus { border-color: #409EFF; }"
+            "QLineEdit:focus { border-color: #58A6FF; }"
         )
     );
     bottomLayout->addWidget(m_searchEdit);
@@ -230,10 +230,10 @@ void AssetWidget::setupUI()
     m_searchBtn = new QPushButton(QStringLiteral("搜索"));
     m_searchBtn->setStyleSheet(
         QStringLiteral(
-            "QPushButton { background-color: #409EFF; color: white;"
+            "QPushButton { background-color: #58A6FF; color: white;"
             "  border: none; padding: 8px 20px; border-radius: 4px;"
             "  font-size: 13px; font-weight: bold; }"
-            "QPushButton:hover { background-color: #66B1FF; }"
+            "QPushButton:hover { background-color: #79C0FF; }"
         )
     );
     bottomLayout->addWidget(m_searchBtn);
@@ -243,17 +243,16 @@ void AssetWidget::setupUI()
     // 分隔线
     auto* separator = new QFrame();
     separator->setFrameShape(QFrame::VLine);
-    separator->setStyleSheet(QStringLiteral("color: #3C3F41;"));
     bottomLayout->addWidget(separator);
     bottomLayout->addSpacing(8);
 
     m_addBtn = new QPushButton(QStringLiteral("添加资产"));
     m_addBtn->setStyleSheet(
         QStringLiteral(
-            "QPushButton { background-color: #67C23A; color: white;"
+            "QPushButton { background-color: #3FB950; color: white;"
             "  border: none; padding: 8px 20px; border-radius: 4px;"
             "  font-size: 13px; font-weight: bold; }"
-            "QPushButton:hover { background-color: #85CE61; }"
+            "QPushButton:hover { background-color: #56D364; }"
         )
     );
     bottomLayout->addWidget(m_addBtn);
@@ -261,10 +260,10 @@ void AssetWidget::setupUI()
     m_editBtn = new QPushButton(QStringLiteral("编辑资产"));
     m_editBtn->setStyleSheet(
         QStringLiteral(
-            "QPushButton { background-color: #E6A23C; color: white;"
+            "QPushButton { background-color: #D29922; color: white;"
             "  border: none; padding: 8px 20px; border-radius: 4px;"
             "  font-size: 13px; font-weight: bold; }"
-            "QPushButton:hover { background-color: #EBB563; }"
+            "QPushButton:hover { background-color: #DBAB4A; }"
         )
     );
     bottomLayout->addWidget(m_editBtn);
@@ -272,7 +271,7 @@ void AssetWidget::setupUI()
     m_deleteBtn = new QPushButton(QStringLiteral("删除资产"));
     m_deleteBtn->setStyleSheet(
         QStringLiteral(
-            "QPushButton { background-color: #F56C6C; color: white;"
+            "QPushButton { background-color: #F85149; color: white;"
             "  border: none; padding: 8px 20px; border-radius: 4px;"
             "  font-size: 13px; font-weight: bold; }"
             "QPushButton:hover { background-color: #F89898; }"
@@ -285,7 +284,7 @@ void AssetWidget::setupUI()
     m_importCsvBtn = new QPushButton(QStringLiteral("导入 CSV"));
     m_importCsvBtn->setStyleSheet(
         QStringLiteral(
-            "QPushButton { background-color: #4A4D52; color: #DCDCDC;"
+            "QPushButton { background-color: #4A4D52; color: #E6EDF3;"
             "  border: none; padding: 8px 20px; border-radius: 4px;"
             "  font-size: 13px; font-weight: bold; }"
             "QPushButton:hover { background-color: #5A5D62; }"
@@ -296,7 +295,7 @@ void AssetWidget::setupUI()
     m_exportBtn = new QPushButton(QStringLiteral("导出 CSV"));
     m_exportBtn->setStyleSheet(
         QStringLiteral(
-            "QPushButton { background-color: #4A4D52; color: #DCDCDC;"
+            "QPushButton { background-color: #4A4D52; color: #E6EDF3;"
             "  border: none; padding: 8px 20px; border-radius: 4px;"
             "  font-size: 13px; font-weight: bold; }"
             "QPushButton:hover { background-color: #5A5D62; }"
@@ -706,11 +705,11 @@ void AssetWidget::loadDemoAssets()
         if (expiryDate.isValid()) {
             qint64 daysToExpiry = today.daysTo(expiryDate);
             if (daysToExpiry < 0) {
-                warrantyItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+                warrantyItem->setForeground(QColor(QStringLiteral("#F85149")));
             } else if (daysToExpiry <= 30) {
-                warrantyItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+                warrantyItem->setForeground(QColor(QStringLiteral("#D29922")));
             } else {
-                warrantyItem->setForeground(QColor(QStringLiteral("#67C23A")));
+                warrantyItem->setForeground(QColor(QStringLiteral("#3FB950")));
             }
         }
         m_assetTable->setItem(row, 7, warrantyItem);
@@ -718,13 +717,13 @@ void AssetWidget::loadDemoAssets()
         auto* statusItem = new QTableWidgetItem(a.status);
         statusItem->setTextAlignment(Qt::AlignCenter);
         if (a.status == QStringLiteral("在线")) {
-            statusItem->setForeground(QColor(QStringLiteral("#67C23A")));
+            statusItem->setForeground(QColor(QStringLiteral("#3FB950")));
         } else if (a.status == QStringLiteral("离线")) {
-            statusItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+            statusItem->setForeground(QColor(QStringLiteral("#F85149")));
         } else if (a.status == QStringLiteral("待部署")) {
-            statusItem->setForeground(QColor(QStringLiteral("#409EFF")));
+            statusItem->setForeground(QColor(QStringLiteral("#58A6FF")));
         } else {
-            statusItem->setForeground(QColor(QStringLiteral("#909399")));
+            statusItem->setForeground(QColor(QStringLiteral("#8B949E")));
         }
         m_assetTable->setItem(row, 8, statusItem);
     }
@@ -749,13 +748,13 @@ void AssetWidget::loadDemoAssets()
         daysItem->setTextAlignment(Qt::AlignCenter);
         if (l.remainingDays < 0) {
             daysItem->setText(QStringLiteral("永久"));
-            daysItem->setForeground(QColor(QStringLiteral("#67C23A")));
+            daysItem->setForeground(QColor(QStringLiteral("#3FB950")));
         } else {
             daysItem->setText(QString::number(l.remainingDays));
             if (l.remainingDays <= 30) {
-                daysItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+                daysItem->setForeground(QColor(QStringLiteral("#D29922")));
             } else {
-                daysItem->setForeground(QColor(QStringLiteral("#67C23A")));
+                daysItem->setForeground(QColor(QStringLiteral("#3FB950")));
             }
         }
         m_licenseTable->setItem(row, 4, daysItem);
@@ -763,11 +762,11 @@ void AssetWidget::loadDemoAssets()
         auto* statusItem = new QTableWidgetItem(l.status);
         statusItem->setTextAlignment(Qt::AlignCenter);
         if (l.status == QStringLiteral("有效")) {
-            statusItem->setForeground(QColor(QStringLiteral("#67C23A")));
+            statusItem->setForeground(QColor(QStringLiteral("#3FB950")));
         } else if (l.status == QStringLiteral("即将到期")) {
-            statusItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+            statusItem->setForeground(QColor(QStringLiteral("#D29922")));
         } else {
-            statusItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+            statusItem->setForeground(QColor(QStringLiteral("#F85149")));
         }
         m_licenseTable->setItem(row, 5, statusItem);
     }
@@ -823,16 +822,16 @@ void AssetWidget::updateOverview()
     if (expiringCount > 0) {
         m_expiringLabel->setStyleSheet(
             QStringLiteral(
-                "font-size: 14px; font-weight: bold; color: #F56C6C;"
-                "background-color: #25262B; border-radius: 8px;"
+                "font-size: 14px; font-weight: bold; color: #F85149;"
+                "background-color: #161B22; border-radius: 8px;"
                 "padding: 10px 12px; border: 2px solid #F56C6C;"
             )
         );
     } else {
         m_expiringLabel->setStyleSheet(
             QStringLiteral(
-                "font-size: 14px; font-weight: bold; color: #E6A23C;"
-                "background-color: #25262B; border-radius: 8px;"
+                "font-size: 14px; font-weight: bold; color: #D29922;"
+                "background-color: #161B22; border-radius: 8px;"
                 "padding: 10px 12px; border: 2px solid #E6A23C;"
             )
         );
@@ -893,27 +892,27 @@ void AssetWidget::onAddAsset()
     dialog->setMinimumWidth(420);
     dialog->setStyleSheet(
         QStringLiteral(
-            "QDialog { background-color: #1E1F22; color: #DCDCDC; }"
-            "QLabel { color: #8C8C8C; font-size: 13px; }"
+            "QDialog { background-color: #0D1117; color: #E6EDF3; }"
+            "QLabel { color: #8B949E; font-size: 13px; }"
             "QLineEdit {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 6px 10px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 6px 10px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
-            "QLineEdit:focus { border-color: #409EFF; }"
+            "QLineEdit:focus { border-color: #58A6FF; }"
             "QComboBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 6px 10px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 6px 10px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
             "QComboBox::drop-down { border: none; }"
             "QComboBox QAbstractItemView {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  selection-background-color: #3C3F41;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  selection-background-color: #30363D;"
             "}"
             "QDateEdit {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 6px 10px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 6px 10px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
         )
@@ -969,11 +968,11 @@ void AssetWidget::onAddAsset()
     buttonBox->setStyleSheet(
         QStringLiteral(
             "QPushButton {"
-            "  background-color: #409EFF; color: white;"
+            "  background-color: #58A6FF; color: white;"
             "  border: none; padding: 8px 20px; border-radius: 4px;"
             "  font-size: 13px; font-weight: bold;"
             "}"
-            "QPushButton:hover { background-color: #66B1FF; }"
+            "QPushButton:hover { background-color: #79C0FF; }"
         )
     );
     layout->addRow(buttonBox);
@@ -1022,11 +1021,11 @@ void AssetWidget::onAddAsset()
         if (expiryDate.isValid()) {
             qint64 daysToExpiry = QDate::currentDate().daysTo(expiryDate);
             if (daysToExpiry < 0) {
-                warrantyItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+                warrantyItem->setForeground(QColor(QStringLiteral("#F85149")));
             } else if (daysToExpiry <= 30) {
-                warrantyItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+                warrantyItem->setForeground(QColor(QStringLiteral("#D29922")));
             } else {
-                warrantyItem->setForeground(QColor(QStringLiteral("#67C23A")));
+                warrantyItem->setForeground(QColor(QStringLiteral("#3FB950")));
             }
         }
         m_assetTable->setItem(row, 7, warrantyItem);
@@ -1034,13 +1033,13 @@ void AssetWidget::onAddAsset()
         auto* statusItem = new QTableWidgetItem(a.status);
         statusItem->setTextAlignment(Qt::AlignCenter);
         if (a.status == QStringLiteral("在线")) {
-            statusItem->setForeground(QColor(QStringLiteral("#67C23A")));
+            statusItem->setForeground(QColor(QStringLiteral("#3FB950")));
         } else if (a.status == QStringLiteral("离线")) {
-            statusItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+            statusItem->setForeground(QColor(QStringLiteral("#F85149")));
         } else if (a.status == QStringLiteral("待部署")) {
-            statusItem->setForeground(QColor(QStringLiteral("#409EFF")));
+            statusItem->setForeground(QColor(QStringLiteral("#58A6FF")));
         } else {
-            statusItem->setForeground(QColor(QStringLiteral("#909399")));
+            statusItem->setForeground(QColor(QStringLiteral("#8B949E")));
         }
         m_assetTable->setItem(row, 8, statusItem);
 
@@ -1071,27 +1070,27 @@ void AssetWidget::onEditAsset()
     dialog->setMinimumWidth(420);
     dialog->setStyleSheet(
         QStringLiteral(
-            "QDialog { background-color: #1E1F22; color: #DCDCDC; }"
-            "QLabel { color: #8C8C8C; font-size: 13px; }"
+            "QDialog { background-color: #0D1117; color: #E6EDF3; }"
+            "QLabel { color: #8B949E; font-size: 13px; }"
             "QLineEdit {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 6px 10px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 6px 10px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
-            "QLineEdit:focus { border-color: #409EFF; }"
+            "QLineEdit:focus { border-color: #58A6FF; }"
             "QComboBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 6px 10px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 6px 10px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
             "QComboBox::drop-down { border: none; }"
             "QComboBox QAbstractItemView {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  selection-background-color: #3C3F41;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  selection-background-color: #30363D;"
             "}"
             "QDateEdit {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 6px 10px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 6px 10px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
         )
@@ -1146,11 +1145,11 @@ void AssetWidget::onEditAsset()
     buttonBox->setStyleSheet(
         QStringLiteral(
             "QPushButton {"
-            "  background-color: #409EFF; color: white;"
+            "  background-color: #58A6FF; color: white;"
             "  border: none; padding: 8px 20px; border-radius: 4px;"
             "  font-size: 13px; font-weight: bold;"
             "}"
-            "QPushButton:hover { background-color: #66B1FF; }"
+            "QPushButton:hover { background-color: #79C0FF; }"
         )
     );
     layout->addRow(buttonBox);
@@ -1191,24 +1190,24 @@ void AssetWidget::onEditAsset()
         if (expiryDate.isValid()) {
             qint64 daysToExpiry = QDate::currentDate().daysTo(expiryDate);
             if (daysToExpiry < 0) {
-                warrantyItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+                warrantyItem->setForeground(QColor(QStringLiteral("#F85149")));
             } else if (daysToExpiry <= 30) {
-                warrantyItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+                warrantyItem->setForeground(QColor(QStringLiteral("#D29922")));
             } else {
-                warrantyItem->setForeground(QColor(QStringLiteral("#67C23A")));
+                warrantyItem->setForeground(QColor(QStringLiteral("#3FB950")));
             }
         }
 
         auto* statusItem = m_assetTable->item(currentRow, 8);
         statusItem->setText(a.status);
         if (a.status == QStringLiteral("在线")) {
-            statusItem->setForeground(QColor(QStringLiteral("#67C23A")));
+            statusItem->setForeground(QColor(QStringLiteral("#3FB950")));
         } else if (a.status == QStringLiteral("离线")) {
-            statusItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+            statusItem->setForeground(QColor(QStringLiteral("#F85149")));
         } else if (a.status == QStringLiteral("待部署")) {
-            statusItem->setForeground(QColor(QStringLiteral("#409EFF")));
+            statusItem->setForeground(QColor(QStringLiteral("#58A6FF")));
         } else {
-            statusItem->setForeground(QColor(QStringLiteral("#909399")));
+            statusItem->setForeground(QColor(QStringLiteral("#8B949E")));
         }
 
         updateOverview();
@@ -1347,11 +1346,11 @@ void AssetWidget::onImportCSV()
         if (expiryDate.isValid()) {
             qint64 daysToExpiry = QDate::currentDate().daysTo(expiryDate);
             if (daysToExpiry < 0) {
-                warrantyItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+                warrantyItem->setForeground(QColor(QStringLiteral("#F85149")));
             } else if (daysToExpiry <= 30) {
-                warrantyItem->setForeground(QColor(QStringLiteral("#E6A23C")));
+                warrantyItem->setForeground(QColor(QStringLiteral("#D29922")));
             } else {
-                warrantyItem->setForeground(QColor(QStringLiteral("#67C23A")));
+                warrantyItem->setForeground(QColor(QStringLiteral("#3FB950")));
             }
         }
         m_assetTable->setItem(row, 7, warrantyItem);
@@ -1359,13 +1358,13 @@ void AssetWidget::onImportCSV()
         auto* statusItem = new QTableWidgetItem(a.status);
         statusItem->setTextAlignment(Qt::AlignCenter);
         if (a.status == QStringLiteral("在线")) {
-            statusItem->setForeground(QColor(QStringLiteral("#67C23A")));
+            statusItem->setForeground(QColor(QStringLiteral("#3FB950")));
         } else if (a.status == QStringLiteral("离线")) {
-            statusItem->setForeground(QColor(QStringLiteral("#F56C6C")));
+            statusItem->setForeground(QColor(QStringLiteral("#F85149")));
         } else if (a.status == QStringLiteral("待部署")) {
-            statusItem->setForeground(QColor(QStringLiteral("#409EFF")));
+            statusItem->setForeground(QColor(QStringLiteral("#58A6FF")));
         } else {
-            statusItem->setForeground(QColor(QStringLiteral("#909399")));
+            statusItem->setForeground(QColor(QStringLiteral("#8B949E")));
         }
         m_assetTable->setItem(row, 8, statusItem);
 

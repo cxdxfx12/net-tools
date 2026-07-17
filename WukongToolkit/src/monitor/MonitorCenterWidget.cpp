@@ -69,14 +69,14 @@ void MonitorCenterWidget::setupUI()
         combo->setMinimumWidth(minWidth);
         combo->setStyleSheet(
             "QComboBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px 8px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 4px 8px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
             "QComboBox::drop-down { border: none; }"
             "QComboBox QAbstractItemView {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  selection-background-color: #3C3F41;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  selection-background-color: #30363D;"
             "}"
         );
     };
@@ -84,15 +84,15 @@ void MonitorCenterWidget::setupUI()
     auto styleTable = [](QTableWidget* table) {
         table->setStyleSheet(
             "QTableWidget {"
-            "  background-color: #1E1F22; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; font-size: 12px;"
-            "  gridline-color: #2C2D30;"
+            "  background-color: #0D1117; color: #E6EDF3;"
+            "  border: 1px solid #30363D; font-size: 12px;"
+            "  gridline-color: #21262D;"
             "}"
             "QTableWidget::item { padding: 3px 6px; }"
-            "QTableWidget::item:selected { background-color: #3C3F41; }"
+            "QTableWidget::item:selected { background-color: #30363D; }"
             "QHeaderView::section {"
-            "  background-color: #25262B; color: #8C8C8C;"
-            "  border: none; border-bottom: 2px solid #3C3F41;"
+            "  background-color: #161B22; color: #8B949E;"
+            "  border: none; border-bottom: 2px solid #30363D;"
             "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
             "}"
         );
@@ -110,13 +110,13 @@ void MonitorCenterWidget::setupUI()
                     "  font-size: 13px; font-weight: bold;"
                     "}"
                     "QPushButton:hover { background-color: %2; }"
-                    "QPushButton:disabled { background-color: #5C5C5C; }")
+                    "QPushButton:disabled { background-color: #484F58; }")
                 .arg(bgColor, hoverColor)
         );
         btn->setFixedHeight(34);
     };
 
-    auto styleLabel = [](QLabel* label, const QString& color = "#8C8C8C", int fontSize = 12) {
+    auto styleLabel = [](QLabel* label, const QString& color = "#8B949E", int fontSize = 12) {
         label->setStyleSheet(
             QString("font-size: %1px; color: %2;").arg(fontSize).arg(color)
         );
@@ -125,8 +125,8 @@ void MonitorCenterWidget::setupUI()
     auto styleCard = [](QFrame* card) {
         card->setStyleSheet(
             "QFrame {"
-            "  background-color: #25262B;"
-            "  border: 1px solid #3C3F41;"
+            "  background-color: #161B22;"
+            "  border: 1px solid #30363D;"
             "  border-radius: 6px;"
             "}"
         );
@@ -136,8 +136,8 @@ void MonitorCenterWidget::setupUI()
         spin->setFixedWidth(width);
         spin->setStyleSheet(
             "QSpinBox {"
-            "  background: #25262B; color: #DCDCDC;"
-            "  border: 1px solid #3C3F41; padding: 4px;"
+            "  background: #161B22; color: #E6EDF3;"
+            "  border: 1px solid #30363D; padding: 4px;"
             "  border-radius: 3px; font-size: 13px;"
             "}"
         );
@@ -147,8 +147,8 @@ void MonitorCenterWidget::setupUI()
     auto* topGroup = new QGroupBox("设备监控中心");
     topGroup->setStyleSheet(
         "QGroupBox {"
-        "  color: #409EFF; font-size: 13px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+        "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+        "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
         "  padding-top: 16px;"
         "}"
         "QGroupBox::title {"
@@ -159,12 +159,12 @@ void MonitorCenterWidget::setupUI()
     topLayout->setSpacing(12);
 
     auto* deviceLabel = new QLabel("监控设备:");
-    styleLabel(deviceLabel, "#8C8C8C", 13);
+    styleLabel(deviceLabel, "#8B949E", 13);
     m_deviceCombo = new QComboBox();
     styleCombo(m_deviceCombo, 220);
 
     m_addDeviceBtn = new QPushButton("+ 添加设备");
-    styleButton(m_addDeviceBtn, "#409EFF", "#66B1FF");
+    styleButton(m_addDeviceBtn, "#58A6FF", "#79C0FF");
 
     topLayout->addWidget(deviceLabel);
     topLayout->addWidget(m_deviceCombo);
@@ -172,7 +172,7 @@ void MonitorCenterWidget::setupUI()
     topLayout->addSpacing(24);
 
     auto* refreshLabel = new QLabel("刷新间隔:");
-    styleLabel(refreshLabel, "#8C8C8C", 13);
+    styleLabel(refreshLabel, "#8B949E", 13);
     m_intervalSpin = new QSpinBox();
     m_intervalSpin->setRange(5, 300);
     m_intervalSpin->setValue(10);
@@ -182,25 +182,25 @@ void MonitorCenterWidget::setupUI()
     m_autoRefreshCheck = new QCheckBox("自动刷新");
     m_autoRefreshCheck->setChecked(true);
     m_autoRefreshCheck->setStyleSheet(
-        "QCheckBox { color: #DCDCDC; font-size: 13px; }"
+        "QCheckBox { color: #E6EDF3; font-size: 13px; }"
         "QCheckBox::indicator {"
         "  width: 16px; height: 16px;"
-        "  border: 1px solid #3C3F41; border-radius: 3px;"
-        "  background-color: #25262B;"
+        "  border: 1px solid #30363D; border-radius: 3px;"
+        "  background-color: #161B22;"
         "}"
         "QCheckBox::indicator:checked {"
-        "  background-color: #409EFF; border-color: #409EFF;"
+        "  background-color: #58A6FF; border-color: #58A6FF;"
         "}"
     );
 
     m_refreshBtn = new QPushButton("立即刷新");
-    styleButton(m_refreshBtn, "#67C23A", "#85CE61");
+    styleButton(m_refreshBtn, "#3FB950", "#56D364");
 
     m_exportBtn = new QPushButton("导出 CSV");
-    styleButton(m_exportBtn, "#E6A23C", "#EBB563");
+    styleButton(m_exportBtn, "#D29922", "#DBAB4A");
 
     m_fullScreenBtn = new QPushButton("全屏");
-    styleButton(m_fullScreenBtn, "#909399", "#B4B4B4");
+    styleButton(m_fullScreenBtn, "#8B949E", "#B4B4B4");
 
     topLayout->addWidget(refreshLabel);
     topLayout->addWidget(m_intervalSpin);
@@ -215,7 +215,7 @@ void MonitorCenterWidget::setupUI()
     // ── Middle: Dashboard cards + Metrics table ──
     auto* middleSplitter = new QSplitter(Qt::Horizontal);
     middleSplitter->setStyleSheet(
-        "QSplitter::handle { background-color: #3C3F41; width: 2px; }"
+        "QSplitter::handle { background-color: #30363D; width: 2px; }"
     );
 
     // Left: Dashboard cards
@@ -235,8 +235,8 @@ void MonitorCenterWidget::setupUI()
     auto* cpuIcon = new QLabel("🖥");
     cpuIcon->setStyleSheet("font-size: 18px;");
     auto* cpuTitle = new QLabel("CPU 使用率");
-    styleLabel(cpuTitle, "#DCDCDC", 14);
-    cpuTitle->setStyleSheet("font-size: 14px; color: #DCDCDC; font-weight: bold;");
+    styleLabel(cpuTitle, "#E6EDF3", 14);
+    cpuTitle->setStyleSheet("font-size: 14px; color: #E6EDF3; font-weight: bold;");
     cpuHeader->addWidget(cpuIcon);
     cpuHeader->addWidget(cpuTitle);
     cpuHeader->addStretch();
@@ -248,12 +248,12 @@ void MonitorCenterWidget::setupUI()
     m_cpuBar->setFixedHeight(28);
     m_cpuBar->setStyleSheet(
         "QProgressBar {"
-        "  background-color: #1E1F22; border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; border: 1px solid #30363D;"
         "  border-radius: 4px; text-align: center; color: white;"
         "  font-size: 13px; font-weight: bold;"
         "}"
         "QProgressBar::chunk {"
-        "  background-color: #67C23A; border-radius: 3px;"
+        "  background-color: #3FB950; border-radius: 3px;"
         "}"
     );
 
@@ -272,7 +272,7 @@ void MonitorCenterWidget::setupUI()
     auto* memIcon = new QLabel("💾");
     memIcon->setStyleSheet("font-size: 18px;");
     auto* memTitle = new QLabel("内存使用率");
-    memTitle->setStyleSheet("font-size: 14px; color: #DCDCDC; font-weight: bold;");
+    memTitle->setStyleSheet("font-size: 14px; color: #E6EDF3; font-weight: bold;");
     memHeader->addWidget(memIcon);
     memHeader->addWidget(memTitle);
     memHeader->addStretch();
@@ -284,12 +284,12 @@ void MonitorCenterWidget::setupUI()
     m_memBar->setFixedHeight(28);
     m_memBar->setStyleSheet(
         "QProgressBar {"
-        "  background-color: #1E1F22; border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; border: 1px solid #30363D;"
         "  border-radius: 4px; text-align: center; color: white;"
         "  font-size: 13px; font-weight: bold;"
         "}"
         "QProgressBar::chunk {"
-        "  background-color: #67C23A; border-radius: 3px;"
+        "  background-color: #3FB950; border-radius: 3px;"
         "}"
     );
 
@@ -308,9 +308,9 @@ void MonitorCenterWidget::setupUI()
     tempIcon->setStyleSheet("font-size: 24px;");
     auto* tempTextLayout = new QVBoxLayout();
     m_tempLabel = new QLabel("设备温度");
-    styleLabel(m_tempLabel, "#8C8C8C", 12);
+    styleLabel(m_tempLabel, "#8B949E", 12);
     m_tempValueLabel = new QLabel("-- °C");
-    m_tempValueLabel->setStyleSheet("font-size: 22px; color: #67C23A; font-weight: bold;");
+    m_tempValueLabel->setStyleSheet("font-size: 22px; color: #3FB950; font-weight: bold;");
     tempTextLayout->addWidget(m_tempLabel);
     tempTextLayout->addWidget(m_tempValueLabel);
 
@@ -330,9 +330,9 @@ void MonitorCenterWidget::setupUI()
     uptimeIcon->setStyleSheet("font-size: 24px;");
     auto* uptimeTextLayout = new QVBoxLayout();
     m_uptimeLabel = new QLabel("运行时间");
-    styleLabel(m_uptimeLabel, "#8C8C8C", 12);
+    styleLabel(m_uptimeLabel, "#8B949E", 12);
     m_uptimeValueLabel = new QLabel("--");
-    m_uptimeValueLabel->setStyleSheet("font-size: 16px; color: #409EFF; font-weight: bold;");
+    m_uptimeValueLabel->setStyleSheet("font-size: 16px; color: #58A6FF; font-weight: bold;");
     uptimeTextLayout->addWidget(m_uptimeLabel);
     uptimeTextLayout->addWidget(m_uptimeValueLabel);
 
@@ -350,7 +350,7 @@ void MonitorCenterWidget::setupUI()
     metricsLayout->setSpacing(4);
 
     auto* metricsTitle = new QLabel("监控指标");
-    metricsTitle->setStyleSheet("font-size: 13px; color: #409EFF; font-weight: bold; padding: 4px 0;");
+    metricsTitle->setStyleSheet("font-size: 13px; color: #58A6FF; font-weight: bold; padding: 4px 0;");
 
     m_metricsTable = new QTableWidget(0, 5);
     m_metricsTable->setHorizontalHeaderLabels({"指标", "当前值", "状态", "阈值", "上次更新"});
@@ -376,8 +376,8 @@ void MonitorCenterWidget::setupUI()
     auto* interfaceGroup = new QGroupBox("接口流量");
     interfaceGroup->setStyleSheet(
         "QGroupBox {"
-        "  color: #409EFF; font-size: 13px; font-weight: bold;"
-        "  border: 1px solid #3C3F41; border-radius: 4px; margin-top: 8px;"
+        "  color: #58A6FF; font-size: 13px; font-weight: bold;"
+        "  border: 1px solid #30363D; border-radius: 4px; margin-top: 8px;"
         "  padding-top: 16px;"
         "}"
         "QGroupBox::title {"
@@ -609,11 +609,11 @@ void MonitorCenterWidget::generateSimulatedMetrics()
 
     // Update temperature
     if (temp < 50) {
-        m_tempValueLabel->setStyleSheet("font-size: 22px; color: #67C23A; font-weight: bold;");
+        m_tempValueLabel->setStyleSheet("font-size: 22px; color: #3FB950; font-weight: bold;");
     } else if (temp < 70) {
-        m_tempValueLabel->setStyleSheet("font-size: 22px; color: #E6A23C; font-weight: bold;");
+        m_tempValueLabel->setStyleSheet("font-size: 22px; color: #D29922; font-weight: bold;");
     } else {
-        m_tempValueLabel->setStyleSheet("font-size: 22px; color: #F56C6C; font-weight: bold;");
+        m_tempValueLabel->setStyleSheet("font-size: 22px; color: #F85149; font-weight: bold;");
     }
     m_tempValueLabel->setText(QString("%1 °C").arg(temp));
 
@@ -930,11 +930,11 @@ void MonitorCenterWidget::addMetricRow(const QString& metric, const QString& val
 
     auto* statusItem = new QTableWidgetItem(status);
     if (status == "OK") {
-        statusItem->setForeground(QColor("#67C23A"));
+        statusItem->setForeground(QColor("#3FB950"));
     } else if (status == "Caution") {
-        statusItem->setForeground(QColor("#E6A23C"));
+        statusItem->setForeground(QColor("#D29922"));
     } else if (status == "Warning" || status == "Critical" || status == "Error") {
-        statusItem->setForeground(QColor("#F56C6C"));
+        statusItem->setForeground(QColor("#F85149"));
     }
     m_metricsTable->setItem(row, 2, statusItem);
 
@@ -957,9 +957,9 @@ void MonitorCenterWidget::addInterfaceRow(const QString& name, const QString& st
 
     auto* statusItem = new QTableWidgetItem(status);
     if (status == "Up") {
-        statusItem->setForeground(QColor("#67C23A"));
+        statusItem->setForeground(QColor("#3FB950"));
     } else {
-        statusItem->setForeground(QColor("#F56C6C"));
+        statusItem->setForeground(QColor("#F85149"));
     }
     m_interfaceTable->setItem(row, 1, statusItem);
 
@@ -977,7 +977,7 @@ void MonitorCenterWidget::clearMetrics()
     m_cpuBar->setValue(0);
     m_memBar->setValue(0);
     m_tempValueLabel->setText("-- °C");
-    m_tempValueLabel->setStyleSheet("font-size: 22px; color: #67C23A; font-weight: bold;");
+    m_tempValueLabel->setStyleSheet("font-size: 22px; color: #3FB950; font-weight: bold;");
     m_uptimeValueLabel->setText("--");
 }
 
@@ -992,16 +992,16 @@ void MonitorCenterWidget::updateProgressBar(QProgressBar* bar, int value)
 {
     QString color;
     if (value < 60) {
-        color = "#67C23A"; // Green
+        color = "#3FB950"; // Green
     } else if (value < 80) {
-        color = "#E6A23C"; // Yellow
+        color = "#D29922"; // Yellow
     } else {
-        color = "#F56C6C"; // Red
+        color = "#F85149"; // Red
     }
 
     bar->setStyleSheet(
         QString("QProgressBar {"
-                "  background-color: #1E1F22; border: 1px solid #3C3F41;"
+                "  background-color: #0D1117; border: 1px solid #30363D;"
                 "  border-radius: 4px; text-align: center; color: white;"
                 "  font-size: 13px; font-weight: bold;"
                 "}"

@@ -127,20 +127,20 @@ void PacketCaptureWidget::setupUI()
     ifaceRow->setSpacing(8);
 
     auto* ifaceLabel = new QLabel("网卡:");
-    ifaceLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_interfaceCombo = new QComboBox();
     m_interfaceCombo->setMinimumWidth(180);
     m_interfaceCombo->setStyleSheet(
         "QComboBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
         "QComboBox::drop-down { border: none; }"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #409EFF;"
-        "  border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #58A6FF;"
+        "  border: 1px solid #30363D;"
         "}"
     );
     ifaceRow->addWidget(ifaceLabel);
@@ -149,7 +149,7 @@ void PacketCaptureWidget::setupUI()
     m_refreshInterfaceBtn = new QPushButton("刷新");
     m_refreshInterfaceBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #3C3F41; color: #DCDCDC;"
+        "  background-color: #30363D; color: #E6EDF3;"
         "  border: none; padding: 6px 14px; border-radius: 3px;"
         "  font-size: 12px;"
         "}"
@@ -165,13 +165,13 @@ void PacketCaptureWidget::setupUI()
     filterRow->setSpacing(8);
 
     auto* filterLabel = new QLabel("过滤器:");
-    filterLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_filterEdit = new QLineEdit();
     m_filterEdit->setPlaceholderText("例如: tcp port 80, host 192.168.1.1, icmp, udp port 53");
     m_filterEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -179,15 +179,15 @@ void PacketCaptureWidget::setupUI()
     filterRow->addWidget(m_filterEdit, 3);
 
     auto* countLabel = new QLabel("包数量:");
-    countLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     m_packetCountSpin = new QSpinBox();
     m_packetCountSpin->setRange(0, 99999);
     m_packetCountSpin->setValue(100);
     m_packetCountSpin->setSpecialValueText("无限制");
     m_packetCountSpin->setStyleSheet(
         "QSpinBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -203,12 +203,12 @@ void PacketCaptureWidget::setupUI()
     m_startBtn = new QPushButton("开始捕获");
     m_startBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #67C23A; color: white;"
+        "  background-color: #3FB950; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #85CE61; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #56D364; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_startBtn->setFixedHeight(32);
 
@@ -216,24 +216,24 @@ void PacketCaptureWidget::setupUI()
     m_stopBtn->setEnabled(false);
     m_stopBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #F56C6C; color: white;"
+        "  background-color: #F85149; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #F78989; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #FF7B72; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_stopBtn->setFixedHeight(32);
 
     m_clearBtn = new QPushButton("清除");
     m_clearBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #E6A23C; color: white;"
+        "  background-color: #D29922; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #EBB563; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #DBAB4A; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_clearBtn->setFixedHeight(32);
 
@@ -241,12 +241,12 @@ void PacketCaptureWidget::setupUI()
     m_exportBtn->setEnabled(false);
     m_exportBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 8px 20px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_exportBtn->setFixedHeight(32);
 
@@ -265,11 +265,11 @@ void PacketCaptureWidget::setupUI()
     statusRow->setSpacing(16);
 
     m_statusLabel = new QLabel("就绪 — 等待开始捕获");
-    m_statusLabel->setStyleSheet("font-size: 13px; color: #67C23A; font-weight: bold;");
+    m_statusLabel->setStyleSheet("font-size: 13px; color: #3FB950; font-weight: bold;");
     statusRow->addWidget(m_statusLabel);
 
     m_packetCountLabel = new QLabel("捕获: 0 包");
-    m_packetCountLabel->setStyleSheet("font-size: 13px; color: #DCDCDC;");
+    
     statusRow->addWidget(m_packetCountLabel);
     statusRow->addStretch();
 
@@ -288,7 +288,7 @@ void PacketCaptureWidget::setupUI()
     packetListLayout->setSpacing(4);
 
     auto* packetListTitle = new QLabel("数据包列表");
-    packetListTitle->setStyleSheet("font-size: 13px; font-weight: bold; color: #DCDCDC; padding: 2px 0;");
+    packetListTitle->setStyleSheet("font-size: 13px; font-weight: bold; color: #E6EDF3; padding: 2px 0;");
     packetListLayout->addWidget(packetListTitle);
 
     m_packetTable = new QTableWidget(0, 7);
@@ -309,18 +309,18 @@ void PacketCaptureWidget::setupUI()
     m_packetTable->setColumnWidth(3, 160);
     m_packetTable->setStyleSheet(
         "QTableWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  gridline-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  gridline-color: #30363D; border: 1px solid #30363D;"
         "  font-size: 12px;"
         "}"
         "QTableWidget::item { padding: 3px 6px; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
         "}"
-        "QTableWidget::item:alternate { background-color: #25262B; }"
-        "QTableWidget::item:selected { background-color: #409EFF; color: white; }"
+        "QTableWidget::item:alternate { background-color: #161B22; }"
+        "QTableWidget::item:selected { background-color: #58A6FF; color: white; }"
     );
     packetListLayout->addWidget(m_packetTable, 1);
 
@@ -333,7 +333,7 @@ void PacketCaptureWidget::setupUI()
     statLayout->setSpacing(4);
 
     auto* statTitle = new QLabel("协议层次统计");
-    statTitle->setStyleSheet("font-size: 13px; font-weight: bold; color: #DCDCDC; padding: 2px 0;");
+    statTitle->setStyleSheet("font-size: 13px; font-weight: bold; color: #E6EDF3; padding: 2px 0;");
     statLayout->addWidget(statTitle);
 
     m_protocolTree = new QTreeWidget();
@@ -345,17 +345,17 @@ void PacketCaptureWidget::setupUI()
     m_protocolTree->setRootIsDecorated(true);
     m_protocolTree->setStyleSheet(
         "QTreeWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D;"
         "  font-size: 12px;"
         "}"
         "QTreeWidget::item { padding: 3px 6px; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 4px 8px; font-size: 12px; font-weight: bold;"
         "}"
-        "QTreeWidget::item:alternate { background-color: #25262B; }"
+        "QTreeWidget::item:alternate { background-color: #161B22; }"
     );
     statLayout->addWidget(m_protocolTree, 1);
 
@@ -372,7 +372,7 @@ void PacketCaptureWidget::setupUI()
     detailLayout->setSpacing(4);
 
     auto* detailTitle = new QLabel("数据包详情 (Hex Dump)");
-    detailTitle->setStyleSheet("font-size: 13px; font-weight: bold; color: #DCDCDC; padding: 2px 0;");
+    detailTitle->setStyleSheet("font-size: 13px; font-weight: bold; color: #E6EDF3; padding: 2px 0;");
     detailLayout->addWidget(detailTitle);
 
     m_detailView = new QPlainTextEdit();
@@ -380,8 +380,8 @@ void PacketCaptureWidget::setupUI()
     m_detailView->setPlaceholderText("选择数据包列表中的条目以查看 HEX 转储和 ASCII 内容");
     m_detailView->setStyleSheet(
         "QPlainTextEdit {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D;"
         "  font-family: 'Menlo', 'Consolas', 'Courier New', monospace;"
         "  font-size: 12px;"
         "  padding: 8px;"
@@ -566,7 +566,7 @@ void PacketCaptureWidget::onInterfaceRefresh()
 {
     detectInterfaces();
     m_statusLabel->setText("网卡列表已刷新");
-    m_statusLabel->setStyleSheet("font-size: 13px; color: #409EFF; font-weight: bold;");
+    m_statusLabel->setStyleSheet("font-size: 13px; color: #58A6FF; font-weight: bold;");
 }
 
 // ============================================================================
@@ -685,7 +685,7 @@ void PacketCaptureWidget::onStartCapture()
     m_stopBtn->setEnabled(true);
     m_exportBtn->setEnabled(false);
     m_statusLabel->setText("正在捕获...");
-    m_statusLabel->setStyleSheet("font-size: 13px; color: #67C23A; font-weight: bold;");
+    m_statusLabel->setStyleSheet("font-size: 13px; color: #3FB950; font-weight: bold;");
 
     Logger::instance().info("PacketCapture",
                             QString("开始捕获: sudo tcpdump %1").arg(args.join(' ')));
@@ -707,7 +707,7 @@ void PacketCaptureWidget::onStopCapture()
     m_stopBtn->setEnabled(false);
     m_exportBtn->setEnabled(m_packets.size() > 0);
     m_statusLabel->setText(QString("已停止 — 捕获 %1 包").arg(m_packetCount));
-    m_statusLabel->setStyleSheet("font-size: 13px; color: #E6A23C; font-weight: bold;");
+    m_statusLabel->setStyleSheet("font-size: 13px; color: #D29922; font-weight: bold;");
 
     Logger::instance().info("PacketCapture",
                             QString("捕获已停止，共 %1 包").arg(m_packetCount));
@@ -735,7 +735,7 @@ void PacketCaptureWidget::onClearCapture()
     m_detailView->clear();
     m_packetCountLabel->setText("捕获: 0 包");
     m_statusLabel->setText("就绪 — 等待开始捕获");
-    m_statusLabel->setStyleSheet("font-size: 13px; color: #67C23A; font-weight: bold;");
+    m_statusLabel->setStyleSheet("font-size: 13px; color: #3FB950; font-weight: bold;");
     m_exportBtn->setEnabled(false);
 
     Logger::instance().info("PacketCapture", "捕获数据已清除");
@@ -1075,11 +1075,11 @@ void PacketCaptureWidget::addPacketRow(const PacketInfo& pkt)
     auto* protoItem = new QTableWidgetItem(pkt.protocol);
     protoItem->setTextAlignment(Qt::AlignCenter);
     QColor protoColor;
-    if (pkt.protocol == "TCP") protoColor = QColor(0x40, 0x9E, 0xFF);
-    else if (pkt.protocol == "UDP") protoColor = QColor(0x67, 0xC2, 0x3A);
-    else if (pkt.protocol == "ICMP" || pkt.protocol == "ICMPv6") protoColor = QColor(0xE6, 0xA2, 0x3C);
+    if (pkt.protocol == "TCP") protoColor = QColor(0x58, 0xA6, 0xFF);
+    else if (pkt.protocol == "UDP") protoColor = QColor(0x3F, 0xB9, 0x50);
+    else if (pkt.protocol == "ICMP" || pkt.protocol == "ICMPv6") protoColor = QColor(0xD2, 0x99, 0x22);
     else if (pkt.protocol == "ARP") protoColor = QColor(0x9B, 0x59, 0xB6);
-    else if (pkt.protocol == "DNS") protoColor = QColor(0xF5, 0x6C, 0x6C);
+    else if (pkt.protocol == "DNS") protoColor = QColor(0xF8, 0x51, 0x49);
     else if (pkt.protocol == "HTTP" || pkt.protocol == "HTTPS") protoColor = QColor(0x00, 0xB4, 0xD8);
     else if (pkt.protocol == "TLS" || pkt.protocol == "SSL") protoColor = QColor(0xFF, 0x85, 0x1B);
     else if (pkt.protocol == "SSH") protoColor = QColor(0x2C, 0xCC, 0x70);
@@ -1127,11 +1127,11 @@ void PacketCaptureWidget::updateProtocolStats()
 
         // 着色
         QColor c;
-        if (pair.first == "TCP") c = QColor(0x40, 0x9E, 0xFF);
-        else if (pair.first == "UDP") c = QColor(0x67, 0xC2, 0x3A);
-        else if (pair.first == "ICMP" || pair.first == "ICMPv6") c = QColor(0xE6, 0xA2, 0x3C);
+        if (pair.first == "TCP") c = QColor(0x58, 0xA6, 0xFF);
+        else if (pair.first == "UDP") c = QColor(0x3F, 0xB9, 0x50);
+        else if (pair.first == "ICMP" || pair.first == "ICMPv6") c = QColor(0xD2, 0x99, 0x22);
         else if (pair.first == "ARP") c = QColor(0x9B, 0x59, 0xB6);
-        else if (pair.first == "DNS") c = QColor(0xF5, 0x6C, 0x6C);
+        else if (pair.first == "DNS") c = QColor(0xF8, 0x51, 0x49);
         else if (pair.first == "HTTP" || pair.first == "HTTPS") c = QColor(0x00, 0xB4, 0xD8);
         else c = QColor(0xDC, 0xDC, 0xDC);
         item->setForeground(0, c);
@@ -1165,7 +1165,7 @@ void PacketCaptureWidget::onProcessFinished(int exitCode, QProcess::ExitStatus e
 
     if (m_packetCount > 0) {
         m_statusLabel->setText(QString("捕获完成 — 共 %1 包").arg(m_packetCount));
-        m_statusLabel->setStyleSheet("font-size: 13px; color: #409EFF; font-weight: bold;");
+        m_statusLabel->setStyleSheet("font-size: 13px; color: #58A6FF; font-weight: bold;");
     } else {
         m_statusLabel->setText("捕获完成 — 无数据包");
         m_statusLabel->setStyleSheet("font-size: 13px; color: #909090; font-weight: bold;");
@@ -1192,7 +1192,7 @@ void PacketCaptureWidget::onProcessError(QProcess::ProcessError error)
         m_stopBtn->setEnabled(false);
 
         m_statusLabel->setText("捕获失败: " + errMsg);
-        m_statusLabel->setStyleSheet("font-size: 13px; color: #F56C6C; font-weight: bold;");
+        m_statusLabel->setStyleSheet("font-size: 13px; color: #F85149; font-weight: bold;");
 
         Logger::instance().error("PacketCapture", "捕获进程错误: " + errMsg);
 

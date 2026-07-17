@@ -58,31 +58,31 @@ void HttpWidget::setupUI()
     historyLayout->setSpacing(4);
 
     auto* historyTitle = new QLabel("请求历史");
-    historyTitle->setStyleSheet("font-size: 13px; font-weight: bold; color: #DCDCDC; padding: 2px 0;");
+    historyTitle->setStyleSheet("font-size: 13px; font-weight: bold; color: #E6EDF3; padding: 2px 0;");
     historyLayout->addWidget(historyTitle);
 
     m_historyList = new QListWidget();
     m_historyList->setStyleSheet(
         "QListWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D;"
         "  font-size: 12px;"
         "}"
-        "QListWidget::item { padding: 5px 8px; border-bottom: 1px solid #3C3F41; }"
+        "QListWidget::item { padding: 5px 8px; border-bottom: 1px solid #30363D; }"
         "QListWidget::item:hover { background-color: #2B2D30; }"
-        "QListWidget::item:selected { background-color: #409EFF; color: white; }"
+        "QListWidget::item:selected { background-color: #58A6FF; color: white; }"
     );
     historyLayout->addWidget(m_historyList, 1);
 
     m_clearHistoryBtn = new QPushButton("清除历史");
     m_clearHistoryBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #F56C6C; color: white;"
+        "  background-color: #F85149; color: white;"
         "  border: none; padding: 5px 14px; border-radius: 3px;"
         "  font-size: 12px;"
         "}"
-        "QPushButton:hover { background-color: #F78989; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #FF7B72; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     historyLayout->addWidget(m_clearHistoryBtn);
 
@@ -109,15 +109,15 @@ void HttpWidget::setupUI()
     m_methodCombo->setFixedWidth(90);
     m_methodCombo->setStyleSheet(
         "QComboBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 13px; font-weight: bold;"
         "}"
         "QComboBox::drop-down { border: none; }"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #409EFF;"
-        "  border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #58A6FF;"
+        "  border: 1px solid #30363D;"
         "}"
     );
     urlRow->addWidget(m_methodCombo);
@@ -126,8 +126,8 @@ void HttpWidget::setupUI()
     m_urlEdit->setPlaceholderText("输入请求 URL, 例如: https://api.example.com/users");
     m_urlEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 13px;"
         "}"
     );
@@ -136,12 +136,12 @@ void HttpWidget::setupUI()
     m_sendBtn = new QPushButton("发送");
     m_sendBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 8px 24px; border-radius: 4px;"
         "  font-size: 13px; font-weight: bold;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_sendBtn->setFixedHeight(32);
     urlRow->addWidget(m_sendBtn);
@@ -154,7 +154,7 @@ void HttpWidget::setupUI()
 
     m_authEnableCheck = new QCheckBox("Basic Auth");
     m_authEnableCheck->setStyleSheet(
-        "QCheckBox { color: #DCDCDC; font-size: 12px; }"
+        "QCheckBox { color: #E6EDF3; font-size: 12px; }"
         "QCheckBox::indicator { width: 16px; height: 16px; }"
     );
     authRow->addWidget(m_authEnableCheck);
@@ -165,8 +165,8 @@ void HttpWidget::setupUI()
     m_authUserEdit->setFixedWidth(120);
     m_authUserEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 12px;"
         "}"
     );
@@ -179,15 +179,15 @@ void HttpWidget::setupUI()
     m_authPassEdit->setFixedWidth(120);
     m_authPassEdit->setStyleSheet(
         "QLineEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 12px;"
         "}"
     );
     authRow->addWidget(m_authPassEdit);
 
     auto* timeoutLabel = new QLabel("超时:");
-    timeoutLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     authRow->addWidget(timeoutLabel);
 
     m_timeoutSpin = new QSpinBox();
@@ -197,8 +197,8 @@ void HttpWidget::setupUI()
     m_timeoutSpin->setFixedWidth(80);
     m_timeoutSpin->setStyleSheet(
         "QSpinBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px;"
         "  border-radius: 3px; font-size: 12px;"
         "}"
     );
@@ -212,17 +212,17 @@ void HttpWidget::setupUI()
     headersRow->setSpacing(6);
 
     auto* headersLabel = new QLabel("请求头:");
-    headersLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     headersRow->addWidget(headersLabel);
 
     m_addHeaderBtn = new QPushButton("+ 添加");
     m_addHeaderBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #67C23A; color: white;"
+        "  background-color: #3FB950; color: white;"
         "  border: none; padding: 4px 12px; border-radius: 3px;"
         "  font-size: 12px;"
         "}"
-        "QPushButton:hover { background-color: #85CE61; }"
+        "QPushButton:hover { background-color: #56D364; }"
     );
     m_addHeaderBtn->setFixedHeight(26);
     headersRow->addWidget(m_addHeaderBtn);
@@ -230,11 +230,11 @@ void HttpWidget::setupUI()
     m_removeHeaderBtn = new QPushButton("- 删除");
     m_removeHeaderBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #F56C6C; color: white;"
+        "  background-color: #F85149; color: white;"
         "  border: none; padding: 4px 12px; border-radius: 3px;"
         "  font-size: 12px;"
         "}"
-        "QPushButton:hover { background-color: #F78989; }"
+        "QPushButton:hover { background-color: #FF7B72; }"
     );
     m_removeHeaderBtn->setFixedHeight(26);
     headersRow->addWidget(m_removeHeaderBtn);
@@ -253,14 +253,14 @@ void HttpWidget::setupUI()
     m_headersTable->verticalHeader()->setVisible(false);
     m_headersTable->setStyleSheet(
         "QTableWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  gridline-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  gridline-color: #30363D; border: 1px solid #30363D;"
         "  font-size: 12px;"
         "}"
         "QTableWidget::item { padding: 2px 6px; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 3px 6px; font-size: 12px; font-weight: bold;"
         "}"
     );
@@ -271,7 +271,7 @@ void HttpWidget::setupUI()
     bodyConfigRow->setSpacing(6);
 
     auto* ctLabel = new QLabel("Content-Type:");
-    ctLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     bodyConfigRow->addWidget(ctLabel);
 
     m_contentTypeCombo = new QComboBox();
@@ -287,15 +287,15 @@ void HttpWidget::setupUI()
     m_contentTypeCombo->setCurrentText("application/json");
     m_contentTypeCombo->setStyleSheet(
         "QComboBox {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 4px 8px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 4px 8px;"
         "  border-radius: 3px; font-size: 12px;"
         "}"
         "QComboBox::drop-down { border: none; }"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #409EFF;"
-        "  border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #58A6FF;"
+        "  border: 1px solid #30363D;"
         "}"
     );
     bodyConfigRow->addWidget(m_contentTypeCombo);
@@ -309,8 +309,8 @@ void HttpWidget::setupUI()
     m_requestBodyEdit->setMaximumHeight(120);
     m_requestBodyEdit->setStyleSheet(
         "QPlainTextEdit {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px;"
         "  border-radius: 3px; font-size: 13px; font-family: 'Consolas', 'Monaco', monospace;"
         "}"
     );
@@ -328,7 +328,7 @@ void HttpWidget::setupUI()
     responseInfoRow->setSpacing(16);
 
     auto* statusTitleLabel = new QLabel("状态:");
-    statusTitleLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     responseInfoRow->addWidget(statusTitleLabel);
 
     m_statusCodeLabel = new QLabel("-");
@@ -336,19 +336,19 @@ void HttpWidget::setupUI()
     responseInfoRow->addWidget(m_statusCodeLabel);
 
     auto* timeTitleLabel = new QLabel("耗时:");
-    timeTitleLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     responseInfoRow->addWidget(timeTitleLabel);
 
     m_responseTimeLabel = new QLabel("-");
-    m_responseTimeLabel->setStyleSheet("font-size: 13px; color: #DCDCDC;");
+    
     responseInfoRow->addWidget(m_responseTimeLabel);
 
     auto* sizeTitleLabel = new QLabel("大小:");
-    sizeTitleLabel->setStyleSheet("font-size: 12px; color: #8C8C8C;");
+    
     responseInfoRow->addWidget(sizeTitleLabel);
 
     m_responseSizeLabel = new QLabel("-");
-    m_responseSizeLabel->setStyleSheet("font-size: 13px; color: #DCDCDC;");
+    
     responseInfoRow->addWidget(m_responseSizeLabel);
 
     responseInfoRow->addStretch();
@@ -356,12 +356,12 @@ void HttpWidget::setupUI()
     m_exportBtn = new QPushButton("导出响应");
     m_exportBtn->setStyleSheet(
         "QPushButton {"
-        "  background-color: #409EFF; color: white;"
+        "  background-color: #58A6FF; color: white;"
         "  border: none; padding: 5px 14px; border-radius: 3px;"
         "  font-size: 12px;"
         "}"
-        "QPushButton:hover { background-color: #66B1FF; }"
-        "QPushButton:disabled { background-color: #5C5C5C; }"
+        "QPushButton:hover { background-color: #79C0FF; }"
+        "QPushButton:disabled { background-color: #484F58; }"
     );
     m_exportBtn->setEnabled(false);
     responseInfoRow->addWidget(m_exportBtn);
@@ -382,14 +382,14 @@ void HttpWidget::setupUI()
     m_responseHeadersTable->verticalHeader()->setVisible(false);
     m_responseHeadersTable->setStyleSheet(
         "QTableWidget {"
-        "  background-color: #1E1F22; color: #DCDCDC;"
-        "  gridline-color: #3C3F41; border: 1px solid #3C3F41;"
+        "  background-color: #0D1117; color: #E6EDF3;"
+        "  gridline-color: #30363D; border: 1px solid #30363D;"
         "  font-size: 12px;"
         "}"
         "QTableWidget::item { padding: 2px 6px; }"
         "QHeaderView::section {"
-        "  background-color: #25262B; color: #8C8C8C;"
-        "  border: none; border-bottom: 2px solid #3C3F41;"
+        "  background-color: #161B22; color: #8B949E;"
+        "  border: none; border-bottom: 2px solid #30363D;"
         "  padding: 3px 6px; font-size: 12px; font-weight: bold;"
         "}"
     );
@@ -401,8 +401,8 @@ void HttpWidget::setupUI()
     m_responseBodyEdit->setPlaceholderText("响应内容将显示在此处...");
     m_responseBodyEdit->setStyleSheet(
         "QPlainTextEdit {"
-        "  background: #1E1F22; color: #DCDCDC;"
-        "  border: 1px solid #3C3F41; padding: 5px;"
+        "  background: #0D1117; color: #E6EDF3;"
+        "  border: 1px solid #30363D; padding: 5px;"
         "  border-radius: 3px; font-size: 13px; font-family: 'Consolas', 'Monaco', monospace;"
         "}"
     );
@@ -603,10 +603,10 @@ void HttpWidget::onMethodChanged(const QString& method)
 
     // 根据方法变色
     QColor methodColor;
-    if (method == "GET")        methodColor = QColor(0x67, 0xC2, 0x3A);
-    else if (method == "POST")  methodColor = QColor(0xE6, 0xA2, 0x3C);
-    else if (method == "PUT")   methodColor = QColor(0x40, 0x9E, 0xFF);
-    else if (method == "DELETE")methodColor = QColor(0xF5, 0x6C, 0x6C);
+    if (method == "GET")        methodColor = QColor(0x3F, 0xB9, 0x50);
+    else if (method == "POST")  methodColor = QColor(0xD2, 0x99, 0x22);
+    else if (method == "PUT")   methodColor = QColor(0x58, 0xA6, 0xFF);
+    else if (method == "DELETE")methodColor = QColor(0xF8, 0x51, 0x49);
     else if (method == "PATCH") methodColor = QColor(0x9B, 0x59, 0xB6);
     else if (method == "HEAD")  methodColor = QColor(0x90, 0x90, 0x90);
     else if (method == "OPTIONS") methodColor = QColor(0x00, 0xB4, 0xD8);
@@ -614,15 +614,15 @@ void HttpWidget::onMethodChanged(const QString& method)
 
     m_methodCombo->setStyleSheet(
         QString("QComboBox {"
-        "  background: #25262B; color: %1;"
-        "  border: 1px solid #3C3F41; padding: 5px 8px;"
+        "  background: #161B22; color: %1;"
+        "  border: 1px solid #30363D; padding: 5px 8px;"
         "  border-radius: 3px; font-size: 13px; font-weight: bold;"
         "}"
         "QComboBox::drop-down { border: none; }"
         "QComboBox QAbstractItemView {"
-        "  background: #25262B; color: #DCDCDC;"
-        "  selection-background-color: #409EFF;"
-        "  border: 1px solid #3C3F41;"
+        "  background: #161B22; color: #E6EDF3;"
+        "  selection-background-color: #58A6FF;"
+        "  border: 1px solid #30363D;"
         "}").arg(methodColor.name())
     );
 
@@ -686,7 +686,7 @@ void HttpWidget::updateResponseDisplay(QNetworkReply* reply)
         m_responseHeadersTable->insertRow(row);
 
         auto* nameItem = new QTableWidgetItem(QString::fromUtf8(header.first));
-        nameItem->setForeground(QColor(0x40, 0x9E, 0xFF));
+        nameItem->setForeground(QColor(0x58, 0xA6, 0xFF));
         auto* valueItem = new QTableWidgetItem(QString::fromUtf8(header.second));
 
         m_responseHeadersTable->setItem(row, 0, nameItem);
@@ -713,7 +713,7 @@ void HttpWidget::updateResponseDisplay(QNetworkReply* reply)
     // 网络错误
     if (reply->error() != QNetworkReply::NoError && statusCode == 0) {
         m_statusCodeLabel->setText("Error");
-        m_statusCodeLabel->setStyleSheet("font-size: 16px; font-weight: bold; color: #F56C6C;");
+        m_statusCodeLabel->setStyleSheet("font-size: 16px; font-weight: bold; color: #F85149;");
         m_responseBodyEdit->setPlainText("网络错误: " + reply->errorString());
         Logger::instance().error("HTTP", "请求失败: " + reply->errorString());
     }
@@ -736,11 +736,11 @@ void HttpWidget::clearResponse()
 
 QString HttpWidget::statusColor(int code) const
 {
-    if (code >= 200 && code < 300) return "#67C23A";   // green: 2xx
-    if (code >= 300 && code < 400) return "#E6A23C";   // yellow: 3xx
-    if (code >= 400 && code < 500) return "#F56C6C";   // red: 4xx
-    if (code >= 500)              return "#F56C6C";   // red: 5xx
-    return "#DCDCDC";
+    if (code >= 200 && code < 300) return "#3FB950";   // green: 2xx
+    if (code >= 300 && code < 400) return "#D29922";   // yellow: 3xx
+    if (code >= 400 && code < 500) return "#F85149";   // red: 4xx
+    if (code >= 500)              return "#F85149";   // red: 5xx
+    return "#E6EDF3";
 }
 
 // ─── JSON 格式化 ──────────────────────────────────────────────────────

@@ -19,7 +19,7 @@ ChartWidget::ChartWidget(QWidget* parent)
     : QWidget(parent)
 {
     setMinimumHeight(150);
-    setStyleSheet("background-color: #1E1F22; border: 1px solid #3C3F41;");
+    
 }
 
 void ChartWidget::addDataPoint(qreal value)
@@ -50,21 +50,21 @@ void ChartWidget::paintEvent(QPaintEvent* event)
     int margin = 40;
 
     // Background
-    painter.fillRect(rect(), QColor("#1E1F22"));
+    painter.fillRect(rect(), QColor("#0D1117"));
 
     // Find max
     qreal maxVal = *std::max_element(m_data.begin(), m_data.end());
     maxVal = std::max(maxVal, (qreal)1.0);
 
     // Grid
-    painter.setPen(QPen(QColor("#3C3F41"), 1, Qt::DotLine));
+    painter.setPen(QPen(QColor("#30363D"), 1, Qt::DotLine));
     for (int i = 0; i < 5; ++i) {
         int y = margin + (h - margin * 2) * i / 4;
         painter.drawLine(margin, y, w - margin, y);
     }
 
     // Axis
-    painter.setPen(QColor("#8C8C8C"));
+    painter.setPen(QColor("#8B949E"));
     painter.drawLine(margin, margin, margin, h - margin);
     painter.drawLine(margin, h - margin, w - margin, h - margin);
 
@@ -87,7 +87,7 @@ void ChartWidget::paintEvent(QPaintEvent* event)
             else path.lineTo(x, y);
         }
 
-        painter.setPen(QPen(QColor("#409EFF"), 2));
+        painter.setPen(QPen(QColor("#58A6FF"), 2));
         painter.drawPath(path);
 
         // Fill
@@ -138,11 +138,9 @@ void FlowWidget::setupUI()
     controlLayout->addWidget(m_protocolCombo);
 
     m_startStopBtn = new QPushButton("启动");
-    m_startStopBtn->setStyleSheet("QPushButton { background-color: #409EFF; color: #FFF; }");
     controlLayout->addWidget(m_startStopBtn);
 
     m_statusLabel = new QLabel("● 已停止");
-    m_statusLabel->setStyleSheet("color: #8C8C8C;");
     controlLayout->addWidget(m_statusLabel);
 
     controlLayout->addStretch();
@@ -152,13 +150,12 @@ void FlowWidget::setupUI()
     auto* summaryLayout = new QHBoxLayout();
     auto makeCard = [](const QString& title, QLabel*& valueLabel) -> QWidget* {
         auto* card = new QWidget();
-        card->setStyleSheet("background-color: #25262B; border: 1px solid #3C3F41; border-radius: 6px; padding: 8px;");
         auto* layout = new QVBoxLayout(card);
         layout->setSpacing(4);
         auto* titleLabel = new QLabel(title);
-        titleLabel->setStyleSheet("color: #8C8C8C; font-size: 11px; border: none;");
+        
         valueLabel = new QLabel("0");
-        valueLabel->setStyleSheet("color: #409EFF; font-size: 20px; font-weight: bold; border: none;");
+        valueLabel->setStyleSheet("color: #58A6FF; font-size: 20px; font-weight: bold; border: none;");
         layout->addWidget(titleLabel);
         layout->addWidget(valueLabel);
         return card;
@@ -227,9 +224,7 @@ void FlowWidget::onStartStop()
         if (m_socket->bind(QHostAddress::AnyIPv4, m_portSpin->value())) {
             m_running = true;
             m_startStopBtn->setText("停止");
-            m_startStopBtn->setStyleSheet("QPushButton { background-color: #F56C6C; color: #FFF; }");
             m_statusLabel->setText("● 运行中");
-            m_statusLabel->setStyleSheet("color: #67C23A;");
             m_portSpin->setEnabled(false);
             m_protocolCombo->setEnabled(false);
             m_refreshTimer->start(1000);
@@ -242,9 +237,7 @@ void FlowWidget::onStartStop()
         m_socket->close();
         m_refreshTimer->stop();
         m_startStopBtn->setText("启动");
-        m_startStopBtn->setStyleSheet("QPushButton { background-color: #409EFF; color: #FFF; }");
         m_statusLabel->setText("● 已停止");
-        m_statusLabel->setStyleSheet("color: #8C8C8C;");
         m_portSpin->setEnabled(true);
         m_protocolCombo->setEnabled(true);
         Logger::instance().info("FLOW", "Listener stopped");

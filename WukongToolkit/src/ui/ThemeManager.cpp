@@ -12,30 +12,188 @@ ThemeManager& ThemeManager::instance()
     return s_instance;
 }
 
-void ThemeManager::applyDarkTheme()
+QString ThemeManager::themeName(AppTheme theme)
 {
-    m_currentTheme = AppTheme::Dark;
-    qApp->setStyleSheet(styleSheet());
-    qApp->setFont(uiFont());
-    emit themeChanged(AppTheme::Dark);
+    switch (theme) {
+    case AppTheme::Ocean:  return QStringLiteral("暗夜蓝");
+    case AppTheme::Forest: return QStringLiteral("森林绿");
+    case AppTheme::Sunset: return QStringLiteral("日落橙");
+    }
+    return QStringLiteral("未知");
 }
 
-void ThemeManager::applyLightTheme()
+// ═══════════════════════════════════════════════════════════════════════════
+// Palette Definitions
+// ═══════════════════════════════════════════════════════════════════════════
+
+ThemeManager::Palette ThemeManager::paletteForTheme(AppTheme theme) const
 {
-    m_currentTheme = AppTheme::Light;
-    qApp->setStyleSheet(styleSheet());
-    qApp->setFont(uiFont());
-    emit themeChanged(AppTheme::Light);
+    switch (theme) {
+
+    // ── 暗夜蓝 (Ocean) — 深海蓝底+冰蓝强调，专业冷静，适合长时间工作 ──
+    case AppTheme::Ocean:
+        return {
+            /* bgPrimary      */ QColor("#0D1117"),
+            /* bgSecondary    */ QColor("#161B22"),
+            /* bgTertiary     */ QColor("#1C2128"),
+            /* bgInput        */ QColor("#1C2128"),
+            /* bgCard         */ QColor("#161B22"),
+            /* bgHover        */ QColor("#21262D"),
+            /* accent         */ QColor("#58A6FF"),
+            /* accentHover    */ QColor("#79C0FF"),
+            /* accentPressed  */ QColor("#388BFD"),
+            /* danger         */ QColor("#F85149"),
+            /* dangerHover    */ QColor("#FF7B72"),
+            /* warning        */ QColor("#D29922"),
+            /* success        */ QColor("#3FB950"),
+            /* info           */ QColor("#8B949E"),
+            /* textPrimary    */ QColor("#E6EDF3"),
+            /* textSecondary  */ QColor("#8B949E"),
+            /* textDisabled   */ QColor("#484F58"),
+            /* border         */ QColor("#30363D"),
+            /* borderSubtle   */ QColor("#21262D"),
+            /* hoverBackground*/ QColor(255, 255, 255, 12),
+            /* selection      */ QColor(88, 166, 255, 40),
+            /* scrollbarHandle*/ QColor("#30363D"),
+        };
+
+    // ── 森林绿 (Forest) — 松露绿底+翡翠强调，护眼自然，适合夜间编码 ──
+    case AppTheme::Forest:
+        return {
+            /* bgPrimary      */ QColor("#0D1A12"),
+            /* bgSecondary    */ QColor("#14281C"),
+            /* bgTertiary     */ QColor("#1A3323"),
+            /* bgInput        */ QColor("#1A3323"),
+            /* bgCard         */ QColor("#14281C"),
+            /* bgHover        */ QColor("#1E3A2A"),
+            /* accent         */ QColor("#3FB950"),
+            /* accentHover    */ QColor("#56D364"),
+            /* accentPressed  */ QColor("#2EA043"),
+            /* danger         */ QColor("#F85149"),
+            /* dangerHover    */ QColor("#FF7B72"),
+            /* warning        */ QColor("#D29922"),
+            /* success        */ QColor("#3FB950"),
+            /* info           */ QColor("#7D9B87"),
+            /* textPrimary    */ QColor("#D2E8D8"),
+            /* textSecondary  */ QColor("#7D9B87"),
+            /* textDisabled   */ QColor("#4A6B54"),
+            /* border         */ QColor("#2B4A34"),
+            /* borderSubtle   */ QColor("#1E3A2A"),
+            /* hoverBackground*/ QColor(63, 185, 80, 20),
+            /* selection      */ QColor(63, 185, 80, 35),
+            /* scrollbarHandle*/ QColor("#2B4A34"),
+        };
+
+    // ── 日落橙 (Sunset) — 暖灰底+琥珀强调，温暖活力，适合晨间工作 ──
+    case AppTheme::Sunset:
+        return {
+            /* bgPrimary      */ QColor("#1A1410"),
+            /* bgSecondary    */ QColor("#241D17"),
+            /* bgTertiary     */ QColor("#2D241C"),
+            /* bgInput        */ QColor("#2D241C"),
+            /* bgCard         */ QColor("#241D17"),
+            /* bgHover        */ QColor("#352B21"),
+            /* accent         */ QColor("#D29922"),
+            /* accentHover    */ QColor("#E2A83F"),
+            /* accentPressed  */ QColor("#B8860E"),
+            /* danger         */ QColor("#F85149"),
+            /* dangerHover    */ QColor("#FF7B72"),
+            /* warning        */ QColor("#D29922"),
+            /* success        */ QColor("#3FB950"),
+            /* info           */ QColor("#A0907A"),
+            /* textPrimary    */ QColor("#F0E6D8"),
+            /* textSecondary  */ QColor("#A0907A"),
+            /* textDisabled   */ QColor("#5E5448"),
+            /* border         */ QColor("#3D342A"),
+            /* borderSubtle   */ QColor("#2D241C"),
+            /* hoverBackground*/ QColor(210, 153, 34, 18),
+            /* selection      */ QColor(210, 153, 34, 35),
+            /* scrollbarHandle*/ QColor("#3D342A"),
+        };
+    }
+    // unreachable
+    return {};
 }
 
-void ThemeManager::toggleTheme()
+// ═══════════════════════════════════════════════════════════════════════════
+// Color Getters (delegate to current theme palette)
+// ═══════════════════════════════════════════════════════════════════════════
+
+#define THEME_PALETTE instance().paletteForTheme(instance().m_currentTheme)
+
+QColor ThemeManager::bgPrimary()       { return THEME_PALETTE.bgPrimary; }
+QColor ThemeManager::bgSecondary()     { return THEME_PALETTE.bgSecondary; }
+QColor ThemeManager::bgTertiary()      { return THEME_PALETTE.bgTertiary; }
+QColor ThemeManager::bgInput()         { return THEME_PALETTE.bgInput; }
+QColor ThemeManager::bgCard()          { return THEME_PALETTE.bgCard; }
+QColor ThemeManager::bgHover()         { return THEME_PALETTE.bgHover; }
+QColor ThemeManager::accentColor()     { return THEME_PALETTE.accent; }
+QColor ThemeManager::accentHover()     { return THEME_PALETTE.accentHover; }
+QColor ThemeManager::accentPressed()   { return THEME_PALETTE.accentPressed; }
+QColor ThemeManager::accentMuted()     {
+    QColor c = THEME_PALETTE.accent;
+    c.setAlpha(30);
+    return c;
+}
+QColor ThemeManager::dangerColor()     { return THEME_PALETTE.danger; }
+QColor ThemeManager::dangerHover()     { return THEME_PALETTE.dangerHover; }
+QColor ThemeManager::warningColor()    { return THEME_PALETTE.warning; }
+QColor ThemeManager::successColor()    { return THEME_PALETTE.success; }
+QColor ThemeManager::infoColor()       { return THEME_PALETTE.info; }
+QColor ThemeManager::textPrimary()     { return THEME_PALETTE.textPrimary; }
+QColor ThemeManager::textSecondary()   { return THEME_PALETTE.textSecondary; }
+QColor ThemeManager::textDisabled()    { return THEME_PALETTE.textDisabled; }
+QColor ThemeManager::borderColor()     { return THEME_PALETTE.border; }
+QColor ThemeManager::borderFocus()     { return THEME_PALETTE.accent; }
+QColor ThemeManager::borderSubtle()    { return THEME_PALETTE.borderSubtle; }
+QColor ThemeManager::hoverBackground() { return THEME_PALETTE.hoverBackground; }
+QColor ThemeManager::selectionColor()  { return THEME_PALETTE.selection; }
+QColor ThemeManager::scrollbarBg()     { return QColor(Qt::transparent); }
+QColor ThemeManager::scrollbarHandle() { return THEME_PALETTE.scrollbarHandle; }
+QColor ThemeManager::hoverOverlay()    { return THEME_PALETTE.textPrimary; }
+
+#undef THEME_PALETTE
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Theme Application
+// ═══════════════════════════════════════════════════════════════════════════
+
+void ThemeManager::applyOceanTheme()
 {
-    if (m_currentTheme == AppTheme::Dark) {
-        applyLightTheme();
-    } else {
-        applyDarkTheme();
+    m_currentTheme = AppTheme::Ocean;
+    qApp->setStyleSheet(styleSheet());
+    qApp->setFont(uiFont());
+    emit themeChanged(AppTheme::Ocean);
+}
+
+void ThemeManager::applyForestTheme()
+{
+    m_currentTheme = AppTheme::Forest;
+    qApp->setStyleSheet(styleSheet());
+    qApp->setFont(uiFont());
+    emit themeChanged(AppTheme::Forest);
+}
+
+void ThemeManager::applySunsetTheme()
+{
+    m_currentTheme = AppTheme::Sunset;
+    qApp->setStyleSheet(styleSheet());
+    qApp->setFont(uiFont());
+    emit themeChanged(AppTheme::Sunset);
+}
+
+void ThemeManager::cycleTheme()
+{
+    switch (m_currentTheme) {
+    case AppTheme::Ocean:  applyForestTheme(); break;
+    case AppTheme::Forest: applySunsetTheme(); break;
+    case AppTheme::Sunset: applyOceanTheme();  break;
     }
 }
+
+// ═══════════════════════════════════════════════════════════════════════════
+// QSS Stylesheet
+// ═══════════════════════════════════════════════════════════════════════════
 
 static QString colorStr(const QColor& c) {
     if (c.alpha() == 255) {
@@ -51,389 +209,649 @@ static QString colorStr(const QColor& c) {
 
 QString ThemeManager::styleSheet() const
 {
-    bool isDark = (m_currentTheme == AppTheme::Dark);
+    // Color variables
+    QString vBg1   = colorStr(bgPrimary());       // %1
+    QString vBg2   = colorStr(bgSecondary());     // %2
+    QString vBg3   = colorStr(bgTertiary());      // %3
+    QString vBgInp = colorStr(bgInput());         // %4
+    QString vBgCard= colorStr(bgCard());          // %5
+    QString vBgHov = colorStr(bgHover());         // %6
+    QString vTxt1  = colorStr(textPrimary());     // %7
+    QString vTxt2  = colorStr(textSecondary());   // %8
+    QString vTxtD  = colorStr(textDisabled());    // %9
+    QString vBdr   = colorStr(borderColor());     // %10
+    QString vBdrS  = colorStr(borderSubtle());    // %11
+    QString vAcc   = colorStr(accentColor());     // %12
+    QString vAccH  = colorStr(accentHover());     // %13
+    QString vAccP  = colorStr(accentPressed());   // %14
+    QString vAccM  = colorStr(accentMuted());     // %15
+    QString vDang  = colorStr(dangerColor());     // %16
+    QString vSucc  = colorStr(successColor());    // %17
+    QString vWarn  = colorStr(warningColor());    // %18
+    QString vInfo  = colorStr(infoColor());       // %19
+    QString vSclBg = colorStr(scrollbarBg());     // %20
+    QString vSclH  = colorStr(scrollbarHandle()); // %21
+    QString vHovBg = colorStr(hoverBackground()); // %22
+    QString vSel   = colorStr(selectionColor());  // %23
 
-    QString bg1       = colorStr(bgPrimary());
-    QString bg2       = colorStr(bgSecondary());
-    QString bg3       = colorStr(bgTertiary());
-    QString bgInp     = colorStr(bgInput());
-    QString txt1      = colorStr(textPrimary());
-    QString txt2      = colorStr(textSecondary());
-    QString txtD      = colorStr(textDisabled());
-    QString bdr       = colorStr(borderColor());
-    QString acc       = colorStr(accentColor());
-    QString accH      = colorStr(accentHover());
-    QString accP      = colorStr(accentPressed());
-    QString dang      = colorStr(dangerColor());
-    QString succ      = colorStr(successColor());
-    QString warn      = colorStr(warningColor());
-    QString infoG     = colorStr(infoColor());
-    QString hovBg     = colorStr(hoverOverlay());
-    QString sclBg     = colorStr(scrollbarBg());
-    QString sclH      = colorStr(scrollbarHandle());
-
-    QString hoverAlpha = isDark ? QStringLiteral("0.08") : QStringLiteral("0.06");
-
-    QString sheet = QStringLiteral(
-        /* ── Global ── */
+    return QStringLiteral(
+        // ═══════════════════════════════════════════════════════════════
+        // GLOBAL
+        // ═══════════════════════════════════════════════════════════════
+        "* {"
+        "  outline: none;"
+        "}"
         "QWidget {"
         "  background-color: %1;"
-        "  color: %2;"
-        "  font-family: \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans\", sans-serif;"
-        "  font-size: 11px;"
+        "  color: %7;"
+        "  font-family: \"Inter\", \"SF Pro Text\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif;"
+        "  font-size: 12px;"
+        "  selection-background-color: %23;"
+        "  selection-color: %7;"
         "}"
-        "QMainWindow { background-color: %1; }"
+        "QMainWindow {"
+        "  background-color: %1;"
+        "}"
         "QMainWindow::separator {"
-        "  background-color: %4;"
-        "  width: 1px; height: 1px;"
+        "  background-color: %10;"
+        "  width: 1px;"
+        "  height: 1px;"
         "}"
-        /* ── MenuBar ── */
+
+        // ═══════════════════════════════════════════════════════════════
+        // MENUBAR
+        // ═══════════════════════════════════════════════════════════════
         "QMenuBar {"
-        "  background-color: %3;"
-        "  color: %2;"
-        "  border-bottom: 1px solid %4;"
-        "  padding: 3px 0px;"
+        "  background-color: %2;"
+        "  color: %7;"
+        "  border-bottom: 1px solid %11;"
+        "  padding: 2px 0px;"
+        "  font-size: 12px;"
         "}"
         "QMenuBar::item {"
         "  background: transparent;"
-        "  padding: 7px 14px;"
+        "  padding: 6px 12px;"
         "  border-radius: 6px;"
         "  margin: 2px 4px;"
         "}"
-        "QMenuBar::item:selected { background-color: %5%6; }"
-        /* ── Menu ── */
+        "QMenuBar::item:selected {"
+        "  background-color: %6;"
+        "}"
+        "QMenuBar::item:pressed {"
+        "  background-color: %22;"
+        "}"
+
+        // ═══════════════════════════════════════════════════════════════
+        // MENU
+        // ═══════════════════════════════════════════════════════════════
         "QMenu {"
-        "  background-color: %3;"
-        "  color: %2;"
-        "  border: 1px solid %4;"
+        "  background-color: %2;"
+        "  color: %7;"
+        "  border: 1px solid %10;"
         "  border-radius: 8px;"
-        "  padding: 6px 0px;"
+        "  padding: 4px 0px;"
+        "  font-size: 12px;"
         "}"
         "QMenu::item {"
-        "  padding: 7px 32px 7px 18px;"
+        "  padding: 6px 28px 6px 14px;"
         "  margin: 2px 6px;"
-        "  border-radius: 6px;"
+        "  border-radius: 5px;"
         "}"
-        "QMenu::item:selected { background-color: %5%6; }"
+        "QMenu::item:selected {"
+        "  background-color: %6;"
+        "}"
+        "QMenu::item:disabled {"
+        "  color: %9;"
+        "}"
         "QMenu::separator {"
         "  height: 1px;"
-        "  background-color: %4;"
-        "  margin: 6px 12px;"
+        "  background-color: %10;"
+        "  margin: 4px 10px;"
         "}"
-        /* ── ToolBar ── */
+
+        // ═══════════════════════════════════════════════════════════════
+        // TOOLBAR
+        // ═══════════════════════════════════════════════════════════════
         "QToolBar {"
-        "  background-color: %3;"
-        "  border-bottom: 1px solid %4;"
-        "  padding: 4px 6px;"
+        "  background-color: %2;"
+        "  border-bottom: 1px solid %11;"
+        "  padding: 4px 8px;"
         "  spacing: 4px;"
         "}"
         "QToolBar::separator {"
         "  width: 1px;"
-        "  background-color: %4;"
-        "  margin: 6px 6px;"
+        "  background-color: %10;"
+        "  margin: 4px 6px;"
         "}"
         "QToolButton {"
         "  background: transparent;"
         "  border: none;"
         "  border-radius: 6px;"
-        "  padding: 5px 10px;"
-        "  color: %2;"
-        "  font-size: 11px;"
-        "}"
-        "QToolButton:hover { background-color: %5%6; }"
-        "QToolButton:pressed { background-color: %5%6; }"
-        /* ── TreeWidget ── */
-        "QTreeWidget {"
-        "  background-color: %3;"
-        "  color: %2;"
-        "  border: none;"
-        "  outline: none;"
-        "  font-size: 11px;"
-        "}"
-        "QTreeWidget::item {"
-        "  padding: 7px 10px;"
-        "  border-radius: 6px;"
-        "}"
-        "QTreeWidget::item:selected { background-color: %5%6; }"
-        "QTreeWidget::item:hover { background-color: %5%6; }"
-        "QTreeWidget::branch { background-color: %3; }"
-        /* ── DockWidget ── */
-        "QDockWidget { color: %2; }"
-        "QDockWidget::title {"
-        "  background-color: %3;"
-        "  padding: 8px 14px;"
-        "  border-bottom: 1px solid %4;"
+        "  padding: 5px 12px;"
+        "  color: %8;"
+        "  font-size: 12px;"
         "  font-weight: 500;"
         "}"
-        /* ── TabWidget ── */
-        "QTabWidget::pane {"
-        "  background-color: %1;"
-        "  border: 1px solid %4;"
-        "  border-radius: 0 8px 8px 8px;"
-        "}"
-        "QTabBar::tab {"
-        "  background-color: %3;"
-        "  color: %8;"
-        "  padding: 8px 18px;"
-        "  border: 1px solid %4;"
-        "  border-bottom: none;"
-        "  border-radius: 8px 8px 0 0;"
-        "  margin-right: 2px;"
-        "  font-size: 11px;"
-        "}"
-        "QTabBar::tab:selected {"
-        "  background-color: %1;"
+        "QToolButton:hover {"
+        "  background-color: %6;"
         "  color: %7;"
-        "  border-bottom: 2px solid %7;"
         "}"
-        "QTabBar::tab:hover {"
-        "  background-color: %5%6;"
-        "  color: %2;"
+        "QToolButton:pressed {"
+        "  background-color: %22;"
         "}"
-        /* ── Buttons ── */
-        "QPushButton {"
-        "  background-color: %7;"
-        "  color: #FFFFFF;"
-        "  border: none;"
-        "  border-radius: 6px;"
-        "  padding: 6px 18px;"
-        "  font-size: 11px;"
-        "  font-weight: 500;"
-        "}"
-        "QPushButton:hover { background-color: %9; }"
-        "QPushButton:pressed { background-color: %10; }"
-        "QPushButton:disabled {"
-        "  background-color: %4;"
+
+        // ═══════════════════════════════════════════════════════════════
+        // TREEWIDGET (Navigation sidebar)
+        // ═══════════════════════════════════════════════════════════════
+        "QTreeWidget {"
+        "  background-color: %2;"
         "  color: %8;"
-        "}"
-        /* ── LineEdit ── */
-        "QLineEdit {"
-        "  background-color: %11;"
-        "  color: %2;"
-        "  border: 1px solid %4;"
-        "  border-radius: 6px;"
-        "  padding: 7px 12px;"
-        "  min-height: 20px;"
-        "  font-size: 11px;"
-        "  selection-background-color: %7;"
-        "}"
-        "QLineEdit:focus {"
-        "  border-color: %7;"
-        "  border-width: 1.5px;"
-        "}"
-        /* ── ComboBox ── */
-        "QComboBox {"
-        "  background-color: %11;"
-        "  color: %2;"
-        "  border: 1px solid %4;"
-        "  border-radius: 6px;"
-        "  padding: 7px 12px;"
-        "  min-height: 20px;"
-        "  font-size: 11px;"
-        "  padding-right: 28px;"
-        "}"
-        "QComboBox:focus { border-color: %7; }"
-        "QComboBox::drop-down {"
         "  border: none;"
-        "  padding-right: 10px;"
-        "  width: 24px;"
-        "}"
-        "QComboBox QAbstractItemView {"
-        "  background-color: %3;"
-        "  color: %2;"
-        "  border: 1px solid %4;"
-        "  border-radius: 6px;"
-        "  selection-background-color: %5%6;"
         "  outline: none;"
+        "  font-size: 12px;"
         "  padding: 4px;"
         "}"
-        /* ── SpinBox ── */
-        "QSpinBox, QDoubleSpinBox {"
+        "QTreeWidget::item {"
+        "  padding: 6px 10px;"
+        "  border-radius: 6px;"
+        "  margin: 1px 0px;"
+        "}"
+        "QTreeWidget::item:selected {"
+        "  background-color: %23;"
+        "  color: %12;"
+        "}"
+        "QTreeWidget::item:hover {"
+        "  background-color: %6;"
+        "  color: %7;"
+        "}"
+        "QTreeWidget::branch {"
+        "  background-color: %2;"
+        "}"
+        "QTreeWidget::branch:has-children:!has-siblings:closed,"
+        "QTreeWidget::branch:closed:has-children:has-siblings {"
+        "  border-image: none;"
+        "}"
+
+        // ═══════════════════════════════════════════════════════════════
+        // DOCKWIDGET
+        // ═══════════════════════════════════════════════════════════════
+        "QDockWidget {"
+        "  color: %7;"
+        "  titlebar-close-icon: none;"
+        "  titlebar-normal-icon: none;"
+        "}"
+        "QDockWidget::title {"
+        "  background-color: %2;"
+        "  padding: 8px 12px;"
+        "  border-bottom: 1px solid %11;"
+        "  font-weight: 600;"
+        "  font-size: 11px;"
+        "  color: %8;"
+        "  text-transform: uppercase;"
+        "  letter-spacing: 0.5px;"
+        "}"
+
+        // ═══════════════════════════════════════════════════════════════
+        // TABWIDGET
+        // ═══════════════════════════════════════════════════════════════
+        "QTabWidget::pane {"
+        "  background-color: %1;"
+        "  border: none;"
+        "  border-top: 1px solid %11;"
+        "  top: -1px;"
+        "}"
+        "QTabBar::tab {"
+        "  background-color: transparent;"
+        "  color: %8;"
+        "  padding: 8px 16px;"
+        "  border: none;"
+        "  border-bottom: 2px solid transparent;"
+        "  margin-right: 0px;"
+        "  font-size: 12px;"
+        "  font-weight: 500;"
+        "}"
+        "QTabBar::tab:selected {"
+        "  color: %7;"
+        "  border-bottom: 2px solid %12;"
+        "  font-weight: 600;"
+        "}"
+        "QTabBar::tab:hover:!selected {"
+        "  color: %7;"
+        "  background-color: %6;"
+        "  border-bottom: 2px solid %10;"
+        "}"
+        "QTabBar::close-button {"
+        "  image: none;"
+        "  background: %8;"
+        "  border-radius: 2px;"
+        "  margin: 2px;"
+        "}"
+        "QTabBar::close-button:hover {"
+        "  background: %7;"
+        "}"
+
+        // ═══════════════════════════════════════════════════════════════
+        // PUSHBUTTON
+        // ═══════════════════════════════════════════════════════════════
+        "QPushButton {"
+        "  background-color: %3;"
+        "  color: %7;"
+        "  border: 1px solid %10;"
+        "  border-radius: 6px;"
+        "  padding: 6px 16px;"
+        "  font-size: 12px;"
+        "  font-weight: 500;"
+        "  min-height: 20px;"
+        "}"
+        "QPushButton:hover {"
+        "  background-color: %6;"
+        "  border-color: %10;"
+        "}"
+        "QPushButton:pressed {"
+        "  background-color: %22;"
+        "}"
+        "QPushButton:disabled {"
         "  background-color: %11;"
-        "  color: %2;"
-        "  border: 1px solid %4;"
+        "  color: %9;"
+        "  border-color: %11;"
+        "}"
+
+        // ═══════════════════════════════════════════════════════════════
+        // LINEEDIT
+        // ═══════════════════════════════════════════════════════════════
+        "QLineEdit {"
+        "  background-color: %4;"
+        "  color: %7;"
+        "  border: 1px solid %10;"
         "  border-radius: 6px;"
         "  padding: 7px 12px;"
-        "  min-height: 20px;"
-        "  font-size: 11px;"
+        "  min-height: 18px;"
+        "  font-size: 12px;"
+        "  selection-background-color: %23;"
         "}"
-        "QSpinBox:focus, QDoubleSpinBox:focus { border-color: %7; }"
-        /* ── TextEdit ── */
+        "QLineEdit:focus {"
+        "  border-color: %12;"
+        "  box-shadow: 0 0 0 2px %15;"
+        "}"
+        "QLineEdit:disabled {"
+        "  background-color: %11;"
+        "  color: %9;"
+        "}"
+        "QLineEdit[readOnly=\"true\"] {"
+        "  background-color: %3;"
+        "}"
+
+        // ═══════════════════════════════════════════════════════════════
+        // COMBOBOX
+        // ═══════════════════════════════════════════════════════════════
+        "QComboBox {"
+        "  background-color: %4;"
+        "  color: %7;"
+        "  border: 1px solid %10;"
+        "  border-radius: 6px;"
+        "  padding: 7px 28px 7px 12px;"
+        "  min-height: 18px;"
+        "  font-size: 12px;"
+        "}"
+        "QComboBox:hover {"
+        "  border-color: %12;"
+        "}"
+        "QComboBox:focus {"
+        "  border-color: %12;"
+        "  box-shadow: 0 0 0 2px %15;"
+        "}"
+        "QComboBox::drop-down {"
+        "  border: none;"
+        "  width: 24px;"
+        "  subcontrol-position: center right;"
+        "  subcontrol-origin: padding;"
+        "}"
+        "QComboBox::down-arrow {"
+        "  image: none;"
+        "  border-left: 4px solid transparent;"
+        "  border-right: 4px solid transparent;"
+        "  border-top: 5px solid %8;"
+        "  margin-right: 4px;"
+        "}"
+        "QComboBox QAbstractItemView {"
+        "  background-color: %2;"
+        "  color: %7;"
+        "  border: 1px solid %10;"
+        "  border-radius: 6px;"
+        "  selection-background-color: %6;"
+        "  outline: none;"
+        "  padding: 4px;"
+        "  font-size: 12px;"
+        "}"
+        "QComboBox QAbstractItemView::item {"
+        "  padding: 6px 12px;"
+        "  border-radius: 4px;"
+        "  min-height: 20px;"
+        "}"
+        "QComboBox QAbstractItemView::item:selected {"
+        "  background-color: %23;"
+        "  color: %12;"
+        "}"
+
+        // ═══════════════════════════════════════════════════════════════
+        // SPINBOX
+        // ═══════════════════════════════════════════════════════════════
+        "QSpinBox, QDoubleSpinBox {"
+        "  background-color: %4;"
+        "  color: %7;"
+        "  border: 1px solid %10;"
+        "  border-radius: 6px;"
+        "  padding: 7px 12px;"
+        "  min-height: 18px;"
+        "  font-size: 12px;"
+        "}"
+        "QSpinBox:focus, QDoubleSpinBox:focus {"
+        "  border-color: %12;"
+        "  box-shadow: 0 0 0 2px %15;"
+        "}"
+        "QSpinBox::up-button, QDoubleSpinBox::up-button {"
+        "  border: none;"
+        "  border-left: 1px solid %10;"
+        "  border-bottom: 1px solid %10;"
+        "  border-top-right-radius: 5px;"
+        "  background-color: %3;"
+        "  width: 22px;"
+        "}"
+        "QSpinBox::down-button, QDoubleSpinBox::down-button {"
+        "  border: none;"
+        "  border-left: 1px solid %10;"
+        "  border-bottom-right-radius: 5px;"
+        "  background-color: %3;"
+        "  width: 22px;"
+        "}"
+        "QSpinBox::up-button:hover, QDoubleSpinBox::up-button:hover,"
+        "QSpinBox::down-button:hover, QDoubleSpinBox::down-button:hover {"
+        "  background-color: %6;"
+        "}"
+
+        // ═══════════════════════════════════════════════════════════════
+        // PLAINTEXTEDIT / TEXTEDIT
+        // ═══════════════════════════════════════════════════════════════
         "QPlainTextEdit, QTextEdit {"
         "  background-color: %1;"
-        "  color: %2;"
-        "  border: 1px solid %4;"
+        "  color: %7;"
+        "  border: 1px solid %10;"
         "  border-radius: 6px;"
-        "  selection-background-color: %7;"
-        "  font-family: \"JetBrains Mono\", \"SF Mono\", \"Consolas\", \"Menlo\", monospace;"
-        "  font-size: 10px;"
-        "  padding: 6px;"
+        "  selection-background-color: %23;"
+        "  font-family: \"JetBrains Mono\", \"SF Mono\", \"Cascadia Code\", \"Consolas\", \"Menlo\", monospace;"
+        "  font-size: 12px;"
+        "  padding: 8px;"
         "}"
-        /* ── TableView ── */
+        "QPlainTextEdit:focus, QTextEdit:focus {"
+        "  border-color: %12;"
+        "  box-shadow: 0 0 0 2px %15;"
+        "}"
+
+        // ═══════════════════════════════════════════════════════════════
+        // TABLEVIEW / TABLEWIDGET
+        // ═══════════════════════════════════════════════════════════════
         "QTableView, QTableWidget {"
-        "  background-color: %1;"
-        "  color: %2;"
-        "  border: 1px solid %4;"
-        "  border-radius: 6px;"
-        "  gridline-color: %4;"
-        "  selection-background-color: %5%6;"
-        "  font-size: 11px;"
+        "  background-color: %2;"
+        "  color: %7;"
+        "  border: 1px solid %10;"
+        "  border-radius: 8px;"
+        "  gridline-color: %11;"
+        "  selection-background-color: %23;"
+        "  selection-color: %7;"
+        "  font-size: 12px;"
         "  outline: none;"
         "}"
-        "QTableView::item, QTableWidget::item { padding: 5px 10px; }"
+        "QTableView::item, QTableWidget::item {"
+        "  padding: 6px 12px;"
+        "  border-bottom: 1px solid %11;"
+        "}"
+        "QTableView::item:selected, QTableWidget::item:selected {"
+        "  background-color: %23;"
+        "  color: %7;"
+        "}"
         "QHeaderView::section {"
         "  background-color: %3;"
-        "  color: %2;"
-        "  padding: 7px 12px;"
+        "  color: %8;"
+        "  padding: 8px 12px;"
         "  border: none;"
-        "  border-right: 1px solid %4;"
-        "  border-bottom: 1px solid %4;"
-        "  font-weight: 500;"
+        "  border-bottom: 1px solid %10;"
+        "  font-weight: 600;"
         "  font-size: 11px;"
+        "  text-transform: uppercase;"
+        "  letter-spacing: 0.5px;"
         "}"
-        /* ── ScrollBar ── */
+        "QHeaderView::section:hover {"
+        "  background-color: %6;"
+        "  color: %7;"
+        "}"
+
+        // ═══════════════════════════════════════════════════════════════
+        // SCROLLBAR
+        // ═══════════════════════════════════════════════════════════════
         "QScrollBar:vertical {"
-        "  background: %12;"
+        "  background: %20;"
         "  width: 8px;"
         "  border: none;"
         "  margin: 0px;"
         "}"
         "QScrollBar::handle:vertical {"
-        "  background: %13;"
+        "  background: %21;"
         "  border-radius: 4px;"
         "  min-height: 30px;"
         "  margin: 2px;"
         "}"
-        "QScrollBar::handle:vertical:hover { background: %13; }"
-        "QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0px; }"
+        "QScrollBar::handle:vertical:hover {"
+        "  background: %8;"
+        "}"
+        "QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {"
+        "  height: 0px;"
+        "}"
         "QScrollBar:horizontal {"
-        "  background: %12;"
+        "  background: %20;"
         "  height: 8px;"
         "  border: none;"
         "  margin: 0px;"
         "}"
         "QScrollBar::handle:horizontal {"
-        "  background: %13;"
+        "  background: %21;"
         "  border-radius: 4px;"
         "  min-width: 30px;"
         "  margin: 2px;"
         "}"
-        "QScrollBar::handle:horizontal:hover { background: %13; }"
-        "QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal { width: 0px; }"
-        /* ── StatusBar ── */
-        "QStatusBar {"
-        "  background-color: %3;"
-        "  color: %8;"
-        "  border-top: 1px solid %4;"
-        "  font-size: 10px;"
-        "  padding: 2px;"
+        "QScrollBar::handle:horizontal:hover {"
+        "  background: %8;"
         "}"
-        "QStatusBar::item { border: none; }"
-        "QStatusBar QLabel { padding: 0px 8px; }"
-        /* ── Splitter ── */
-        "QSplitter::handle { background-color: %4; }"
-        "QSplitter::handle:horizontal { width: 1px; }"
-        "QSplitter::handle:vertical { height: 1px; }"
-        /* ── Label ── */
-        "QLabel { color: %2; background: transparent; font-size: 11px; }"
-        /* ── GroupBox ── */
-        "QGroupBox {"
-        "  color: %2;"
-        "  border: 1px solid %4;"
-        "  border-radius: 8px;"
-        "  margin-top: 14px;"
-        "  padding: 18px 12px 12px 12px;"
-        "  font-weight: 500;"
+        "QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {"
+        "  width: 0px;"
+        "}"
+
+        // ═══════════════════════════════════════════════════════════════
+        // STATUSBAR
+        // ═══════════════════════════════════════════════════════════════
+        "QStatusBar {"
+        "  background-color: %2;"
+        "  color: %8;"
+        "  border-top: 1px solid %11;"
         "  font-size: 11px;"
+        "  padding: 2px 4px;"
+        "  min-height: 24px;"
+        "}"
+        "QStatusBar::item {"
+        "  border: none;"
+        "}"
+        "QStatusBar QLabel {"
+        "  padding: 2px 10px;"
+        "  color: %8;"
+        "  background: transparent;"
+        "}"
+
+        // ═══════════════════════════════════════════════════════════════
+        // SPLITTER
+        // ═══════════════════════════════════════════════════════════════
+        "QSplitter::handle {"
+        "  background-color: %10;"
+        "}"
+        "QSplitter::handle:horizontal {"
+        "  width: 1px;"
+        "}"
+        "QSplitter::handle:vertical {"
+        "  height: 1px;"
+        "}"
+
+        // ═══════════════════════════════════════════════════════════════
+        // LABEL
+        // ═══════════════════════════════════════════════════════════════
+        "QLabel {"
+        "  color: %7;"
+        "  background: transparent;"
+        "  font-size: 12px;"
+        "}"
+
+        // ═══════════════════════════════════════════════════════════════
+        // GROUPBOX
+        // ═══════════════════════════════════════════════════════════════
+        "QGroupBox {"
+        "  color: %7;"
+        "  border: 1px solid %10;"
+        "  border-radius: 8px;"
+        "  margin-top: 16px;"
+        "  padding: 18px 14px 14px 14px;"
+        "  font-weight: 600;"
+        "  font-size: 12px;"
         "}"
         "QGroupBox::title {"
         "  subcontrol-origin: margin;"
         "  padding: 0px 10px;"
         "  left: 12px;"
+        "  color: %7;"
         "}"
-        /* ── CheckBox / RadioButton ── */
+
+        // ═══════════════════════════════════════════════════════════════
+        // CHECKBOX / RADIOBUTTON
+        // ═══════════════════════════════════════════════════════════════
         "QCheckBox, QRadioButton {"
-        "  color: %2;"
+        "  color: %7;"
         "  spacing: 8px;"
-        "  font-size: 11px;"
+        "  font-size: 12px;"
         "}"
         "QCheckBox::indicator, QRadioButton::indicator {"
         "  width: 16px;"
         "  height: 16px;"
         "}"
-        /* ── ProgressBar ── */
+
+        // ═══════════════════════════════════════════════════════════════
+        // PROGRESSBAR
+        // ═══════════════════════════════════════════════════════════════
         "QProgressBar {"
-        "  background-color: %11;"
-        "  border: 1px solid %4;"
+        "  background-color: %4;"
+        "  border: 1px solid %10;"
         "  border-radius: 6px;"
         "  text-align: center;"
-        "  color: %2;"
-        "  font-size: 10px;"
-        "  height: 18px;"
+        "  color: %7;"
+        "  font-size: 11px;"
+        "  font-weight: 500;"
+        "  height: 6px;"
         "}"
         "QProgressBar::chunk {"
-        "  background-color: %7;"
+        "  background-color: %12;"
         "  border-radius: 5px;"
         "}"
-        /* ── ToolTip ── */
+
+        // ═══════════════════════════════════════════════════════════════
+        // TOOLTIP
+        // ═══════════════════════════════════════════════════════════════
         "QToolTip {"
-        "  background-color: %3;"
-        "  color: %2;"
-        "  border: 1px solid %4;"
+        "  background-color: %2;"
+        "  color: %7;"
+        "  border: 1px solid %10;"
         "  padding: 6px 10px;"
         "  border-radius: 6px;"
         "  font-size: 11px;"
         "}"
-        /* ── ListWidget ── */
+
+        // ═══════════════════════════════════════════════════════════════
+        // LISTWIDGET
+        // ═══════════════════════════════════════════════════════════════
         "QListWidget {"
-        "  background-color: %1;"
-        "  color: %2;"
-        "  border: 1px solid %4;"
-        "  border-radius: 6px;"
+        "  background-color: %2;"
+        "  color: %7;"
+        "  border: 1px solid %10;"
+        "  border-radius: 8px;"
         "  outline: none;"
-        "  font-size: 11px;"
+        "  font-size: 12px;"
+        "  padding: 4px;"
         "}"
         "QListWidget::item {"
         "  padding: 6px 10px;"
         "  border-radius: 4px;"
+        "  margin: 1px 0px;"
         "}"
-        "QListWidget::item:selected { background-color: %5%6; }"
-        "QListWidget::item:hover { background-color: %5%6; }"
-        /* ── DateEdit / TimeEdit ── */
+        "QListWidget::item:selected {"
+        "  background-color: %23;"
+        "  color: %12;"
+        "}"
+        "QListWidget::item:hover {"
+        "  background-color: %6;"
+        "}"
+
+        // ═══════════════════════════════════════════════════════════════
+        // DATEEDIT / TIMEEDIT
+        // ═══════════════════════════════════════════════════════════════
         "QDateEdit, QTimeEdit {"
-        "  background-color: %11;"
-        "  color: %2;"
-        "  border: 1px solid %4;"
+        "  background-color: %4;"
+        "  color: %7;"
+        "  border: 1px solid %10;"
         "  border-radius: 6px;"
         "  padding: 7px 12px;"
-        "  font-size: 11px;"
+        "  font-size: 12px;"
         "}"
-        "QDateEdit:focus, QTimeEdit:focus { border-color: %7; }"
-        /* ── Dialog ── */
+        "QDateEdit:focus, QTimeEdit:focus {"
+        "  border-color: %12;"
+        "  box-shadow: 0 0 0 2px %15;"
+        "}"
+
+        // ═══════════════════════════════════════════════════════════════
+        // DIALOG
+        // ═══════════════════════════════════════════════════════════════
         "QDialog {"
-        "  background-color: %1;"
-        "  color: %2;"
+        "  background-color: %2;"
+        "  color: %7;"
         "  border-radius: 10px;"
         "}"
-        /* ── Slider ── */
+
+        // ═══════════════════════════════════════════════════════════════
+        // SLIDER
+        // ═══════════════════════════════════════════════════════════════
         "QSlider::groove:horizontal {"
-        "  background: %4;"
+        "  background: %10;"
         "  height: 4px;"
         "  border-radius: 2px;"
         "}"
         "QSlider::handle:horizontal {"
-        "  background: %7;"
+        "  background: %12;"
         "  width: 14px;"
         "  height: 14px;"
         "  margin: -5px 0;"
         "  border-radius: 7px;"
+        "  border: 2px solid %2;"
         "}"
-        "QSlider::handle:horizontal:hover { background: %9; }"
-    ).arg(
-        bg1, txt1, bg3, bdr, hovBg, hoverAlpha,
-        acc, txt2, accH, accP, bgInp,
-        sclBg, sclH
-    );
+        "QSlider::handle:horizontal:hover {"
+        "  background: %13;"
+        "}"
 
-    return sheet;
+        // ═══════════════════════════════════════════════════════════════
+        // FRAME / CARD
+        // ═══════════════════════════════════════════════════════════════
+        "QFrame[card=\"true\"] {"
+        "  background-color: %5;"
+        "  border: 1px solid %10;"
+        "  border-radius: 8px;"
+        "}"
+    ).arg(
+        vBg1, vBg2, vBg3, vBgInp, vBgCard, vBgHov,
+        vTxt1, vTxt2, vTxtD, vBdr, vBdrS,
+        vAcc, vAccH, vAccP, vAccM,
+        vDang, vSucc, vWarn, vInfo,
+        vSclBg, vSclH, vHovBg, vSel
+    );
 }
